@@ -8,7 +8,7 @@
 
 set -ev
 
-# If we are not the bndtools/bnd.manual Travis build, then we don't continue
+# If we don't have credentials to the GitHub repo, then we don't continue
 if [ -z "$id_rsa_1" ]; then
   exit 0
 fi

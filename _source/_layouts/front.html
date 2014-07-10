@@ -14,37 +14,43 @@
 	</div>
 
 	<div class=container12>
-		<div span=12 class=highlight>This site is currently heavily
-			under construction (contributions are welcome!) and not all
-			statements are true yet. For now, this site is there for the early adopters to get organized. So use is currently at your own risk ...</div>
+		<div span=12>
+			<div class=highlight>This site is currently heavily under
+				construction (contributions are welcome!) and not all statements are
+				true yet. For now, this site is there for the early adopters to get
+				organized. So use is currently at your own risk ...</div>
+		</div>
 	</div>
 	<ul class=container12>
-		<li span=4 class=highlight>
-			<h1>Why OSGi enRoute?</h1> <img width=80px class=text-inset
-			src="/img/what.png">
+		<li span=4>
+			<h1>Why OSGi enRoute?</h1>
 			<p>
-				OSGi is <em>arguably</em> the best way to develop software systems
-				and take advantage of modularity. However, until now the threshold
-				to get started was high due to lack of a good tool chain, proper
-				service based libraries, and tutorials, with the consequence that
-				many people gave up before the benefits became visible.
+				<img width=80px class=text-inset src="/img/what.png"> OSGi is
+				<em>arguably</em> the best way to develop software systems and take
+				advantage of modularity. However, until now the threshold to get
+				started was high due to lack of a good tool chain, proper service
+				based libraries, and tutorials, with the consequence that many
+				people gave up before the benefits became visible.
 			<p>The vision of the OSGi Alliance with the enRoute project is
 				therefore to make OSGi as easy as possible for developers to get
 				started with OSGi without compromising its core values.
 			<p>
 				<a href="/book/why.html">Read more ...</a>
 		<li span=4>
-			<h1>What is OSGi enRoute?</h1> <img width=80px class=text-inset
-			src="/img/wow.png">
-			<p>First, OSGi enRoute is a project under construction that will remain under construction
-			for 
+			<h1>What is OSGi enRoute?</h1>
+			<p>
+				<img width=80px class=text-inset src="/img/wow.png">First,
+				OSGi enRoute is a project under construction that will remain under
+				construction for some time. That said, a lot of work has ALREADY
+				been done and the overal structure is clear. What we are planning to
+				have in the near future is:
 			<ul>
-				<li><b>Community</b> – A growing community 
-				<li><b>Programming Model</b> – A best practice µservice based
-					development model
+				<li><b>Community</b> – A growing community (well, any new
+					project will easily have a growing community, please join!).
+				<li><b>Programming Model</b> – A quite cool, best practice
+					µservice based development model.
 				<li><b>Tool Chain</b> – A selected tool chain that supports the
-					intended use of the OSGi programming model over all the stages of
-					development.
+					OSGi programming model over all the stages of development.
 				<li><b>Profiles</b> – A mechanism for creating sets of service
 					contracts and capabilities so that developers can decouple
 					themselves from implementation details. Currently there is one
@@ -53,10 +59,27 @@
 				<li><b>Education</b> – A (hopefully growing) number of
 					tutorials.
 			</ul>
+			<p>
+				<a href="/book/why.html">Read more ...</a>
 		<li span=4>
-			<h1>How to get started?</h1> <img width=80px class=text-inset
-			src="/img/read.png">
-			<p>OSGi
+			<h1>How to get started?</h1>
+
+			<p>
+				<img width=80px class=text-inset src="/img/read.png"> If you
+				are a developer and want to try out the tool chain then start with
+				the <a href="/tutorials/base/index.html">base tutorial</a>. This is
+				a zero-knowledge required tutorial that guides you through all the
+				principles of developing with enRoute. This tutorial will work you
+				through all the basics.
+			<p>
+				If you are an architect and want to know more about what enRoute is
+				and does then you start reading the <a href="book/200-overview.html">introduction</a>
+				of the enRoute handbook.
+			<p>
+				If you're interested in the enRoute Profiles, you can find more to
+				read in the <a href="book/400"></a>
+			<p>
+				<a href="/book/why.html">Read more ...</a>
 			<ol>
 				{% for chapter in site.chapters %}
 				<li><a href="{{chapter.url}}">{{chapter.title}}</a> {% endfor%}

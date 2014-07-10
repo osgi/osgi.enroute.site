@@ -1,14 +1,10 @@
 markdown: kramdown
 collections:
-  chapters:
+  book:
     output: true
-  macros:
+  pbase:
     output: true
-  heads:
-    output: true
-  commands:
-    output: true
-  instructions:
+  tbase:
     output: true
 
 defaults:

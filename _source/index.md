@@ -1,0 +1,6 @@
+---
+layout: front
+---
+
+# bnd manual
+

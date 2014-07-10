@@ -1,0 +1,25 @@
+markdown: kramdown
+collections:
+  chapters:
+    output: true
+  macros:
+    output: true
+  heads:
+    output: true
+  commands:
+    output: true
+  instructions:
+    output: true
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: default
+
+      
+      
+      
+      
+      

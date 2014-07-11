@@ -58,9 +58,9 @@ If you resolve the annotations, please select the OSGi annotations and the bnd v
 
 TODO: remove the bnd annotations from the profile.
 
-## Create a run Descriptor
+## Create a Run Descriptor
 
-We now have a project. This project cannot run yet, we need to add a run specification. So select `File/New/Run Descriptor`. In this wizard. Call it `hello`, this will later be the name of our application. Then select the `OSGi enRoute Base Launcher` template. This will open the Resolve tab:
+We now have a project. This project cannot run yet, we need to add a run specification. So select `File/New/Run Descriptor`. In this wizard. Call it `hello`, this will later be the name of our application. Then select the `OSGi enRoute Base Launcher` template. This will open the Run tab:
 
 ![Resolve tab](/img/book/qs/resolve.jpg)
 
@@ -72,12 +72,105 @@ A bundle is a social animal and usually needs some other bundles before it wants
 
 ![Resolve tab](/img/book/qs/resolve-result.jpg)
 
+We should save the `hello` run descriptor now.
+
 ## Launching the project
 
-
+At the right-top of the Run tab you see a `Run OSGi` and `Debug OSGi` button. Hit it and enjoy the warm welcome from this amazing enRoute application! If you can't find it, it is the bottom part of the window, the output of the Eclipse console.
+ 
 ## Adding a Dependency
+Lets add a simple dependency that is not included in the enRoute Base profile. Let's use JLine, a command line processor, to create a quit command. Add the following code to `HelloImpl.java`.
+
+	@Component(name = "com.acme.prime.hello")
+	public class HelloImpl extends Thread {
+		final static Logger log = LoggerFactory.getLogger(HelloImpl.class);
+	
+		@Activate
+		void activate() {
+			System.out.println("Hello World");
+			start();
+		}
+	
+		@Deactivate
+		void deactivate() {
+			System.out.println("Goodbye World");
+			interrupt();
+		}
+	
+		public void run() {
+			try {
+				ConsoleReader r = new ConsoleReader();
+				String line;
+				while ( !isInterrupted() && (line=r.readLine("> "))!=null) {
+					if ( "quit".equals(line))
+						FrameworkUtil.getBundle(HelloImpl.class).stop();
+					System.out.println(line.toUpperCase());
+				}
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}	
+		}
+	}
+
+There will be compile errors and maybe bndtools complains that it wants to terminate the process. This is not necessary and you can safely ignore those warnings since bndtools will always refresh the classes on changes. So keep the framework running!
+
+So how do we get this JAR for JLine? Easy, first click on the `bnd.bnd` file and select the build tab:
+
+![Resolve tab](/img/book/qs/build-tab.jpg)
+
+In the left bottom corner, under the package explorer there is a view with the bnd repositories. We can see if JLine is present there by typing JLine in the search input control.
+
+![Resolve tab](/img/book/qs/search-jpm.jpg)
+
+Nope, out of luck. Fortunately, there is a link that allows us to continue searching on jpm4j.org. If you click on this link then it opens a web browser view on [JPM][10].
+
+TODO unfortunately, the Linux browser in Eclipse is not operational for this, you can also go to [jpm4j.org][10] and search there.
+
+![Resolve tab](/img/book/qs/jline.jpg)
+ 
+At the right side of the entries you will see version vignettes. If you drag a version vignette to the build tab and drop it on the Build path control then you get the following pop up:
+
+![Resolve tab](/img/book/qs/depsfromjpm.jpg)
+
+Click finish and save the `bnd.bnd` file. This should get rid of any compile errors. However, we now get a warning from the console that there are unresolved bundles. This makes sense because we added a dependency to JLine but we do not have it running as a bundle.
+
+So double click the `hello.bndrun` file and click on the `Resolve` button, the save the file. If things were done in the right order then you should see the `Hello World` again and the prompt. Type a few words, which are echoed in upper case, and then type `quit` with a return. You should now also see the `Goodbye World` because we just made the bundle commit suicide (which is not a good practice, also not in OSGi).
+
+There is a small chance that you did something different and that the you do not get the prompt. In that case, terminate the running process, goto the Run tab on the `hello.bndrun` file, and click `Run OSGi` again. If this does not resolve the issue, try the next step since this will add some debugging.
+
+Otherwise, you can try the [Forum](/forum.html).
+
+Caveat: This is still early days for enRoute, so feedback appreciated.
+
+## Debugging
+Of course OSGi enRoute will never let you down, you're live will be tranquil, and you can spend lots of time on the beach. Ehh, well we try but Watson is not that advanced yet and in the mean time you will have to do some debugging and diagnosing to make actual applications work.
+
+One of the great tools is the Apache Felix Web Console, especially with Xray. So double click the `hello.bndrun` file and add the `aQute.xray.plugin` to the `Run Requirements` control, and then hit `Resolve`. This will add a web server, Apache Felix Web Console, and XRay. Save the file, and then go to  [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray). The user id password is, surprisingly innovative, `admin` and `admin`. The Apache Felix Web Console is an amazing tool, learn to use it.
+
+TODO There is a bug in Jetty, so for now you have to also add org.apache.felix.eventadmin to the initial requirements.
+
+![Resolve tab](/img/book/qs/xray.jpg)
 
 ## Creating an Application
+Ok, this was fun. But how do we deploy this? Well, we can make this into an application, an executable JAR file. If you go to the `hello.bndrun`, the `Run` tab, then you see there is an `Export` button at the right top. This will ask you for what type of export (`Executable JAR`) and where to put it. For now, place it into the `/Ws/com.acme.prime/com.acme.prime.hello.provider/hello.jar` file.
+
+Since we are going to start the application outside Eclipse, now is a good time to kill the launched framework. 
+
+Next step is the infamous command line shell. 
+
+	$ cd /Ws/com.acme.prime/com.acme.prime.hello.provider
+	$ java -jar hello.jar
+	Hello World
+	> quit
+	Goodbye World
+	QUIT
+	
+Obviously, we also packed the Web server so you can also still go to   [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
+
+You can quite this app by hitting control-c.
+
+## Putting it on Github
+
 
 ## Continuous Integration
 
@@ -113,3 +206,5 @@ Make sure you always create projects in the bnd workspace. A bnd workspace is al
 [7]: http://enroute.osgi.org
 [8]: https://github.com/osgi/osgi.enroute.archetype
 [9]: http://bndtools.org/installation.html
+[10]: http://www.jpm4j.org
+[10]: forum.html

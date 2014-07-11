@@ -101,7 +101,11 @@
 }
 @mixin scale($ratio:1.5)
 {
-  @include transform(scale($ratio));
+  -webkit-transform: scale($ratio);
+  -moz-transform: scale($ratio);
+  -o-transform: scale($ratio);
+  -ms-transform: scale($ratio);
+  transform: scale($ratio);
 }
 @mixin transition($duration:0.2s, $ease:ease-out)
 {

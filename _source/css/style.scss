@@ -33,6 +33,7 @@ $color-vignette:	#F0F0F0;
 @import "functions.scss";
 @import "layout.scss";
 @import "base.scss";
+@import "book.scss";
 
 
 /*
@@ -155,3 +156,8 @@ div.letter-icon {
 	text-align: center;
 }
 
+img.short-header {
+	@include rounded(5px);
+	max-width: 100%;
+	margin-bottom: $text-separation;
+}

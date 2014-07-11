@@ -5,15 +5,5 @@
 <link href="/css/style.css" rel="stylesheet" />
 <title>{{page.title}}</title>
 
-	{% for chapter in site.chapters %}
-		{% if chapter.url == page.url %}
-			<style>
-				 body {
-					counter-reset: h1 {{ forloop.index }};
-				}
-			</style>
-				
-		{%endif%}
-	{%endfor%}
 
 </head>

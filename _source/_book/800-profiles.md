@@ -1,4 +1,4 @@
 ---
-title: Introduction
+title: Profiles
 layout: book
 ---

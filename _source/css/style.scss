@@ -140,3 +140,18 @@ $color-vignette:	#F0F0F0;
 .highlight {
 	@include vignette();
 }
+
+div.letter-icon {
+   	@include rounded(5px);
+	border: 2px solid $secondary-color;
+	padding: $text-separation/2;
+	margin: 0 $text-separation/2 $text-separation/2 0;
+	float: left;
+	height: 25px;
+	width: 25px;
+	font-size: 400%;
+	font-weight: bold;
+	vertical-align: baseline;
+	text-align: center;
+}
+

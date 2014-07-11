@@ -359,3 +359,9 @@ dl.property-index {
 	}
 }
 
+.alert {
+	@include vignette();
+	background-color:  $color-warning;
+	font-size: larger;
+	
+}

@@ -4,63 +4,113 @@ layout: book
 summary: A quick-start guide to get engaged with OSGi enRoute. It shows how to quickly use the complete toolchain.
 ---
 
-Since bnd(tools) is the central toolchain for OSGi enRoute starting with enRoute means starting with bndtools. The enRoute project maintains a Github repository with an archetypical workspace. This workspace is setup to contain:
+In this quick start we develop a little project that, surprise, surprise,  prints out "Hello world", and because it is OSGi based, we will also cover the "Goodbye World". 
 
-* A properly configured bnd workspace
-* A configuration that uses JPM as the remote repository (which contains Maven Central).
-* A gradle build
-* Prepared for building on Travis.
- 
-In this quick start we develop a little project that, suprise, prints out "hello world". Now, just keep one thing in mind, this setup takes a few shortcuts to make things simpler but that are not advised for an actual development. So try this at home, but not at work. We'll get back to this in the last chapter.
+This tutorial is light on the explanations because it focuses on introducing the overall architecture of enRoute, not the details. Over time this site will be filled with tutorials and documentation (or references to those) that will explain the minute details. This however, is about some big steps.
+
+We will cover the whole chain, from creating a workspace all the way to continuous integration.
+
+A disclaimer. This quick start is about learning to use OSGi enRoute, not about learning Java, Git, nor Eclipse. It is assumed that you have basic experience with these tools.
+
+If you have any questions about this quick-start, please discuss them in the [forum][10].
+
+Another disclaimer, this is still under development. Feedback appreciated. And note that you can clone this site and send us pull requests.
 
 ## Prerequisites
 
 * [Java 8][2], probably already got it? If not, this is a good time to get started!
 * [git][6], unlikely that you do not have it installed yet?
-* [Eclipse Luna][3], if you do not know which variant, pick the _Eclipse Standard_ variant.
-* Bndtools 2.4M1 or later, either from the [Eclipse Market Place][4] (available under Eclipse's Help for some reason) or you can be more adventurous and try out the latest and greatest at [cloudbees][1], you can install it also from the Eclipse `Help/Install New Software` menu.
+* [Eclipse Luna][3], if you do not know which variant, pick the _Eclipse Standard_ variant, make sure it has Git support.
+* [Bndtools][9], while we're under construction you have to install it from [cloudbees][1] update site, this is the latest build and not release so do not use it for production.
 
-This quick start is about learning to use OSGi enRoute, not about learning Java nor Eclipse. It is assumed that you have experience with both tools.
 
 ## Creating a Workspace
 
-We are going to use the OSGi enRoute archetype workspace, which is a [Github repository][8]. In this case we clone the archetype repository and disconnect it. We need to use a good name for your workspace, make it a short path, and don't use spaces in the path. In this example we assume *nix and the path `/Ws/com.acme.prime` but you can use other paths, just mentally replace it when we use this path. Assuming that name, we can do the following steps:
+Since bnd(tools) is the central toolchain for OSGi enRoute starting with enRoute means starting with bnd(tools), the bnd based tools. A crucial concept in bnd is the _workspace_. The workspace contains a number of _projects_, that can each create multiple _bundles_. The workspace also has a `cnf` directory that contains shared information that can be referenced and used in the projects. 
 
-	$ mkdir /Ws
-	$ cd /Ws
-	$ git clone git@github.com:osgi/osgi.enroute.archetype.git com.acme.prime
-	Cloning into 'com.acme.prime'...
-	...
-	Checking connectivity... done.
+The enRoute project maintains a Github repository with [an archetypical workspace for bnd][13]. This workspace is setup to contain:
 
-We can now fire up Eclipse and select the `/Ws/com.acme.prime` as the Eclipse workspace. First, we must open the bndtools perspective. You can select an Eclipse perspective with `Window/Open Perspective/Bndtools`. Whenever you see a text like (`File/Open`) we intend to convey a menu path. 
+* A properly configured bnd workspace
+* A configuration that uses JPM as the remote repository (which contains Maven Central) for external dependencies.
+* A gradle build
+* Prepared for building on Travis CI
 
-If there is no `Bndtools` entry, select `Other ...` and then select Bndtools. If there is still no entry, then you have [not installed bndtools yet][9]. 
+### Naming 
+First we must decided on a name (very important!). Best practice is to use a directory with all your workspaces that has a short path since it is likely you use it a lot in a shell, for example `/Ws`. Then use reverse domain names for the workspace name, based on your domain name and the topic of the workspace, for example `com.acme.prime`. To prevent yourself from unnecessary misery, do not use spaces in the path. In this chapter we use `/Ws/com.acme.prime` as the Eclipse workspace location.
 
-Select `File/Import/General/Existing Projects into Workspace`. As the root directory we select `/Ws/com.acme.prime`. This will allow us to import the `cnf` project. A bnd workspace requires a `cnf` project. This project configures bndtools and contains information shared between all the projects in the bnd workspace. You can look upon the bnd workspace as a kind of module that imports and exports bundles, in that view, the `cnf` project contains is private information. 
- 
+### Start bndtools
+So fire up Eclipse and select `/Ws/com.acme.prime` as the Eclipse workspace. You'll get the start screen, just close it and select the bndtools perspective. You can select an Eclipse perspective with `Window/Open Perspective/Bndtools`. 
+
+A bit of legend, whenever you see a text like `File/Open` we hope you treat it as a menu path. That is, go to the menu bar, click on `File`, then select `Open`. If the menu path starts with @/ then it is from the context menu on the selected object, which has been clearly defined in the previous sentence. 
+
+Back to `Window/Open Perspective/Bndtools`. If there is no `Bndtools` entry, select `Other ...` and then select Bndtools. If there is still no entry, then you have [not installed bndtools yet][9]. 
+
+### Import the Archetype Workspace
+We are going to use the OSGi enRoute archetype workspace, which is a [Github repository][8]. We need to import this archetype so select `File/Import/Projects from Git/Clone URI`. The URI that we should use is
+
+> `git@github.com:osgi/osgi.enroute.archetype.git`
+
+This will give us:
+
+![Import archetype](/img/book/qs/git-import-1.jpg)
+
+Select the `master` branch on the next page, and then on the `Next-Next` page we must provide the path. By default git places the projects in a subdirectory `git` of your home directory. (This is an Eclipse preference.) However, we want to keep the Eclipse workspace and the bnd archetype workspace together for simplicity but not in the same folder for various reasons. So we should place it in the `scm` (for Source Control Management, e.g. Git)  subfolder of the Eclipse workspace, ergo: `/Ws/com.acme.prime/scm`.
+
+![Import archetype](/img/book/qs/git-local-dest.jpg)
+
+On the next page we must define how to import the projects. A bnd workspace contains potentially many projects so the default option is ok, `Import existing projects`, so you can click `Next` and `Finish`. This will give you a Package Explorer with a single project `cnf`. 
+
+Congratulations, you've created your first workspace!
+
+### About the Workspace
+
+A bnd workspace requires a `cnf` project. This project configures bndtools and contains information shared between all the projects in the bnd workspace. You can look upon the bnd workspace as a kind of next order module that imports and exports bundles, in that view, the `cnf` project contains is private information. So, we now have the following structure:
+
+	/Ws               workspaces
+	  com.acme.prime  Eclipse Workspace
+	    .metadata     The Eclipse metadata
+	    scm           The source control folder
+	      .git        The git control folder
+	      cnf         The bnd control folder 
+	      ....        Build files
+
+Fortunately, from Eclipse it looks very simple:
+
+![Import archetype](/img/book/qs/final.jpg)
+
+You have to restart Eclipse to make sure bndtools picks up the location.
+
 ## Creating a Project
+Now we need to create a project that will do the hard work of printing `Hello world` and `Goodbye World!`. There is fortunately a template for this! So do `File/New/Bndtools OSGi Project`. This will open a wizard that asks lots of questions. There are two things important.
 
-Let's make the archetypical `Hello world` (and in the dynamic OSGi world also `Goodbye World!`). So do (`File/New/Bndtools OSGi Project`). This will open a wizard that asks lots of questions. There are two things important.
+* For the name fill in `com.acme.prime.hello.provider`. bndtools will use the extension (`provider`) to select a project that creates a bundle that provides an implementation for an API. enRoute recognizes the following names:
+  * `test` – An OSGi test project, tests are run inside a framework.
+  * `provider`, `adapter` – An implementation project
+  * `api` – API only project
+  * `application` – An application project. This is a project that binds together a set of components and parameterizes them.
+* In the `Next` page, select the enRoute template.
+* And then `Finish` the wizard.
 
-* For the name fill in `com.acme.prime.hello.provider`. bndtools will use the extension to select a project that creates a bundle that provides an implementation for an API.
-* In the next page, select the enRoute template.
-* And then finish the wizard.
+During initialization the project could have some warnings and errors but in the end should have no errors.
 
 ## Changing the Source Code
 
-To see something happening, we add the `Hello` and `Goodbye` to the `com.acme.prime.hello.provider.HelloImpl` class. You can add the following methods to the component:
+To see something happening, we add the `Hello` and `Goodbye` printouts to the `com.acme.prime.hello.provider.HelloImpl` class. You can add the following methods to the component:
 
-	@Activate void activate() { System.out.println("Hello World"); }
-	@Deactivate void deactivate() { System.out.println("Goodbye World"); }
+	@Activate void activate() { 
+		System.out.println("Hello World"); 
+	}
+	@Deactivate void deactivate() { 
+		System.out.println("Goodbye World"); 
+	}
 
-If you resolve the annotations, please select the OSGi annotations and the bnd variants.
+If you resolve the annotation imports, please select the OSGi annotations and the bnd variants.
 
 TODO: remove the bnd annotations from the profile.
 
 ## Create a Run Descriptor
 
-We now have a project. This project cannot run yet, we need to add a run specification. So select `File/New/Run Descriptor`. In this wizard. Call it `hello`, this will later be the name of our application. Then select the `OSGi enRoute Base Launcher` template. This will open the Run tab:
+We now have a project. This project cannot run yet, we need to add a run specification. So select the project in the Package Explorer and then `@/File/New/Run Descriptor`. In this wizard. Call it `hello`, this will later be the name of our application. Then select the `OSGi enRoute Base Launcher` template. This will open the Run tab:
 
 ![Resolve tab](/img/book/qs/resolve.jpg)
 
@@ -72,14 +122,18 @@ A bundle is a social animal and usually needs some other bundles before it wants
 
 ![Resolve tab](/img/book/qs/resolve-result.jpg)
 
-We should save the `hello` run descriptor now.
+If we click on `Finish`, then the list of bundles will be saved as the `-runbundles` variable, which controls what bundles should be installed and instarted.
+
+We should then save the `hello` run descriptor.
 
 ## Launching the project
 
-At the right-top of the Run tab you see a `Run OSGi` and `Debug OSGi` button. Hit it and enjoy the warm welcome from this amazing enRoute application! If you can't find it, it is the bottom part of the window, the output of the Eclipse console.
+At the right-top of the Run tab you see a `Run OSGi` and `Debug OSGi` button. Hit it and enjoy the warm welcome from this amazing enRoute application! If you can't find it, it is at the bottom part of the window, the output of the Eclipse console.
  
 ## Adding a Dependency
-Lets add a simple dependency that is not included in the enRoute Base profile. Let's use JLine, a command line processor, to create a quit command. Add the following code to `HelloImpl.java`.
+Lets add a simple dependency that is not included in the enRoute Base profile. Let's use [JLine][15], a command line processor, to create a quit command.
+ 
+Let's add the following code to `HelloImpl.java`.
 
 	@Component(name = "com.acme.prime.hello")
 	public class HelloImpl extends Thread {
@@ -112,13 +166,15 @@ Lets add a simple dependency that is not included in the enRoute Base profile. L
 		}
 	}
 
-There will be compile errors and maybe bndtools complains that it wants to terminate the process. This is not necessary and you can safely ignore those warnings since bndtools will always refresh the classes on changes. So keep the framework running!
+There will be compile errors because we are missing dependencies. Some can be solved, like the OSGi framework because it is already on the build path. Others, the JLline dependencies are not available.
 
-So how do we get this JAR for JLine? Easy, first click on the `bnd.bnd` file and select the build tab:
+Maybe bndtools complains that it wants to terminate the process. This is not necessary and you can safely ignore those warnings since bndtools will always refresh the classes on changes. So keep the framework churning along!
+
+So how do we get this JAR for JLine? Easy, first click on the `bnd.bnd` file and select the `Build` tab:
 
 ![Resolve tab](/img/book/qs/build-tab.jpg)
 
-In the left bottom corner, under the package explorer there is a view with the bnd repositories. We can see if JLine is present there by typing JLine in the search input control.
+We need to add JLine to the Build path control. To do this, goto the left bottom corner, under the Package Explorer, there is a view with the bnd repositories. We can see if JLine is present there by typing JLine in the search input control.
 
 ![Resolve tab](/img/book/qs/search-jpm.jpg)
 
@@ -132,7 +188,7 @@ At the right side of the entries you will see version vignettes. If you drag a v
 
 ![Resolve tab](/img/book/qs/depsfromjpm.jpg)
 
-Click finish and save the `bnd.bnd` file. This should get rid of any compile errors. However, we now get a warning from the console that there are unresolved bundles. This makes sense because we added a dependency to JLine but we do not have it running as a bundle.
+Click finish and save the `bnd.bnd` file. Goto the HelloImpl class and fix the imports. This should get rid of any compile errors. However, we now get a warning from the console that there are unresolved bundles. This makes sense because we added a dependency to JLine but we do not have it running as a bundle.
 
 So double click the `hello.bndrun` file and click on the `Resolve` button, the save the file. If things were done in the right order then you should see the `Hello World` again and the prompt. Type a few words, which are echoed in upper case, and then type `quit` with a return. You should now also see the `Goodbye World` because we just made the bundle commit suicide (which is not a good practice, also not in OSGi).
 
@@ -145,13 +201,16 @@ Caveat: This is still early days for enRoute, so feedback appreciated.
 ## Debugging
 Of course OSGi enRoute will never let you down, you're live will be tranquil, and you can spend lots of time on the beach. Ehh, well we try but Watson is not that advanced yet and in the mean time you will have to do some debugging and diagnosing to make actual applications work.
 
-One of the great tools is the Apache Felix Web Console, especially with Xray. So double click the `hello.bndrun` file and add the `aQute.xray.plugin` to the `Run Requirements` control, and then hit `Resolve`. This will add a web server, Apache Felix Web Console, and XRay. Save the file, and then go to  [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray). The user id password is, surprisingly innovative, `admin` and `admin`. The Apache Felix Web Console is an amazing tool, learn to use it.
+One of the great tools is the Apache Felix Web Console, especially with Xray. So double click the `hello.bndrun` file and add the `aQute.xray.plugin` to the `Run Requirements` control
 
-TODO There is a bug in Jetty, so for now you have to also add org.apache.felix.eventadmin to the initial requirements.
+TODO There is a bug in Jetty, so for now you have to also add org.apache.felix.eventadmin to the initial requirements, this should in general not be necessary.
+
+Then hit `Resolve`. This will add a web server, Apache Felix Web Console, and XRay. Save the file, and then go to  [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray). The user id password is, surprisingly innovative, `admin` and `admin`. The Apache Felix Web Console is an amazing tool, learn to use it.
 
 ![Resolve tab](/img/book/qs/xray.jpg)
 
 ## Creating an Application
+
 Ok, this was fun. But how do we deploy this? Well, we can make this into an application, an executable JAR file. If you go to the `hello.bndrun`, the `Run` tab, then you see there is an `Export` button at the right top. This will ask you for what type of export (`Executable JAR`) and where to put it. For now, place it into the `/Ws/com.acme.prime/com.acme.prime.hello.provider/hello.jar` file.
 
 Since we are going to start the application outside Eclipse, now is a good time to kill the launched framework. 
@@ -169,32 +228,89 @@ Obviously, we also packed the Web server so you can also still go to   [http://l
 
 You can quite this app by hitting control-c.
 
+## Building Outside the IDE
+
+If you can't automatically build it then it is not software engineering. Automating repeated processes is at the heart of building software. It is that OSGi enRoute/bnd includes a full gradle build that does not require any extra work. The raison d'être of bnd is that it runs inside an IDE like Eclipse but can also run from a shell. So we only have to fire up a shell and run the build.
+
+There is a script included, `gradlew`, that will download the correct gradle version. You can also install gradle (> 1.12) and use it. It should go without saying, but you should also have java 8 installed on the command line.
+
+	$ cd /Ws/com.acme.prime
+	$ java -version
+	java version "1.8.0"
+	Java(TM) SE Runtime Environment ...
+	$ ./gradlew
+	Downloading https://b../biz.aQute.bnd-latest.jar to 
+	    /Ws/com.acme.prime/cnf/cache/biz.aQute.bnd-latest.jar ...
+	:help
+	
+	Welcome to Gradle 1.12.
+	To run a build, run gradlew <task> ...
+	To see a list of available tasks, run gradlew tasks
+	To see a list of command-line options, run gradlew --help
+	BUILD SUCCESSFUL
+
+For almost all features of bndtools there is a corresponding gradle task you can execute. You can see all the possible tasks with `./gradlew tasks`. For example, you automatically get a task to build your `hello` application:
+
+	$ ./gradlew export.hello
+	:com.acme.prime.hello.provider:compileJava
+	:com.acme.prime.hello.provider:processResources UP-TO-DATE
+	:com.acme.prime.hello.provider:classes
+	:com.acme.prime.hello.provider:jar
+	Warning: Please update this Bundle-Description in com.acme.prime.hello.provider/bnd.bnd
+	:com.acme.prime.hello.provider:assemble
+	:com.acme.prime.hello.provider:export.hello
+	Plugin found aQute.launcher.plugin.ProjectLauncherImpl 1.4.0.201406101507
+
+	BUILD SUCCESSFUL
+
+TODO should print out where it stores it.
+
+This task will store the output in `com.acme.prime.hello.provider/generated/distributions/hello.jar`.
+
 ## Putting it on Github
 
+We should now create a repository on [Github][11], for which you will need an account. There is a nice tutorial about [setting up new repositories on Github][12].Lets call this new repository the same as the workspace `com.acme.prime`.
+
+![Create new repo](/img/book/qs/github-newrepo.jpg)
+
+We need to copy the git URL so that we can connect our bnd workspace to this repository
+
+> `git@github.com:osgi/com.acme.prime.git`
+
+This URL will of course differ for you. Now, in bndtools we must connect our bnd workspace to this repository. This can all be done from inside Eclipse.
+
+In the Package Explorer, select all the projects and the select on the context menu `Team/Disconnect`. We could reconnect this repository to our own new repository but since we do not want to inherit this unrelated history we need to delete it. 
+
+In a perfect world we would reconnect the git repository from inside Eclipse. However, EGit is not up to the level of the CVS plugin in Eclipse and this turned to be quite cumbersome.
+
+TODO Is there an easy way with EGit?
+
+So we will reconnect form the shell. First we delete the old repo since it contains the history of the archetype which is of no importants to us.
+
+	$ cd /Ws/com.acme.prime
+	$ rm -rf scm/.git
+
+Then we basically do what Github told us to do ...
+
+	$ git init
+	$ git add .
+	$ git commit -m "first commit"
+	$ git remote add origin git@github.com:osgi/com.acme.prime.git
+	$ git push -u origin master
+
+Sometimes command line interfaces are hard to beat ... If you go to [Github][11] then you should be able to see your workshop.
 
 ## Continuous Integration
 
+The bnd workspace is setup to be built continuously with [Travis CI][13]. The way to activate this is ridicuously simple. Just go to the site, create an account based on your Github credentials, and go to the your account page. Select the `Repositories` tab. The first time it is likely that you need to click on the `Sync Now` button, this refreshes your list of repositories. Find your new repository and set the right button to `ON`, that's it. Now every push will automatically build the repository.
 
+After you enabled builds on Travis, go to the home page and see your repo being build. 
 
+![Create new repo](/img/book/qs/travis.jpg)
 
-   
+### Conclusion
 
-	
-	
-
-Fire up bndtools and create a new workspace. 
-  
-Select the bndtools perspective (`Window/Open Perspective/Other .../Bndtools`). So (`File/Open`) means goto the File menu and select Open.
-
-
-You can create this 
-
-* Use git to clone this repository somewhere on your file system. Make sure the path to the repository does not contain spaces, especially on windows.
-* Open Eclipse and select this folder as a workspace, then do `Import/Existing Projects` from this folder, which will only be the cnf project.
-* You now have a working bndtools workspace. 
-* You can follow the tutorials at [enroute.osgi.org][7]
-
-Make sure you always create projects in the bnd workspace. A bnd workspace is always flat and the projects must therefore reside in the same folder as the cnf project.
+In this mini-tutorial we've covered a lot of ground. 
 
 
 [1]: https://bndtools.ci.cloudbees.com/job/bndtools.master/lastSuccessfulBuild/artifact/build/generated/p2/
@@ -208,3 +324,8 @@ Make sure you always create projects in the bnd workspace. A bnd workspace is al
 [9]: http://bndtools.org/installation.html
 [10]: http://www.jpm4j.org
 [10]: forum.html
+[11]: http://github.com
+[12]: https://help.github.com/articles/create-a-repo
+[13]: https://travis-ci.org/
+[14]: https://github.com/osgi/osgi.enroute.archetype
+[15]: http://jline.sourceforge.net/

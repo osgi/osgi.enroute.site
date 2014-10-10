@@ -4,9 +4,9 @@ markdown: kramdown
 collections:
   book:
     output: true
-  pbase:
+  qs:
     output: true
-  tbase:
+  tutorial_base:
     output: true
 
 defaults:

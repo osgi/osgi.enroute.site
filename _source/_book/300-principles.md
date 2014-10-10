@@ -3,6 +3,10 @@ layout: book
 title: Principles
 ---
 
+This is the more theoretical section that only the 1% will read. You can safely skip it and belong to the 99%, it is just a section where the ideas behind OSGi enRoute, and largely behind OSGi, are given some more footing so that that minority that actually wants to know where things come from are also satisfied. 
+
+## Principles
+
 With the Internet today it is no problem to find a solution to almost any detailed question. It is therefore hard to understand how we worked only a decade ago without Google, Bing, and Stack Overflow at our finger tips. Across my desk there are hundreds of books explaining CVS, XML, XSLT, LDAP, and other old technologies, silently testifying about this BG (Before Google) era. However, there are also books in that bookshelf that do not prescribe a solution to a detailed problem but that attempt to go deeper into the mysteries of the software development process. Books that discuss the _principles_ of the software development process without reverting to ephemeral screen shots.
 
 So why are principles important? Principles are important because they _guide us_ towards solutions to problems we are not always directly aware of. Software is a frighteningly complex endeavor that forces its practitioners to make hundreds to thousands of decisions each day; decisions that can actually have quite far reaching consequences. Though each of these decisions has a local optimum, it is not that local optimum that creates great systems. You cannot look at the millions of parts in a 747 airplane and point out a single part that makes it fly. Flying is the combined result of all those millions of parts _interacting_. To make these parts work, they need to be _designed_. To make these designs work together, we need an _architecture_ that defines the rules and constraints of the designs. To define an architecture we need principles that guide us in developing the right architecture. 
@@ -95,17 +99,17 @@ With respect to size, we should therefore take the following into account:
 
 Modularity is the technique software developers have used since the beginning of time to keep complexity under control, over and over again. A module provides a fence around its constituents and thereby chunks these constituents in a new concept. One can argue that a function is a module, it chunks a number of lines of code, and maybe some variables and parameters, into a uniquely named entity. After we chunked the lines this way, we can forget the inner details and only remember its function.
 
-During the era of structured programming (1965-1985) grouping functions in a module was common. These concepts were explicit in some languages (Modula) or implicit by being in the same files. These modues provided some hiding but it was [Parnas][15] who wrote an essay in 1972 about the "On the Criteria To Be Used in Decomposing Systems into Modules" that decomposing systems into modules could significantly simplify the overall system. Then again, improperly modularized systems can complexify a system. Though there are many subtle issues at stake, decomposing a system into modules tries to optimize the impact of expected changes. A good modularization requires changes to only a small percentage of the modules, a badly modularized system affects a much larger percentage. The [Dependencies], [Cohesion], and other sections dive deeper into issues around the decomposition into modules.
+During the era of structured programming (1965-1985) grouping functions in a module was common. These concepts were explicit in some languages (Modula) or implicit by being in the same files. These modules provided some hiding but it was [Parnas][15] who wrote an essay in 1972 about the "On the Criteria To Be Used in Decomposing Systems into Modules" that decomposing systems into modules could significantly simplify the overall system. Then again, improperly modularized systems can complexify a system. Though there are many subtle issues at stake, decomposing a system into modules tries to optimize the impact of expected changes. A good modularization requires changes to only a small percentage of the modules, a badly modularized system affects a much larger percentage. The [Dependencies], [Cohesion], and other sections dive deeper into issues around the decomposition into modules.
 
 Alan Kay picked up on modules when he discovered _objects_ during the development of Smalltalk. Classes can be seen as modules that can be instantiated multiple times. This created a paradigm shift from structured programming to Object Oriented Programming. In the eighties and early nineties the industry started to reluctantly embrace objects and classes; today they are mainstream. When James Gosling developed Java in the early nineties he did not only embrace objects, he actually added another layer of modularity: packages. Package encapsulated classes, interfaces, and resources. It is clear that modularity is not a process that has been applied multiple times in our industry.
 
-Modules have multiple benefots. As Parnas discovered, you good decompositions simplify an overall system and bad decompositions complexify it. Howevre, modules also provide chunking which it is easier to use them large systems. A module provides a chunk that abstracts the underlying details. By only exposing a small part of the internal details, other developers are confronted with only a fraction of the parts that are hidden behind the module fence. Module developers, on the other side of the fence can limit what they expose to the outside world (export) and are limited in what they can take from the outside world (import). Therefore a module/component developer sees its module's internal (let's not call it private) parts and any imported parts. These are significantly fewer parts than will be in the overall system. Since complexity has a tendency to increase exponentially with the number of parts as discussed in chunking, we can simplify the system by reducing the visible parts.
+Modules have multiple benefits. As Parnas discovered, your good decompositions simplify an overall system and bad decompositions complexify it. However, modules also provide chunking which it is easier to use then large systems. A module provides a chunk that abstracts the underlying details. By only exposing a small part of the internal details, other developers are confronted with only a fraction of the parts that are hidden behind the module fence. Module developers, on the other side of the fence can limit what they expose to the outside world (export) and are limited in what they can take from the outside world (import). Therefore a module/component developer sees its module's internal (let's not call it private) parts and any imported parts. These are significantly fewer parts than will be in the overall system. Since complexity has a tendency to increase exponentially with the number of parts as discussed in chunking, we can simplify the system by reducing the visible parts.
 
 However, this hiding of parts provides another advantage. Parts that are not exported are *not known to anybody outside the module*. These parts can be changed at will as long as these changes do not become visible outside the module. Any developer that has maintained software knows how scary it is to make changes to a code base because the scope of changes is so often hard to oversee. Properly modularized systems minimize this scope and therefore make it easier to adapt them to new needs. For example, changing a private method only affects its owning class. Your IDE actually helps you by giving a warning when a private field or method is not used; the IDE can only calculate this because the scope is known. The IDE could even warn about package private fields/members that are not used but the IDEs are unfortunately not that clever yet.
 
 Functions, modules, classes, and packages are modules. It can be argued that the JAR file is also some form of module, it aggregates a set of packages. However, when [James Gosling][18] designed Java he did not provide any access controls on the JARs. He also almost completely discarded the boundaries of the JARs once they were deployed on the class path. The boundaries are still visible in a call like `ClassLoader.getResources()`, that returns resources with the same name but from different JARs, but that is about it. 
 
-Toay, there is need for the next level of modularity. When systems grow, and the amount of software is doubled every 7 years, we are reaching a level where we need an additional level of modularity because the current JAR abstraction falls short. We need a module that provides proper encapsulation of our packages.  
+Today, there is need for the next level of modularity. When systems grow, and the amount of software is doubled every 7 years, we are reaching a level where we need an additional level of modularity because the current JAR abstraction falls short. We need a module that provides proper encapsulation of our packages.  
 
 In 1998 a couple of companies, among which IBM, Ericsson, Nokia, Deutsche Telekom, Software AG, Oracle, Sun, and many others joined together to develop a software standard for residential gateways. Out of this effort grew the OSGi Alliance with its Core Framework and Service specifications. The OSGi Alliance started with the JAR file and provided a standard that made this JAR file a proper module: the Bundle. It gave the bundle an identity, it allowed packages to be exported, and packages could be imported. It extended Java in the most natural way by exporting and importing _packages_, not classes. 
 
@@ -129,7 +133,7 @@ There is often confusion about modules, _components_, and bundles. In this secti
 
 A bundle can actually contain multiple components. The reason that this is not a 1:1 relation is that this would conflate the physical module (the JAR/Bundle) that delivers the code and resources and the logical module (the component) that represents the functionality in the system. Even though these concepts often overlap it would be an unnecessary constraint if they had to overlap. One of the rules of good design is not to conflate different concepts for convenience only. The fact that the underlying responsibilities are different usually warrants different reifications.
 
-For an example, in an application you can often find a set if highly cohesive components that share very similar dependencies. Forcing each of these components to be delivered as a separate JAR would make the overall system more complex without a fundamental reasons. Obviously, it requires careful consideration to place components together since they will aggregate their dependencies. Only highly components that have cohesion and share similar dependencies should be bundled together.
+For an example, in an application you can often find a set of highly cohesive components that share very similar dependencies. Forcing each of these components to be delivered as a separate JAR would make the overall system more complex without a fundamental reason. Obviously, it requires careful consideration to place components together since they will aggregate their dependencies. Only highly coupled components that have cohesion and share similar dependencies should be bundled together.
 
 Not all components are created equally. There are a number of components that can be recognized. These are discussed in the following sections.
 
@@ -147,7 +151,7 @@ Dynamic linking, where the dependencies were kept in a separate file, became pop
 
 Since memory cost has gone down the tide is turning again. In MacOS 10, it is no longer possible to share dependencies except from the operating system. The same is true for the iPad, it is impossible to share dependencies with other applications; each application must be stand-alone.
 
-This makes a lot of sense since sharing opens up for many problems, being able to deliver a unit with all its dependencies prevents a lot of problems. Since memory has become so cheap that the cost has become negligible it makes sense to prevent these problems by letting an application carry its dependencies. Especially, since it is not that hard to hare the identical dependencies under the covers.
+This makes a lot of sense since sharing opens up for many problems, being able to deliver a unit with all its dependencies prevents a lot of problems. Since memory has become so cheap that the cost has become negligible it makes sense to prevent these problems by letting an application carry its dependencies. Especially, since it is not that hard to have the identical dependencies under the covers.
 
 In Java, a language that grew up in a period where static linking did not really exist anymore, dynamic linking is at the core. Very few environments provide the capability to static link applications, [bnd][16] is one of the few exceptions.
 
@@ -157,12 +161,14 @@ There are functions that provide a system wide function, shared by all other com
 In classic Java, stateful components are often constructed statically, which inevitably requires statics. Statics are evil since they are global variables. They tend to create singletons, often significantly constraining the solution space.
 
 ### Abstracted Components
-An abstracted component separates its API from its implementation. The provide a shared function but abstract away the actual way it is implementations. Implementations might differ in their non-functional characteristics but it is also possible that they are optimized for different environments.
+
+An abstracted component separates its API from its implementation. The provide a shared function but abstract away the actual way it is implemented. Implementations might differ in their non-functional characteristics but it is also possible that they are optimized for different environments.
 
 Abstracted components are selected based on their API, allowing the selection to be deferred to the assembler. Since the APIs are separated from the implementation, they can be specified by different persons/organizations. This allows for independent implementations of the components.
 
 ### Extender Components
-Extender components utilize the reified modules (e.g. bundles) and their life cycle to act on behalf of other components.The purpose of the extender component is simplify the implementation of other components by taking care of boilerplate code, allowing the other components to become smaller and more concise. For example, OSGi Declarative Services removes a myriad of dependency handling and configuration details from a component by inspecting an XML file in its bundle. Since the component code has no traces of these aspects, it becomes more readable and more predictable. 
+
+Extender components utilize the reified modules (e.g. bundles) and their life cycle to act on behalf of other components. The purpose of the extender component is simplify the implementation of other components by taking care of boilerplate code, allowing the other components to become smaller and more concise. For example, OSGi Declarative Services removes a myriad of dependency handling and configuration details from a component by inspecting an XML file in its bundle. Since the component code has no traces of these aspects, it becomes more readable and more predictable. 
  
 ## Dependencies
 
@@ -178,7 +184,7 @@ Maven dependencies are _transitive_. That is, if you depend on another program y
 
 Dependencies forces us to consider the fundamental problems of sharing. It is not only about living with their behavior, which is not that hard because we are directly acquainted with them, but also how to live with the behavior of who they bring to the table. How can we control who will sit on that table? 
 
-It should be clear that dependencies are a mixed bag. The benefits of sharing must be balanced against the problems of transitive dependencies. Lots of developers do not want to be bothered by this problem. They keep adding JARs regardless of the cost. Since this clearly does not work in the long wrong when software will double another time in the next 7 years, how can we minimize the problems?
+It should be clear that dependencies are a mixed bag. The benefits of sharing must be balanced against the problems of transitive dependencies. Lots of developers do not want to be bothered by this problem. They keep adding JARs regardless of the cost. Since this clearly does not work in the long run, when software will double another time in the next 7 years, how can we minimize the problems?
 
 The most fundamental, and rather simple, solution to this problem is to just minimize the number of dependencies. In general it is better to reuse what is out there then to write it yourself but the cost of the dependency (and its transitive dependencies) should be more taken into account. Sometimes it is better to rewrite these 16 lines instead of dragging in 36 Mb of extra JAR files (an actual case). The first rule is to become aware of what you actually depend on. If you use Maven, traverse the transitive dependencies to understand what will be put on your classpath. Unfortunately, IDEs provide very little feedback in general about the cost of adding a dependency.
 
@@ -208,7 +214,7 @@ Focusing on loosely coupled components also not propose to run a sloppy set of t
 
 This section only advocates to develop components without encumbering them with unnecessary dependencies so they are resilient to changes in the  production environment by being blissfully unaware of, and thus not affected by, those changes. Unfortunately this puts an extra burden on the developer because it means that just adding one more JAR on the class path becomes a liability. Instead, sometimes it is necessary to move functions to another module or duplicate code.
 
-Asking developers to restrict themselves often runs against developers instincts. It often seems as if enterprise is just another word for nothing left to add. However, the cost of a bug exponentially increases the later it is found in the process. However cumbersome it may feel for a developer to work around an unwanted dependency, this cost is handsomely paid back by a reduction in problems later down the production line. For the developers the incentive is less tedious maintenance work and the esthetic pleasure of making elegant uncoupled components.
+Asking developers to restrict themselves often runs against developers instincts. It often seems as if enterprise is just another word for nothing left to add. However, the cost of a bug exponentially increases the later it is found in the process. However cumbersome it may feel for a developer to work around an unwanted dependency, this cost is handsomely paid back by a reduction in problems later down the production line. For the developers the incentive is less tedious maintenance work and the aesthetic pleasure of making elegant uncoupled components.
 
 ### Expressing Dependencies
 
@@ -218,9 +224,9 @@ However, and you knew a however was coming, depending on JARs is not optimal. A 
 
 There are the following issues at stake here. We should minimize the impact of a required dependency and we need some lubricant that can reduce the ripple effect of small changes.
 
-The solution to these issues is to express the dependencies only the actual things that are used: the classes. When a JAR is needed, then look it up in a class-to-JAR index.
+The solution to these issues is to express the dependencies only for actual things that are used: the classes. When a JAR is needed, then look it up in a class-to-JAR index.
 
-For many classic Java developers this is a brutal unnecessary uncalled for complexification of the development process. They have nightmares of having to list thousands of class names in the project's descriptor, e.g. the pom. They also detest the idea of having anything more than a file system between them and the repository. And to a certain extend they are right (although the picture is not nearly as dire as they sketch it). Why would one complexify a situation that works? Well, many large projects have become entangled balls of mud; they've reached the limits of the simplistic model can handle. In the long run we just do not have a choice.
+For many classic Java developers this is a brutal unnecessary uncalled complexification of the development process. They have nightmares of having to list thousands of class names in the project's descriptor, e.g. the pom. They also detest the idea of having anything more than a file system between them and the repository. And to a certain extent they are right (although the picture is not nearly as dire as they sketch it). Why would one complexify a situation that works? Well, many large projects have become entangled balls of mud; they've reached the limits of the simplistic model can handle. In the long run we just do not have a choice.
 
 First let's address the listing of classes, would that create extra work? Well, it turns out developers are already listing those classes in their project. Every Java source file is explicitly importing packages or classes and these imports are encoded in the class files. It is quite trivial to make a tool that extracts these dependencies automatically, in fact that [has been done][16]. We even can reduce the sheer amount by using packages instead of classes. This is a better choice anyway since a class cannot be used in isolation since it is part of a package. Unfortunately, lots of classic Java developers do not see the package as a module but it really was the intention of James Gosling, the Java Language Specification even mentions them as such. A package has visibility and encapsulation rules. The reason packages are often not seen as modules is that JARs did not enforce their modularity. Many developers therefore used packages without respecting their boundaries.
 
@@ -257,14 +263,11 @@ Expressing all dependencies in a formal language like the OSGi R&C model is a ne
 
 ### Tooling
 
-This section defined a comprehensive model to handle dependencies but it had one disadvantage, it required tooling to analyze the byte codes in the class files and to resolve the requirements and capabilities. Since builds are often horribly complicated beasts the enterprise software world generally dislikes touching the build system. And to a certain extend they are right. Though a build tool like maven made it easier to share (sub) build tools with its plugin model, creating a plugin is significantly more work than with good old make.
+This section defined a comprehensive model to handle dependencies but it had one disadvantage, it required tooling to analyze the byte codes in the class files and to resolve the requirements and capabilities. Since builds are often horribly complicated beasts the enterprise software world generally dislikes touching the build system. And to a certain extent they are right. Though a build tool like maven made it easier to share (sub) build tools with its plugin model, creating a plugin is significantly more work than with good old make.
 
-However, time has moved on. We started using assemblers, then compilers, and now often generators. The complexity of our software grows, and the number of parts explodes, our brains are fairly constant in how much we can handle. In 1980 a program of a 10.000 lines was considered large, today a phone can contain up to 20-40 million of lines of code. Since most applications are build out of smaller parts it seems logical that we develop tools that manage those dependencies for us when they become so numerous that they become a blur to us.
+owever, time has moved on. We started using assemblers, then compilers, and now often generators. The complexity of our software grows, and the number of parts explodes, our brains are fairly constant in how much we can handle. In 1980 a program of a 10.000 lines was considered large, today a phone can contain up to 20-40 million of lines of code. Since most applications are built out of smaller parts it seems logical that we develop tools that manage those dependencies for us when they become so numerous that they become a blur to us.
 
-The resistance in our world against tools is kind of ironic. All day we work to provide user friendly tools that simplify the lives of our customers. We add databases, graphic user interfaces, etc. We would never propose our users to provide their information in an XML file (at least, hopefully so) but when it comes to our work we seem to be happy to accept such an unbelievably simplistic user interface. Yes, 
-
-
-
+The resistance in our world against tools is kind of ironic. All day we work to provide user friendly tools that simplify the lives of our customers. We add databases, graphic user interfaces, etc. We would never propose our users to provide their information in an XML file (at least, hopefully so) but when it comes to our work we seem to be happy to accept such an unbelievably simplistic user interface.
 
 The advantages of depending on another component are quite clear:
 
@@ -272,12 +275,7 @@ The advantages of depending on another component are quite clear:
 * State – Sharing of state. Dependencies that provide an abstraction of a state must, by definition be shared.
 * Abstraction 
 
-
 Using dependencies requires a balance between the cost of a dependency and the benefit. Let us first discuss some of the unexpected problems that arise due to dependencies.
-
-
-
-
 
 ## Standards
 
@@ -323,7 +321,12 @@ That said, open source software is not without cost and disadvantages:
 * Indeterminate Quality – Though there are many open source projects that provide solid quality control, there are many more that have no controls. It is up to all users of the open source projects to decide what the quality is, and if this is sufficient.
 * Governance – Using open source software can be a black art if it comes to licensing issues. Some software is very liberal, other software has stringent requirements that can affect the visibility of your own code (GPL) that relies on this software. Patents in the software can also affect your bottom line. Understanding the implications is hard. Several companies like [Sonatype][12] and [Blackduck][13] have sprung up to help you with the implications of open source. However, the cost for these companies changes the gratis picture of open source.
 * Responsibility – Popular open source projects often have numerous committers and really popular projects have dedicated companies providing patches to existing projects for special needs. However, this can be very expensive. For dying projects it is sometimes necessary to clone a repository and take over the maintenance. This is obviously an unwanted situation since it combines the worst of both worlds by giving you the responsibility of a foreign code base.
- 
+
+## Conclusion
+
+This section is not finished yet, we've got lots more where this is coming from. Watch this space.
+
+<!-- 
 ## Don't Repeat Yourself
 
 ## Modularity
@@ -362,8 +365,7 @@ http://programmer.97things.oreilly.com/wiki/index.php/Beware_the_Share
 ## Singletons
 
 ## Serve the assembler
-
-## 
+-->
 
 
 [1]: http://www.eclipse.org/equinox/
@@ -376,12 +378,10 @@ http://programmer.97things.oreilly.com/wiki/index.php/Beware_the_Share
 [8]: http://quoteinvestigator.com/2011/05/13/einstein-simple/
 [9]: http://www.ioccc.org/
 [10]: http://en.wikipedia.org/wiki/The_Magical_Number_Seven,_Plus_or_Minus_Two
-[11]: http://en.wikipedia.org/wiki/555_(telephone_number)
 [12]: http://www.sonatype.com/
 [13]: http://www.blackducksoftware.com/
 [14]: http://en.wiktionary.org/wiki/dependee
 [15]: http://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf
 [16]: http://aqute.biz/Code/Bnd
-[17]: http://www.osgi.org/Download/File?url=/download/rfc-0112_BundleRepository.pdf
 [18]: http://en.wikipedia.org/wiki/James_Gosling
 [19]: http://en.wikipedia.org/wiki/Maurice_Wilkes

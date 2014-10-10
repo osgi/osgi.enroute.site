@@ -131,7 +131,6 @@ $color-vignette:	#F0F0F0;
 	width: 100%;
 }
 
-
 .text-inset {
 	float: left;
 	margin: 0 $text-separation 0 $text-separation;
@@ -160,4 +159,54 @@ img.short-header {
 	@include rounded(5px);
 	max-width: 100%;
 	margin-bottom: $text-separation;
+}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes enlarge {
+    from { width: 50%;}
+    to { width:100%;}
+}
+
+/* Standard syntax */
+@keyframes enlarge {
+    from { width: 50%;}
+    to { width:100%;}
+}
+.tutorial-content img {
+   	@include rounded(5px);
+   	border: 1px solid lightgrey;
+	align: center;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: $block-separation;
+	margin-bottom: $block-separation;
+}
+
+/*
+ * Next and Previous navigation
+ */
+
+.nav-prev {
+    &:before { content: "\25C0\00A0"; }
+	float: left;
+}
+ 
+.nav-next {
+    &:after { content: "\00A0\25B6"; }
+	float: right;
+}
+
+p.bug {
+	&:before { font-weight: bold; content: "BUG: "; }
+   	@include rounded(3px);
+   	background-color: #FFF0F0;
+   	padding: $text-separation;
+   	margin: $text-separation 0 $text-separation 0;
+   	border: solid 1px #FFE0E0;
+}
+
+pre.shell {
+	color: white;
+	background-color: black;
 }

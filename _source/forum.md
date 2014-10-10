@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: forum
 title: Forum
 ---
 

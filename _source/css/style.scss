@@ -206,6 +206,15 @@ p.bug {
    	border: solid 1px #FFE0E0;
 }
 
+p.warning {
+	&:before { font-weight: bold; content: "WARNING: "; }
+   	@include rounded(3px);
+   	background-color: rgb(247, 252, 180);
+   	padding: $text-separation;
+   	margin: $text-separation 0 $text-separation 0;
+   	border: solid 1px #FFE0E0;
+}
+
 pre.shell {
 	color: white;
 	background-color: black;

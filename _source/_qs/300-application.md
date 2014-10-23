@@ -28,30 +28,34 @@ So we can just click `Finish` and get it over with.
  
 ## Code
  
-The OSGi enRoute template has already created some source code for us. This source code is making a single page web-application with a Gogo command. So double click on the `UpperApplication.java` source file to open the Java editor to see what kind of code we need. So what's in there?
+The OSGi enRoute template has already created some source code for us. This source code is making a single page web-application. So double click on the `UpperApplication.java` source file to open the Java editor to see what kind of code we need. 
 
 ![The UpperApplication source code](/img/qs/upper-0.png)
 
-The first thing you will see are a number _Require_ annotations. These annotations ensure that we include the proper web resources for our application like Angular, Bootstrap, and the web extender that serves our static pages. Then we have the component annotation that makes this object a Declarative Services _service component_. A service component automatically is registered as a service when it implements an interface and it can very dynamically depend on other services..
-This `UpperApplication` component implements the _REST_ interface and is thus registered as a _REST_ service. The contract of this service indicates that any public method in this class becomes available as a REST end-point. The `getUpper` method is for the `GET` method (it starts with `get`) and it is the `/rest/upper` URI. Since it accepts a single argument, we can specify the word to upper case as `/rest/upper/<word>`. 
+So what's in there? The first thing you will see are a number _Require_ annotations. These annotations ensure that we include the proper web resources for our application like Angular, Bootstrap, and the web extender that serves our static pages. Then we have the component annotation that makes this object a Declarative Services _service component_. A service component automatically is registered as a service when it implements an interface and it can  depend on other services.
+
+This `UpperApplication` component implements the _REST_ interface and is thus registered as a _REST_ service. The contract of this service indicates that any public method in this class becomes available as a REST end-point. The `getUpper` method is for the `GET` method (duh, it starts with `get`. If you want a `POST` call it `postUpper`) and it is mapped from the `/rest/upper` URI. Since it accepts a single argument, we can specify the word we want to upper case as `/rest/upper/<word>`. 
 	
-*Warning*: This method is called from an untrusted external source so should in general be protected by a check for authorization.
+This method is called from an untrusted external source so should in general be protected by a check for authorization.
+{: .warning}
 
-Since this is a single page web app we also need some static resources for the Javascript code and the Bootstrap CSS. These resources are stored in the `static` directory which is included in our bundle. These resources are directly mapped to the root. The `com.application.prime.upper/index.html` contains the single page HTML root. It defines a header, view area, and a footer. The `com.application.prime.upper/main/main.js` contains the Javascript code, and the `com.application.prime.upper/main/htm` directory contains _html fragments_ that are inserted in the main page depending on the URI. 
+Since this is a single page web app we also need some static resources for the Javascript code and the Bootstrap CSS. These resources are stored in the `static` directory which is included in our bundle. These resources are directly mapped to the root. That is, a resource with the path `static/abc/def` will be available as `/abc/def`. 
 
-We wont' go in detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
+The `com.acme.prime.upper/index.html` contains the single page HTML root. It defines a header, view area, and a footer. The `com.acme.prime.upper/main/main.js` contains the Javascript code, and the `com.acme.prime.upper/main/htm` directory contains _html fragments_ that are inserted in the main page depending on the URI. Take a look at these resources and notice how these resources can use macros from the build environment.
+
+We wont' go into more detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
 
 ## Defining a Runtime
 
-Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the _Require_ annotations, we're good to go as long as our application is listed in the initial requirements. 
+Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the _Require_ annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could any of the other bundles listed on the left side but lets assume we're good for now.
 
-![Resolved set](/img/qs/resolve-initial-0.png)
+![Runtime Requirements](/img/qs/resolve-initial-0.png)
 
 So hit the `Resolve` button. This will open a dialog that shows you what bundles are required in runtime.
 
 ![Resolved set](/img/qs/resolve-initial-1.png)
 
-You can `Finish` this set, which will set the `Run Bundles` list. This list is normally not visible, it is closed, but if you open it you can the resulting bundles.
+You can click `Finish`, which will set the `Run Bundles` list. This list is normally not visible, it is closed, but if you open it you can the resulting bundles.
 
 ![Resolved set](/img/qs/resolve-initial-2.png)
 
@@ -69,19 +73,19 @@ Just click on the 'To Upper!' button. This will ask you for a word and then prin
 
 ## Debugging
 
-Of course you will never need to debug enRoute projects since they are by definition perfect. However, perfection isn't what it used to be so let's therefore see how we can do some debugging in this project.
+Of course you will never need to debug enRoute projects since they are by definition perfect! However, since perfection isn't what it used to be, let's see how we can do some debugging in this project.
 
-You can debug this project as you can any other project. You can set breakpoints and single stop. There is one difference with more traditional Java. In our case, we generate a bundle that gets deployed on every change we make. If you change some code an save it, a new bundle will get deployed. If you get more requirements in the `bndrun` file, those new bundles will be deployed or no longer necessary bundles get removed. This works so well that the dialog box that Eclipse sometimes pops up to tell you it could not patch the class files can be ignored because bnd does not rely on patching.
+You can debug this project as you can any other project in Java. You can set breakpoints and single step. There is one difference with more traditional Java. In our case, we generate a bundle that gets deployed on every change we make. If you change some code an save it, a new bundle will get deployed. If you get more requirements in the `bndrun` file, those new bundles will be deployed or no longer necessary bundles get removed. This works so well that the dialog box that Eclipse sometimes pops up to tell you it could not patch the class files can be ignored because bnd does not rely on this patching.
 
 ![Resolved set](/img/qs/debug-patch-0.png)
 
-So just click the checkbox and dismiss it. So that out of the way, let's change our code from making this upper case code to return lower case code. (Don't kill the running framework.)
+So just click the check-box and dismiss this dialog. That out of the way, let's change our code from making this upper case code to return lower case code. (Don't kill the running framework.)
 
-	public String getUpper(String string) throws Exception {
-		return m.toLowerCase();
+	public String getUpper(RESTRequest req, String string) throws Exception {
+		return string.toLowerCase();
 	}
 
-If there are no Javascript or html fragment changes you need to refresh the page in the browser to reload. Otherwise you can just click the button on your browser and try it out.  
+If there are no Javascript or html fragment changes you need to refresh the page in the browser to reload. Otherwise you can just click the button on your browser and try it out. You actually rarely have to restart the framework.
  
 ## OSGi Details
 
@@ -95,7 +99,7 @@ Then double click the `debug.bndrun` file and select the `Run` tab, then click o
 
 So save the `debug.bndrun` file and click `Debug OSGi`. First, this `bndrun` file will run in trace mode. (You can control this through the `-runtrace` property that you can see when you double click the `debug.bndrun` file and select the `Source` tab.) In trace mode, the launcher provides detailed information about the launch process as well the ongoing update process when there are changed in bndtools.
 
-Anyway, the cool part now is that we have [Web Console](http://felix.apache.org/site/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
+Anyway, we now have the unsurpassed [Web Console](http://felix.apache.org/site/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
 
 ![Resolved set](/img/qs/debug-xray-0.png)
 

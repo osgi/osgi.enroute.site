@@ -8,6 +8,8 @@ collections:
     output: true
   tutorial_base:
     output: true
+  services:
+    output: true
 
 defaults:
   -

@@ -5,7 +5,6 @@
 .book {
 	img {
 		max-width: 100%;
-		@include drop-shadow(4px,4px,4px,0.2);
 		@include rounded(4px);
 		border: 1px solid lightgray;
 		margin-left: auto;

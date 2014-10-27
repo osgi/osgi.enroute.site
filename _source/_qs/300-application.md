@@ -101,6 +101,11 @@ So save the `debug.bndrun` file and click `Debug OSGi`. First, this `bndrun` fil
 
 Anyway, we now have the unsurpassed [Web Console](http://felix.apache.org/site/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
 
+If you're asked for your credentials, the Apache Felix boys have giving you an unforgettable user id & password: 
+
+	User id: 	admin
+	Password:	admin
+
 ![Resolved set](/img/qs/debug-xray-0.png)
 
 In the full tutorial the possibilities of XRay are further explained.

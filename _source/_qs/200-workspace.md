@@ -83,7 +83,7 @@ Now, select the `Bndtools` perspective with `Window/Open Perspective .../Other .
 
 ![Perspective Selection Dialog](/img/qs/workspace-bndtools-0.png)
 
-Selecting `Bndtools` and clicking `OK` ensures that you are in the proper perspective. Your Eclipse should look similar to:
+Selecting `Bndtools` and clicking `OK` ensures that you are in the proper perspective. Your Eclipse should look similar to (at least after you refresh the repository view at the left bottom):
 
 ![Perspective Selection Dialog](/img/qs/workspace-bndtools-1.png)
 

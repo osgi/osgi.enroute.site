@@ -219,3 +219,11 @@ pre.shell {
 	color: white;
 	background-color: black;
 }
+
+
+div.hide {
+	color: white;
+	&:hover {
+		color: black;
+	}
+}

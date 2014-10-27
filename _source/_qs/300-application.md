@@ -1,8 +1,8 @@
 ---
 title: Creating an Application
 layout: tutorial
-prev: 200-workspace.html
-next: /book/200-quick-start.html#End
+prev: 300-application.html
+next: 400-exercise-tolower.html
 summary: Creating a sample enRoute Application
 ---
 

@@ -5,6 +5,8 @@ version: 1.0
 summary: Provides REST end-points that are based on method naming pattern with type safe use of the pay-load, parameters, and result body.
 ---
 
+![REST Service](/img/services/rest-service.png)
+
 ## Introduction
 
 The OSGi enRoute REST API specifies a service contract for components to provide REST _end-points_. Representational State Transfer (REST) is an architectural style that allows the interchange of information between elements of a distributed system. A REST end-point has an HTTP(S) URL and can thus be accessed from all modern computing environments. An end-point defines the meaning of the segments of this URL, any specified parameters in the URL, as well as the used HTTP verb (GET, PUT, POST, etc). For example:

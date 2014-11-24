@@ -4,7 +4,12 @@ layout: service
 version: 1.5
 summary: Provides a push and pull model to configure components. 
 ---
-The Configuration Admin service is an important aspect of the deployment of an OSGi framework. It allows an Operator to configure deployed bundles. Configuring is the process of defining the con- figuration data for bundles and assuring that those bundles receive that data when they are active in the OSGi framework.
+
+![Configuration Admin Collaboration Diagram](/img/services/org.osgi.service.cm.overview.png)
+
+
+
+The Configuration Admin service is an important aspect of the deployment of an OSGi framework. It allows an operator to configure deployed bundles. Configuring is the process of defining the configuration data for bundles and assuring that those bundles receive that data when they are active in the OSGi framework.
 
 This specification is based on the concept of a Configuration Admin service that manages the con- figuration of an OSGi framework. It maintains a database of Configuration objects, locally or re- motely. This service monitors the service registry and provides configuration information to ser- vices that are registered with a service.pid property, the Persistent IDentity (PID), and implement one of the following interfaces:
 

@@ -5,6 +5,9 @@ version: 1.3
 summary: An extender for Declarative Services components 
 ---
 
+![Declarative Services Collaboration Diagram](/img/services/org.osgi.service.component.overview.png)
+
+
 The OSGi Framework contains a procedural service model which provides a publish/find/bind mod- el for using services. This model is elegant and powerful, it enables the building of applications out of bundles that communicate and collaborate using these services.
 This specification addresses some of the complications that arise when the OSGi service model is used for larger systems and wider deployments, such as:
 

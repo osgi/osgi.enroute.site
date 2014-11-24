@@ -5,7 +5,7 @@ version: 1.0
 summary: Provides REST end-points that are based on method naming pattern with type safe use of the pay-load, parameters, and result body.
 ---
 
-![REST Service](/img/services/rest-service.png)
+![REST Service](/img/services/osgi.enroute.rest.overview.png)
 
 ## Introduction
 

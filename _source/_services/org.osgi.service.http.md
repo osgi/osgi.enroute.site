@@ -5,6 +5,8 @@ version: 1.3
 summary:  An HTTP server framework
 ---
 
+![Http Service Collaboration Diagram](/img/services/org.osgi.service.http.overview.png)
+
 An OSGi framework normally provides users with access to services on the Internet and other net- works. This access allows users to remotely retrieve information from, and send control to, services in an OSGi framework using a standard web browser.
 Bundle developers typically need to develop communication and user interface solutions for stan- dard technologies such as HTTP, HTML, XML, and servlets.
 

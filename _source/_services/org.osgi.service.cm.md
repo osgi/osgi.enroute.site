@@ -15,11 +15,44 @@ Declarative Services, the rock solid foundation of OSGi enRoute, has a very clos
 
 Hmm, you seem to be still reading, so be prepared to dive a bit deeper. There are a few advanced cases where directly using Configuration Admin comes in handy. 
 
-* You're writing middle ware and need to work closely with Configuration Admin.
+* You're writing middleware and need to work closely with Configuration Admin.
 * You want to receive multiple configurations
-* You want to define configuration for other components
+* You want to set configuration for other components
 
 ## Example Usage
+
+The following snippet shows a small example how you can use Configuration Admin to create a singleton configuration:
+
+	Configuration configuration = cm.getConfiguration("singleton", "?");
+	Hashtable<String, Object> map = new Hashtable<String,Object>();
+	map.put("msg", "Hello Singleton");
+	configuration.update(map);
+
+The following creates a factory configuration:
+
+	Configuration a = cm.createFactoryConfiguration("factory", "?");
+	Hashtable<String, Object> map = new Hashtable<String,Object>();
+	map.put("msg", "Hello Factory");
+	a.update(map);
+
+You can list all configurations with the following snippet:
+
+	public Collection<Map<String, Object>> findConfigurations(String filter)
+			throws IOException, InvalidSyntaxException {
+		return getConfigurations0(filter).map(
+				(c) -> ca.toMap(c.getProperties()))
+				.collect(Collectors.toList());
+	}
+
+	private Stream<Configuration> getConfigurations0(String filter)
+			throws IOException, InvalidSyntaxException {
+
+		Configuration[] configurations = cm.listConfigurations(filter);
+		if (configurations == null)
+			configurations = EMPTY;
+
+		return Arrays.stream(configurations);
+	}
 
 ## Background
 
@@ -53,25 +86,15 @@ If a configuration is deleted through Configuration Admin then the Managed Servi
 
 ### Locations
 
-Locations were a mistake in the Configuration Admin API. Ok, I've said it. They were a failed attempt to provide security at an unsuitable place. Mea culpa ... The intention was that we could restrict configurations to specific bundles, this restriction was actually automatic when the location was set to `null` and a bundle used it. Countless hours have been lost figuring out why Configuration Admin did not call `update` only to discover that the location was wrong.
+Locations were a mistake in the Configuration Admin API. Ok, I've said it. They were a failed attempt to provide security at an unsuitable place. Mea culpa ... The intention was that we could restrict configurations to specific bundles, this restriction was actually automatic when the location was set to `null` and a bundle used it. Countless hours have been lost figuring out why Configuration Admin did not call `update` only to discover that the location was wrong. Alas, the sins we commit when we try to specify.
 
 So what should you do with the location? Well, just set it always to "?". This is a recent addition to the specification that basically removes the awkward location check. 
 
+## Example Application
+
+You can find an example application at [OSGi enRoute Example}[2]. This application is a web application that provides an implementation for all actors in the Configuration Admin service except for Configuration Admin itself. The application has a number of buttons to execute simple scenarios.
 
 
-
-
-
-
- 
-
-The Configuration Admin service is an important aspect of the deployment of an OSGi framework. It allows an operator to configure deployed bundles. Configuring is the process of defining the configuration data for bundles and assuring that those bundles receive that data when they are active in the OSGi framework.
-
-This specification is based on the concept of a Configuration Admin service that manages the configuration of an OSGi framework. It maintains a database of Configuration objects, locally or re- motely. This service monitors the service registry and provides configuration information to ser- vices that are registered with a service.pid property, the Persistent IDentity (PID), and implement one of the following interfaces:
-
-* Managed Service – A service registered with this interface receives its configuration dictionary from the database or receives null when no such configuration exists.
-* Managed Service Factory – Services registered with this interface can receive several configuration dictionaries when registered. The database contains zero or more configuration dictionaries for this service. Each configuration dictionary is given sequentially to the service.
-
-The database can be manipulated either by the Management Agent or bundles that configure them- selves. Other parties can provide Configuration Plugin services. Such services participate in the con- figuration process. They can inspect the configuration dictionary and modify it before it reaches the target service.
 
 [1]: /services/org.osgi.service.component.html
+[2]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.cm.application

@@ -92,7 +92,7 @@ So what should you do with the location? Well, just set it always to "?". This i
 
 ## Example Application
 
-You can find an example application at [OSGi enRoute Example}[2]. This application is a web application that provides an implementation for all actors in the Configuration Admin service except for Configuration Admin itself. The application has a number of buttons to execute simple scenarios.
+You can find an example application at [OSGi enRoute Example][2]. This application is a simple web application that provides an implementation for all actors in the Configuration Admin service specification except for Configuration Admin itself. The application has a number of buttons to execute simple scenarios. Run it in debug mode, set breakpoints, and enjoy.
 
 
 

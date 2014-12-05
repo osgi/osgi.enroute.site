@@ -13,15 +13,16 @@ We have organized the work around a number of Github repositories. All these rep
 
 * [`osgi.enroute.site`][enroute-doc] – This website! Don't whine about this website, clone it, change it, and create a pull-request. All contributions welcome.   
 * [`osgi.enroute`][enroute] – The OSGi enRoute Profile and Distro repository. This repository is the source for the OSGi enRoute  profiles. You will find the definition here as well as the sources for the service contracts that are not (yet?) part of the OSGi standards.
-* [`workspace`][workspace] – The OSGi enRoute template for a bnd workspace. This template creates a bnd environment that is all setup to go. It also contains the OSGi enRoute default distro. 
-* [`bundles`](https://github.com/osgi/bundles) – Some of the services in the OSGi enRoute Base Profile are new and do not have open source implementations (yet!). This repository provides default, and mostly rather simple, implementations for these services. We're actively pushing these projects into one of the major open source projects.
-* [`osgi.enroute.template`](https://github.com/osgi/osgi.enroute.template) – This project provides the base for the bndtools project templates. 
+* [`workspace`][workspace] – The OSGi enRoute template for a bnd workspace. This template creates a bnd environment that is all setup to go. It also contains the OSGi enRoute default distro at the latest revision. 
+* [`osgi.enroute.bundles`](https://github.com/osgi/osgi.enroute.bundles) – Some of the services in the OSGi enRoute Base Profile are new and do not have open source implementations (yet!). This repository provides default, and mostly rather simple, implementations for these services. We're actively pushing these projects into one of the major open source projects.
+* [`osgi.enroute.template`][template] – This repository is an OSGi enRoute workspace for project templates in bndtools. It is a normal workspace but it uses weird names so these names can be replaced when the template is expanded. The template must currently manually be imported in the bndtools build.
+* [`osgi.enroute.examples`][examples] – The OSGi enRoute service catalog demonstrates the use of the OSGi API with small examples. These examples can be found in this repository. 
 
 ### Tools
 
 In sorted order:
 
-* [bnd(tools)[(http://bndtools.org) – The bnd(tools) project provides the underlying engine for the OSGi enRoute tool chain as well as the Eclipse bndtools plugin. You can find their repositories at [Github][bndtools].
+* [bnd(tools)[(http://bndtools.org) – The bnd(tools) project provides the underlying engine for the OSGi enRoute tool chain as well as the Eclipse bndtools plugin. You can find their repositories at [Github][bndtools]. For the moment, please install the latest release from [Cloudbees][cloudbees].
 * [Eclipse](http://eclipse.org)  – The Eclipse Foundation provides the unsurpassed IDE that forms the basis of the ease of use 
 * [Git & Github](https://github.com) – Git provides the unsurpassed source control management system. 
 * [Gradle][gradle] - The command line based build tool used in the continuous build on Travis.
@@ -42,10 +43,11 @@ In sorted order:
 * [Knopflerfish](http://www.knopflerfish.org/) – Knopflerfish is an open source distro of the OSGi specifications, they have implementations for almost all specifications. Several bundles in the OSGi enRoute distro are coming from Knopflerfish. The guardian company of Knopflerfish is [Makewave](http://www.makewave.com), who is a Principal member of the OSGi Alliance, tracing their membership back to the early beginnings.
 
 
-
-
 [enroute-doc]: https://github.com/osgi/osgi.enroute.site
 [enroute]: https://github.com/osgi/osgi.enroute
+[template]: https://github.com/osgi/osgi.enroute.template
+[examples]: https://github.com/osgi/osgi.enroute.examples
 [workspace]: https://github.com/osgi/workspace
 [bndtools]: https://github.com/bndtools
 [gradle]: http://www.gradle.org/
+[cloudbees]: https://bndtools.ci.cloudbees.com/job/bndtools.master/lastSuccessfulBuild/artifact/build/generated/p2/

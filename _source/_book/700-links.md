@@ -9,7 +9,9 @@ This page provides you with a map for the components that we use and love to dep
 
 ### OSGi enRoute Repositories
 
-We have organized the work around a number of Github repositories. All these repositories are either Apache Software License version 2.0, or EPL 1.0 unless indicated otherwise.
+We have organized the work around a number of Github repositories. All these repositories are either Apache Software License version 2.0, or EPL 1.0 unless indicated otherwise. To make this all work, there are actually a rather large number of repositories involved, which tends to get confusing. Therefore an illustration how it all hangs together:
+
+![Repositories in use and their relations](/img/repositories-overview.png)
 
 * [`osgi.enroute.site`][enroute-doc] – This website! Don't whine about this website, clone it, change it, and create a pull-request. All contributions welcome.   
 * [`osgi.enroute`][enroute] – The OSGi enRoute Profile and Distro repository. This repository is the source for the OSGi enRoute  profiles. You will find the definition here as well as the sources for the service contracts that are not (yet?) part of the OSGi standards.

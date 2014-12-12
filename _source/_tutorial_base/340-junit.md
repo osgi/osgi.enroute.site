@@ -8,7 +8,7 @@ summary: Test the Provider project with a standard (non-OSGi) JUnit test
 
 ## What you will learn in this section
 
-In this section we will create a whitebox JUnit test for our provider implementation. JUnit tests are very cheap; using them extensively safes tremendous amount of times in later phases of the development process. JUnit tests are always run before code is released and when they fail, they prohibit the release of the project.
+In this section we will create a whitebox JUnit test for our provider implementation. JUnit tests are very cheap; using them extensively saves tremendous amount of times in later phases of the development process. JUnit tests are always run before code is released and when they fail, they prohibit the release of the project.
 
 Testing is one of those chores a developer has to do, not as much fun as some deep algorithmic code. However, it is likely one of the most effective ways to spend your time.
 

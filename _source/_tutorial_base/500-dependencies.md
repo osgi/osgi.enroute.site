@@ -28,7 +28,7 @@ This comes up empty, but we do get a link to 'Continue Search on jpm4j.org'. If 
 Unfortunately the browser support in Linux Eclipse does not work well with jpm4j. You can go to the `Eclipse/Preferences/Bndtools/JPM. There you can select an external browser.
 {: .bug}
 
-This website provides has lots of interesting info and it contains more than Maven Central. Any JAR on there can be added to the build path of our project with a drag-and-drop operation. The drag always starts with the version vignette. The drop goes either to the `Central` repository or to the `Build` tab (where it is added to the build-path and the repository). Since weneed to have the PARSII parser on our build path we first double click the `bnd.bnd` file, and the select the `Build` tab. We then drag the version vignette (the green 1.1.0 thingy) on the `Build Path` list. 
+This website provides has lots of interesting info and it contains more than Maven Central. Any JAR on there can be added to the build path of our project with a drag-and-drop operation. The drag always starts with the version vignette. The drop goes either to the `Central` repository or to the `Build` tab (where it is added to the build-path and the repository). Since we need to have the PARSII parser on our build path we first double click the `bnd.bnd` file, and the select the `Build` tab. We then drag the version vignette (the green 1.1.0 thingy) on the `Build Path` list. 
 
 ![Repositories](/img/tutorial_base/dependencies-repo-3.png)
 
@@ -73,7 +73,7 @@ The bundle therefore looks like:
 
 We now have 2 options. We can add the PARSII bundle to the runtime or we can add the imported packages to our own bundle. What is best? In this case the answer is quite easy since the PARSII is actually not a bundle; it is only a simple JAR. You can verify this easily. Select the PARSII bundle in the respositories view under the Central repository (search for parsii). If you double click on the JAR it opens the JAR Viewer, and the manifest is shown. This rather meager manifest is not an OSGi manifest, ergo, this is not a bundle. So option 2, adding the packages to the JAR is the best solution.
 
-Go back to the `Contents` tab of the provider bundle. If you now drag the `parsii.eval` package from the Imported Pacaks list to the Private Packages list and save the `bnd.bnd` file then you see that a new import replaces the the `parsii.eval` package: `parsii.tokenizer`. You can now also drag this package to the Private Packages list but lets learn something new.
+Go back to the `Contents` tab of the provider bundle. If you now drag the `parsii.eval` package from the Imported Packages list to the Private Packages list and save the `bnd.bnd` file then you see that a new import replaces the the `parsii.eval` package: `parsii.tokenizer`. You can now also drag this package to the Private Packages list but lets learn something new.
 
 Adding these packages by hand can become tedious. So select the `Source` tab of the `bnd.bnd` editor:
 

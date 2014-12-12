@@ -10,7 +10,7 @@ In the previous section we created a fresh clean OSGi enRoute demo application b
 
 ## To Lower
 
-The demo application turns the word into a lower case word. Let's make the first exercise really trivial and turn it into lower case. The `UpperApplication` class contains the code that is called from the REST interface. You can change the method to:
+The demo application turns the word into an upper case word. Let's make the first exercise really trivial and turn it into lower case. The `UpperApplication` class contains the code that is called from the REST interface. You can change the method to:
 
 	public String getUpper(RESTRequest rq, String string) {
 		return string.toLowerCase();

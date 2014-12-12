@@ -12,7 +12,7 @@ All this work to get a working provider! However, we've only run it in a evaluat
 
 There are a myriad of deploy formats in Java (and OSGi!): WAR files, Karaf CARs, EAR files, OSGi Subsystems, OSGi Deployment Admin, etc. Bndtools can support all of those through _plugins_ but always natively supports the most humblest of all deployment formats: an executable JAR. An executable JAR has no external dependencies, everything it needs outside the JDK is embedded.
 
-The beauty of An executable JAR is that it can be started anywhere there is a java virtual machine:
+The beauty of an executable JAR is that it can be started anywhere there is a java virtual machine:
 
 	$ java -jar executable.jar
 
@@ -24,7 +24,7 @@ So do a `New/Bndtools OSGi Project` and use `com.acme.prime.eval.application` as
 
 ## The Sole Content
 
-By default, an application only contains a Gogo shell command, in this case in the `EvalApplication` class. This one is very similar and then not really to the `EvalImpl` class. In the `EvalImpl` class we just made the existing API call, `eval`, available as a Gogo command. In this application project we need to get the service and call the method on that service. Getting a service is made very easy with DS, just add a setter method and add the `@Reference` annotation. So lets replace the code for  the `EvalApplication` code with:
+By default, an application only contains a Gogo shell command, in this case in the `EvalApplication` class. This one is very similar, and then not really, to the `EvalImpl` class. In the `EvalImpl` class we just made the existing API call, `eval`, available as a Gogo command. In this application project we need to get the service and call the method on that service. Getting a service is made very easy with DS, just add a setter method and add the `@Reference` annotation. So lets replace the code for  the `EvalApplication` code with:
 
 	@Component(
 		service=EvalApplication.class, 

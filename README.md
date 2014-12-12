@@ -12,7 +12,7 @@ This repository holds the OSGi enRoute website hosted at [http://enroute.osgi.or
 
 You can clone this repository and then run jekyll (2.0.3+) in the root directory:
 
-	$ jekyll  server -w -s _source -d _site
+	$ bundle exec jekyll server -w -s _source -d _site
 
 Then go to [http://localhost:4000](http://localhost:4000). The pages are automatically updated when you edit a markdown file, though you do have to refresh the browser to see these changes. Eclipse later revisions have a decent markdown editor build in.
 
@@ -20,6 +20,13 @@ Then go to [http://localhost:4000](http://localhost:4000). The pages are automat
 
 The contents of this repository are made available to the public under the terms of the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
+## Contributing
+
+Want to hack on osgi.enroute.site? There are [instructions](CONTRIBUTING.md) to get you
+started.
+
+They are probably not perfect, please let us know if anything feels
+wrong or incomplete.
 
 [enroute]: http://enroute.osgi.org
 [jekyll]: http://jekyllrb.com/

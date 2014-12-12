@@ -84,7 +84,7 @@ The first thing you'll notice is how the console is filled with red text. This i
 
 ![Application bndrun](/img/tutorial_base/deploy-debug-0.png)
 
-The `debug.bndrun` file inherits from the `com.acme.prime.eval.bndrun` file, any initial requirement we add to this file is automatically added to the debug run; first principle of Do Not Repeat Yourself (DNRY). However, the `debug.bndrun` adds a set of standard requirements that make it so much easier to debug OSGi applications. It adds Web Console, the Gogo shell, etc. So click on the `Debug OSGi` button and then go to [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray) to inspect your OSGi system. The user id and password were `admin`, and ... drums ... `admin`.
+The `debug.bndrun` file inherits from the `com.acme.prime.eval.bndrun` file, any initial requirement we add to this file is automatically added to the debug run; first principle of Don't Repeat Yourself (DRY). However, the `debug.bndrun` adds a set of standard requirements that make it so much easier to debug OSGi applications. It adds Web Console, the Gogo shell, etc. So click on the `Debug OSGi` button and then go to [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray) to inspect your OSGi system. The user id and password were `admin`, and ... drumroll ... `admin`.
 
 ![Application bndrun](/img/tutorial_base/deploy-debug-1.png)
 

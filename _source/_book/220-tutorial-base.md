@@ -4,15 +4,11 @@ layout: book
 summary: A complete tutorial to use the OSGi enRoute tool chain
 ---
 
-In this quick start we develop a little project that, surprise, surprise,  prints out "Hello world", and because it is OSGi based, we will also cover the "Goodbye World". 
+In this tutorial we develop a little project that, surprise, surprise,  prints out "Hello world", and because it is OSGi based, we will also cover the "Goodbye World". 
 
-This tutorial is light on the explanations because it focuses on introducing the overall architecture of enRoute, not the details. Over time this site will be filled with tutorials and documentation (or references to those) that will explain the minute details. This however, is about some big steps.
+A disclaimer. This tutorial is about learning to use OSGi enRoute, not about learning Java, Git, nor Eclipse. It is assumed that you have basic experience with these tools.
 
-We will cover the whole chain, from creating a workspace all the way to continuous integration.
-
-A disclaimer. This quick start is about learning to use OSGi enRoute, not about learning Java, Git, nor Eclipse. It is assumed that you have basic experience with these tools.
-
-If you have any questions about this quick-start, please discuss them in the [forum][forum].
+If you have any questions about this tutorial, please discuss them in the [forum][forum].
 
 ## Sections
 

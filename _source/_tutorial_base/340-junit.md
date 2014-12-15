@@ -8,7 +8,7 @@ summary: Test the Provider project with a standard (non-OSGi) JUnit test
 
 ## What you will learn in this section
 
-In this section we will create a whitebox JUnit test for our provider implementation. JUnit tests are very cheap; using them extensively safes tremendous amount of times in later phases of the development process. JUnit tests are always run before code is released and when they fail, they prohibit the release of the project.
+In this section we will create a whitebox JUnit test for our provider implementation. JUnit tests are very cheap; using them extensively saves tremendous amount of times in later phases of the development process. JUnit tests are always run before code is released and when they fail, they prohibit the release of the project.
 
 Testing is one of those chores a developer has to do, not as much fun as some deep algorithmic code. However, it is likely one of the most effective ways to spend your time.
 
@@ -29,7 +29,7 @@ So let's evaluate a simple expression:
 		}
 	}
 
-Now, when I learned flying in a retractable gear plane my teacher told me that there are two kind of retractable gear pilots. The first category is the pilots that have not landed the plane with gear up and the second category is for the pilots that have not yet landed their planes with gear up. Something like this is going to happen to you when testing in bndtools. In this case you must use the standard Eclipse JUnit test after selecting the test class or method: `@/Run As/JUnit Test`. Undoubtedly, there will be many times when you select the `Bnd OSGi Test Launcher (JUnit)` which we will discuss later. So select the `EvalImplTest` class and do `@/Run As/JUnit Test`.
+Now, when I learned flying in a retractable gear plane my teacher told me that there are two kind of retractable gear pilots. The first category is the pilots that have landed the plane with gear up and the second category is for the pilots that have not yet landed their planes with gear up. Something like this is going to happen to you when testing in bndtools. In this case you must use the standard Eclipse JUnit test after selecting the test class or method: `@/Run As/JUnit Test`. Undoubtedly, there will be many times when you select the `Bnd OSGi Test Launcher (JUnit)` which we will discuss later. So select the `EvalImplTest` class and do `@/Run As/JUnit Test`.
 
 ![JUnit](/img/tutorial_base/junit-0.png)
 

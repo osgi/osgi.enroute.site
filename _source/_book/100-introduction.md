@@ -30,7 +30,7 @@ That said, we've gone out of our way to make the transition as easy as possible.
 
 ## Together We're Stronger 
 
-We strive to be complete because a key problem for starters is how to assemble all the parts to just do a `Hello World`. But we actually also strive to become redundant over time. Not only are there are a lot more smart people outside the OSGi Alliance than inside, we also feel that Service Oriented Programming is about assembling from many different sources. We therefore want this project to be a collaboration between many parties. This web site is hosted on [Github][enroute-doc] and pull-requests are very much welcomed. We also setup the profiles and the tool chain so that others, both commercial companies as well as open source, can extend the model.
+We strive to be complete because a key problem for starters is how to assemble all the parts to just do a `Hello World`. But we actually also strive to become redundant over time. Not only are there a lot more smart people outside the OSGi Alliance than inside, we also feel that Service Oriented Programming is about assembling from many different sources. We therefore want this project to be a collaboration between many parties. This web site is hosted on [Github][enroute-doc] and pull-requests are very much welcomed. We also setup the profiles and the tool chain so that others, both commercial companies as well as open source, can extend the model.
 
 If you're part of a project (commercial or open source) and want to participate in the OSGi enRoute project do not hesitate to contact us.
 

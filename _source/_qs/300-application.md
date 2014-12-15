@@ -43,11 +43,11 @@ Since this is a single page web app we also need some static resources for the J
 
 The `com.acme.prime.upper/index.html` contains the single page HTML root. It defines a header, view area, and a footer. The `com.acme.prime.upper/main/main.js` contains the Javascript code, and the `com.acme.prime.upper/main/htm` directory contains _html fragments_ that are inserted in the main page depending on the URI. Take a look at these resources and notice how these resources can use macros from the build environment.
 
-We wont' go into more detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
+We won't go into more detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
 
 ## Defining a Runtime
 
-Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the _Require_ annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could any of the other bundles listed on the left side but lets assume we're good for now.
+Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the _Require_ annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could add any of the other bundles listed on the left side as a requirement but lets assume we're good for now.
 
 ![Runtime Requirements](/img/qs/resolve-initial-0.png)
 
@@ -101,7 +101,7 @@ So save the `debug.bndrun` file and click `Debug OSGi`. First, this `bndrun` fil
 
 Anyway, we now have the unsurpassed [Web Console](http://felix.apache.org/site/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
 
-If you're asked for your credentials, the Apache Felix boys have giving you an unforgettable user id & password: 
+If you're asked for your credentials, the Apache Felix boys have given you an unforgettable user id & password: 
 
 	User id: 	admin
 	Password:	admin

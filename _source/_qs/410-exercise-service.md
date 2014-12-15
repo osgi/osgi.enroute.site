@@ -12,7 +12,7 @@ Currently we make a mortal error for Service Oriented Systems; we mix different 
 
 So in this exercise you should create a service API and a provider. From a high level, this will consists of the following steps:
 
-* Create an API. We will create an API project that exports an `Upper` interface to turn a string into upper.
+* Create an API. We will create an API project that exports an `Upper` interface to turn a string into upper case.
 * Create a provider for the Upper service.
 * Convert the `UpperApplication` class to use the Upper service.
 * Add the provider to the set of run bundles
@@ -41,7 +41,7 @@ We now need to change the `UserApplication` class to use our new incredibly powe
 
 The first thing we need to do is to make sure the Upper Application can see the API project. So click on the `bnd.bnd` file, select the `Build` tab, and add the API project, just like we did in the provider project.
 
-Then we change the `UserApplication` component class. We must add a setter method for the `Upper` server with a `@Reference` annotation to the end of the class (convention is to place references at the end):
+Then we change the `UserApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation to the end of the class (convention is to place references at the end):
 
 	@Reference
 	void setUpper( Upper upper ) {

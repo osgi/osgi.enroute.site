@@ -41,5 +41,4 @@ However, running into real problems is the best way to learn a technology. If yo
 And watch this space, we will expand this site with hundreds data sheets of services you can find on the net. These data-sheets will show you how to use this service in your application with real examples. 
 
 [forum]: /forum.html
-[enroute-doc]: https://github.com/osgi/osgi.enroute/tree/master/osgi.enroute.doc
-
+[enroute-doc]: https://github.com/osgi/osgi.enroute.site

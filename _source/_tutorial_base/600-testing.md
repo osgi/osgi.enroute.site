@@ -86,7 +86,7 @@ The current tests only tests if the service exists. So lets add some more:
 	}
 
 
-The tests are run in a real OSGi Framework but this does not stop us from debugging. Just click on the left margin next to the `trig` function, select the function name, and then `@/Debug As/Bnd OSGi Test Launcher (JUnit) (Shift+Alt+X C)`. The debugger stops in the method and you can now single step, even if this crosses to another bundle.
+The tests are run in a real OSGi Framework but this does not stop us from debugging. Just click on the left margin next to the `trig` function, select the function name, and then `@/Debug As/Bnd OSGi Test Launcher (JUnit) (Shift+Alt+D K)`. The debugger stops in the method and you can now single step, even if this crosses to another bundle.
 
 If you make changes then in this case the changes are not immediately reflected in the running framework. 
 

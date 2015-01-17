@@ -41,6 +41,10 @@ Make sure you have a good command line shell available. If you're familiar with 
 If you start using enRoute you will likely create a number of workspaces. There is a very handy utility plugin for Eclipse on MacOS that shows you which workspace is which icon in the task bar:
 
 > [http://njbartlett.name/2011/10/09/workspace-mac-badge.html](http://njbartlett.name/2011/10/09/workspace-mac-badge.html)
+
+There is also multi-workspace laucher plugin from Torkild U. Resheim that incorporates Neil Bartlett's task bar badge (above).
+
+> [OS X Eclipse Launcher Utility](http://marketplace.eclipse.org/content/osx-eclipse-launcher)
 	
 ### Unix
 

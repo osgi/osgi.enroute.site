@@ -1,7 +1,7 @@
 ---
 title: Creating an Application
 layout: tutorial
-prev: 300-application.html
+prev: 200-workspace.html
 next: 400-exercise-tolower.html
 summary: Creating a sample enRoute Application
 ---
@@ -12,7 +12,7 @@ So let's get started by creating a new Bndtools Project. Select `File/New/Bndtoo
 
 ![Create Application Project](/img/qs/app-create-0.png)
 
-This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application.`. For OSGi enRoute, this `.application` suffix is crucial since it defines the template we will use. So in the first page we enter this name.
+This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is crucial since it defines the template we will use. So in the first page we enter this name.
 
 ![Create Application Project](/img/qs/app-create-1.png)
  
@@ -32,7 +32,7 @@ The OSGi enRoute template has already created some source code for us. This sour
 
 ![The UpperApplication source code](/img/qs/upper-0.png)
 
-So what's in there? The first thing you will see are a number _Require_ annotations. These annotations ensure that we include the proper web resources for our application like Angular, Bootstrap, and the web extender that serves our static pages. Then we have the component annotation that makes this object a Declarative Services _service component_. A service component automatically is registered as a service when it implements an interface and it can  depend on other services.
+So what's in there? The first thing you will see is a number of annotations. They ensure that we include the proper web resources for our application like Angular, Bootstrap, and the web extender that serves our static pages. Then we have the component annotation that makes this object a Declarative Services _service component_. A service component is automatically  registered as a service when it implements an interface and it can depend on other services.
 
 This `UpperApplication` component implements the _REST_ interface and is thus registered as a _REST_ service. The contract of this service indicates that any public method in this class becomes available as a REST end-point. The `getUpper` method is for the `GET` method (duh, it starts with `get`. If you want a `POST` call it `postUpper`) and it is mapped from the `/rest/upper` URI. Since it accepts a single argument, we can specify the word we want to upper case as `/rest/upper/<word>`. 
 	
@@ -47,7 +47,7 @@ We won't go into more detail now because we just want to see it run! Understandi
 
 ## Defining a Runtime
 
-Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the _Require_ annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could add any of the other bundles listed on the left side as a requirement but lets assume we're good for now.
+Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could add any of the other bundles listed on the left side as a requirement but lets assume we're good for now.
 
 ![Runtime Requirements](/img/qs/resolve-initial-0.png)
 
@@ -55,7 +55,7 @@ So hit the `Resolve` button. This will open a dialog that shows you what bundles
 
 ![Resolved set](/img/qs/resolve-initial-1.png)
 
-You can click `Finish`, which will set the `Run Bundles` list. This list is normally not visible, it is closed, but if you open it you can the resulting bundles.
+Clicking `Finish` will set the `Run Bundles` list. This list is normally not visible. Open it if you'd like to see the resulting bundles.
 
 ![Resolved set](/img/qs/resolve-initial-2.png)
 
@@ -67,7 +67,7 @@ You are app is running and waiting for customers to enjoy the terrific upper cas
 
 [http://localhost:8080/com.acme.prime.upper](http://localhost:8080/com.acme.prime.upper)!
 
-Just click on the 'To Upper!' button. This will ask you for a word and then prints the word in the alert bar.
+Just click on the 'To Upper!' button. This will ask you for a word and then prints the result in the alert bar.
 
 ![The Application](/img/qs/app-0.png)
 

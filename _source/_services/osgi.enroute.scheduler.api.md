@@ -206,7 +206,7 @@ But what about that Object parameter? Well, we have not told you yet that you ca
 		long telephone();
 	}
 	
-	@Component( property= "bar=0633982260\n"
+	@Component( property= "telephone=0633982260\n"
 		+CronJob.CRON+"=0 0 0 ? JAN MON#1 2000-2022"
 	public class ExampleCron implements CronJob<Object> {
 	

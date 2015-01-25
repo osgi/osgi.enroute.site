@@ -75,7 +75,7 @@ Just click on the 'To Upper!' button. This will ask you for a word and then prin
 
 Of course you will never need to debug enRoute projects since they are by definition perfect! However, since perfection isn't what it used to be, let's see how we can do some debugging in this project.
 
-You can debug this project as you can any other project in Java. You can set breakpoints and single step. There is one difference with more traditional Java. In our case, we generate a bundle that gets deployed on every change we make. If you change some code an save it, a new bundle will get deployed. If you get more requirements in the `bndrun` file, those new bundles will be deployed or no longer necessary bundles get removed. This works so well that the dialog box that Eclipse sometimes pops up to tell you it could not patch the class files can be ignored because bnd does not rely on this patching.
+You can debug this project as you can any other project in Java. You can set breakpoints and single step. There is one difference with more traditional Java. In our case, we generate a bundle that gets deployed on every change we make. If you change some code and save it, a new bundle will get deployed. If you get more requirements in the `bndrun` file, those new bundles will be deployed or no longer necessary bundles get removed. This works so well that the dialog box that Eclipse sometimes pops up to tell you it could not patch the class files can be ignored because bnd does not rely on this patching.
 
 ![Resolved set](/img/qs/debug-patch-0.png)
 
@@ -85,7 +85,7 @@ So just click the check-box and dismiss this dialog. That out of the way, let's 
 		return string.toLowerCase();
 	}
 
-If there are no Javascript or html fragment changes you need to refresh the page in the browser to reload. Otherwise you can just click the button on your browser and try it out. You actually rarely have to restart the framework.
+If there are Javascript or html fragment changes, you need to refresh the page in the browser to reload. Otherwise you can just click the button on your browser and try it out. You actually rarely have to restart the framework.
  
 ## OSGi Details
 

@@ -16,11 +16,11 @@ This will open a wizard. Now naming is important and we've found that using Java
 
 ![Create Application Project](/img/qs/app-create-1.png)
  
-Click on `Next` to go to the page where we select the _template_. For this tutorial, it is mandatory to use the OSGi enRoute template since our workspace is not setup for the other templates. The OSGi enRoute templates creates specific project types based on the suffix of the project name. In this case we create an application project.
+Click on `Next` to go to the page where we select the _template_. For this tutorial, it is mandatory to use the OSGi enRoute template since our workspace is not setup for the other templates. The OSGi enRoute templates create specific project types based on the suffix of the project name. In this case we create an application project.
  
 ![Select the OSGi enRoute template](/img/qs/app-create-2.png)
  
-Select `Next` to go to the Java settinges page, which would should not change since OSGi enRoute has already set this up.
+Select `Next` to go to the Java settinges page, which should not change since OSGi enRoute has already set this up.
  
 ![Select the OSGi enRoute template](/img/qs/app-create-3.png)
  

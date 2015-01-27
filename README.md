@@ -1,6 +1,6 @@
 # OSGi enRoute Web Site
 
-This repository holds the OSGi enRoute website hosted at [http://enroute.osgi.org][enroute]. This web site is maintained as markdown and turned into HTML by [Jekyll][jekyll] using [GitHub Pages](https://help.github.com/articles/what-are-github-pages/). We have the following layout in the _site folder:
+This repository holds the OSGi enRoute website hosted at [http://enroute.osgi.org][enroute]. This web site is maintained as markdown and turned into HTML by [Jekyll][jekyll] using [GitHub Pages](https://help.github.com/articles/what-are-github-pages/). We have the following layout in the root folder:
 
 * _book – Is the main set of chapters. The entries are listed in the nav bar
 * _qs – Quick Start Tutorial

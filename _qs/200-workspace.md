@@ -3,17 +3,17 @@ title: The Workspace
 layout: tutorial
 prev: 100-prerequisites.html
 next: 300-application.html
-summary: Setup a bnd(tools) workspace
+summary: Setup a bnd workspace
 ---
 
 ## What you will learn in this section
-We will setup a bnd(tools) workspace for enRoute so we can build an application in the next section.
+We will setup a bnd workspace for enRoute so we can build an application in the next section.
 
 Before you start this section, make sure you've checked the [prerequisites](100-prerequisites.html) for enRoute on your platform. 
 
 ## The Workspace
 
-A workspace is a directory that has a specific layout so that bnd(tools) knows how to treat your projects. Since we will work in Eclipse we actually have 2 workspaces. The Eclipse workspace is a directory where Eclipse keeps its metadata and we keep that separated from the bnd(tools) workspace.
+A workspace is a directory that has a specific layout so that bnd knows how to treat your projects. Since we will work in Eclipse we actually have 2 workspaces. The Eclipse workspace is a directory where Eclipse keeps its metadata (a standard Eclipse workspace). We keep that separated from the bnd workspace which is a standard git repository, though we won't call it that. You'll see why soon.
 
 Since a bnd workspace for enRoute has some specific setup, we clone the workspace from a Github project, [osgi/workspace](https://github.com/osgi/workspace). 
 
@@ -55,7 +55,7 @@ Select `Next` and then select the `master` branch.
 
 ![Import archetype](/img/qs/git-import-4.png)
 
-Then select `Next` to go to the page where we will tell EGit to store our Git/bnd workspace in your file system.
+Then select `Next` to go to the page where we will tell EGit to store our bnd workspace in your file system.
 
 ![Import archetype](/img/qs/git-import-5.png)
 
@@ -76,7 +76,7 @@ So just click `Finish`. Which should give you a fresh new workspace, only beaten
 
 We've now created a workspace that will allow us to play with enRoute. Maybe a bit cumbersome with all the EGit steps but once you've mastered it is quite fast since most pages are just clicking `Next` to accept the defaults.
 
-You have to restart Eclipse since there is a small chance that Eclipse will by default place new projects in the Eclipse workspace and not, as is absolutely required, in the Git/bnd workspace.
+You have to restart Eclipse since there is a small chance that Eclipse will by default place new projects in the Eclipse workspace and not, as is absolutely required, in the bnd workspace.
 {: .bug}
 
 Now, select the `Bndtools` perspective with `Window/Open Perspective .../Other ...'. This opens a selection dialog:
@@ -92,7 +92,7 @@ Selecting `Bndtools` and clicking `OK` ensures that you are in the proper perspe
 
 Since we made changes to your file system, a short summary of where we placed what.
 
-The Eclipse workspace was placed in a special place for Eclipse workspaces, the `~/eclipse` directory. We named this workspace `com.acme.prime`, which is a good name. The bnd workspace was placed also in your home directory, in the `~/git` directory, also under the name `com.acme.prime`; keeping the related Eclipse and Git/bnd workspace named identical is a a good practice.
+The Eclipse workspace was placed in a special place for Eclipse workspaces, the `~/eclipse` directory. We named this workspace `com.acme.prime`, which is a good name. The bnd workspace was placed also in your home directory, in the `~/git` directory, also under the name `com.acme.prime`; using the same name for both the Eclipse and bnd workspaces is a good practice.
 
 	~/
 		git/

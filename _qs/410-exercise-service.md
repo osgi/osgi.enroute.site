@@ -1,7 +1,7 @@
 ---
 title: Exercise Services
 layout: tutorial
-prev: 400-exercise-tolower.html
+prev: 300-application.html
 next: /book/200-quick-start.html#End
 summary: Using services in the Demo Application
 ---

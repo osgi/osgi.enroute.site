@@ -19,13 +19,17 @@ So in this exercise you should create a service API and a provider. From a high 
 
 ### Create an API
 
-In general, you want to have an API project per workspace. So we should create such an API project. In OSGi enRoute this means the name of the project should end with `.api` and you should select the OSGi enRoute template. Let's to call our API project `com.acme.prime.api`.
+It is important to keep API code away from implementation code. If you store API and implementation in the same project it is too easy to leak implementation code to other projects that only require the API.
+ 
+In OSGi enRoute this means the name of the project should end with `.api` and you should select the OSGi enRoute template. Let's to call our general API project `com.acme.prime.api`. Why not `com.acme.prime.upper.api`? Well, we plan for the future; we want to reuse this project for other API as well. We could create a project per API but that tends to create hundreds of almost empty projects over time. Since a workspace should be a cohesive module, the APIs we define in this general API project are very likely to be also cohesive.
 
 In this new project, we rename the template API to reflect our semantics. So rename the `com.acme.prime.api` package to `com.acme.prime.upper.api` and the `Prime.java` file to `Upper.java`. Then change the `Upper` class so that we can use it to change a word to upper case:
 
 	public interface Upper {
 		String upper(String input);
 	}
+
+If you have another API in the future, you can then add it to the same project in another package.
 
 ### Create a Provider
 

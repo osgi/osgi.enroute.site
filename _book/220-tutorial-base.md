@@ -4,7 +4,7 @@ layout: book
 summary: A complete tutorial to use the OSGi enRoute tool chain
 ---
 
-In this tutorial we develop a little project that, surprise, surprise,  prints out "Hello world", and because it is OSGi based, we will also cover the "Goodbye World". 
+In this tutorial we develop a little project that creates a simple server application that interacts with an OSGi console shell. 
 
 A disclaimer. This tutorial is about learning to use OSGi enRoute, not about learning Java, Git, nor Eclipse. It is assumed that you have basic experience with these tools.
 
@@ -30,7 +30,7 @@ Well, first, since we're still in beta, we'd love feedback. Our most favorite fe
 
 After you've done this tutorial you should have a basic feeling of how to build an application with  OSGi enRoute. So the best way to continue learning is to build a small application based on these principles. Running into real problems is the best way to learn a technology. If you run into problems, use the [Forum][forum] to ask questions and get answers.
 
-And watch this space, we will expand this site with hundreds data sheets of services you can find on the net. These data-sheets will show you how to use this service in your application with real examples. 
+And watch this space, we will expand this site with hundreds of data sheets of services you can find on the net. These data-sheets will show you how to use this service in your application with real examples. 
 
   
 

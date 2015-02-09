@@ -85,7 +85,7 @@ If we translate this to a picture with the standard OSGi notation it looks as fo
 
 ![Bundle Layout](/img/tutorial_base/provider-imports-1.png)
 
-We can see that our simple bundle is importing the `com.acme.prime.eval.api` package to get the `Eval` interface. This is quite unpleasant for our users since they are forced to always download two bundles. Since the service API package and our simple implementation are tightly coupled (virtually any change will force a change in our provider) we can simplify the life of our customers by exporting the API from our provider bundle. This an be done by dragging the imported package in the right 'Import Packages' list to the Exported Package list and dropping it there.  If there is already an export of the `com.acme.prime.eval.provider.api` then you should remove it, it is a placeholder.
+We can see that our simple bundle is importing the `com.acme.prime.eval.api` package to get the `Eval` interface. This is quite unpleasant for our users since they are forced to always download two bundles. Since the service API package and our simple implementation are tightly coupled (virtually any change will force a change in our provider) we can simplify the life of our customers by exporting the API from our provider bundle. This can be done by dragging the imported package in the right 'Import Packages' list to the Exported Package list and dropping it there.  If there is already an export of the `com.acme.prime.eval.provider.api` then you should remove it, it is a placeholder.
 
 After you save the `bnd.bnd` file, you'll see that the imports disappear.
 

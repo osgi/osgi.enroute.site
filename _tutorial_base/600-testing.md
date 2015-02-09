@@ -62,7 +62,7 @@ There is an issue in bndtools and this test resolve. Don't add the test bundle o
 {: .bug}
 
 
-Hit the `Resolve` button and safe. We have only a few dependencies, all caused by the fact that the provider uses Declarative Services (DS) a.k.a. SCR.
+Hit the `Resolve` button and save. We have only a few dependencies, all caused by the fact that the provider uses Declarative Services (DS) a.k.a. SCR.
 
 Our bundles now look as follows:
 

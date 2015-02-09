@@ -11,7 +11,7 @@ In the previous section we learned how to run our bundle inside a framework. In 
 
 ## Debugging
 
-While your OSGi framework is happily humming along and you're making changes there is a change that you want to see what is going on inside. Just enter a normal IDE breakpoint (double click in the left margin) and make sure your code gets there. 
+While your OSGi framework is happily humming along and you're making changes there is a chance that you want to see what is going on inside. Just enter a normal IDE breakpoint (double click in the left margin) and make sure your code gets there. 
 
 For example, put a breakpoint on the `EvalImpl.eval` method. When you enter the Gogo `test:eval` command, you will see that the IDE enters your breakpoint. Before you go to the debugger, however, Eclipse might annoy with the following dialog:
 
@@ -104,7 +104,7 @@ If you click on an entry then such an editor opens:
 
 ### Bundles
 
-If go back to XRay again then you can see  the bundles as boxes with rounded corners on the right side. Bundles are also color coded:
+If go back to XRay again then you can see  the bundles as boxes with rounded corners on the left side. Bundles are also color coded:
 
 * Orange – Active
 * Grey – Resolved

@@ -4,7 +4,7 @@ layout: book
 summary: A quick-start guide to get engaged with OSGi enRoute. It shows how to quickly use the complete toolchain.
 ---
 
-In this quick start we develop a little project that, creates a single page web-application
+In this quick start we develop a little project that, creates a single page web-application.
 
 This tutorial is light on the explanations because it focuses on introducing the overall architecture of enRoute, not the details. Over time this site will be filled with tutorials and documentation (or references to those) that will explain the minute details. This however, is about some big steps.
 

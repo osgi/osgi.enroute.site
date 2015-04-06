@@ -35,7 +35,7 @@ One of the great tools to debug OSGi applications is the Apache Felix Web Consol
 
 First switch back to the bndtools perspective (usuall the bndools icon is at the right top). Then double click the `bnd.bnd` file, select the `Run` tab and add the `aQute.xray.plugin` to the `Run Requirements` list. Since we use dependencies, this plugin will automatically drag in the web console and the required Jetty web server. 
 
-However, there is a bug in Jetty, so for now you have to also add `org.apache.felix.eventadmin` to the initial requirements, this should in general not be necessary. We're working on it.
+However, there is a bug in Jetty, so for now you have to also add `org.apache.felix.eventadmin` to the initial requirements, this should in general not be necessary. There are also unfound plugins such as Failed to instantiate plugin `org.apache.felix.webconsole.internal.deppack.DepPackServlet`. We're working on it.
 {: class=bug }
 
 

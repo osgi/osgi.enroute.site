@@ -103,7 +103,7 @@ Lets say you buy a house from me. In this scenario you are consumer of the contr
 
 So a consumer is relatively distant from the contract and it often plays the role of a consumer in many different service contracts. A provider usually provides only a single service contact while being a consumer in other service contracts.  
 
-Therefore the best practice in OSGi is for a provider to include its service API. Separating the API from the provider makes no sense since there is a 1:1 relation because there is no backward compatibility for a provider. Having the API in the bundle just makes life easier.
+Therefore the best practice in OSGi is for a provider to include its service API codes and export it. Separating the API from the provider makes no sense since there is a 1:1 relation between provider and API, unlike the consumer that will get backward compatibility from the API. Having the API in the bundle just makes life easier. That said, do not make the mistake to place them in the same _project_ since that would require compiling against a JAR that would also contain the implementation. Compilation should always be done against API only JARs to prevent accidentally becoming dependent on implementation code.
 
 In this section we dragged the service API import to the exported package list. For developers not used to bnd this can be surprising because the API is not part of the provider project; it came from the API project. However, in bnd you can put any package in your bundle that is available on the build path.
 

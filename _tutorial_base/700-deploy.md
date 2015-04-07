@@ -1,5 +1,5 @@
 ---
-title: Creating an Application
+title: Deploying an Application
 layout: tutorial
 prev: 600-testing.html
 next: 800-ci.html

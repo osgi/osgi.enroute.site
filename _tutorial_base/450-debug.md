@@ -38,6 +38,8 @@ First switch back to the bndtools perspective (usuall the bndools icon is at the
 However, there is a bug in Jetty, so for now you have to also add `org.apache.felix.eventadmin` to the initial requirements, this should in general not be necessary. We're working on it.
 {: class=bug }
 
+And that is not all, the web console makes a rather noisy start by showing an unnecessary stack trace because it missing something from Deployment Admin. You can safely ignore this.
+{: class=bug }
 
 ![Run Window for adding XRay](/img/tutorial_base/debug-xray-0.png)
 

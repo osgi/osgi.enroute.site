@@ -101,11 +101,16 @@ The concepts of consumers and providers can be confusing, mostly because it is o
 
 Lets say you buy a house from me. In this scenario you are consumer of the contract and I am the provider of the contract. These roles are, surprisingly, not symmetrical. For example, if the seller adds an extra room after the contract was signed then the buyer will not object (ok, in general, you get my point). However, if the seller removes a room the buyer is going to be upset. A consumer can expect backward compatibility but a provider is closely bound to the contract. Virtually any change in the service contract will require a provider to be updated to provide the new functions. 
 
+In terms of OSGi and semantic versioning the above example corresponds to the following recommended practice
+* Micro change -> backward compatible with existing providers and consumers of the API
+* Minor change -> existing providers of the API are not compatible but consumers are
+* Major change -> existing providers and consumers are no longer compatible
+
 So a consumer is relatively distant from the contract and it often plays the role of a consumer in many different service contracts. A provider usually provides only a single service contact while being a consumer in other service contracts.  
 
-Therefore the best practice in OSGi is for a provider to include its service API. Separating the API from the provider makes no sense since there is a 1:1 relation because there is no backward compatibility for a provider. Having the API in the bundle just makes life easier.
+Therefore the best practice in OSGi is for a provider to export its service API. Separating the API from the provider makes no sense since there is a 1:1 relation. This should not be confused with keeping API and provider in a _physically_ separate bundles. What is meant here is to _export_ the imported API package in the provider bundle.
 
-In this section we dragged the service API import to the exported package list. For developers not used to bnd this can be surprising because the API is not part of the provider project; it came from the API project. However, in bnd you can put any package in your bundle that is available on the build path.
+For example, in this section we dragged the service API import to the exported package list. For developers not used to bnd this can be surprising because the API is not part of the provider project; it came from the API project. However, in bnd you can put any package in your bundle that is available on the build path, with additional benefit this will guide the dependency detection while constructing the runtime.
 
  
 

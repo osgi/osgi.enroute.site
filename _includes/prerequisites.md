@@ -7,11 +7,11 @@ Before you start any of the tutorials you must prepare your environment so that 
 
 ## Installing bndtools
 
-In general you should install the bndtools from either the Eclipse Marketplace or, if you're a bit more adventurous, from the Milestone update. However, since this site is in beta, it is best to install the continuous build version. Once we're out of beta, we will make sure there is always a good version in the market place. The URL for the continuous build is:
+Since this site is in beta, it is best to install the continuous build version. Once we're out of beta, we will make sure there is always a good version in the market place. The URL for the continuous build is:
 
 	https://bndtools.ci.cloudbees.com/job/bndtools.master/lastSuccessfulBuild/artifact/build/generated/p2/
 
-You can find the details how to install bndtools on the bndtools website:
+In general you should install the bndtools from either the Eclipse Marketplace or, if you're a bit more adventurous, from the Milestone update. You can find the details how to install bndtools on the bndtools website:
 
 	http://bndtools.org/installation.html#update-site
 

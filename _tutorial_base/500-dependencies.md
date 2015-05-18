@@ -113,7 +113,7 @@ The basic dependency model of bnd is based on the OSGi Bundle Symbolic Name (BSN
 
 In the enRoute project we have the following repositories:
 
-* Workspace – The workspace repository represents all the bundles in the workspace built by projects. You can add an such bundles as a dependency to your project.
+* Workspace – The workspace repository represents all the bundles in the workspace built by projects. You can add such bundles as a dependency to your project.
 * Release – This is the repository where our final bundles are released in, you can find the storage of this repo in ./cnf/release
 * Central (JPM4J) – This is a view on the JPM repository, which contains Maven Central. It does not provide direct access to the 700.000+ JARs JARs since this set is growing. Since the JPM repository is in constant flux, it is possible to get different build results over time. Therefore, the JPM repository keeps a view which is under source control; you can find this file in `./cnf/repository.json`.
 

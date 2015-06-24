@@ -111,6 +111,12 @@ All other exceptions are translated to a 500 SERVER ERROR error code.
 Clients can always set the response of the request through the servlet objects that are available on the RESTRequest arguments. However, this should in general be a last resort since most incompatibilities are caused by the sometimes really subtle interpretations of these error codes. In general it is best to try to make requests binary: succeed when all goes OK and fail in all other cases.
 
 
+## Discussion
+
+*   **Couldn't we just annotate a service with a service property and then have it automatically extended regardless the service interface?** 
+
+    The issue is that you cannot just convert a service since a service in general has NO defenses against attacks. I think it is quite crucial to realize that any method in that class is open for external calls from anywhere in the world. The work you need to do to make this work secure dwarfs the fact that you must implement an interface … Not just on the security, I find that the way you create this facade is often without any real functionality, it is often just an orchestrator. It checks the authority and then calls other services, potentially with the current user as parameters. In this model the JSONRPC and REST services are just securing and orchestrating. This allows the other services to be very cohesive since they know they do not have to worry about security and get the user as parameter instead of having to link in the current user model.
+
 ## Configuration
 
 Implementations must follow the PID `osgi.enroute.rest` which must support at least the following fields:

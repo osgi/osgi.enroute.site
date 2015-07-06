@@ -13,6 +13,26 @@ The archetypical use case for Event Admin is the case where you have useful info
 
 The Event Admin service captures this commonality.
 
+# Example Usage
+
+The following code shows a component that sends an event every second using the [scheduler](scheduler). 
+
+    @Component(property=CronJob.CRON+"=* * * * * ?")
+    public class EventSource {
+	EventAdmin	eventAdmin;
+	
+	public void run(Object object) {
+		Event event = new Event( "osgi/enroute/examples/ping", new HashMap<String,Object>() );
+		eventAdmin.postEvent(event);
+	}
+	
+	@Reference
+	void setEventAdmin( EventAdmin eventAdmin) {
+		this.eventAdmin = eventAdmin;
+	}
+    }
+
+
 
 
 Nearly all the bundles in an OSGi framework must deal with events, either as an event publisher or as an event handler. So far, the preferred mechanism to disperse those events have been the service interface mechanism.
@@ -21,3 +41,8 @@ Dispatching events for a design related to X, usually involves a service of type
 
 The Event Admin service provides an inter-bundle communication mechanism. It is based on a event publish and subscribe model, popular in many message based systems.
 This specification defines the details for the participants in this event model.
+
+
+
+
+[scheduler]: 

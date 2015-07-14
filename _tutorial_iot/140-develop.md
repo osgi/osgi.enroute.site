@@ -1,9 +1,8 @@
 ---
-title: Exploring
+title: Developing
 layout: tutorial
-prev: /book/100-prerequisites.html
-next: 200-workspace.html
-summary: Exploring the Pi
+prev: 120-exploring.html
+summary: Developing a Java program on the Pi
 ---
 
 ## Hello World

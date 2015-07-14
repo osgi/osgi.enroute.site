@@ -10,7 +10,7 @@ summary: The prerequisites for the use of OSGi enRoute (Important!)
 
 ## Raspberry Pi Setup
 
-Ok, now about that Raspberry Pi. This tutorial assumes a Raspberry Pi 2 model B+. This model is compatible with the Raspberry [Pi 1 Model B+][pimodel2b]. See the [Raspberry Pi][pi] and [Pi4j][pi4j]  sites for compatibility details. Note that the Raspberry 2 is surprisingly much faster.
+Ok, now about that Raspberry Pi. This tutorial assumes a Raspberry Pi 2 model B. This model is compatible with the Raspberry [Pi 1 Model B+][pimodel2b]. See the [Raspberry Pi][pi] and [Pi4j][pi4j]  sites for compatibility details. Note that the Raspberry 2 is surprisingly much faster, faster than you would expect from the technical specifications.
 
 ## Booting the Pi
 
@@ -30,7 +30,6 @@ The state you want to reach before you continue is that you can log in with SSH 
 	Last login: Thu Jun 18 07:42:02 2015 from 192.168.67.102
 	pi@raspberrypi ~ $ 
 {: .shell}
-	
 
 ## Java
 
@@ -42,7 +41,7 @@ Java 8 is now included in the [NOOBS distribution][noobs]. So in the shell, you 
 	Java HotSpot(TM) Client VM (build 25.0-b70, mixed mode)
 {: .shell}
 
-The build numbers should be regarded as minimum. If Java is not installed, then you can download it from [Oracle's Java Embedded site][java] and install it locally. You might want to search for [java + Raspberry Pi on Google][javapi]. 
+The build numbers should be regarded as minimum. Java is installed on the latest Raspian OS but if Java is not installed on your machine, then you can download it from [Oracle's Java Embedded site][java] and install it locally. You might want to search for [java + Raspberry Pi on Google][javapi]. 
 
 ## JPM
 
@@ -65,7 +64,7 @@ The build numbers should be regarded as minimum. If Java is not installed, then 
 
 To experiment with the Raspberry Pi we will need some sensors and actuators. It also helps to have a little breadboard and wires. It is amazing what you can get at amazon nowadays. If you can afford it, the [SunFounder][sunfounder] kit is like a boy's dream but for this tutorial you just need:
 
-* An couple of LEDs with 270 Ω resistors
+* An couple of LEDs with ± 270 Ω resistors
 * A few button/switches that you can plugin a breadboard
 * A breadboard
 * Some wires female-male to connect the Raspberry to the breadboard.
@@ -85,16 +84,12 @@ Almost there, we only need one more install! One of the nicest things in the OSG
 	
 This will start the bndremote program in the Java debug mode and will listen to port 1044. This will allow us to debug OSGi enRoute applications in bndtools on another machine.
 
-As you can see, we start the command with `sudo`, this is required to use the general purpose IO on the device. The `-n` option indicates the network we are running on, otherwise you can only use it from the same machine. 
+As you can see, we start the command with `sudo`, this is required to use the general purpose IO on the device. The `-n` option indicates the network we are running on, if you don't specify this you can only use the agent from the same machine (i.e. localhost). 
 
 ## Setting Up bndtools
 
 The next setup is the Eclipse works. Please follow the [quick start tutorial][qs] or if you're ambitious the [base tutorial][base]. For this tutorial, you should create a new workspace as described in the tutorials.
 
-In this workspace, create a project. In this tutorial this project is called `osgi.enroute.examples.iot.domotica.application`, but you should obviously give it a name dear to you, just make sure it ends with `.application` since the OSGi enRoute template uses that extension to provide the proper project structure for a web application. It should therefore go without saying, that you should select the OSGi enRoute template when asked.
-
-
-	
 [java]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-arm-downloads-2187472.html
 [pi]: https://www.raspberrypi.org/
 [pimodel2b]: http://pi4j.com/pins/model-2b-rev1.html

@@ -2,7 +2,7 @@
 title: Exploring
 layout: tutorial
 prev: 100-prerequisites.html
-next: 140-develop.html
+next: 140-circuits.html
 summary: Exploring the Pi
 ---
 
@@ -18,18 +18,18 @@ The following code assumes the `osgi.enroute.examples.iot.domotica.application` 
 
 ## Hello World 
 
-An OSGi enRoute Application project is a full web application with REST but we are first going to ignore those goodies. As always, the easiest app is to say `Hello World` (and on OSGi also `Goodbye World!`). So lets create a component in the `osgi.enroute.examples.iot.domotica.provider` package that performs these highly complex actions:
+An OSGi enRoute Application project is a full web application with REST but we are first going to ignore those goodies. As always, the easiest app is to say `Hello World` (and on OSGi also `Goodbye World!`). So lets create a component in the `osgi.enroute.examples.iot.domotica.command` package that performs these highly complex actions:
 
-	package osgi.enroute.examples.iot.domotica.provider;
-	
-	import ...
-	
 	@Component
-	public class UsePi {	
-		@Activate void activate() {
+	public class DomoticaCommand {
+	
+		@Activate
+		void activate() {
 			System.out.println("Hello World");
 		}
-		@Deactivate void deactivate() {
+	
+		@Deactivate
+		void deactivate() {
 			System.out.println("Goodbye World");
 		}
 	}
@@ -45,7 +45,8 @@ So double click this file and go to the `Source` tab. In the editor, add the fol
 	-runremote: \
 		pi; \
 			jdb=1044; \
-			host=192.168.2.4
+			host=192.168.2.4; \
+			shell=-1
 
 Obviously you have to change the IP number to the one you are using. In the [pre-requisites](100-prerequisites.html) we should have started the bnd remote main program via ssh:
 
@@ -56,163 +57,153 @@ Obviously you have to change the IP number to the one you are using. In the [pre
 
 We now need to _resolve_ the run specification. On the `debug.bndrun`, select the `Run` tab and click the `Resolve` button.
 
-The next step is to run this Run specification. Select the `debug.bndrun` file and call up the context menu, and select `@/Debug As/Bnd Native Launcher`. This will cause bnd to start the debugger and look for a remote agent on the specified host.
+The next step is to run this Run specification. Select the `debug.bndrun` file and call up the context menu, and select `@/Debug As/Bnd Native Launcher`. This will cause bnd to start the debugger and look for a remote agent on the specified host. If you forgot to start the remote agent then you have all the time of the world, bnd(tools) will keep tryng until it finds an agent. Once it succeeds, the ssh shell window should look like:
 
- 
-
- The first attempt is to work with the Raspberry Pi's hardware. Some background.
-
-
-
-
-
-
-
-
-The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle also registers  a Pi4J
-
-  
-
-
-## Installing the Circuit Application
-
-Among the [OSGi enRoute bundles][bundles] there is a small application that can wire components to the Raspberry Pi hardware. This application is available from jpm, so let's install the latest version (with the @* suffix you get the latest snapshot):
-
-	pi@raspberrypi ~ $ sudo jpm install osgi.enroute.iot.circuit.application.launch@*
-	pi@raspberrypi - $ circuit
-	[INFO] Started Jetty 8.1.14.v20131031 at port(s) HTTP:8080 on context path /
-	....
-	[DEBUG] Reusing context with id []
 	____________________________
 	Welcome to Apache Felix Gogo
 	
+	g!
+	2015-07-14 16:41:59.701:INFO:oejs.Server:jetty-8.1.14.v20131031
+	2015-07-14 16:42:00.202:INFO:oejs.AbstractConnector:Started SelectChannelConnector@0.0.0.0:8080
+	[INFO] Started Jetty 8.1.14.v20131031 at port(s) HTTP:8080 on context path /
+	[INFO] Detected extended HttpService. Filters enabled.
+	[INFO] Http service whiteboard started
+	Hello world	
 	Web server
-	g! 
 {: .shell}
 
-Let's see on what kind of Raspberry we're running:
+The bndtools IDE will continuously update the bundles on the remote agent. Let's test it by changing the "Hello World" to "I love Domotica!".
 
-	g! pi:info
-	----------------------------------------------------
-	HARDWARE INFO
-	----------------------------------------------------
-	Serial Number     :  00000000237a3302
-	CPU Revision      :  5
-	CPU Architecture  :  7
-	CPU Part          :  0xc07
-	CPU Temperature   :  43.3
-	CPU Core Voltage  :  1.2
-	CPU Model Name    :  ARMv7 Processor rev 5 (v7l)
-	Processor         :  3
-	Hardware Revision :  a01041
-	Is Hard Float ABI :  true
-	Board Type        :  Model2B_Rev1
-	----------------------------------------------------
-	MEMORY INFO
-	----------------------------------------------------
-	Total Memory      :  972111872
-	Used Memory       :  191946752
-	Free Memory       :  780165120
-	Shared Memory     :  0
-	Memory Buffers    :  22642688
-	Cached Memory     :  97341440
-	SDRAM_C Voltage   :  1.2
-	SDRAM_I Voltage   :  1.2
-	SDRAM_P Voltage   :  1.225
-	----------------------------------------------------
-	OPERATING SYSTEM INFO
-	----------------------------------------------------
-	OS Name           :  Linux
-	OS Version        :  3.18.7-v7+
-	OS Architecture   :  arm
-	OS Firmware Build :  7789db485409720b0e523a3d6b86b12ed56fd152 (clean) (release)
-	OS Firmware Date  :  Feb 14 2015 22:23:03
-	----------------------------------------------------
-	JAVA ENVIRONMENT INFO
-	----------------------------------------------------
-	Java Vendor       :  Oracle Corporation
-	Java Vendor URL   :  http://java.oracle.com/
-	Java Version      :  1.8.0
-	Java VM           :  Java HotSpot(TM) Client VM
-	Java Runtime      :  Java(TM) SE Runtime Environment
-	----------------------------------------------------
-	NETWORK INFO
-	----------------------------------------------------
-	Hostname          :  raspberry
-	IP Addresses      :  192.168.2.4
-	Nameserver        :  192.168.2.1
-	----------------------------------------------------
-	CODEC INFO
-	----------------------------------------------------
-	H264 Codec Enabled:  true
-	MPG2 Codec Enabled:  false
-	WVC1 Codec Enabled:  false
-	----------------------------------------------------
-	CLOCK INFO
-	----------------------------------------------------
-	ARM Frequency     :  600000000
-	CORE Frequency    :  250000000
-	H264 Frequency    :  0
-	ISP Frequency     :  250000000
-	V3D Frequency     :  250000000
-	UART Frequency    :  3000000
-	PWM Frequency     :  0
-	EMMC Frequency    :  250000000
-	Pixel Frequency   :  25200000
-	VEC Frequency     :  0
-	HDMI Frequency    :  163683000
-	DPI Frequency     :  0
+	Goodbye World!
+	I love Domotica
 {: .shell}
 
-This is likely more than you ever wanted to know about your Raspberry. What other commands are there?
+## Talking to the Hardware
 
-	g! pi
-	refreshed
-	pi:* commands. These directly manipulate the GpioController.
-	create <name> <pin>           – create a digital pin
-	test <name>                   – set a pin low/high 20 times
-	pins                          – show the pins
-	blink <name> <time>           – use the Pi4J blink function
-	high <name>                   – set a pin high
-	low <name>                    – set a pin low
-	info                          – show all the info of the board
-	reset                         – reset the controller
+We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We could use this library directly but we can also use the OSGi enRoute version. The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle therefore also registers  a Pi4J GpioController.
+
+So first add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
+
+	-runrequires: \
+		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.domotica.application)',\
+		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.pi.provider)'
+
+Actually, the easiest way to do this is to select the `Run` tab and then drag the `osgi.enroute.iot.pi.provider` from the repositories to the Run Requirements list. Save this file, then go to the `debug.bndrun` file and click on the `Resolve` button in the `Run` tab and save this file. This will load the   `osgi.enroute.iot.pi.provider` bundle in the Pi.
+
+The `osgi.enroute.iot.pi.provider` bundle adds a GpioController service from the Pi4j project. Since we want to use that GpioController service we need access to the type. We therefore need to add  this bundle also to the `bnd.bnd` file's `-buildpath` instruction.
+
+	-buildpath: \
+		osgi.enroute.base.api,\
+		osgi.enroute.logger.simple.provider,\
+		osgi.enroute.web.simple.provider;version=1.2,\
+		osgi.enroute.iot.circuit.provider,\
+		osgi.enroute.iot.pi.provider
 	
-	Pin numbers follow Pi4J GPIO numbers, see http://pi4j.com/pins/model-2b-rev1.html
+You can of course also click on the `+` in the `bnd.bnd`'s file Build tab and it from the list.
+
+Let's first do something very naughty: use statics. The Pi4j library has a SystemInfo class that provides lots of information about our Pi.
+
+	@Component
+	public class DomoticaCommand {
+	
+		@Activate
+		void activate() {
+			System.out.println(SystemInfo.getBoardType().name() + " " + SystemInfo.getSerial());
+		}
+	
+		@Deactivate
+		void deactivate() {
+			System.out.println("Goodbye World");
+		}
+		
+		@Reference
+		void setGpio(GpioController g) {
+			this.g = g;
+		}
+	}
+
+Save the file Java source file and watch the output:
+
+	Goodbye World!
+	Model2B_Rev1 00000000237a3302
 {: .shell}
 
-## The Beef!
+## Real Hardware
 
-It is time to go down to the hardware. It is kind of surprising what kind of sensors you can buy for less cost than a Starbucks' coffee today but we'll start simple. We will start with an LED. Let's take the example from [Gordons Projects][gordon] since this is the author of the library that we're using deep down in native code. We 'reuse' his pictures with his gracious permission but we adapt the text to use our `pi` commands.
+It is time to get this hardware out of the static-electricy protection pouches! We are going to make an LED blink! To "design" this scenario we use a handy open source tool called ["Fritzing"][fritzing]. It allows us to design in schema or breadboard mode. Let's start with a schema:
 
-### A Single LED
+![LED Example](/img/tutorial_iot/exploring-led-schema-1.png){:height="300px"}.
 
-Note: This is a verbatim copy of 
-To make sure it all works we first see if we can get an LED to turn on. The Raspberry connector looks like:
+A bit about pin numbering ... that is a bit of a mess. Pi4j uses another numbering than the Raspberry connector/chip uses. This is highly confusing. In the schema we connected the LED to the Raspberry GPIO17 on in the connector pin 11, in Pi4J this called the GPIO00 pin. Confused? You will be. We will keep the Pi4J numbering as much as possible. This the connector:
+
+![Model 2B pins](http://pi4j.com/images/j8header-2b.png){:height="600px"}.
+
+We connect the positive side of the LED to the GPIO 4 of the Raspberry and then connect it to ground via a 220Ω resistor. An LED is a _light emitting diode_, quite popular nowadays because they are very power efficient. The resistor is there to limit the current, otherwise we could destroy the Raspberry GPIO port or the LED. (Murphy says the Raspberry is the more likely candidate since it is more expensive). Remember that electronic class? We limit the current to less than (2.7V)/120Ω ~ 20 mA. This is within the  [Raspberry Pi][gpiospec] limits.
+
+We implement this schema on a _breadboard_. A [breadboard][breadboard] is a little board that makes it easy to prototype with the Raspberry Pi. It provides power lines above and below the board and a prototyping area where the vertical lines are connected. The distance between the holes is standard 0.1 inch, most ICs can be delivered with pins that use this spacing. Connections are made using small wires. Our breadboard is shown in the following picture:
+  
+![LED Example](/img/tutorial_iot/exploring-led-breadboard-1.png){:height="300px"}.
+
+We follow industry standard colors:
+
+* Red – Power, in our case the Raspberry 3.3V
+* Blue – Ground
+* Other – Signal wires
+
+A quick word about the electronics involved. LEDs are _Light Emitting Diodes_ and the diode part is important for us – they only pass electricity one way, so we need to make sure we put them in the right way round. They have a long leg and a slightly shorter leg. The long leg goes to the plus side and the shorter leg to the negative (or 0v) side. If we’re cut the legs short (as I have done here), then another way is to look at the side of the LED – there will be a flat section. Think of the flat as a minus sign and connect that to the resistor so that it is connected to the ground side of the circuit.
+
+You could test the circuit by connecting a temporary wire from the red 3.3V barto the LED on the side of the yellow wire. This should light the LED.
+ 
+## Blinking!
+
+The next step is the software. The following code will start a thread and blink the LED. The details about the API are to be found at the [Pi4j site][pi4j]. We are using the Pi4J API but realize that this API is not how you should use the Raspberry Pi on with OSGi.
+
+	private Scheduler scheduler;
+	private Closeable schedule;
+
+	@Activate
+	void activate() throws Exception {
+		try {
+			GpioController gpioController = GpioFactory.getInstance();
+			
+			while (!gpioController.getProvisionedPins().isEmpty()) 
+				gpioController.unprovisionPin(gpioController.getProvisionedPins().iterator().next());
+
+			GpioPinDigitalOutput out = gpioController
+					.provisionDigitalOutputPin(RaspiPin.GPIO_00, "LED1",
+							PinState.LOW);
+
+			schedule = scheduler.schedule(() -> {
+				boolean high = out.getState().isHigh();
+				out.setState(!high);
+			}, 500);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Deactivate
+	void deactivate() throws IOException {
+		schedule.close();
+		System.out.println("Goodbye World!");
+	}
+
+	@Reference
+	void setScheduler(Scheduler scheduler) {
+		this.scheduler = scheduler;
+	}
+ 
+Save the code, and see how the LED is blinking at you!
+
+## Thinking Ahead
+
+We hope you're still reading this and not escaped to the Pi4J site to see how you can use the GpioController to do more cool stuff and impress your partner with your explorations outside cyberspace. For we need to talk a bit ...
+
+Take a look at the code. This `activate` method clearly shows that we have one of those evil static APIs with life cycle attitude. Static APIs with such an attitude generally spell trouble in OSGi. Things work better with services. And this is a prime example of the disadvantages. As you can see, we need this odd loop to clear out any pins that were already provisioned before. We then need to create the pin while choosing a specific GPIO. If you think about this API then you should realize that such a design does not work very well in a shared environment. What if other bundles want use a GPIO pin as well? How do we prevent it from being cleared. We picked GPIO00 but that was arbitrary, we could've picked any GPIO. Sadly, lots of APIs are designed with the God complex, thinking that there is a single designer that omniscient. In a modular environment we try to avoid those like the plague. So in the coming sections we show an alternative on OSGi mechanisms. This example was just to get a quick and dirty win.
 
 
-![Model 2B pins](http://pi4j.com/images/j8header-2b.png)
-
-
-Before we even get started with the GPIO, lets make an LED light up by simply wiring it to the +3.3v supply and 0v.
-
-![Simple LED on 3.3V](/img/tutorial_iot/simple-led.jpg)  
-
-We have a yellow wire from the Pi’s +3.3v supply to the breadboard and this connects to an LED then via a 270Ω (ohm) resistor to 0v. The green wire connects back to the Pi.(Note that in general your breadboard might be different than the one shown here. In general breadboard have a strip of holes colored red, which you want to connect to the plus, and colored blue, which is Gnd).
-
-A quick word about the electronics involved. LEDs are Light Emitting Diodes and the diode part is important for us – they only pass electricity one way, so we need to make sure we put them in the right way round. They have a long leg and a slightly shorter leg. The long leg goes to the plus side and the shorter leg to the negative (or 0v) side. If we’re cut the legs short (as I have done here), then another way is to look at the side of the LED – there will be a flat section. Think of the flat as a minus sign and connect that to the 0v side of the circuit.
-
-If we allow too much current through the LED, it will burn very bright for a very short period of time before it burns out, so we need a resistor to limit the current. Calculating the resistor value is not difficult but for now, just use anything from 270Ω to 330Ω. Anything higher will make the LED dimmer.
-
-Refer to the diagram here to work out the pins we’re using. From this view the 3.3v pin on the GPIO connector is to the top-left, or pin number 1 on the connector. The Gnd pin is number 6, or the outer third pin from the top.
-
-We need to move the yellow wire to one of the programmable GPIO pins. We’ll move it to wiringPi pin 0 (GPIO-00 for us) which is notionally the first user GPIO pin. (It’s physical location is pin 11 on the GPIO connector)
-
-![GPIO-00 LED](/img/tutorial_iot/gpio00-led-3d.jpg)
-
-Do check against the wiring diagram to work out which pin on the connector to use. The LED will initially be off because normally the GPIO pins are initialized as inputs at power-on time.
-
-[bundles]: https://github.com/osgi/osgi.enroute.bundles
-[gordon]: https://projects.drogon.net/raspberry-pi/gpio-examples/tux-crossing/gpio-examples-1-a-single-led/
 [pi4j]: http://pi4j.com/
 [wiringpi]: http://wiringpi.com/
+[fritzing]: http://fritzing.org/home/
+[breadboard]: http://tangentsoft.net/elec/breadboard.html
+[gpiospec]: http://www.mosaic-industries.com/embedded-systems/microcontroller-projects/raspberry-pi/gpio-pin-electrical-specifications

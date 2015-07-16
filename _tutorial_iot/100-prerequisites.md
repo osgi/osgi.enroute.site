@@ -52,7 +52,6 @@ The build numbers should be regarded as minimum. Java is installed on the latest
 	  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 	                                 Dload  Upload   Total   Spent    Left  Speed
 	100 1564k  100 1564k    0     0   319k      0  0:00:04  0:00:04 --:--:--  328k
-	pi@raspberry ~ $ sudo jpm init
 	Home dir      /var/jpm
 	Bin  dir      /usr/local/bin
 	pi@raspberry ~ $ jpm version
@@ -65,7 +64,7 @@ The build numbers should be regarded as minimum. Java is installed on the latest
 To experiment with the Raspberry Pi we will need some sensors and actuators. It also helps to have a little breadboard and wires. It is amazing what you can get at amazon nowadays. If you can afford it, the [SunFounder][sunfounder] kit is like a boy's dream but for this tutorial you just need:
 
 * An couple of LEDs with ± 270 Ω resistors
-* A few button/switches that you can plugin a breadboard
+* A few button/switches that you can plug into a breadboard
 * A breadboard
 * Some wires female-male to connect the Raspberry to the breadboard.
 
@@ -75,7 +74,7 @@ Any local electronics store has this material. If you need a reference, these pa
 
 ## Remote bnd Debugging
 
-Almost there, we only need one more install! One of the nicest things in the OSGi enRoute tool chain is the remote debugging facility. Remote debugging from bnd(tools) requires an _agent_ to be running inside an OSGi framework. However, in this case we would also like to define the actual framework in bnd(tools), we just need a program that installs a framework with an agent defined in a bnd(tools) bndrun file. This is the biz.aQute.remote.main program. Let's install it:
+Almost there, we only need one more install! The OSGi enRoute tool chain has a remote debugging facility. Remote debugging from bnd(tools) requires an _agent_ to be running inside an OSGi framework. However, in this case we would also like to define the actual framework in bnd(tools), we just need a program that installs a framework with an agent defined in a bnd(tools) bndrun file. This is the biz.aQute.remote.main program. Let's install it:
 
 	pi@raspberrypi ~ $ sudo jpm install -f biz.aQute.remote.main@*
 	pi@raspberrypi ~ $ sudo bndremote -n 192.168.2.4
@@ -88,7 +87,7 @@ As you can see, we start the command with `sudo`, this is required to use the ge
 
 ## Setting Up bndtools
 
-The next setup is the Eclipse works. Please follow the [quick start tutorial][qs] or if you're ambitious the [base tutorial][base]. For this tutorial, you should create a new workspace as described in the tutorials.
+The next setup is the Eclipse works. Please follow the [quick start tutorial][qs] or if you're ambitious the [base tutorial][base]. For this tutorial, you should create a new workspace as described in the tutorials. Make sure you get the latest version workspace from github.
 
 [java]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-arm-downloads-2187472.html
 [pi]: https://www.raspberrypi.org/

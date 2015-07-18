@@ -42,6 +42,7 @@ The OSGi enRoute Application template has created a complete runnable project. T
 
 So double click this file and go to the `Source` tab. In the editor, add the following instruction:
 
+	-runpath: biz.aQute.remote.launcher
 	-runremote: \
 		pi; \
 			jdb=1044; \

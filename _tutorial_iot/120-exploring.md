@@ -40,6 +40,10 @@ Make sure you add the package to the private packages of the bundle. You can do 
 
 The OSGi enRoute Application template has created a complete runnable project. The `osgi.enroute.examples.iot.domotica.bndrun` file has a specification for running this application on an OSGi server that contains an HTTP server an other necessities in life. However, in this case we will use  the `debug.bndrun` run specification. This run specification inherits its setup from the `osgi.enroute.examples.iot.domotica.bndrun` file, it just adds a number of useful debugging bundles.
 
+The Http Server will run by (the OSGi) default on port 8080. You can change this port number by setting a run property in the `osgi.enroute.examples.iot.domotica.bndrun` file:
+
+	-runproperty: or.osgi.service.http.port = 9090
+
 So double click this file and go to the `Source` tab. In the editor, add the following instruction:
 
 	-runpath: biz.aQute.remote.launcher
@@ -52,9 +56,11 @@ So double click this file and go to the `Source` tab. In the editor, add the fol
 Obviously you have to change the IP number to the one you are using. In the [pre-requisites](100-prerequisites.html) we should have started the bnd remote main program via ssh:
 
 	$ ssh pi@192.168.2.4
-	pi@raspberrypi ~ $ sudo bndremote -n 192.168.2.4
+	pi@raspberrypi ~ $ sudo bndremote -a
 	Listening for transport dt_socket at address: 1044
 {: .shell}
+
+The `-a` option indicates that bndremote should listen to all interfaces, not just localhost.
 
 We now need to _resolve_ the run specification. On the `debug.bndrun`, select the `Run` tab and click the `Resolve` button.
 
@@ -81,7 +87,7 @@ The bndtools IDE will continuously update the bundles on the remote agent. Let's
 
 ## Talking to the Hardware
 
-We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We could use this library directly but we can also use the OSGi enRoute version. The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle therefore also registers  a Pi4J GpioController.
+We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We could use this library directly but we can also use the OSGi enRoute version. The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle therefore also registers  a Pi4J GpioController.
 
 So first add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
 
@@ -108,8 +114,9 @@ Let's first do something very naughty: use statics. The Pi4j library has a Syste
 	public class DomoticaCommand {
 	
 		@Activate
-		void activate() {
-			System.out.println(SystemInfo.getBoardType().name() + " " + SystemInfo.getSerial());
+		void activate() throws Exception {
+			System.out.println(SystemInfo.getBoardType().name() 
+				+ " " + SystemInfo.getSerial());
 		}
 	
 		@Deactivate
@@ -135,11 +142,11 @@ It is time to get this hardware out of the static-electricy protection pouches! 
 
 ![LED Example](/img/tutorial_iot/exploring-led-schema-1.png){:height="300px"}.
 
-A bit about pin numbering ... that is a bit of a mess. Pi4j uses another numbering than the Raspberry connector/chip uses. This is highly confusing. In the schema we connected the LED to the Raspberry GPIO17 on in the connector pin 11, in Pi4J this called the GPIO00 pin. Confused? You will be. We will keep the Pi4J numbering as much as possible. This the connector:
+A bit about pin numbering ... that is a bit of a mess. Pi4j uses another numbering than the Raspberry connector/chip uses. This is highly confusing. In the schema we connected the LED to the Raspberry GPIO17 on in the connector pin 11, in Pi4J this called the GPIO00 pin. Confused? You will be. We will keep the Pi4J numbering as much as possible. This the connector for Pi4j numbering:
 
 ![Model 2B pins](http://pi4j.com/images/j8header-2b.png){:height="600px"}.
 
-We connect the positive side of the LED to the GPIO 4 of the Raspberry and then connect it to ground via a 220Ω resistor. An LED is a _light emitting diode_, quite popular nowadays because they are very power efficient. The resistor is there to limit the current, otherwise we could destroy the Raspberry GPIO port or the LED. (Murphy says the Raspberry is the more likely candidate since it is more expensive). Remember that electronic class? We limit the current to less than (2.7V)/120Ω ~ 20 mA. This is within the  [Raspberry Pi][gpiospec] limits.
+We connect the positive side of the LED to the GPIO 4 of the Raspberry and then connect it to ground via a 220Ω resistor. An LED is a _light emitting diode_, quite popular nowadays because they are very power efficient. The resistor is there to limit the current, otherwise we could destroy the Raspberry GPIO port or the LED. (Murphy says the Raspberry is the more likely candidate since it is more expensive). Remember that Electronics 101 class? We limit the current to less than (2.7V)/220Ω ~ 20 mA. This is within the  [Raspberry Pi][gpiospec] limits.
 
 We implement this schema on a _breadboard_. A [breadboard][breadboard] is a little board that makes it easy to prototype with the Raspberry Pi. It provides power lines above and below the board and a prototyping area where the vertical lines are connected. The distance between the holes is standard 0.1 inch, most ICs can be delivered with pins that use this spacing. Connections are made using small wires. Our breadboard is shown in the following picture:
   

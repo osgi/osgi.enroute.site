@@ -63,7 +63,7 @@ The build numbers should be regarded as minimum. Java is installed on the latest
 
 To experiment with the Raspberry Pi we will need some sensors and actuators. It also helps to have a little breadboard and wires. It is amazing what you can get at amazon nowadays. If you can afford it, the [SunFounder][sunfounder] kit is like a boy's dream but for this tutorial you just need:
 
-* An couple of LEDs with ± 270 Ω resistors
+* An couple of LEDs with ± 220 Ω resistors
 * A few button/switches that you can plug into a breadboard
 * A breadboard
 * Some wires female-male to connect the Raspberry to the breadboard.

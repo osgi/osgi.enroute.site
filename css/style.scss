@@ -220,6 +220,12 @@ pre.shell {
 	background-color: black;
 }
 
+@media print {
+	pre.shell {
+		border: 1px solid grey;
+		color: black;
+	}
+}
 
 div.hide {
 	color: white;

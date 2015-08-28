@@ -11,7 +11,7 @@ Since this site is in beta, it is best to install the continuous build version. 
 
 	https://bndtools.ci.cloudbees.com/job/bndtools.master/1487/artifact/build/generated/p2/
 
- **(We are currently finalizing bnd 3.0.0, for this tutorial please use RC1.)**
+ **(We are currently finalizing bnd 3.0.0, for this tutorial please use RC1 (definitely not later).)**
 
 You can find the details how to install bndtools on the bndtools website: [http://bndtools.org/installation.html#update-site]
 

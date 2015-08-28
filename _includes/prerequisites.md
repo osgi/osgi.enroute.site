@@ -7,9 +7,11 @@ Before you start any of the tutorials you must prepare your environment so that 
 
 ## Installing bndtools
 
-Since this site is in beta, it is best to install the continuous build version. Once we're out of beta, we will make sure there is always a good version in the market place. The URL for the continuous build is:
+Since this site is in beta, it is best to install the continuous build version. Once we're out of beta, we will make sure there is always a good version in the market place. The URL for the continuous build for:
 
-	https://bndtools.ci.cloudbees.com/job/bndtools.master/lastSuccessfulBuild/artifact/build/generated/p2/
+	https://bndtools.ci.cloudbees.com/job/bndtools.master/1487/artifact/build/generated/p2/
+
+ **(We are currently finalizing bnd 3.0.0, for this tutorial please use RC1.)**
 
 You can find the details how to install bndtools on the bndtools website: [http://bndtools.org/installation.html#update-site]
 

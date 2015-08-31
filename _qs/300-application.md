@@ -6,13 +6,15 @@ next: 410-exercise-service.html
 summary: Creating a sample enRoute Application
 ---
 
+## What To Do
 In the previous section we created a fresh clean OSGi enRoute workspace in `~/git/com.acme.prime` and selected the `Bndtools` perspective. In this section we're going to create an application project in this workspace that will run inside an OSGi framework. This 'application' will provide a web user interface based on Google's [Angular JS](https://angularjs.org/) and Twitter's [Bootstrap](http://getbootstrap.com/). We will use the OSGi enRoute built-in template since this is setup to provide exactly that (coincidence of course!).
 
+## Create bndtools Project
 So let's get started by creating a new Bndtools Project. Select `File/New/Bndtools OSGi Project`.
 
 ![Create Application Project](/img/qs/app-create-0.png)
 
-This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is crucial since it defines the template we will use. So in the first page we enter this name.
+This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is *crucial* since it defines the template we will use. So in the first page we enter this name.
 
 ![Create Application Project](/img/qs/app-create-1.png)
  
@@ -34,14 +36,38 @@ The OSGi enRoute template has already created some source code for us. This sour
 
 So what's in there? The first thing you will see is a number of annotations. They ensure that we include the proper web resources for our application like Angular, Bootstrap, and the web extender that serves our static pages. Then we have the component annotation that makes this object a Declarative Services _service component_. A service component is automatically  registered as a service when it implements an interface and it can depend on other services.
 
-This `UpperApplication` component implements the _REST_ interface and is thus registered as a _REST_ service. The contract of this service indicates that any public method in this class becomes available as a REST end-point. The `getUpper` method is for the `GET` method (duh, it starts with `get`. If you want a `POST` call it `postUpper`) and it is mapped from the `/rest/upper` URI. Since it accepts a single argument, we can specify the word we want to upper case as `/rest/upper/<word>`. 
+This `UpperApplication` component implements the _REST_ interface and is thus registered as a _REST_ service. The contract of this service indicates that any public method in this class becomes available as a REST end-point. The `getUpper` method is for the `GET` method (duh, it starts with `get`. If you want a `POST` call it `postUpper`) and it is mapped from the `/rest/upper` URI. Since it accepts a single argument, we can specify the word we want to upper case as `/rest/upper/<word>`. You can find more information about the REST API in the [service catalog](/services/osgi.enroute.rest.api.html)
 	
-This method is called from an untrusted external source so should in general be protected by a check for authorization.
+REST methods are called from an untrusted external source so they should be protected by a check for authorization.
 {: .warning}
 
-Since this is a single page web app we also need some static resources for the Javascript code and the Bootstrap CSS. These resources are stored in the `static` directory which is included in our bundle. These resources are directly mapped to the root. That is, a resource with the path `static/abc/def` will be available as `/abc/def`. 
+## HTML Resources
 
-The `com.acme.prime.upper/index.html` contains the single page HTML root. It defines a header, view area, and a footer. The `com.acme.prime.upper/main/main.js` contains the Javascript code, and the `com.acme.prime.upper/main/htm` directory contains _html fragments_ that are inserted in the main page depending on the URI. Take a look at these resources and notice how these resources can use macros from the build environment.
+Since this is a single page web app we also need some static resources for the Javascript code and CSS. 
+
+The resources from this application are stored in the `static` directory which is included in our bundle. These resources are directly mapped to the root. That is, a resource with the path `static/abc/def` will be available as `/abc/def`. The recommendation is to create a static direction with the application PID name in `static`.
+
+	static/
+		com.acme.prime.upper
+			index.html
+		...
+
+The `static/com.acme.prime.upper/index.html` contains the single page HTML root. It defines a header, view area, and a footer. The `com.acme.prime.upper/main/htm` directory contains _html fragments_ that are inserted in the main page depending on the URI. Take a look at these resources and notice how these resources can use macros from the build environment.
+
+## Automatic Resources
+
+In the Java code we require several Javascript resources and CSS resources. If you look in the `index.html` file you see entries like:
+
+	<link 
+		rel="stylesheet" 
+		type="text/css"
+		href="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.css">
+
+	<script 
+		src="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.js">
+	</script>
+		
+OSGi enRoute will automatically insert any CSS or Javascript code in these places that your bundle requires through the annotation. Additionally, at the and it will add any such code in your bundle's `web` directory. 
 
 We won't go into more detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
 
@@ -73,7 +99,7 @@ Just click on the 'To Upper!' button. This will ask you for a word and then prin
 
 ## Debugging
 
-Of course you will never need to debug enRoute projects since they are by definition perfect! However, since perfection isn't what it used to be, let's see how we can do some debugging in this project.
+Of course you will never need to debug OSGi enRoute projects since they are by definition perfect! However, since perfection isn't what it used to be, let's see how we can do some debugging in this project.
 
 You can debug this project as you can any other project in Java. You can set breakpoints and single step. There is one difference with more traditional Java. In our case, we generate a bundle that gets deployed on every change we make. If you change some code and save it, a new bundle will get deployed. If you get more requirements in the `bndrun` file, those new bundles will be deployed or no longer necessary bundles get removed. This works so well that the dialog box that Eclipse sometimes pops up to tell you it could not patch the class files can be ignored because bnd does not rely on this patching.
 

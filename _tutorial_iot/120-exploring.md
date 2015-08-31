@@ -123,11 +123,6 @@ Let's first do something very naughty: use statics. The Pi4j library has a Syste
 		void deactivate() {
 			System.out.println("Goodbye World");
 		}
-		
-		@Reference
-		void setGpio(GpioController g) {
-			this.g = g;
-		}
 	}
 
 Save the file Java source file and watch the output:

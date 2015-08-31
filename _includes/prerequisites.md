@@ -1,7 +1,7 @@
 Before you start any of the tutorials you must prepare your environment so that the right tools are installed. This page helps you to achieve this. We need to run the following tools on your computer:
 
 * [Java 8][java8], probably already got it? If not, this is a good time to get started!
-* [Eclipse Luna][luna], if you do not know which variant, pick the _Eclipse Standard_ variant, make sure it has EGit included.
+* [Eclipse Mars][mars], if you do not know which variant, pick the _Eclipse Standard_ variant, make sure it has EGit included.
 * [Git][git], unfortunately the built-in EGit in Eclipse needs some good old command line help
 
 
@@ -51,6 +51,6 @@ There is also multi-workspace laucher plugin from Torkild U. Resheim that incorp
 There is a bug in Eclipse concerning the browser support in Linux. It may be necessary to configure an external browser in the Eclipse's Preferences for `bndtools/JPM`. 
 
 [java8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
-[luna]: https://www.eclipse.org/downloads/
+[mars]: https://www.eclipse.org/downloads/
 [git]: http://git-scm.com/book/en/Getting-Started-Installing-Git
 [gitforwindows]: http://msysgit.github.io

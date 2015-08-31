@@ -48,15 +48,13 @@ The first thing we need to do is to make sure the Upper Application can see the 
 Then we change the `UserApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation to the end of the class (convention is to place references at the end):
 
 	@Reference
-	void setUpper( Upper upper ) {
-		this.upper = upper;
-	}
+	Upper		upper;
 	
 The `@Reference` annotation creates a dependency on this service; the `UpperApplication` component is not started until the service registry contains an Upper service. 
 
 The next step is to use the `upper` instance variable that we've just set in the `getUpper` method.
 
-	public String getUpper(RESTRequest rq, String string) {
+	public String getUpper(String string) {
 		return upper.upper(string);
 	}
 

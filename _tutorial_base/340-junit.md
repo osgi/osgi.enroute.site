@@ -50,6 +50,6 @@ The JUnit pane has many buttons that allow you to rerun tests, an incredibly pow
 The JUnit runner will create a new VM with the build-path as class-path. That is all your test dependencies must be on the build-path. It will then run your tests. You can either use:
 
 * JUnit 4.x – JUnit 4 requires annotations on the test class. Do not extend TestCase in your class because then the annotations are ignored.
-* JUnit 3.x – JUnit 3 test cases must extend TestCase. This is usally the easiest way to write tests.
+* JUnit 3.x – JUnit 3 test cases must extend TestCase. This is usually the easiest way to write tests.
 
- 
+

@@ -1,7 +1,7 @@
 ---
 title: org.osgi.service.http
 layout: service
-version: 1.3
+version: 1.2.1
 summary:  An HTTP server framework
 ---
 

@@ -15,21 +15,35 @@ The OSGi enRoute REST API specifies a service contract for components to provide
 
 This end-point is mapped to the URI `/rest/upper` and the next segment specifies the word to translate to upper case. The `alphaonly` is a _parameter_ on the URL, in this case a boolean.
 
-A HTTP request can specify a _payload_, this is normally associated with the `POST` and the `PUT` verb. As response, the HTTP request will return a _body_.
+A HTTP request can specify a _payload_, a payload can be associated with the `POST` and the `PUT` verb. As response, the HTTP request will return a _body_.
 
 Since the REST API is of such major importance for many modern systems, it is crucial that the overhead for the programmer to support this interface is absolutely minimized. This specifications leverages the Java type system to provide REST end points. It provides a deterministic mapping from a URI request to a REST method name of a restricted set of methods. Adding a method named according to a defined pattern is all that is required to add a new REST end-point.
 
 ## REST Methods
 
-The first parameter of a REST method must be an interface that extends the `RESTRequest` interface. This interface provides access to the underlying servlet objects as well as the host name. However, these objects are rarely needed; the primary purpose of this interface is to be extended with methods that have the name of the URL arguments. The interface does not have to be public, it can be a private interface of a class. That is, the previous example would need an interface defined as:
+A REST class will make every public method that starts with `get`, `post`, `put`, `option`, `delete` available as a REST endpoint. The remainder of the method name and the parameters define the remainder of the URI. These methods can be POJO or take a special object providing the context. For example:
+
+	public String getUpper() {
+		return "UPPER";
+	}
+ 
+The first parameter of a REST method can be be an interface that is or extends the `RESTRequest` interface. This interface provides access to the underlying servlet objects as well as the host name. However, these objects are rarely needed; the primary purpose of this interface is to be extended with methods that have the name of the URL arguments. The interface does not have to be public, it can be a private interface of a class. That is, the previous example would need an interface defined as:
 
 	interface UpperRequest extends RESTRequest {
-		boolean alphaonly();
+		String upper();
 	}  
 
-Any return type can be used for the REST methods that is supported by the DTO conversion techniques. Note that the actual return type must be a public class and have a public constructor.
+	public String getUpper( UpperRequest rq ) {
+		return rq.upper().toUpperCase();
+	}
+
+Any return type can be used for the REST methods that is supported by the DTOs service conversion techniques. 
 
 Any remaining segments in the URI are mapped to the parameters of the method. These method parameters are not required to be strings. Any parameter type that can be converted from a string according to the DTO conversion techniques can be used. The REST method can either have a fixed number of parameters or it can use varargs for a variable number.
+
+	public String getUpper(String lower) {
+		return lower.toUpperCase();
+	}
 
 The returned body is defined by the method's return type. In general, this type is converted to a JSON file according to the DTO JSON conversion rules. All Java's basic types and all DTO's can be used as return types.
 
@@ -49,7 +63,7 @@ Therefore, the previous example can be defined as:
 		}
 	}
 	
-Assuming a default root of `/rest`, this will provide a REST end-point of the earlier example URL.
+Assuming a default root of `/rest`, this will provide a REST end-point of the earlier example URL `GET /rest/upper/<word>?alphaonly=true`.
 
 ## Extra Conversions for the Body
 
@@ -115,11 +129,11 @@ Clients can always set the response of the request through the servlet objects t
 
 *   **Couldn't we just annotate a service with a service property and then have it automatically extended regardless the service interface?** 
 
-    The issue is that you cannot just convert a service since a service in general has NO defenses against attacks. I think it is quite crucial to realize that any method in that class is open for external calls from anywhere in the world. The work you need to do to make this work secure dwarfs the fact that you must implement an interface … Not just on the security, I find that the way you create this facade is often without any real functionality, it is often just an orchestrator. It checks the authority and then calls other services, potentially with the current user as parameters. In this model the JSONRPC and REST services are just securing and orchestrating. This allows the other services to be very cohesive since they know they do not have to worry about security and get the user as parameter instead of having to link in the current user model.
+The issue is that you cannot just convert a service since a service in general has NO defenses against attacks. I think it is quite crucial to realize that any method in that class is open for external calls from anywhere in the world. The work you need to do to make this work secure dwarfs the fact that you must implement an interface … Not just on the security, I find that the way you create this facade is often without any real functionality, it is often just an orchestrator. It checks the authority and then calls other services, potentially with the current user as parameters. In this model the JSONRPC and REST services are just securing and orchestrating. This allows the other services to be very cohesive since they know they do not have to worry about security and get the user as parameter instead of having to link in the current user model.
 
 ## Configuration
 
 Implementations must follow the PID `osgi.enroute.rest` which must support at least the following fields:
 
-* `alias` – The primary end-point
+* `org.osgi.service.http.servlet.pattern` – The primary end-point
 

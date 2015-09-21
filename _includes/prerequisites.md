@@ -15,7 +15,7 @@ Since bndtools undergoes continuous improvements, you can also install it from l
 
 	https://dl.bintray.com/bndtools/bndtools/latest
 
-You can find the details how to install bndtools on the bndtools website: [http://bndtools.org/installation.html#update-site]
+You can find the details how to install bndtools on the [bndtools website](http://bndtools.org/installation.html#update-site)
 
 ## Conventions
 

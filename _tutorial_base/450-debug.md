@@ -33,7 +33,7 @@ Of course OSGi enRoute will never let you down, you're life will be tranquil, an
 
 One of the great tools to debug OSGi applications is the Apache Felix Web Console. The Web Console provides insight in everything you wanted to know about OSGi, and actually a lot more.  Especially XRay, a web console plugin, is very useful for beginners because it visualizes the services layer very well. In Xray, each service type is represented by an icon and wires run back and forth to the bundles registering and getting them (and even just listening).
 
-First switch back to the bndtools perspective (usuall the bndools icon is at the right top). Then double click the `bnd.bnd` file, select the `Run` tab and add the `aQute.xray.plugin` to the `Run Requirements` list. Since we use dependencies, this plugin will automatically drag in the web console and the required Jetty web server. 
+First switch back to the bndtools perspective (usuall the bndools icon is at the right top). Then double click the `bnd.bnd` file, select the `Run` tab and add the `osgi.enroute.webconsole.xray.provider` to the `Run Requirements` list. Since we use dependencies, this plugin will automatically drag in the web console and the required Jetty web server. 
 
 However, there is a bug in Jetty, so for now you have to also add `org.apache.felix.eventadmin` to the initial requirements, this should in general not be necessary. We're working on it.
 {: class=bug }

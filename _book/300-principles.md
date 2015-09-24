@@ -315,6 +315,9 @@ Open source has the following advantages:
 * Eyes – Popular open source projects have multiple people looking at the code. This increases the confidence one can have about the quality.
 * Longevity – Open source software is likely to stay, or at least linger, around forever. One of the reason Airbus is using open source, and provides software as open source, is because they have requirements lasting 80 years. Open software is one of the few areas that can provide such an availability guarantee.
 * Community – If there is a community around an open source project than it is easier to find knowledgeable people; this makes it easier to find answer to problems on StackOverflow or other places. Any issues will also quickly become clear due to discussions on the Internet about this. If things go badly, it is also less painful to be in company.
+* Debugging - The source code is often directly available in the IDE when a library is used. So it is possible to debug into the open source code to understand what is going on.
+* Fix problems yourself - If the community does not fix a bug, fork the project, fix the bug and build a private release.
+* Avoid maintenance by giving back - When doing private fixes they have to be merged into any new release. By giving them back to the community the next release will include the fix.
 
 That said, open source software is not without cost and disadvantages:
 

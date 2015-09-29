@@ -47,11 +47,11 @@ The build numbers should be regarded as minimum. Java is installed on the latest
 
 [Jpm4j][jpm] is _Just Another Package Manager for Java_, it is related to bnd which is a big part of the OSGi enRoute tool chain. You can [install jpm][jpminstall] with the following commands:
 
-	pi@raspberrypi ~ $ curl https://bndtools.ci.cloudbees.com/job/bnd.master/653/artifact/dist/bundles/biz.aQute.jpm.run/biz.aQute.jpm.run-latest.jar >jpm.jar
-	pi@raspberrypi ~ $ sudo java -jar jpm.jar init
+	pi@raspberrypi ~ $ curl https://bndtools.ci.cloudbees.com/job/bnd.master/719/artifact/dist/bundles/biz.aQute.jpm.run/biz.aQute.jpm.run-3.0.0.jar >jpm.jar
 	  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
 	                                 Dload  Upload   Total   Spent    Left  Speed
 	100 1564k  100 1564k    0     0   319k      0  0:00:04  0:00:04 --:--:--  328k
+	pi@raspberrypi ~ $ sudo java -jar jpm.jar init
 	Home dir      /var/jpm
 	Bin  dir      /usr/local/bin
 	pi@raspberry ~ $ jpm version

@@ -7,7 +7,7 @@ We _strongly_ believe that OSGi's Service Oriented Systems is the best paradigm 
 
 This OSGi Alliance initiative is about removing the barriers to adoption. It is about creating an environment where development of applications is almost as easy to get started with as a Ruby on Rails without loosing the key advantages of OSGi/Java for projects that grow beyond their initial size.
 
-The following picture shows this idea. Where OSGi/Java provides an arguably better development environment for large application development, it is hard to deny that it is a lot easier to get started with popular non-type safe languages like for example node.js or Ruby on Rails. It is the mission of OSGi enRoute to lower this threshold.
+The following picture shows this idea. Where OSGi/Java provides a better development environment for large application development, it is hard to deny that it is a lot easier to get started with popular non-type safe languages like for example node.js or Ruby on Rails. It is the mission of OSGi enRoute to lower this threshold.
 
 ![Lowering the barriers](/img/book/why-enroute.png)
 

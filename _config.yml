@@ -12,6 +12,8 @@ collections:
     output: true
   services:
     output: true
+  trains:
+    output: true
 
 defaults:
   -

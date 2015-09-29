@@ -36,7 +36,7 @@ Though bugs can just be stupidities, quite often they are caused by the coder's 
  
 It should therefore be clear that a large part of our work is addressing the effects of time. The context changes, which requires us to change the software, which changes the context for others. When we develop software we should be aware at any time that we are not really building anything but that we are in a continuous re-shaping process. It is crucial to be aware that any real world system lives in an ever evolving context where our own changes contribute to this changing context.
 
-There are many practices in our industry that would be perfectly ok if change was not continuous, but that have unexpected consequences in world that never stops changing.
+There are many practices in our industry that would be perfectly OK if change was not continuous, but that have unexpected consequences in world that never stops changing.
 
 A surprising example is _aggregating_, putting parts together in a greater whole. For example, you repackage a number of JARs in a single JAR. Every time you aggregate a set of parts, you create an additional responsibility because the underlying artifacts, the dependencies, will each change over time at their own rate.  Each of these changes will add maintenance costs to rebuild the aggregate. Also, you will have to make the aggregation evolve at the rate of its fastest evolving part or the clients of the fastest moving part will be upset. Therefore, by aggregating you increase the entropy of the build. 
 
@@ -254,7 +254,7 @@ However, one should realize that any large system is almost by definition indete
 
 In the previous sections we discussed dependencies with the assumption that they were code dependencies. However, the world is much richer than that. Developers that are coding are engraving many assumptions into their code. For example the version of the Java runtime. Each revision of Java brings new version of the class file format, making it impossible to run new code on an old VM. However, this important aspect is not recorded anywhere but the class file. The error is only detected when the code is run and throws an Incompatible Class Format Error when one of its classes is loaded, which can be many hours after the program was started. 
 
-Another module assumes that it runs on a machine that has more than 8Gb of memory. Yet another module provides a certificate to the environment but there is no good way in classic Java to require that such a certificate is actually present. 
+Another module assumes that it runs on a machine that has more than 8GB of memory. Yet another module provides a certificate to the environment but there is no good way in classic Java to require that such a certificate is actually present. 
 
 Since these requirements and capabilities are not recorded anywhere, we have to revert to out of band (too often missing) documentation or in the end trial and error to make a set of modules work reliably together. It should be clear by now that one of the core principles of enRoute is that we have developers create loosely coupled components that are then assembled by an assembler into an application. Automating this assembly process, or making life easier for the assembler, is the primary goal. Having to revert to trial and error does not fit this goal.
 

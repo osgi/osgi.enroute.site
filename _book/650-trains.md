@@ -9,7 +9,7 @@ The contest will be judged on November 3 at the [OSGi Community Event 2015](http
 
 The prizes for the winner and two runners up are:
 
-* €200 Amazon Gift certificate for the First prize
+* €200 Amazon Gift certificate for the winner
 * €50 Amazon Gift certificate each for two runners up
 
 The competition is open to all, whether you will be able to join us at the OSGi Community Event 2015 or not.  Clearly we would love to see you in person at the conference ([Register Here](https://www.eclipsecon.org/europe2015/registration)) and if you can join us you will have the opportunity to test your entry out on the real track before the judging takes place.  This also gives you a slightly longer timeline to submt your entry as you will have from now until November 5.

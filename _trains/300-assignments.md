@@ -1,7 +1,7 @@
 ---
 title: Assignments
 layout: book
-summary: How do the assignments
+summary: How to do the assignments
 ---
 
 The contest has two possible categories for submissions. You either write a Train Manager or a Track Manager. That said, we do enjoy other submissions as well.
@@ -12,7 +12,7 @@ To keep our life workable you will have to write the code in OSGi enRoute. This 
 
 Make sure you create a unique name for your project so we can run all the examples from a single workspace.
 
-The track is not hard coded. The Track Info service provides a description of the track. Be careful, this description might change so do not assume you know how the track looks like. If you're adventurous you can change the track layout in the application. In the applications' `configuration/configuration.json` resource you can the configurations.
+The track is not hard coded. The Track Info service provides a description of the track. Be careful, this description might change so do not assume you know how the track looks like. If you're adventurous you can change the track layout in the application. In the applications' `configuration/configuration.json` resource you can change the configurations.
 
 Obviously we worked hard to make this whole SDK work well. However, we're human and make errors. Fortunately this is open source so it is easy to help improve this SDK. If you add some cool feature to the GUI, make the emulator more useful, or improve the documentation then we're more than interested to receive a Pull Request. Believe us experts, we're not that brilliant so we do look forward to learn from you.
 

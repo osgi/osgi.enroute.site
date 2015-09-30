@@ -11,7 +11,7 @@ The OSGi IoT Contest 2015 has been set up to offer two clear categories for subm
 
 That said, if you have ideas for other categories that you could write something for then that would be great, and you are welcome  to do so.
 
-You're free to use any technology that you want, there are no real limits. (Though we prefer it when you keep the number of dependencies low.) 
+You're free to use any technology that you want, there are no real limits. (Though we prefer it when you keep the number of dependencies low). 
 
 To keep our life workable you will have to write the code in OSGi enRoute. This means bnd(tools) and gradle. There are a number of tutorials on the enRoute.osgi.org web site. We hope you will enjoy it and welcome your feedback on your experience with this too.
 

@@ -3,7 +3,7 @@ title: OSGi IoT Contest 2015
 layout: book
 ---
 
-Welcome to the home page of the OSGi Software Development Kit (SDK) for the OSGi IoT Contest 2015! 
+Welcome to the home page of the [OSGi Software Development Kit (SDK)](https://github.com/osgi/osgi.iot.contest.sdk) for the OSGi IoT Contest 2015! 
 
 The contest will be judged on November 3 at the [OSGi Community Event 2015](http://www.osgi.org/CommunityEvent2015) which is being co-located with [EclipseCon Europe 2015](ce) (November 3 to 5) in Ludwigsburg, Germany.  
 
@@ -33,7 +33,7 @@ We have two categories in this domain:
 
 ## What do I need to do to enter the Contest?
 
-You will have to develop a Track or Train Manager bundle using the _Software Development Kit_ (SDK). The SDK contains an emulator and a GUI that will enable you to write OSGi bundles for this environment. 
+You will have to develop a Track or Train Manager bundle using the [_Software Development Kit_ (SDK)](https://github.com/osgi/osgi.iot.contest.sdk). The SDK contains an emulator and a GUI that will enable you to write OSGi bundles for this environment. 
 
 In the Exhibition area of the conference we will have a stand where the LEGO® train track will be on display.  Inegrated with this track layout will be an OSGi Cloud, provided by the [Paremus Service Fabric](http://www,paremus.com), and a number of Raspberry Pi's which will all be connected together across a network. 
 
@@ -66,10 +66,13 @@ There are three prizes on offer, 1 for the winner and 1 each for two runners up:
 8. Create your own project in this workspace and write a Track Manager or Train Manager implementation. (Or both!) Make sure you name your project with a project name in your name space.
 9. Test it in the GUI with the emulator. You can easily control the bundles you want to try this out with in the `/osgi.enroute.trains.application/debug.bndrun` file.
 10. Repeat .....
+ 
+If you have questions, don't hesitate to ask on the [forum](/trains/900-forum.html). We will really like to hear from you and the team from the OSGi Alliance and some of its Member companies, who have created this, will be pleased to help you out.
+
+
+## More info
 
 You are welcome to copy the existing code, it is all Apache Software License 2.0. However, this code does not handle some of the harder challenges such as missed RFID events or menacing trains :-). So feel free to use or implement better planning software, however please be aware that the track layout may be changed. You should also expect at least one other train to be in use at the same time on the track. 
-
-If you have questions, don't hesitate to ask on the [forum](/trains/900-forum.html). We will really like to hear from you and the team from the OSGi Alliance and some of its Member companies, who have created this, will be pleased to help you out.
 
 * If you're really ambitious then you can include your own sensors such as a camera, gas sensor, or geiger counter in your entry.  However if you do so you must be prepared to bring these sensors with you to the conference so that we can jusge your entry. If you do plan on adding your own hardware please contact us [by email](mailto:iot2015@osgi.org).
 
@@ -87,7 +90,7 @@ If you have questions, don't hesitate to ask on the [forum](/trains/900-forum.ht
 * October 31 (midnight Pacific Time) - submission deadline for entry's if not attending OSGi Community Event 2015
 * November 3 & 4 – Testing on the 'real' track. Test slots available by advance appointment only [by email](mailto:iot2015@osgi.org?subject="OSGi IoT Test Slot")
 * November 4 at 17.45 – The contest and juding commences. 
-* November 5 15.00 to 15.45 – Announcement of the winner and two runners up at the conference Closing Session.
+* November 5 between 15.00 to 15.45 – Announcement of the winner and two runners up at the conference Closing Session.
 
 ## Thanks
 

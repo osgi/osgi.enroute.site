@@ -98,7 +98,7 @@ Many thanks to [iMinds](https://www.iminds.be/en), [Paremus](http://www.paremus.
 
 | :[iMinds](https://www.iminds.be/en): | [Paremus](http://www.paremus.com) | [ProSyst](http://www.prosyst.com)|
 | :-------------: | :-------------: | ------------- |
-| Content Cell  | ![Paremus Logo](https://www.osgi.org/wiki/uploads/Community/paremus1.png)  |![ProSyst Logo(https://www.osgi.org/wiki/uploads/Community/prosyst1.png)|
+| Content Cell  | ![Paremus Logo](https://www.osgi.org/wiki/uploads/Community/paremus1.png)  |![ProSyst Logo](https://www.osgi.org/wiki/uploads/Community/prosyst1.png)|
 
 ## More to read
 

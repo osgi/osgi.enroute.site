@@ -16,7 +16,7 @@ The competition is open to all, whether you will be able to join us at the OSGi 
 
 If you cant join us for the conference you can [submit your entry by email](mailto:iot2015@osgi.org?subject="OSGi IoT Contest 2015 Entry").  The deadline for email submissions is midnight Pacific Time on Saturday October 31.
 
-We have setup a Forum for you to ask any questions about the competition, be it logistics, technical, or whatever. Please [join the forum](forum.html) if you plan to make a submission or even if you are just interested in learning more.
+We have setup a Forum for you to ask any questions about the competition, be it logistics, technical, or whatever. Please [join the forum](/trains/900-forum.html) if you plan to make a submission or even if you are just interested in learning more.
 
 ## Why an OSGi IoT Contest?
 
@@ -56,7 +56,7 @@ There are three prizes on offer, 1 for the winner and 1 each for two runners up:
 
 ## How do I start!
 
-1. First, make sure you subscribe to the messages in the [forum](forum.html). This way we can keep you updated. This is also the place to make suggestions or ask any questions (logistics, rules, technical, etc). 
+1. First, make sure you subscribe to the messages in the [forum](/trains/900-forum.html). This way we can keep you updated. This is also the place to make suggestions or ask any questions (logistics, rules, technical, etc). 
 2. Follow the OSGi enRoute tutorial. You might want to start with the [quick start tutorial][qs] and, when you have a Raspberry Pi available, follow the [IoT Tutorial][iot]. This will give you a good understanding of what OSGi enRoute is all about and assist you with entering the contest.
 3. Clone the https://github.com/osgi/osgi.iot.contest.sdk workspace as a git repository and open it up in Eclipse.
 4. Read the [description of the architecture](/trains/200-architecture.html)

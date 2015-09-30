@@ -96,6 +96,10 @@ You are welcome to copy the existing code, it is all Apache Software License 2.0
 
 Many thanks to [iMinds](https://www.iminds.be/en), [Paremus](http://www.paremus.com) and [ProSyst](http://www.prosyst.com), along with other individuals from the OSGi Alliance, for their support in providing software and development time and resources for the creation of the demo and and contest.
 
+| :[iMinds](https://www.iminds.be/en): | [Paremus](http://www.paremus.com) | [ProSyst](http://www.prosyst.com)|
+| :-------------: | :-------------: | ------------- |
+| Content Cell  | ![Paremus Logo](https://www.osgi.org/wiki/uploads/Community/paremus1.png)  |![ProSyst Logo(https://www.osgi.org/wiki/uploads/Community/prosyst1.png)|
+
 ## More to read
 
 <div>

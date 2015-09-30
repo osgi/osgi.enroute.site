@@ -8,6 +8,7 @@ Welcome to the home page of the OSGi Software Development Kit (SDK) for the OSGi
 The contest will be judged on November 3 at the [OSGi Community Event 2015](http://www.osgi.org/CommunityEvent2015) which is being co-located with [EclipseCon Europe 2015](ce) (November 3 to 5) in Ludwigsburg, Germany.  
 
 The prizes for the winner and two runners up are:
+
 * €200 Amazon Gift certificate for the First prize
 * €50 Amazon Gift certificate each for two runners up
 

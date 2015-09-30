@@ -1,7 +1,7 @@
 ---
-title: The OSGi IoT Trains Assignments
+title: Assignments
 layout: book
-summary: The assignments: Train or Track Manager
+summary: How do the assignments
 ---
 
 The contest has two possible categories for submissions. You either write a Train Manager or a Track Manager. That said, we do enjoy other submissions as well.

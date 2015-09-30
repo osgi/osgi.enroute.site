@@ -11,7 +11,7 @@ The prizes for the winner and two runners up are:
 * €200 Amazon Gift certificate for the First prize
 * €50 Amazon Gift certificate each for two runners up
 
-The competition is open to all, whether you will be able to join us at the OSGi Community Event 2015 or not.  Clearly we would love to see you in person at the conference ([Register Here)](https://www.eclipsecon.org/europe2015/registration) and if you can join us you will have the opportunity to test your entry out on the real track before the judging takes place.  This also gives you a slightly longer deadline to submt your entry as you will have from now until November 4.
+The competition is open to all, whether you will be able to join us at the OSGi Community Event 2015 or not.  Clearly we would love to see you in person at the conference ([Register Here](https://www.eclipsecon.org/europe2015/registration)) and if you can join us you will have the opportunity to test your entry out on the real track before the judging takes place.  This also gives you a slightly longer deadline to submt your entry as you will have from now until November 4.
 
 If you cant join us for the conference you can [submit your entry by email](mailto:iot2015@osgi.org?subject="OSGi IoT Contest 2015 Entry").  The deadline for email submissions is midnight Pacific Time on Saturday October 31.
 

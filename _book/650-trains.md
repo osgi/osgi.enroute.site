@@ -22,7 +22,7 @@ We have setup a Forum for you to ask any questions about the competition, be it 
 
 Every year the OSGi Alliance organizes a contest for developers to demonstrate the power of OSGi in the IoT world. Being able to reliably run the same code in the cloud as on small devices is a very compelling proposition. For the developers it is also fun way to demonstrate their skills.
 
-## What is the Contest about?
+## What is the 2015 Contest about?
 
 The 2015 contest is all about _trains_. We will have a LEGO® train track setup at the conference that will include multiple trains, signals, RFIDs, and switches. We will provide the whole infrastructure, you provide the brains to create extensions to our environment.  
 

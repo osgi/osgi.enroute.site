@@ -1,6 +1,6 @@
 ---
 title: Assignments - Some hints and tips
-layout: book
+layout: default
 summary: How to do the assignments
 ---
 

@@ -1,7 +1,8 @@
 ---
 title: OSGi IoT Contest 2015
-layout: book
+layout: default
 ---
+
 
 Welcome to the home page of the [OSGi Software Development Kit (SDK)](https://github.com/osgi/osgi.iot.contest.sdk) for the OSGi IoT Contest 2015! 
 
@@ -14,7 +15,7 @@ The prizes for the winner and two runners up are:
 
 The competition is open to all, whether you will be able to join us at the OSGi Community Event 2015 or not.  Clearly we would love to see you in person at the conference ([Register Here](https://www.eclipsecon.org/europe2015/registration)) and if you can join us you will have the opportunity to test your entry out on the real track before the judging takes place.  This also gives you a slightly longer timeline to submt your entry as you will have from now until November 5.
 
-If you cant join us for the conference you can [submit your entry by email](mailto:iot2015@osgi.org?subject="OSGi IoT Contest 2015 Entry").  The deadline for email submissions is midnight Pacific Time on Saturday October 31.
+If you cannot join us for the conference you can [submit your entry by email](mailto:iot2015@osgi.org?subject="OSGi IoT Contest 2015 Entry").  The deadline for email submissions is midnight Pacific Time on Saturday October 31.
 
 We have setup a Forum for you to ask any questions about the competition, be it logistics, technical, or whatever. Please [join the forum](/trains/900-forum.html) if you plan to make a submission or even if you are just interested in learning more.
 
@@ -24,12 +25,12 @@ Every year the OSGi Alliance organizes a contest for developers to demonstrate t
 
 ## What is the 2015 Contest about?
 
-The 2015 contest is all about _trains_. We will have a LEGO® train track setup at the conference that will include multiple trains, signals, RFIDs, and switches. We will provide the whole infrastructure, you provide the brains to create extensions to our environment.  
+The 2015 contest is all about _trains_. We will have a Lego<sup>®</sup> train track setup at the conference that will include multiple trains, signals, RFIDs, and switches. We will provide the whole infrastructure, you provide the brains to create extensions to our environment.  
 
 We have two categories in this domain:
 
-* Track Manager – The track manager is running in the cloud and is responsible for the overall track infrastructure. A track manager can control the switches, the signals, and it receives the RFID. It also dispatches the events so that the other participants know what is going on.
-* Train Manager – The train manager is is responsible for navigating the train. A train manager is assigned a position and the software must then navigate through the track to that destination. This requires getting permission to use segments of the track, obeying the signals, and making sure the train does not speed.
+* **Track Manager** – The track manager is running in the cloud and is responsible for the overall track infrastructure. A track manager can control the switches, the signals, and it receives the RFID. It also dispatches the events so that the other participants know what is going on.
+* **Train Manager** – The train manager is is responsible for navigating the train. A train manager is assigned a position and the software must then navigate through the track to that destination. This requires getting permission to use segments of the track, obeying the signals, and making sure the train does not speed.
 
 ## What do I need to do to enter the Contest?
 
@@ -42,15 +43,18 @@ We will take the bundles from the participants, upload them in the [Prosyst mPRM
 ## Judging and the Prizes
 
 The winner will be selected by a panel made up of OSGi Alliance representatives and technical experts.  They will be looking at general aspects including:
-- Originality of idea
-- Successful operation (did it work?)
-- Interoperability (did it play nice with other components on the track?)
+
+* Originality of idea
+* Successful operation (did it work?)
+* Interoperability (did it play nice with other components on the track?)
 
 They will also be looking for specific aspects as follows:
-- For a Track Manager: how it manages the signals, switches, and train management. 
-- For a Train Manager: how it handles planning with unexpected events like missing RFID detections and blockages.
+
+* For a Track Manager: how it manages the signals, switches, and train management. 
+* For a Train Manager: how it handles planning with unexpected events like missing RFID detections and blockages.
 
 There are three prizes on offer, 1 for the winner and 1 each for two runners up:
+
 * €200 Amazon Gift certificate for the winner
 * €50 Amazon Gift certificate each for two runners up
 
@@ -86,11 +90,11 @@ You are welcome to copy the existing code, it is all Apache Software License 2.0
 
 ## Important Dates & Deadlines
 
-* October 1 – Contest launch date, SDK Available, sign up to the [forum](forum.html) asap
-* October 31 (midnight Pacific Time) - submission deadline for entry's if not attending OSGi Community Event 2015
-* November 3 & 4 – Testing on the 'real' track. Test slots available by advance appointment only [by email](mailto:iot2015@osgi.org?subject="OSGi IoT Test Slot")
-* November 4 at 17.45 – The contest and juding commences. 
-* November 5 between 15.00 to 15.45 – Announcement of the winner and two runners up at the conference Closing Session.
+* October 1 — Contest launch date, SDK Available, sign up to the [forum](forum.html) asap
+* October 31 (midnight Pacific Time) — submission deadline for entry's if not attending OSGi Community Event 2015
+* November 3 & 4 — Testing on the 'real' track. Test slots available by advance appointment only [by email](mailto:iot2015@osgi.org?subject="OSGi IoT Test Slot")
+* November 4 at 17.45 — The contest and juding commences. 
+* November 5 between 15.00 to 15.45 — Announcement of the winner and two runners up at the conference Closing Session.
 
 ## Thanks
 

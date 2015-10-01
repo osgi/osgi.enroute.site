@@ -89,9 +89,13 @@ h1, h2, h3, h4, h5, h6 {
 	
 }
 
-p, li, blockquote, ol, ul {
+p, blockquote, ol, ul {
 	margin-bottom: $text-separation;
 }
+li {
+	margin-bottom: $text-separation/2;
+}
+
 
 
 h1 {
@@ -121,19 +125,22 @@ h6 {font-size: 1em;}
 	left: -120px;
 }
 
-h1::before {
-	@extend .jump;
-	content: counter(h1);
-}
-h2:before {
-	@extend .jump;
-	content: counter(h1) "." counter(h2);
-}
 
-h3:before {
-	@extend .jump;
-	content: counter(h1) "." counter(h2) "." counter(h3);
-	counter-increment: h3 1;	
+.numbered {
+	h1::before {
+		@extend .jump;
+		content: counter(h1);
+	}
+	h2:before {
+		@extend .jump;
+		content: counter(h1) "." counter(h2);
+	}
+	
+	h3:before {
+		@extend .jump;
+		content: counter(h1) "." counter(h2) "." counter(h3);
+		counter-increment: h3 1;	
+	}
 }
 
 .notes-margin {

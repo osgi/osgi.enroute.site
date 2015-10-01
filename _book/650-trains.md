@@ -38,7 +38,7 @@ You will have to develop a Track or Train Manager bundle using the [_Software De
 
 In the Exhibition area of the conference we will have a stand where the LEGO® train track will be on display.  Inegrated with this track layout will be an OSGi Cloud, provided by the [Paremus Service Fabric](http://www,paremus.com), and a number of Raspberry Pi's which will all be connected together across a network. 
 
-We will take the bundles from the participants, upload them in the [Prosyst mPRM](http://www.prosyst.com) Device Management System that controls the Raspberry Pi's. The mPRM will be running in the Cloud and will be used to deploy the OSGi bundles to the Raspberry Pi's.  We then plan to run the code entered by the contest participants to see how they perform on the real track. We also plan to mix and match bundles from different entries to show how these different components can be used together. 
+We will take the bundles from the participants, upload them in the [ProSyst mPRM](http://www.prosyst.com) Device Management System that controls the Raspberry Pi's. The mPRM will be running in the Cloud and will be used to deploy the OSGi bundles to the Raspberry Pi's.  We then plan to run the code entered by the contest participants to see how they perform on the real track. We also plan to mix and match bundles from different entries to show how these different components can be used together. 
 
 ## Judging and the Prizes
 

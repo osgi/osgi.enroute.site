@@ -102,7 +102,7 @@ Many thanks to
 
 | [iMinds](https://www.iminds.be/en) | [Paremus](http://www.paremus.com) | [ProSyst](http://www.prosyst.com) |
 | :-------------: | :-------------: | :-------------: |
-| ![iMinds Logo](http://www.osgi.org/wiki/uploads/CommunityEvent2015/iminds.png) | ![Paremus Logo](http://www.osgi.org/wiki/uploads/Community/paremus1.png)  |![ProSyst Logo](http://www.osgi.org/wiki/uploads/Community/prosyst1.png)|
+| ![iMinds Logo](http://www.osgi.org/wiki/uploads/CommunityEvent2015/iminds.png) | ![Paremus Logo](http://www.osgi.org/wiki/uploads/Community/paremus1.png)  |![ProSyst Logo](http://www.osgi.org/wiki/uploads/CommunityEvent2015/prosyst2.png)|
 
 along with other individuals from the OSGi Alliance, for their support in providing software and development time and resources for the creation of the demo and and contest.
 

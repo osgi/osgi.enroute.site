@@ -90,7 +90,7 @@ You are welcome to copy the existing code, it is all Apache Software License 2.0
 
 ## Important Dates & Deadlines
 
-* October 1 — Contest launch date, SDK Available, sign up to the [forum](forum.html) asap
+* October 1 — Contest launch date, SDK Available, sign up to the [forum](/trains/900-forum.html) asap
 * October 31 (midnight Pacific Time) — submission deadline for entry's if not attending OSGi Community Event 2015
 * November 3 & 4 — Testing on the 'real' track. Test slots available by advance appointment only [by email](mailto:iot2015@osgi.org?subject="OSGi IoT Test Slot")
 * November 4 at 17.45 — The contest and juding commences. 

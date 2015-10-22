@@ -22,7 +22,7 @@ It helps to understand how the workspace are layed out. An Eclipse workspace is 
 
 Therefore, the best way to work with projects in Eclipse is to not store them in the Eclipse workspace folder but import them from another directory.
 
-For bnd, a workspace is a directory with a `cnf` folder and a number of projects. This is a flat space; hated by many but it works quite well because it is very simple and hard to get wrong. Don't count on it changing so do not try to work around it, you're regret it. The `cnf` folder contains a `build.bnd` file and a `ext` directory which together define the workspace properties.
+For bnd, a workspace is a directory with a `cnf` folder and a number of projects. This is a flat space; hated by many but it works quite well because it is very simple and hard to get wrong. Don't count on it changing so do not try to work around it, you'll regret it. The `cnf` folder contains a `build.bnd` file and a `ext` directory which together define the workspace properties.
 
 A bnd workspace is like a module; it imports bundles (and JARs) from a repository and it exports bundles to the same or another repository. On the inside we have projects that are private to the workspace. The projects should be cohesive so that they can share information via the `cnf` project.
 

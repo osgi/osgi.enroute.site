@@ -7,11 +7,27 @@ summary: Handles static web pages and OSGi enRoute web resources
 
 ![OSGi WebServer Overview](/img/services/osgi.enroute.webserver.overview.png)
 
+{%%%
+
+  Notes:
+   - I made some proof-reading suggestions. I am not an English major, so please feel free to ignore if you do not agree. :-)
+   - I changed "web server" to "webserver" in order to write the word consistently.
+   - Not sure if that is what you wanted or not, but I marked _all_ my changes with "%%%".
+   - Please let me know if this way of working causes you grief, rather than being helpful. :-)
+   
+%%%}
+
 ## When to Use?
 
-A large part of a web site consists of static resources like images, scripts, html, etc. These resources must be mapped to a proper path on the local webserver.
+A large part of a web site %%%usually consists of static resources like images, scripts, html, etc. These resources must be mapped to a proper path on the local webserver.
 
-A common problem with resources that they require a path on the web server. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Since it is often necessary to support multiple versions simultaneously this requires path & dependency management on the client side. This web server feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework manage the dependency management that is then used by the web server to do path management.
+A common problem with resources %%%is that they require a path on the %%% ~~web server~~ webserver. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. %%% ~~Since it is often necessary to support~~ Supporting multiple versions simultaneously requires path & dependency management on the client side. This ~~web server~~ webserver feature {%%%what do you mean by "webserver feature"? Are you referring to this service? Just wondering, because (for example) Karaf has a specific meaning for "feature". Is there are specific meaning here?} provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundleand let the OSGi framework %%%~~manage~~ take care of the dependency management. %%% (what???) that is then used by the %%%~~web server~~ webserver to do path management.
+
+{%%%
+
+Note: I will stop here and generate a small pull request to test this way of working. Please let me know if you want me to continue or not. :-)
+
+%%%}
 
 ## Example
 

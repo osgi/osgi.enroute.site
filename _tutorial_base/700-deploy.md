@@ -128,6 +128,6 @@ Anyway, when you had enough math you can quit this app by hitting control-c.
 
 `bndrun` files define the requirements on a desired runtime. When the `Resolve` button is hit, the bnd _resolver_ looks at the initial requirements and will try to find resources in the repositories that together match those requirements and the requirements from the introduced resources. The resulting set of bundles defines a runtime, these bundles are set in the `-runbundles` instruction.
 
-A runtime environment can then executed to verify it, potentially resulting in some modifications. If the result is ok, then the export function of bnd is used.
+A runtime environment can then be executed to verify it, potentially resulting in some modifications. If the result is ok, then the export function of bnd is used.
 
 The bnd export goes through a plugin; this is the same plugin that manages the launching. In this case this is the default `aQute.launch` plugin. The plugin takes the runtime environment and creates a JAR that contains all the dependencies, including itself and any properties; creating a JAR that is completely self contained.

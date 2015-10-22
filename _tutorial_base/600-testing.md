@@ -96,7 +96,7 @@ Test bundles are normal bundles but are marked with a special header: `Test-Case
 
 	Test-Cases: ${test-cases}
 
-The `${test-cases} macro is set by OSGi enRoute; it calculates the classes that either extend `junit.framework.TestCase` class or that use the the JUnit 4 annotations like `@Test` (you cannot combine these mechanisms). In our example the expansion looks like:
+The `${test-cases}` macro is set by OSGi enRoute; it calculates the classes that either extend `junit.framework.TestCase` class or that use the the JUnit 4 annotations like `@Test` (you cannot combine these mechanisms). In our example the expansion looks like:
 
 	Test-Cases: com.acme.prime.eval.test.EvalTest
 

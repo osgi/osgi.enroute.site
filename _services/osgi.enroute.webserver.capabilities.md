@@ -11,7 +11,7 @@ summary: Handles static web pages and OSGi enRoute web resources
 
 A large part of a web site consists of static resources like images, scripts, html, etc. These resources must be mapped to a proper path on the local webserver.
 
-A common problem with resources that they require a path on the web server. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Since it is often necessary to support multiple versions simultaneously this requires path & dependency management on the client side. This web server feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework manage the dependency management that is then used by the web server to do path management.
+A common problem with resources that they require a path on the webserver. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Since it is often necessary to support multiple versions simultaneously this requires path & dependency management on the client side. This webserver feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework manage the dependency management that is then used by the webserver to do path management.
 
 ## Example
 
@@ -27,7 +27,7 @@ See [OSGi enRoute Webserver example][webserver] for more example code. This exam
 
 ## Static Pages
 
-A web server extender must map static resources in the /static directory to the web, using the remaining path. For example, a resource /static/foo/bar/baz.png must be available under /foo/bar/baz.png on the local web server. Since this space is shared, it is strongly recommended to paths do not clash.
+A webserver extender must map static resources in the /static directory to the web, using the remaining path. For example, a resource /static/foo/bar/baz.png must be available under /foo/bar/baz.png on the local webserver. Since this space is shared, it is strongly recommended to paths do not clash.
 
 The extender must overlay all resources in bundle ID order. That is, multiple bundles can contribute to the same folder and the bundle with the highest ID will overwrite bundles with the same resource paths but a lower bundle id.
 
@@ -37,7 +37,7 @@ Web extenders must also provide support for common web standards like ranges, zi
 
 ## Web Resources
 
-A Web Resource is a bundle that contains resources that must be made available on a web server. This Web Resource name space defines a mechanism to include web resources in an application.
+A Web Resource is a bundle that contains resources that must be made available on a webserver. This Web Resource name space defines a mechanism to include web resources in an application.
 
 There exists a bnd(tools) template to create web resources that is highly recommended to use. Use the OSGi enRoute Templates and make sure the name of the project ends with `.webresource`. The remaining section explains how Web Resource can be made but only continue reading this if you want to wrap your own resources. Though web resources are extremely easy to use and hide a lot of complexity, some of this complexity is reflected in the wrapping of the resources. Though in practice one it is done once, it is relatively easy to maintain.
 
@@ -63,11 +63,11 @@ A bundle that wants to use a web resource should create a requirement to the pro
  
 The requirement can specify a resource and a priority attribute. The resource attribute is a list if resources in the root folder of the bundle that provides the web resource capability. The priority is used to influence the order of include.
 
-In runtime, the web server creates a virtual URI:
+In runtime, the webserver creates a virtual URI:
 
 	/osgi.enroute.webresource/<bsn>/<version>/<glob>
  
-The `<bsn>`is the bundle symbolic name and the `<version>` is the exact version of the bundle. The web server will find this bundles and then look up all web resource wires from this bundle to any actual web resources. It will then create a file that contains all the resources that are listed by the requirements and that match the globbing pattern. The priority will define the order, the higher, the earlier the resource is loaded.
+The `<bsn>`is the bundle symbolic name and the `<version>` is the exact version of the bundle. The webserver will find this bundles and then look up all web resource wires from this bundle to any actual web resources. It will then create a file that contains all the resources that are listed by the requirements and that match the globbing pattern. The priority will define the order, the higher, the earlier the resource is loaded.
 Additionally, any resources that match the globbing pattern in the requiring bundle's web folder are added at the end. That is, applications should place their own web resources that can be merged into one file in the /web folder.
 
 When building with bnd, macros can be used to synchronize the version and bsn with the html file(s). For example:

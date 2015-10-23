@@ -130,3 +130,5 @@ This makes creating the requirement as simple as applying an annotation. In gene
 [webserver]: https://github.com/osgi/osgi.enroute.examples.webserver.application
 [webserver-resource]: https://github.com/osgi/osgi.enroute.examples.webserver.webresource
 
+
+%% Pretty neat example! Where can I find the engine behind this? I would like to see what actually makes all this work. The description on this page makes it somehow look like magic.

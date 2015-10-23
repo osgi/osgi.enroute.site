@@ -56,6 +56,8 @@ Web extenders must also provide support for common web standards like ranges, zi
 
 A Web Resource is a bundle that contains resources that must be made available on a webserver. This Web Resource namespace defines a mechanism to include web resources in an application.
 
+%%% Which Web Resource namespace? I thought it was just written that a Web Resource is a bundle. What is the relationship with a namespace?
+
 There exists a bnd(tools) template to create web resources that is highly recommended to use. Use the OSGi enRoute Templates and make sure the name of the project ends with `.webresource`. The remaining section explains how Web Resource can be made but only continue reading this if you want to wrap your own resources. Though web resources are extremely easy to use and hide a lot of complexity, some of this complexity is reflected in the wrapping of the resources. Though in practice one it is done once, it is relatively easy to maintain.
 
 A web resource, for example Angular, must be wrapped in a bundle. The preferred location is `/static/<owner>/<product>/<version>`. This location will make the resource available over the web in a specific version. This is however not required. For Angular this would be something like `/static/google/angular/1.4.4`.

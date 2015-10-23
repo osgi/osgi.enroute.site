@@ -32,6 +32,8 @@ Several web resources are declared by the enRoute base API.
 
 See [OSGi enRoute Webserver example][webserver] for more example code. This project uses an example [Web Resource][webserver-resource] that demonstrates how to build and wrap web resources.  
 
+%%% Note: the links in this paragraph do not seem to work.
+
 ## Static Pages
 
 A webserver extender must map static resources in the /static directory to the web, using the remaining path. For example, a resource /static/foo/bar/baz.png must be available under /foo/bar/baz.png on the local webserver. Since this space is shared, it is strongly recommended to paths do not clash.

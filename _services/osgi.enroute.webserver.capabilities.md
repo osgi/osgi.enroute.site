@@ -28,7 +28,7 @@ The bundle that requires a web resource:
 	@Component(name="osgi.enroute.examples.webserver")
 	public class WebserverApplication  { }
 
-Several web resources are provided by the enRoute base API. 
+Several web resources are declared by the enRoute base API.
 
 See [OSGi enRoute Webserver example][webserver] for more example code. This example uses an example [Web Resource][webserver-resource] that demonstrates how to build/wrap web resources.  
 

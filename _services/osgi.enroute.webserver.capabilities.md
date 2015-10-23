@@ -131,4 +131,8 @@ This makes creating the requirement as simple as applying an annotation. In gene
 [webserver-resource]: https://github.com/osgi/osgi.enroute.examples.webserver.webresource
 
 
-%% Pretty neat example! Where can I find the engine behind this? I would like to see what actually makes all this work. The description on this page makes it somehow look like magic.
+%%% Pretty neat example! Where can I find the engine behind this? I would like to see what actually makes all this work. The description on this page makes it somehow look like magic.
+
+%%% Is there a reason why these requirement/capability pairs do not resolve at compile time? They only resolve at runtime. It is still wonderful that this happens, but it would be very useful if they actually resolved at compile time, too.
+
+%%% Are there any more general examples of capability/requirements that do _not_ use extenders?

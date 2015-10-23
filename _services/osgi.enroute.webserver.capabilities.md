@@ -9,9 +9,9 @@ summary: Handles static web pages and OSGi enRoute web resources
 
 ## When to Use?
 
-A large part of a web site consists of static resources like images, scripts, html, etc. These resources must be mapped to a proper path on the local webserver.
+A large part of a web site usually consists of static resources like images, scripts, html, etc. These resources must be mapped to a proper path on the local webserver.
 
-A common problem with resources that they require a path on the webserver. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Since it is often necessary to support multiple versions simultaneously this requires path & dependency management on the client side. This webserver feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework manage the dependency management that is then used by the webserver to do path management.
+A common problem with resources is that they require a path on the webserver. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Supporting multiple versions simultaneously requires path & dependency management on the client side. This webserver feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework take care of the dependency management that is then used by the webserver to do path management.
 
 ## Example
 

@@ -64,7 +64,7 @@ There exists a bnd(tools) template to create Web Resources. Use of this template
 
 A Web Resource, for example Angular, must be wrapped in a bundle. The preferred location is `/static/<owner>/<product>/<version>`. This location will make the resource available over the web as a specific version. This is however not required. For Angular, using this approach would result in something like `/static/google/angular/1.4.4`.
 
-The Web Resource should then provide a capability. This capability name must be the generic path, in the previous Angular example this would be /google/angular. It should specify its version and a root attribute. The `root` path must point to a folder in the bundle that contains the resources. In our angular example this would be `/static/google/angular/1.4.4` but it can be anywhere in the bundle. The root path is not required to be publicly available though is is recommended.
+The Web Resource should then provide a capability. This capability name must be the generic path, so in the previous Angular example this would be `/google/angular`. It should specify its version and a root attribute. The `root` path must point to a folder in the bundle that contains the resources. In our angular example this would be `/static/google/angular/1.4.4` but it can be anywhere in the bundle. The root path is not required to be publicly available, though it is a recommended practice.
 
 	Provide-Capability: \
 		osgi.enroute.webresource; \
@@ -74,7 +74,7 @@ The Web Resource should then provide a capability. This capability name must be 
  
 Obviously macros should be used in bnd to remove the inevitable redundancy.
 
-A bundle that wants to use a web resource should create a requirement to the provided capability. For example:
+A bundle that wants to use a Web Resource should create a requirement against the provided capability. For example:
 
 	Require-Capability: \
 		osgi.enroute.webresource; \

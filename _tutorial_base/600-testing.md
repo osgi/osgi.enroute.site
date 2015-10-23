@@ -68,7 +68,7 @@ Our bundles now look as follows:
 
 ![Test Project](/img/tutorial_base/test-test-1.png)
 
-To run the test, we must select the `com.acme.prime.eval.test` project, its `src` folder, a package in this folder, a class in this package, a method in the a class, or the bnd.bnd file. We can then do `@/Debug As/Bnd OSGi Test Launcher (JUnit)' or you can use the keyboard shortcut (Shift+Alt+X C). This executes the test which are then reported in the standard JUnit view. Remember the pilots and retractable gears, want to bet you confuse the entries `JUnit Test` and `Bnd OSGi Test Launcher (JUnit)`. Or even worse now, you often will accidentally select `Bnd OSGi Run Launcher`. If you do the latter, you get an error that the bundles cannot be resolved because JUnit is missing.
+To run the test, we must select the `com.acme.prime.eval.test` project, its `src` folder, a package in this folder, a class in this package, a method in the a class, or the bnd.bnd file. We can then do `@/Debug As/Bnd OSGi Test Launcher (JUnit)` or you can use the keyboard shortcut (Shift+Alt+X C). This executes the test which are then reported in the standard JUnit view. Remember the pilots and retractable gears, want to bet you confuse the entries `JUnit Test` and `Bnd OSGi Test Launcher (JUnit)`. Or even worse now, you often will accidentally select `Bnd OSGi Run Launcher`. If you do the latter, you get an error that the bundles cannot be resolved because JUnit is missing.
 
 And then ... the green bar!
 
@@ -96,7 +96,7 @@ Test bundles are normal bundles but are marked with a special header: `Test-Case
 
 	Test-Cases: ${test-cases}
 
-The `${test-cases} macro is set by OSGi enRoute; it calculates the classes that either extend `junit.framework.TestCase` class or that use the the JUnit 4 annotations like `@Test` (you cannot combine these mechanisms). In our example the expansion looks like:
+The `${test-cases}` macro is set by OSGi enRoute; it calculates the classes that either extend `junit.framework.TestCase` class or that use the the JUnit 4 annotations like `@Test` (you cannot combine these mechanisms). In our example the expansion looks like:
 
 	Test-Cases: com.acme.prime.eval.test.EvalTest
 

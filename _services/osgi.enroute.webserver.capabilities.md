@@ -116,7 +116,7 @@ Adding these requirements is of course rather unpleasant and incredibly error pr
  
 This creates (when using bnd) the `@RequireAngularWebResource` annotation that, when applied anywhere in a bundle, will create the aforementioned requirement.
 
-This makes creating the requirement as simple as applying an annotation. In general there is a single class that represents the application, this class is quite well suited for this purpose. It is recommended that all web resource requirements are placed on the same class.
+This makes creating the requirement as simple as applying an annotation. In general there is a single class that represents the application, this class is quite well suited for this purpose. It is recommended that all web resource requirements be placed in the same class.
 
 	@RequireAngular( 
 		resource={"angular.js", 

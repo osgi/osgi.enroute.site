@@ -62,9 +62,9 @@ There exists a bnd(tools) template to create Web Resources. Use of this template
 
 %%% This did not work for me. When I create a new project using the enRoute templates, even when I name the project ending in `.webresource`, the resulting project is not a Web Resource project. That is, unless there is nothing specific to web resources in this project template, and I am just misunderstanding...
 
-A web resource, for example Angular, must be wrapped in a bundle. The preferred location is `/static/<owner>/<product>/<version>`. This location will make the resource available over the web in a specific version. This is however not required. For Angular this would be something like `/static/google/angular/1.4.4`.
+A Web Resource, for example Angular, must be wrapped in a bundle. The preferred location is `/static/<owner>/<product>/<version>`. This location will make the resource available over the web as a specific version. This is however not required. For Angular, using this approach would result in something like `/static/google/angular/1.4.4`.
 
-The web resource should then provide a capability. This capability name must be the generic path, in the previous Angular example this would be /google/angular. It should specify its version and a root attribute. The `root` path must point to a folder in the bundle that contains the resources. In our angular example this would be `/static/google/angular/1.4.4` but it can be anywhere in the bundle. The root path is not required to be publicly available though is is recommended.
+The Web Resource should then provide a capability. This capability name must be the generic path, in the previous Angular example this would be /google/angular. It should specify its version and a root attribute. The `root` path must point to a folder in the bundle that contains the resources. In our angular example this would be `/static/google/angular/1.4.4` but it can be anywhere in the bundle. The root path is not required to be publicly available though is is recommended.
 
 	Provide-Capability: \
 		osgi.enroute.webresource; \

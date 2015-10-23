@@ -40,9 +40,15 @@ A webserver extender must map static resources in the `/static` directory to a U
 
 The extender must overlay all resources in bundle ID order. That is, multiple bundles can contribute to the same folder and the bundle with the highest ID will overwrite bundles with the same resource paths but a lower bundle id.
 
+%%% The above paragraph is difficult to understand.
+
 Web extenders must also WebResourceNamespace resources.
 
+%%% Should, or must? Why is this so?
+
 Web extenders must also provide support for common web standards like ranges, zipping, caching, etc.
+
+%%% Should, or must? Why is this so?
 
 ## Web Resources
 

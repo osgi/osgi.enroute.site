@@ -60,6 +60,8 @@ A Web Resource is a bundle that contains resources that must be made available o
 
 There exists a bnd(tools) template to create Web Resources. Use of this template is highly recommended. Create a new project using the OSGi enRoute Templates and make sure the name of the project ends with `.webresource`. The remaining section explains how to make a Web Resource, but only continue reading if you want to wrap your own resources. Though Web Resources are extremely easy to use and hide a lot of complexity, some of this complexity is displaced to the wrapping of the resources. In practice, though, it is done only once and is relatively easy to maintain.
 
+%%% This did not work for me. When I create a new project using the enRoute templates, even when I name the project ending in `.webresource`, the resulting project is not a Web Resource project.
+
 A web resource, for example Angular, must be wrapped in a bundle. The preferred location is `/static/<owner>/<product>/<version>`. This location will make the resource available over the web in a specific version. This is however not required. For Angular this would be something like `/static/google/angular/1.4.4`.
 
 The web resource should then provide a capability. This capability name must be the generic path, in the previous Angular example this would be /google/angular. It should specify its version and a root attribute. The `root` path must point to a folder in the bundle that contains the resources. In our angular example this would be `/static/google/angular/1.4.4` but it can be anywhere in the bundle. The root path is not required to be publicly available though is is recommended.

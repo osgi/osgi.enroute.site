@@ -36,11 +36,11 @@ See [OSGi enRoute Webserver example][webserver] for more example code. This proj
 
 ## Static Pages
 
-A webserver extender must map static resources in the /static directory to the web, using the remaining path. For example, a resource /static/foo/bar/baz.png must be available under /foo/bar/baz.png on the local webserver. Since this space is shared, it is strongly recommended to paths do not clash.
+A webserver extender must map static resources in the `/static` directory to a URL as viewed from the web. This is done by removing the `/static` part and using the remaining path. For example, a resource `/static/foo/bar/baz.png` must be available under `/foo/bar/baz.png` on the local webserver. Since the `/static` URL space is shared, it is strongly recommended that paths not clash.
 
 The extender must overlay all resources in bundle ID order. That is, multiple bundles can contribute to the same folder and the bundle with the highest ID will overwrite bundles with the same resource paths but a lower bundle id.
 
-Web Extenders must also WebResourceNamespace resources.
+Web extenders must also WebResourceNamespace resources.
 
 Web extenders must also provide support for common web standards like ranges, zipping, caching, etc.
 

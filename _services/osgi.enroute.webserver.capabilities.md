@@ -82,14 +82,14 @@ A bundle that wants to use a Web Resource should create a requirement against th
      		resource:List="angular.js,angular-route.js,angular-resource.js";
      		priority:Integer=1000
  
-The requirement can specify a resource and a priority attribute. The resource attribute is a list if resources in the root folder of the bundle that provides the web resource capability. The priority is used to influence the order of include.
+The requirement can specify a resource and a priority attribute. The resource attribute is a list if resources in the root folder of the bundle that collectively provide the Web Resource capability. The priority is used to influence the order of inclusion.
 
 In runtime, the webserver creates a virtual URI:
 
 	/osgi.enroute.webresource/<bsn>/<version>/<glob>
  
-The `<bsn>`is the bundle symbolic name and the `<version>` is the exact version of the bundle. The webserver will find this bundles and then look up all web resource wires from this bundle to any actual web resources. It will then create a file that contains all the resources that are listed by the requirements and that match the globbing pattern. The priority will define the order, the higher, the earlier the resource is loaded.
-Additionally, any resources that match the globbing pattern in the requiring bundle's web folder are added at the end. That is, applications should place their own web resources that can be merged into one file in the /web folder.
+The `<bsn>` is the bundle symbolic name and the `<version>` is the exact version of the bundle. The webserver will find this bundle and then look up all Web Resource wires from this bundle to any actual Web Resources. It will then create a file that contains all the resources that are listed by the requirements and that match the globbing pattern. The priority will define the order; the higher the value, the earlier the resource is loaded.
+Additionally, any resources that match the globbing pattern in the requiring bundle's web folder are added at the end. That is, applications should place their own web resources that can be merged into one file in the `/web` folder.
 
 When building with bnd, macros can be used to synchronize the version and bsn with the html file(s). For example:
 

@@ -89,7 +89,7 @@ In runtime, the webserver creates a virtual URI:
 	/osgi.enroute.webresource/<bsn>/<version>/<glob>
  
 The `<bsn>` is the bundle symbolic name and the `<version>` is the exact version of the bundle. The webserver will find this bundle and then look up all Web Resource wires from this bundle to any actual Web Resources. It will then create a file that contains all the resources that are listed by the requirements and that match the globbing pattern. The priority will define the order; the higher the value, the earlier the resource is loaded.
-Additionally, any resources that match the globbing pattern in the requiring bundle's web folder are added at the end. That is, applications should place their own web resources that can be merged into one file in the `/web` folder.
+Additionally, any resources that match the globbing pattern in the requiring bundle's web folder are added at the end. That is, applications should place their own resources that can be merged into one file in the `/web` folder.
 
 When building with bnd, macros can be used to synchronize the version and bsn with the html file(s). For example:
 
@@ -100,7 +100,7 @@ When building with bnd, macros can be used to synchronize the version and bsn wi
 	<script 
 		src="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.js">
 
-Adding these requirements of course is rather unpleasant and incredibly error prone. It is therefore recommended that each web resource creates a customized requirement annotation that can then be used by its clients. See manifest annotations. For example, in the Angular web resource this looks like:
+Adding these requirements is of course rather unpleasant and incredibly error prone. It is therefore recommended that each Web Resource create a customized requirement annotation that can then be used by its clients. (See manifest annotations.) For example, in the Angular web resource this looks like:
 
 	@RequireCapability(
 		ns = WebResourceNamespace.NS, 

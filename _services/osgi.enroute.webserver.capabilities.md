@@ -30,7 +30,7 @@ The bundle that requires a web resource:
 
 Several web resources are declared by the enRoute base API.
 
-See [OSGi enRoute Webserver example][webserver] for more example code. This example uses an example [Web Resource][webserver-resource] that demonstrates how to build/wrap web resources.  
+See [OSGi enRoute Webserver example][webserver] for more example code. This project uses an example [Web Resource][webserver-resource] that demonstrates how to build and wrap web resources.  
 
 ## Static Pages
 

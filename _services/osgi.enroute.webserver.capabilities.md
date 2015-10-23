@@ -13,6 +13,13 @@ A large part of a web site usually consists of static resources like images, scr
 
 A common problem with resources is that they require a path on the webserver. This creates a maintenance burden since often these resources (mostly Javascript) are versioned. Supporting multiple versions simultaneously requires path & dependency management on the client side. This webserver feature provides an alternative model that allows you to wrap your Javascript (or other) resources in a bundle and let the OSGi framework take care of the dependency management that is then used by the webserver to do path management.
 
+%%% The last sentence is not clear. What gets used by the webserver to do path management?
+
+%%% What do you mean by "webserver feature" in the above text?
+ Are you referring to the service component presented on this page?
+ Karaf,for example has a specific meaning for "feature". Is there are specific meaning here? 
+
+
 ## Example
 
 The bundle that requires a web resource:

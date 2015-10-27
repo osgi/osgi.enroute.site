@@ -36,13 +36,13 @@ Always! DS is the backbone of OSGi. Whenever you write code in OSGi you write th
 
 Not sure what we were smoking when designing the original OSGi specification, or maybe it was just youthful exuberance, but OSGi did not really become useful for the rest of us until we had Declarative Services (DS) with their annotations. Though some old hardliners still seem to resist DS (see [Real Men Don't Use DS][1]), it is obvious that if you use OSGi and not use DS you're either extremely deep down in middleware or you're masochistic. 
 
-DS (or also called the Service Component Runtime SCR) is an extender that creates components from, shudder, an XML resource in your bundle. In the bad old days you had to write this XML but fortunately there are now some annotations that allows bnd to write the XML on the fly. This XML file defines your dependencies, properties, and registered services. When the time comes, DS will instantiate the class, inject the dependencies, activate it, and register the services. In short taking your pain out of OSGi, leaving you with all the pleasures.
+DS (or also called the Service Component Runtime SCR) is an extender that creates components from, shudder, an XML resource in your bundle. In the bad old days you had to write this XML but fortunately there are now some annotations that allow bnd to write the required XML on the fly. This XML file defines your dependencies, properties, and registered services. When the time comes, DS will instantiate the class, inject the dependencies, activate it, and register the services. In short, DS takes the pain out of OSGi, leaving you with all the pleasures.
 
-At first, there are many similarities with injection framework that we shall not name here. However, this is comparing a flat space with a 3D space since DS handles _dynamic_ dependencies. Though for many a developer the dynamics in OSGi are off-putting, the advent of distributed systems makes it more and more clear that the world is dynamic and trying to hide these dynamics from the developer is a really bad idea. Over and over, nature proves us that trying to give the impression of a perfect world only makes us fall deeper and harder when the perfection inevitably cracks. The beauty of DS is that it allows us to live in a dynamic world with very little effort on our site. If you're a skeptic, realize that those [lustrous points][2] had no clue what that Square was talking about. So bear with us, and one day you might become a beautiful Sphere!
+There are many similarities with injection frameworks that we shall not name here. However, this is like comparing a flat space with a 3D space since DS handles _dynamic_ dependencies. Though for many a developer the dynamics in OSGi are off-putting, the advent of distributed systems makes it more and more clear that the world is dynamic and trying to hide these dynamics from the developer is a really bad idea. Over and over, nature proves to us that trying to give the impression of a perfect world only makes us fall deeper and harder when the perfection inevitably cracks. The beauty of DS is that it allows us to live in a dynamic world with very little effort. If you're a skeptic, realize that those [lustrous points][2] had no clue what that Square was talking about. So bear with us, and one day you might become a beautiful Sphere!
 
 ## The Simplest Component
 
-Adding a `@Component` annotation to a public class will turn it into a component. Since the effects are rather pointless on an empty class, let's add a constructor so we can at least see something happening. Make sure you got the right Component annotation since some annotation names are clearly more popular than others. 
+Adding a `@Component` annotation to a public class will turn it into a component. Since the effects are rather pointless on an empty class, let's add a constructor so we can at least see something happening. Make sure to use the right `Component` annotation since some annotation names are clearly more popular than others. 
 
 	package osgi.enroute.examples.component.examples;
 	
@@ -55,7 +55,7 @@ Adding a `@Component` annotation to a public class will turn it into a component
 		}
 	}
 
-Obviously, this component will not win the Turing price since it does not do anything and is more or less a waste of bits, sacrificed in the goal to elucidate you. But hey, doesn't it do a great job? 
+Obviously, this component will not win the Turing prize since it does not do anything and is more or less a waste of bits, sacrificed in the goal to elucidate you. But hey, doesn't it do a great job? 
 
 ## Registering a Service
 
@@ -96,7 +96,7 @@ When we run this component, we should see the `EventHandlerImpl` component fire 
 
 ## Initialization
 
-Initializing in a constructor is awkward and ill advised since the object is only partially ready during construction. Initialization should therefore be done separate from the constructor. We can annotate a method with the `@Activate` annotation, this method will be called after the dependencies are set and before a service is registered. 
+Initializing in a constructor is awkward and ill advised since the object is only partially ready during construction. Initialization should therefore be done separately from object construction. We can annotate a method with the `@Activate` annotation; this method will be called after the dependencies are set and before a service is registered. 
 
 	@Component
 	public class SmallPoint {
@@ -108,9 +108,9 @@ Initializing in a constructor is awkward and ill advised since the object is onl
 
 ## Dependencies
 
-We've already seen some examples of the dependencies. These dependencies were the most simple ones: _static_ and _single_. These defaults are also the most common and match the `@Inject` annotation from dependency injection that are dynamic challenged. When the dependencies are met, your component is instantiated and when they are n longer matched, your component is mercilessly killed. Since the component is not alive before and after it never sees the effects that the dynamicity has on it. Always start in this mode since it makes your life significantly easier and it is rarely worth to effort to optimize this.
+We've already seen some examples of the dependencies. These dependencies were the simplest ones: _static_ and _single_. These defaults are also the most common and match the `@Inject` annotation from dependency injection that are dynamically challenged. When the dependencies are satisfied, your component gets instantiated and when they are no longer matched, your component gets mercilessly killed. Since the component is not alive before and after it never sees the effects that the dynamicity has on it. Always start in this mode since it makes your life significantly easier and is rarely worth to effort to optimize.
 
-However, there are some interesting cases that we can simplify by making things more dynamic. For example the Whiteboard pattern. With this pattern we need to track a number of services. These services can come and go. It would be rather tiring if every arrival of a new member would result in our death and resurrection. This common case is handled by setting to the `cardinality` to `MULTIPLE` and the `policy` to `DYNAMIC`. If DS then finds new members we are being informed. This will requires us to specify 2 methods. One method for adding members, the other method for removing the members. The _bind_ method is specified with the @Reference annotation. The _unbind_ method is found through the convention of removing the 'add' prefix of the bind method with the 'remove' prefix. That is, `addMember` as the bind method requires `removeMember` as the unbind method.
+However, there are some interesting cases that we can simplify by making things more dynamic. For example the Whiteboard pattern. With this pattern we need to track a number of services. These services can come and go. It would be rather tiring if every arrival of a new member would result in our death and resurrection. This common case is handled by setting to the `cardinality` to `MULTIPLE` and the `policy` to `DYNAMIC`. If DS then finds new members we get informed. This requires us to specify 2 methods: one method for adding members, the other method for removing the members. The _bind_ method is specified with the @Reference annotation. The _unbind_ method is found through the convention of removing the 'add' prefix of the bind method and replacing it with the 'remove' prefix. That is, `addMember` as the bind method requires `removeMember` as the unbind method.
 
 	@Component
 	public class WhiteboardExample {
@@ -126,7 +126,7 @@ However, there are some interesting cases that we can simplify by making things 
 		}
 	}
 	
-Though it is generally not worth the effort, some people can't stop optimizing (and ok, there are a few legitimate cases), and they want also to treat their unary references dynamic. This sounds simple but there is a gotcha. The gotcha is the order. DS can first register a new service and then unregister the old service. If you write your code carelessly then it is easy to set your fresh new service to null in your unbind method. If you think about it, it is quite friendly of DS to give you a new service before removing the old, you're never without one. However, it means you must use an AtomicReference to use those services reliably. We use the `compareAndSet` method; this will only set the reference to null if the service to be removed is actually the one we're still using.
+Though it is generally not worth the effort, some people can't stop optimizing (and ok, there are a few legitimate cases), and they want also to treat their unary references as being dynamic. This sounds simple but there is a gotcha. The gotcha is the order. DS can first register a new service and then unregister the old service. If you write your code carelessly then it is easy to set your fresh new service to null in your unbind method. If you think about it, it is quite friendly of DS to give you a new service before removing the old, so you're never without one. However, it means you must use an AtomicReference to use those services reliably. We use the `compareAndSet` method; this will only set the reference to `null` if the service to be removed is actually the one we're still using.
 
 This is how it looks:
 
@@ -149,7 +149,7 @@ This is how it looks:
 
 ## Selective References
 
-The dependencies we've used so far were quite promiscuous: they accepted any service with the given service interface. In certain cases you want to be a bit more selective. Maybe you only want the services with a given property. The `target` option in the @Reference annotation holds a filter that makes that reference more selective. You only get services injected that are matching that filter. For example, we only want to see the services that have the `foo` property set. 
+The dependencies we've used so far were quite promiscuous: they accepted any service with the given service interface. In certain cases you want to be a bit more selective. Maybe you only want the services with a given property. The `target` option in the `@Reference` annotation holds a filter that makes that reference more selective. You only get services injected that are matching that filter. For example, we only want to see the services that have the `foo` property set. 
 
 	@Component
 	public class DynamicLogExample {
@@ -190,7 +190,7 @@ Since properties are awkward to use, we can use the DTOs service to convert the 
 		}
 	}
 
-Configurations can be updated dynamically. Without any extra effort, this will mean your component gets shot down and then recreated with the latest configuration data. Since this is a bit rough, you can also tell DS that prefer the more subtle approach and would like to get a courteous callback when the change happens. You can tell DS about your preferences by adding the @Modified annotation to a method that takes a map. So we can make our code a bit more efficient in the light of change:
+Configurations can be updated dynamically. Without any extra effort, this will mean your component gets shot down and then recreated with the latest configuration data. Since this is a bit rough, you can also tell DS that you prefer the more subtle approach and would like to get a courteous callback when the change happens. You can tell DS about your preferences by adding the `@Modified` annotation to a method that takes a map. So we can make our code a bit more efficient in the light of change:
  
 	@Component
 	public class SlightlyBiggerPoint {
@@ -212,15 +212,28 @@ Configurations can be updated dynamically. Without any extra effort, this will m
 		}
 	}
 
+%%% I am strugginling with this. :-(
+  I seem to be unable to configure a component from a different bundle. I have tried setting the location to "?", but that did not work. My `@Modified` method never gets called.
+  What do I need to do in order to allow my (own custom) Management Agent to update a component Configuration?
+  
+  This is what I am doing at this time:
+
+                        String pid = "some.pid"
+                        Configuration configuration = cm.getConfiguration( pid, "?" );
+                        Dictionary<String, String> dictionary = ...
+                        configuration.update( dictionary );
+
+  What could be missing?
+
 ## Configuring References
 
-We've discussed earlier that the @Reference annotation can set a target filter on the selected services. However, the annotation is set during development time. It could be quite useful if we could override this filter in a running system. Surprise!
+We've discussed earlier that the `@Reference` annotation can set a target filter on the selected services. However, the annotation is set during development time. It could be quite useful if we could override this filter in a running system. Surprise!
 
 Each reference has a name, this is the name of the method with the prefix `add` or `set` removed. If we configure a component we can set a magic property called `target.<name>` with the filter. DS will use this configuration property as if it was set on the annotation.
 
 ## Factories
 
-So far we've not discussed the life cycle of the component. We've assumed it just gets created when its dependencies are met. However, the integration with Configuration Admin allows us to control the life via this component with Configration Admin's factory configurations. Each factory instance will correspond to a component instance. These factory components are still only created when their dependencies are met.
+So far we've not discussed the lifecycle of the component. We've assumed it just gets created when its dependencies are satisfied. However, the integration with Configuration Admin allows us to control the life via this component with Configration Admin's factory configurations. Each factory instance will correspond to a component instance. These factory components are still only created when their dependencies are met.
 
 This is probably one of the coolest features of the components. It allows us to create and delete components on demand. Let's see how we can use this.
 
@@ -264,9 +277,11 @@ We can now create a configuration that creates three components.
 	}	
 
 
+%%% In the above sentence, you write "It allows us to create and delete components on demand." You show in the example how to create the components, but how can we delete them?
+
 ## OSGi API
 
-In general you want to make your components oblivious of any OSGi API. This makes them easier to unit tests  and in modularity less coupling is more. However, if you write middleware for OSGi systems then it is very attractive to access the Bundle Context or Component Context. The `activate` method is designd to provide you with all those objects, in any order:
+In general you want to make your components oblivious of any OSGi API. This makes them easier to unit test and in the spirit of modularity less coupling is more. However, if you write middleware for OSGi systems then it is very attractive to access the Bundle Context or Component Context. The `activate` method is designed to provide you with all those objects, in any order:
 
 	@Component
 	public class SmallPoint {

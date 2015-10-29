@@ -183,6 +183,10 @@ img.short-header {
 	margin-bottom: $block-separation;
 }
 
+.tutorial-content {
+	min-height: 400px;
+	margin-bottom: 4*$block-separation;
+}
 /*
  * Next and Previous navigation
  */

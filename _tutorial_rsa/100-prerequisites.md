@@ -18,11 +18,11 @@ The next setup is the Eclipse works. Please follow the [quick start tutorial][qs
 
 The git commands to create a new workspace are:
 
-	$ cd  ~/git
-	$ git init com.mycompany.chat
-	$ cd com.mycompany.chat
-	$ git fetch --depth=1 https://github.com/osgi/workspace master
-	$ git checkout FETCH_HEAD -- .
+	cd  ~/git
+	git init com.mycompany.chat
+	cd com.mycompany.chat
+	git fetch --depth=1 https://github.com/osgi/workspace master
+	git checkout FETCH_HEAD -- .
 {: .shell}
 
 As advised in the [quick start tutorial][qs], you should open an Eclipse workspace in another directory, for example, `~/eclipse/com.mycompany.chat` and the import the `cnf` project from your git workspace ( `~/git/com.mycompany.chat` in the command line example).

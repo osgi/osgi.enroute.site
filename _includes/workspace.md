@@ -3,10 +3,10 @@
 OSGi enRoute requires that you group a number of projects in a _bnd workspace_. A bnd workspace is basically a directory with a `cnf` directory. We start with a template workspace by getting it from git. Though this could be done via EGit in Eclipse but there are about then dialogs for that. So by far the easiest way to do this is via the command line:
 
 	$ cd  ~/git
-	$ git clone --depth 1 --single-branch --branch=master https://github.com/osgi/workspace com.acme.prime
+	$ git init com.acme.prime
 	$ cd com.acme.prime
-	$ rm -rf .git
-	$ git init
+	$ git fetch --depth=1 https://github.com/osgi/workspace master
+	$ git checkout FETCH_HEAD -- .
 
 ## Opening the bnd Workspace in Eclipse
 

@@ -139,7 +139,6 @@ h6 {font-size: 1em;}
 	h3:before {
 		@extend .jump;
 		content: counter(h1) "." counter(h2) "." counter(h3);
-		counter-increment: h3 1;	
 	}
 }
 

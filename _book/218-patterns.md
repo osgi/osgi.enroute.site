@@ -83,4 +83,3 @@ The following OSGi service specifications are extenders:
 * Metatype – The Metatype service can find metatype definitions inside bundles.
 * Remote Service Admin – The RSA Endpoint discovery model can detect endpoint definitions in bundles.
 
-### Example

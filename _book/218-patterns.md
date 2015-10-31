@@ -4,19 +4,19 @@ layout: book
 summary: OSGi Patterns
 ---
 
-There are a number of patterns using in OSGi systems.
+There are a number of patterns used in OSGi systems.
 
 ## Whiteboard Pattern
 
-The Service Whiteboard pattern is useful when you need register with another party and the presence of that other party does not forbid you to make progress. Most OSGi Services except the first few are designed according to the whiteboard model.
+The Service Whiteboard pattern is useful when you need to register with another party and the absence of that other party does not prevent you from making progress. Most OSGi Services except the first few are designed according to the whiteboard model.
 
-In a collaboration model there are multiple parties that interact. In general, this interaction goes into a certain direction. For example, in Event Admin the sender depends on the Event Admin service. It needs the Event Admin interface to send or post an event. In a more traditional model the Event Handler would have to be explicitly registered with the Evenet Admin service. In this vein, a implementation of the Event Handler would have to get the Event Admin service and add itself as listener.
+In a collaboration model there are multiple parties that interact. In general, this interaction goes into a certain direction. For example, in Event Admin, the direction is from a sender to a handler. The sender depends on the Event Admin service: it needs the Event Admin interface to send or post an event. In a more traditional 'listener' model, the handler would have to be explicitly registered with the Event Admin service. In this vein, the handler would also depend on the Event Admin service: it would need the Event Admin interface to add itself as listener. In the Whiteboard  model, the handler doesn't register itself as a listener to the Event Admin service (as a consequence, the handler does not depend on the Event Admin service). Instead, the handler is directly published in the service registry, and the Event Admin service tracks the published handlers.
 
-In an OSGi system this 'listener' model is not recommended because it is more work, it has many potential problems in a dynamic world, and the service registry is a much more powerful and robust (concurrent) mechanism to handle these 'listeners' than that what most providers are willing to provide as registry. And last but not least, there is a free introspection API that is used by all OSGi debugging tools.
+In an OSGi system the 'listener' model is not recommended because it is more work, it has many potential problems in a dynamic world, and the service registry is a much more powerful and robust (concurrent) mechanism to handle these 'listeners' than that what most providers are willing to provide as registry. And last but not least, there is a free introspection API that is used by all OSGi debugging tools.
 
-Using the service registry allows the use of service properties to provide meta data for the service. For example, in Event Admin an Event Handler specifies the topic and filter as service properties. These are picked up by the Event Admin implementation and used to filter the events that are send towards the handler.
+Using the service registry allows the use of service properties to provide meta data for the service. For example, in Event Admin an Event Handler specifies the topic and filter as service properties. These are picked up by the Event Admin implementation and used to filter the events that are sent to the handler.
 
-Just an overview of where the Whiteboard Pattern is used in the OSGi services:
+The following is an overview of where the Whiteboard Pattern is used in the OSGi services:
 
 * Http Service – Allows Servlets & Filters to be registered as service.
 * Event Admin – The Event Handler service receives all events once it is registered.
@@ -27,13 +27,13 @@ Just an overview of where the Whiteboard Pattern is used in the OSGi services:
 * Repository – To make a repository available it is only necesssary to register them.
 * etc. etc.
  
-Novice OSGi users often feel uncomfortable publicly registering these listeners. There are performance fears and a feeling of being unprotected. Performance is not an issue since there have been tests with hundreds of thousands of services without any noticeable degradation. The feeling of being vulnerable will go away once you see how the service in a service registry are collaborating.
+Novice OSGi users often feel uncomfortable publicly registering these listeners. There are performance fears and a feeling of being unprotected. Performance is not an issue since there have been tests with hundreds of thousands of services without any noticeable degradation. The feeling of being vulnerable will go away once you see how the services in a service registry are collaborating.
 
-Clearly the pattern is common and popular because is so easy to. Virtually all OSGi services after release 1 are based on this model. Any occasion where you want to establish a channel of event like objects then the whiteboard should be used. 
+Clearly the pattern is common and popular because is so easy to implement. Virtually all OSGi services after release 1 are based on this model. On any occasion where you want to establish a channel of eventlike objects, the whiteboard pattern should be used. 
 
 ### Example
 
-This example shows a skeleton of a service that listens to a white board service.
+This example shows a skeleton of a service that listens to a whiteboard service.
 
 	package com.acme.server;
 	
@@ -64,11 +64,11 @@ This example shows a skeleton of a service that listens to a white board service
 	
 ## Extender Pattern
 
-The Extender Pattern is useful when you find that bundles have to repeat the same boiler plate code or resources to function. With the bundles only provide the unique part and any shared/common parts are provided by another, shared, bundle. The _extender_ is the bundle that operates on behalf of an _extendee_, the bundle that contains the unique parts. Extenders generally define a manifest header or magic directory to allow an extendee to opt-in.  
+The Extender Pattern is useful when you find that bundles have to repeat the same boilerplate code or resources to function. With the Extender Pattern, the bundles only provide the unique part and any shared/common parts are provided by another, shared, bundle. The _extender_ is the bundle that operates on behalf of an _extendee_, the bundle that contains the unique parts. Extenders generally define a manifest header or magic directory to allow an extendee to opt-in.  
 
-For example, the Declarative Services specification defines an _extender_ model. A component provides an XML file inside its bundle (generated by the annotations) that is read by the extender bundle when the component bundle gets started. This extender bundle then does all the boiler plate code to register services, check dependencies, handler configuration, and many tasks you don't want to know about.
+For example, the Declarative Services specification defines an _extender_ model. A component provides an XML file inside its bundle (generated by the annotations) that is read by the extender bundle when the component bundle gets started. This extender bundle then does all the boilerplate code to register services, check dependencies, handler configuration, and many tasks you don't want to know about.
 
-The benefit is that the extender allows a 'declarative' model, which is usually smaller and more concise extendees.
+The benefit is that the extender allows a 'declarative' model, which usually leads to smaller and more concise extendees.
 
 The extender model works in OSGi because the bundle life cycle is well defined and evented. An extender bundle can listen to the installation of a new bundle as well detect that bundles are/have been uninstalled. It can therefore actively scope its utility around the life cycle of the extendee. For example, Declarative Services will wait to activate components until their bundles' are started. 
  

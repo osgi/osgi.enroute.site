@@ -24,7 +24,7 @@ We have organized the work around a number of Github repositories. All these rep
 
 In sorted order:
 
-* [bnd(tools)[(http://bndtools.org) – The bnd(tools) project provides the underlying engine for the OSGi enRoute tool chain as well as the Eclipse bndtools plugin. You can find their repositories at [Github][bndtools]. For the moment, please install the latest release from [Cloudbees][cloudbees].
+* [bnd(tools)](http://bndtools.org) – The bnd(tools) project provides the underlying engine for the OSGi enRoute tool chain as well as the Eclipse bndtools plugin. You can find their repositories at [Github][bndtools]. For the moment, please install the latest release from [Cloudbees][cloudbees].
 * [Eclipse](http://eclipse.org)  – The Eclipse Foundation provides the unsurpassed IDE that forms the basis of the ease of use 
 * [Git & Github](https://github.com) – Git provides the unsurpassed source control management system. 
 * [Gradle][gradle] - The command line based build tool used in the continuous build on Travis.

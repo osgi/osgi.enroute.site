@@ -8,6 +8,8 @@ collections:
     output: true
   tutorial_base:
     output: true
+  tutorial_rsa:
+    output: true
   tutorial_iot:
     output: true
   services:

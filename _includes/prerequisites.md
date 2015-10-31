@@ -11,7 +11,7 @@ You can install bndtools from the Eclipse market place, make sure you got versio
 
 	https://dl.bintray.com/bndtools/bndtools/3.0.0
 	
-Since bndtools undergoes continuous improvements, you can also install it from latest, which is our continuous integration build. 
+If we update bndtools with a stable release then we will place it here: 
 
 	https://dl.bintray.com/bndtools/bndtools/latest
 
@@ -25,9 +25,9 @@ Whenever you see a text like `File/Open` we hope you treat it as a menu path. Th
 
 Since this part is rather sensitive to the operating system you're using, we have split it in different sections for each of the major operating systems. 
 
-* [Windows](#Windows)
-* [MacOS](#MacOS)
-* [*nix](#Unix)
+* [Windows](#windows)
+* [MacOS](#macos)
+* [*nix](#unix)
 
 
 ### Windows

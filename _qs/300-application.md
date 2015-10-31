@@ -81,9 +81,11 @@ So hit the `Resolve` button. This will open a dialog that shows you what bundles
 
 ![Resolved set](/img/qs/resolve-initial-1.png)
 
-Clicking `Finish` will set the `Run Bundles` list. This list is normally not visible. Open it if you'd like to see the resulting bundles.
+Clicking `Finish` will set the `Run Bundles` list. This list is normally not visible. Open it if you'd like to see the resulting bundles. 
 
 ![Resolved set](/img/qs/resolve-initial-2.png)
+
+Note that every time you resolve, the `-runbundles` are overwritten with the new resolution. So **never** add bundles directly to the `-runbundles` if you use the resolver!
 
 Save the `com.acme.prime.upper.bndrun` file and then click on the `Debug OSGi` button at the right top of the window.
 
@@ -120,6 +122,9 @@ We're running in a framework but there is not much to see of the framework yet. 
 Let's first kill our running framework. Just click the red button on the console view. Also, if you've done some debugging, you might want to return to the Bndtools perspective.
 
 Then double click the `debug.bndrun` file and select the `Run` tab, then click on the `Resolve` button. This gives us a much larger list of bundles. The debug enRoute settings add Web Console, XRay, a web server etc. These are invaluable tools. 
+
+This window looks similar to the following picture. Note that there are no listed requirements because they are inherited from the `com.acme.prime.upper.bndrun` file. 
+
 
 ![Resolved set](/img/qs/debug-details-0.png)
 

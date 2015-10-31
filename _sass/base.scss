@@ -139,7 +139,6 @@ h6 {font-size: 1em;}
 	h3:before {
 		@extend .jump;
 		content: counter(h1) "." counter(h2) "." counter(h3);
-		counter-increment: h3 1;	
 	}
 }
 
@@ -153,7 +152,7 @@ p {
 
 pre, tt, code, kbd, samp, var {
   font-family: 		"Courier New";
-  line-height: 		100%;
+  line-height: 		140%;
   word-wrap: 		break-word;
   word-break:		break-word;
 }

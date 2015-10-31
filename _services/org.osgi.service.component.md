@@ -212,19 +212,6 @@ Configurations can be updated dynamically. Without any extra effort, this will m
 		}
 	}
 
-%%% I am strugginling with this. :-(
-  I seem to be unable to configure a component from a different bundle. I have tried setting the location to "?", but that did not work. My `@Modified` method never gets called.
-  What do I need to do in order to allow my (own custom) Management Agent to update a component Configuration?
-  
-  This is what I am doing at this time:
-
-                        String pid = "some.pid"
-                        Configuration configuration = cm.getConfiguration( pid, "?" );
-                        Dictionary<String, String> dictionary = ...
-                        configuration.update( dictionary );
-
-  What could be missing?
-
 ## Configuring References
 
 We've discussed earlier that the `@Reference` annotation can set a target filter on the selected services. However, the annotation is set during development time. It could be quite useful if we could override this filter in a running system. Surprise!

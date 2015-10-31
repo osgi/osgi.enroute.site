@@ -6,6 +6,8 @@ next: 260-gui.html
 summary: Adding a Distribution Provider and exporting the service
 ---
 
+![Chat Service](/img/tutorial_rsa/overview-distributing.png)
+
 ## Application
 
 We now need to create an environment in which our Chat provider can run. Obviously, since we want to demonstrate distributed OSGi, we should then provide an environment with distribution, using the Zookeeper server we started in the previous section.

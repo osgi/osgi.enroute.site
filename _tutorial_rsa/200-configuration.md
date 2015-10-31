@@ -6,6 +6,8 @@ next: 220-zookeeper.html
 summary: Configuring the Chat service
 ---
 
+![Chat Service Configuration](/img/tutorial_rsa/overview-command.png)
+
 Our current Chat service is a singleton and has hard coded service properties. This is not so nice. It would be better if we could set the `user.name` through configuration. To add configuration data to a component, we must make an annotation interface with the data that we need. In our case we want to set the `user.name` service property. For example:
 
 	package osgi.enroute.examples.chat.provider;

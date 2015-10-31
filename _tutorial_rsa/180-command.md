@@ -6,6 +6,8 @@ next: 200-configuration.html
 summary: Using Gogo to test out our implementation of the Chat API
 ---
 
+![Chat Service](/img/tutorial_rsa/overview-command.png)
+
 ## Running
 
 This section assumes you come from the previous section, there should be a framework running. If you come from another place, make sure the framework is running as described in [Implementing the Chat API](160-implementation.html). We will add a Gogo shell command in this section without restarting the framework.

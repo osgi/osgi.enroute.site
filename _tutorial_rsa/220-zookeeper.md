@@ -5,6 +5,9 @@ prev: 200-configuration.html
 next: 240-distributing.html
 summary: Setting up a Zookeeper discovery server
 ---
+
+![Chat Service Zookeeper](/img/tutorial_rsa/overview-zookeeper.png)
+
 ## Distributed OSGi
 
 Distributed OSGi is almost unbelievably easy to use. To _export_ a service from a framework, all you have to do is set a simple service property:

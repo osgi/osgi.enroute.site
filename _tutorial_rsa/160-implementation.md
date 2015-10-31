@@ -6,6 +6,8 @@ next: 180-command.html
 summary: Creating a simple implementation of the Chat API using the console
 ---
 
+![Chat Service Imlementation](/img/tutorial_rsa/overview-impl.png)
+
 We now have an API so the next step is to create an implementation for the Chat service. We can keep it extremely simple in this case since we're not interested in competing with Facebook messenger or Skype. So we make a simple provider that just sends the messages to the console. 
 
 If we create a _provider_ Bndtools project with the OSGi enRoute templates then we get the proper setup. It will creates a project with a Declarative Services component for us. To setup a provider project, make sure the name of the project ends with `.provider`. In our case we will use the name `osgi.enroute.examples.chat.provider` for the project.

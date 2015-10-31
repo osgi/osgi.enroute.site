@@ -379,3 +379,47 @@ You can find an example application at [OSGi enRoute Example][2].
 [1]: http://blog.osgi.org/2013/07/real-men-dont-use-ds.html
 [2]: https://github.com/Ivesvdf/flatland/blob/master/oneside_a4.pdf?raw=true
 [3]: http://enroute.osgi.org/services/org.osgi.service.event.html
+
+%%% My comments / suggestions
+
+
+First, I had a problem of my own making in my `@Activation` method. Since the code was so simple, of course in my mind it was “not possible” that an error could be thrown here. (Classic self-delusional mistake.) Also unfortunately, I did not see any feedback that snapped me out of my self-delusion.
+
+Even though my component was not really activated due to this error, it still shows up in XRay as if it were working. There is nothing in the image below to indicate that my component is in an erroneous state.
+
+![](PastedGraphic-1.png)
+
+When I click on the yellow box, I see this:
+
+![](PastedGraphic-2.png)
+
+Again here I see nothing that would indicate that my component did not properly initiate.
+
+Unfortunately, when I click on the green dot, I see only this:
+
+![](PastedGraphic-3.png)
+
+So I instead employ the help of gogo, which shows me this:
+
+![](PastedGraphic-4.png)
+
+I still see nothing that indicates the error.
+
+
+After I finally understood the error of my ways and fixed the problem that caused the exception, the next problem was that the configuree (the M component in my example) did not have “immediate=true” set, and there were no calls to this component to activate it. Again, this is what I see in XRay:
+
+![](PastedGraphic-1.png)
+
+I suppose where I _should_ have picked up on this problem was here:
+
+![](PastedGraphic-5.png)
+
+Activation: delayed. However, I was not aware that this would be an issue.
+
+
+My thoughts:
+ * Would be useful if a non-activated component (due to an exception being thrown during activation)
+    would somehow be shown differently in XRay. If the component is not in a working state, it should
+    not appear to be “normal”
+ * Would be useful if a delayed (state ok but not yet activated) component would also somehow be
+    displayed differently.

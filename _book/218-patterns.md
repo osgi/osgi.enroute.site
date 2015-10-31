@@ -8,11 +8,11 @@ There are a number of patterns used in OSGi systems.
 
 ## Whiteboard Pattern
 
-The Service Whiteboard pattern is useful when you need to register with a server (for example to get events) but the absence of that other party does not prevent you from making progress. Typically example is listening to changes in the configuration entries in the Configuration Admin service. The Configuration Admin service should dispatch these to any Configuration Listeners service. However, a Configuration Listener can run perfectly happy before there is a Configuration Admin service around. And since the Configuration Admin can run before any Configuration Listener service are registered the life cycles of the Configuration Admin service and the Configuration Listener service are completely decouped.
+The Service Whiteboard pattern is useful when you need to register with a server (for example to get events) but the absence of that other party does not prevent you from making progress. A typical example is listening to changes in the configuration entries in the Configuration Admin service. The Configuration Admin service should dispatch these to any Configuration Listeners service. However, a Configuration Listener can run perfectly happy before there is a Configuration Admin service around. And since the Configuration Admin can run before any Configuration Listener service are registered, the life cycles of the Configuration Admin service and the Configuration Listener service are completely decoupled.
 
 Most OSGi Services, except the first few, are designed according to the whiteboard pattern. 
 
-The whiteboard pattern is defined as server that uses the OSGi service registry to find its _constituents_. Where a constituent can for example be like a traditional listener. This in contrast with a pattern where the server registers itself as a service and the constituents then register with this server service. 
+The whiteboard pattern is defined as a server that uses the OSGi service registry to find its _constituents_, where each constituent is registered as a service. A constituent can for example be like a traditional listener. This is in contrast with a pattern where the server registers itself as a service and the constituents then register with this server service.
 
 ![Whiteboard pattern](/img/book/whiteboard-pattern.png)  
 

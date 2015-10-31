@@ -8,9 +8,15 @@ There are a number of patterns used in OSGi systems.
 
 ## Whiteboard Pattern
 
-The Service Whiteboard pattern is useful when you need to register with another party and the absence of that other party does not prevent you from making progress. Most OSGi Services except the first few are designed according to the whiteboard model.
+The Service Whiteboard pattern is useful when you need to register with a server (for example to get events) but the absence of that other party does not prevent you from making progress. Typically example is listening to changes in the configuration entries in the Configuration Admin service. The Configuration Admin service should dispatch these to any Configuration Listeners service. However, a Configuration Listener can run perfectly happy before there is a Configuration Admin service around. And since the Configuration Admin can run before any Configuration Listener service are registered the life cycles of the Configuration Admin service and the Configuration Listener service are completely decouped.
 
-In a collaboration model there are multiple parties that interact. In general, this interaction goes into a certain direction. For example, in Event Admin, the direction is from a sender to a handler. The sender depends on the Event Admin service: it needs the Event Admin interface to send or post an event. In a more traditional 'listener' model, the handler would have to be explicitly registered with the Event Admin service. In this vein, the handler would also depend on the Event Admin service: it would need the Event Admin interface to add itself as listener. In the Whiteboard  model, the handler doesn't register itself as a listener to the Event Admin service (as a consequence, the handler does not depend on the Event Admin service). Instead, the handler is directly published in the service registry, and the Event Admin service tracks the published handlers.
+Most OSGi Services, except the first few, are designed according to the whiteboard pattern. 
+
+The whiteboard pattern is defined as server that uses the OSGi service registry to find its _constituents_. Where a constituent can for example be like a traditional listener. This in contrast with a pattern where the server registers itself as a service and the constituents then register with this server service. 
+
+![Whiteboard pattern](/img/book/whiteboard-pattern.png)  
+
+The whiteboard pattern is used when different actors _collaborate_. In a collaboration model there are multiple parties that interact and need to exchange information at appropriate times. In general, this interaction goes into a certain direction. For example, in Event Admin, the direction is from a sender to a handler. The sender depends on the Event Admin service: it needs the Event Admin interface to send or post an event. In a more traditional 'listener' model, the handler would have to be explicitly registered with the Event Admin service. In this vein, the handler would also depend on the Event Admin service: it would need the Event Admin interface to add itself as listener. In the Whiteboard  model, the handler doesn't register itself as a listener to the Event Admin service (as a consequence, the handler does not depend on the Event Admin service). Instead, the handler is directly published in the service registry, and the Event Admin service tracks the published handlers.
 
 In an OSGi system the 'listener' model is not recommended because it is more work, it has many potential problems in a dynamic world, and the service registry is a much more powerful and robust (concurrent) mechanism to handle these 'listeners' than that what most providers are willing to provide as registry. And last but not least, there is a free introspection API that is used by all OSGi debugging tools.
 
@@ -64,7 +70,11 @@ This example shows a skeleton of a service that listens to a whiteboard service.
 	
 ## Extender Pattern
 
-The Extender Pattern is useful when you find that bundles have to repeat the same boilerplate code or resources to function. With the Extender Pattern, the bundles only provide the unique part and any shared/common parts are provided by another, shared, bundle. The _extender_ is the bundle that operates on behalf of an _extendee_, the bundle that contains the unique parts. Extenders generally define a manifest header or magic directory to allow an extendee to opt-in.  
+The Extender Pattern is useful when you find that bundles have to repeat the same boilerplate code or resources to function. 
+
+With the Extender Pattern, the bundles only provide the unique part and any shared/common parts are provided by another, shared, bundle. The _extender_ is the bundle that operates on behalf of an _extendee_, the bundle that contains the unique parts. Extenders generally define a manifest header or magic directory to allow an extendee to opt-in.  
+
+![Extender pattern](/img/book/extender-pattern.png)  
 
 For example, the Declarative Services specification defines an _extender_ model. A component provides an XML file inside its bundle (generated by the annotations) that is read by the extender bundle when the component bundle gets started. This extender bundle then does all the boilerplate code to register services, check dependencies, handler configuration, and many tasks you don't want to know about.
 

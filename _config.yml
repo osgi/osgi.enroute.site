@@ -16,6 +16,8 @@ collections:
     output: true
   trains:
     output: true
+  videos:
+    output: true
 
 defaults:
   -

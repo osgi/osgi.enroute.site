@@ -158,6 +158,6 @@ In runt time, the OSGi framework resolves the actual situation and then the webs
 
 The whole OSGi framework is based on the Capability model. All Import-Package, Require-Bundle, Export-Package, etc. are all require or provide capabilities. Many different namespaces have been created by the OSGi Alliance already. Contracts, Services, META-INF/services, implementations, etc.
 
-[webserver]: https://github.com/osgi/osgi.enroute.examples.webserver.application
-[webserver-resource]: https://github.com/osgi/osgi.enroute.examples.webserver.webresource
+[webserver]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.webserver.application
+[webserver-resource]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.webserver.webresource
 [bundles]: https://github.com/osgi/osgi.enroute.bundles/tree/master/osgi.enroute.web.simple.provider

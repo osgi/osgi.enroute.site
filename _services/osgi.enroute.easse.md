@@ -66,5 +66,5 @@ The `enEasse` module will register an `en$easse` service. This service has the f
 Since the connection consumes resources it is important to close the connection when no longer needed. If a scope is provided then the connection is closed when that scope is destroyed. Otherwise, the handle's return object should be closed by calling `close()` on it.
  
 [ea]: http://enroute.osgi.org/services/org.osgi.service.event.html
-[easseexample]: https://github.com/osgi/osgi.enroute.examples/osgi.enroute.example.eventadminserversentevents.application
+[easseexample]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.easse.application
 [sse]: http://www.w3schools.com/html/html5_serversentevents.asp

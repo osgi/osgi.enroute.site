@@ -371,9 +371,11 @@ If you run a Gogo shell in your framework then adding this component will make t
 	
 ## Example Application
 
-You can find an example application at [OSGi enRoute Example][2]. 
+You can find an example application at [OSGi enRoute Example][4]. 
 
 	
 [1]: http://blog.osgi.org/2013/07/real-men-dont-use-ds.html
 [2]: https://github.com/Ivesvdf/flatland/blob/master/oneside_a4.pdf?raw=true
 [3]: http://enroute.osgi.org/services/org.osgi.service.event.html
+[4]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.component.application
+

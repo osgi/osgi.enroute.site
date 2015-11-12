@@ -222,4 +222,4 @@ The scheduler will pick up the interface from the properties from the generic in
 You can find an example project with scheduler examples at [osgi.enroute.examples][1]. This is an application you should run in the debugger so you can trace what happens. 
 
 
-[1]: https://github.com/osgi/osgi.enroute.examples
+[1]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.scheduler.application

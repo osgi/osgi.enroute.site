@@ -124,7 +124,7 @@ The `en$jsonrpcProvider` must be configured during Angular configuration (`MODUL
 
 
 [jsonrpc]: http://www.jsonrpc.org/specification
-[example]: https://github.com/osgi/osgi.enroute.examples/osgi.enroute.examples.jsonrpc
+[example]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.jsonrpc.application
 [routeProvider]: https://docs.angularjs.org/api/ngRoute/provider/$routeProvider 
 
 

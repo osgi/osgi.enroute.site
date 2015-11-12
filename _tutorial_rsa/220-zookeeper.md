@@ -76,7 +76,7 @@ This code just binds a Zookeeper server life cycle to the component. It starts a
 
 ## Build
 
-The code will not compile, we need the `org.apache.hadoop.zookeeper` bundle. You can add this bundle from JPM. Go to the `Repositories` view and search for `org.apache.hadoop.zookeeper`. Drop the version vignette on the `Central` repository. This will add it. We also need to download `log4j`. There are many variations but the `log4j:log4j:1.2.17` seems to work. This JAR is not needed for compilation but it is required to run Zookeeper.
+The code will not compile, we need the `org.apache.hadoop.zookeeper` bundle. You can add this bundle from JPM. Go to the `Repositories` view and search for `org.apache.hadoop.zookeeper`. Select`Continue Search on JPM4J.org...`. The view `JPM` with an internal web browser opens. Drop the version vignette (green box with a version number in the `Versions` section of the displayed table) on the `Central` repository. Only `Central` is JPM-aware and will add the bundle. You also need to download `log4j`. There are many variations but the `log4j:log4j:1.2.17` seems to work. This JAR is not needed for compilation but it is required to run Zookeeper.
 
 Alternatively, if you have a JAR, you can also drop the JAR file on the `Central` repository.
 
@@ -89,7 +89,7 @@ Now double click the `bnd.bnd` file and select the `Build` tab. Then drag the `o
 		
 If you want to be able to look at the source code, you can select the `org.apache.hadoop.zookeeper` in the `Central` repository, call up a menu, and select `Add Sources`. (This only works when you're connected and for the `Central` repository.)
 
-**Tip:** In certain cases the file is not download yet and you get compile errors. Wait a bit and clean all projects. 
+**Tip:** In certain cases the file is not downloaded yet and you get compile errors. Wait a bit and clean all projects. 
 
 ## Command
 

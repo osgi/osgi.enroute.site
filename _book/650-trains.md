@@ -103,7 +103,7 @@ Many thanks to
 | [iMinds](https://www.iminds.be/en) | [Paremus](http://www.paremus.com) | [ProSyst](http://www.prosyst.com) |
 | :-------------: | :-------------: | :-------------: |
 | ![iMinds Logo](/img/trains/iminds.png) | ![Paremus Logo](/img/trains/paremus.png)  |![ProSyst Logo](/img/trains/prosyst.png)|
-
+ 
 along with other individuals from the OSGi Alliance, for their support in providing software and development time and resources for the creation of the demo and and contest.
 
 ## More to read

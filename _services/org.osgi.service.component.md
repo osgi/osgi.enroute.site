@@ -18,10 +18,16 @@ Always! DS is the backbone of OSGi. Whenever you write code in OSGi you write th
 		LogService log;
 		
 		@Activate
-		void activate(ComponentContext cc, BundleContext bc, Map<String,Object> config) {}
+		void activate(
+			ComponentContext cc, 
+			BundleContext bc, 
+			Map<String,Object> config) {}
 
 		@Deactivate
-		void deactivate(ComponentContext cc, BundleContext bc, Map<String,Object> config) {}
+		void deactivate(
+			ComponentContext cc, 
+			BundleContext bc, 
+			Map<String,Object> config) {}
 		
 		@Modified
 		void modified(Map<String,Object> config) {}
@@ -70,7 +76,9 @@ The fun parts of OSGi are the services. So how can we register a service? Let's 
 		}
 		
 	}
-	
+
+It is important to realize that this component is by default _lazy_ because it registers a service. It means that it will sit there, not even twiddling its thumbs, until it some other bundle starts using it.
+
 ## Creating Events
 
 Though it is not rocket science to create events (just start/stop some components and/or bundles, in OSGi the Framework is mandated to create these events) it would be nice for our fundamental research in OSGi components to have a steady stream. To create such a stream, we need to create Event Admin events every second. This requires us to get access to the Event Admin service (the honest broker between the event senders and receivers) and it would be nice to have a scheduler. Fortunately, they are part of OSGi enRoute. So let's create an Event source:
@@ -80,7 +88,9 @@ Though it is not rocket science to create events (just start/stop some component
 		EventAdmin	eventAdmin;
 		
 		public void run(Object object) {
-			Event event = new Event( "osgi/enroute/examples/ping", new HashMap<String,Object>() );
+			Event event = new Event( 
+				"osgi/enroute/examples/ping", 
+				new HashMap<String,Object>() );
 			eventAdmin.postEvent(event);
 		}
 		
@@ -90,9 +100,9 @@ Though it is not rocket science to create events (just start/stop some component
 		}
 	}
 
-Since this is an immediate component it will run as long as an Event Admin service is registered. 
+This component does not register a service because it does not implement an interface, it is therefore an _immediate_ component. Since this is an immediate component it will run as long as an Event Admin service is registered. 
 
-When we run this component, we should see the `EventHandlerImpl` component fire out messages.
+When we run this component, we should see the `EventHandlerImpl` component fire messages.
 
 ## Initialization
 
@@ -106,11 +116,16 @@ Initializing in a constructor is awkward and ill advised since the object is onl
 		}
 	}
 
+If things don't happen as you had intended then take a look at:
+
+* Is the component immediate? If not then the activate method will not be called until the service is used.
+* Did your activate method throw an exception? Look in the log or in XRay (the bundle will have a warning sign).
+
 ## Dependencies
 
-We've already seen some examples of the dependencies. These dependencies were the simplest ones: _static_ and _single_. These defaults are also the most common and match the `@Inject` annotation from dependency injection that are dynamically challenged. When the dependencies are satisfied, your component gets instantiated and when they are no longer matched, your component gets mercilessly killed. Since the component is not alive before and after it never sees the effects that the dynamicity has on it. Always start in this mode since it makes your life significantly easier and is rarely worth to effort to optimize.
+We've already seen some examples of the dependencies. These dependencies were the simplest ones: _static_ and _single_. These defaults are also the most common and match the `@Inject` annotation from dependency injection frameworks that are dynamically challenged. When the dependencies are satisfied, your component gets instantiated and when they are no longer matched, your component gets mercilessly killed. Since the component is not alive before and after it never sees the effects that the dynamicity has on it. Always start in this mode since it makes your life significantly easier and is rarely worth to effort to optimize.
 
-However, there are some interesting cases that we can simplify by making things more dynamic. For example the Whiteboard pattern. With this pattern we need to track a number of services. These services can come and go. It would be rather tiring if every arrival of a new member would result in our death and resurrection. This common case is handled by setting to the `cardinality` to `MULTIPLE` and the `policy` to `DYNAMIC`. If DS then finds new members we get informed. This requires us to specify 2 methods: one method for adding members, the other method for removing the members. The _bind_ method is specified with the @Reference annotation. The _unbind_ method is found through the convention of removing the 'add' prefix of the bind method and replacing it with the 'remove' prefix. That is, `addMember` as the bind method requires `removeMember` as the unbind method.
+However, there are some interesting cases that we can simplify by making things more dynamic. For example the [Whiteboard pattern][5]. With this pattern we need to track a number of services. These services can come and go. It would be rather tiring if every arrival of a new member would result in our component's death and then immediate resurrection. This common case is handled by setting to the `cardinality` to `MULTIPLE` and the `policy` to `DYNAMIC`. If DS then finds new members we get quickly informed. This requires us to specify two methods: one method for adding members, the other method for removing the members. The _bind_ method is specified with the @Reference annotation. The _unbind_ method is found through the convention of removing the 'add' prefix of the bind method and replacing it with the 'remove' prefix. That is, `addMember` as the bind method requires `removeMember` as the unbind method.
 
 	@Component
 	public class WhiteboardExample {
@@ -173,20 +188,23 @@ Declarative Services is highly integrated with OSGi Configuration Admin. It is t
 		}
 	}
 
-Since properties are awkward to use, we can use the DTOs service to convert the map to a specific configuration interface, an interface where the methods act as property names:
+Since properties are awkward to use, OSGi DS suppprts annotation interfaces for configuration.The methods of the annotation interface act as the property names:
 
 	@Component
 	public class SmallPoint {
 	
-		interface Config {
+		@interface Config {
 			int port();
 			String host();
 		}
 		
 		@Activate
-		void activate(Map<String,Object> map) {
-			Config config = dtos.convert(map).to( Config.class );
-			System.out.println("Configuration " + config.host()+":"+config.port());
+		void activate(Config config) {
+			System.out.println(
+				"Configuration " 
+				+ config.host()
+				+ ":"
+				+ config.port());
 		}
 	}
 
@@ -201,26 +219,29 @@ Configurations can be updated dynamically. Without any extra effort, this will m
 		}
 		
 		@Activate
-		void activate(Map<String,Object> map) {
-			modified(map);
+		void activate(Config config) {
+			modified(config);
 		}
 		
 		@Modified
-		void modified(Map<String,Object> map) {
-			Config config = dtos.convert(map).to( Config.class );
-			System.out.println("Configuration " + config.host()+":"+config.port());
+		void modified(Config config) {
+			System.out.println(
+				"Configuration " 
+					+ config.host()+":"+config.port());
 		}
 	}
+
+Again, don't optimize before you got the problem.
 
 ## Configuring References
 
 We've discussed earlier that the `@Reference` annotation can set a target filter on the selected services. However, the annotation is set during development time. It could be quite useful if we could override this filter in a running system. Surprise!
 
-Each reference has a name, this is the name of the method with the prefix `add` or `set` removed. If we configure a component we can set a magic property called `target.<name>` with the filter. DS will use this configuration property as if it was set on the annotation.
+Each reference has a name, this is the name of the method with the prefix `add` or `set` removed. If we configure a component we can set a magic property called `<name>.target` with the filter. DS will use this configuration property as if it was set on the annotation.
 
 ## Factories
 
-So far we've not discussed the lifecycle of the component. We've assumed it just gets created when its dependencies are satisfied. However, the integration with Configuration Admin allows us to control the life via this component with Configration Admin's factory configurations. Each factory instance will correspond to a component instance. These factory components are still only created when their dependencies are met.
+So far we've not discussed the lifecycle of the component. We've assumed it just gets created when its dependencies are satisfied. However, the integration with Configuration Admin allows us to control the life via this component with Configuration Admin's factory configurations. Each factory instance will correspond to a component instance. These factory components are still only created when their dependencies are met.
 
 This is probably one of the coolest features of the components. It allows us to create and delete components on demand. Let's see how we can use this.
 
@@ -264,8 +285,26 @@ We can now create a configuration that creates three components.
 	}	
 
 
-%%% In the above sentence, you write "It allows us to create and delete components on demand." You show in the example how to create the components, but how can we delete them?
+If we want to delete the three components we could add a `deactivate` method. To delete, we need to locate the Configuration object for each _borg_. We can list the Configuration objects with an _ OSGi filter_. The filter can assert any value in the Configuration's dictionary (map). Once we have the Configuration object we can delete it. 
 
+	@Deactivate
+	void deactivate() {
+		delete(1);
+		delete(2);
+		delete(3);
+	}
+	
+	void delete(int n) {
+		Configuration[] cs = cm.listConfigurations(
+			"(&(service.factoryPid=borg)(borg="+n+"))"
+		);
+		if ( cs != null ) {
+			for ( Configuration c : cs ) {
+				c.delete();
+			}
+		}
+	}
+		
 ## OSGi API
 
 In general you want to make your components oblivious of any OSGi API. This makes them easier to unit test and in the spirit of modularity less coupling is more. However, if you write middleware for OSGi systems then it is very attractive to access the Bundle Context or Component Context. The `activate` method is designed to provide you with all those objects, in any order:
@@ -273,7 +312,10 @@ In general you want to make your components oblivious of any OSGi API. This make
 	@Component
 	public class SmallPoint {
 		@Activate
-		void activate(BundleContext bc, ComponentContext cc, Map<String,Object> map) {
+		void activate(
+			BundleContext bc, 
+			ComponentContext cc, 
+			Map<String,Object> map) {
 			System.out.println("What is my context?");
 		}
 	}
@@ -338,12 +380,16 @@ And then all that is left is the singleton implementation. This service should n
 	@Component( service=WidgetFactoryImplementation.class )
 	public class WidgetFactoryImplementation {
 	
-		public Widget create() {
-			return new Widget() {
-				void foo() { System.out.println("I am doing what I'm good at"); }
-				void close() { System.out.println("You don't need me anymore?"); }
-			}
-		}
+	  public Widget create() {
+	    return new Widget() {
+		  void foo() { 
+	        System.out.println("I am doing what I'm good at"); 
+		  }
+	      void close() { 
+	        System.out.println("You don't need me anymore?"); 
+	      }
+	    }
+	  }
 	}	  
 
 ## Gogo Command
@@ -380,3 +426,4 @@ You can find an example application at [OSGi enRoute Example][4].
 [2]: https://github.com/Ivesvdf/flatland/blob/master/oneside_a4.pdf?raw=true
 [3]: http://enroute.osgi.org/services/org.osgi.service.event.html
 [4]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.component.application
+[5]: /book/218-patterns.html#whiteboard-pattern

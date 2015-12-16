@@ -194,7 +194,7 @@ Since properties are awkward to use, OSGi DS suppprts annotation interfaces for 
 	public class SmallPoint {
 	
 		@interface Config {
-			int port();
+			int port() default 8080;
 			String host();
 		}
 		
@@ -213,8 +213,8 @@ Configurations can be updated dynamically. Without any extra effort, this will m
 	@Component
 	public class SlightlyBiggerPoint {
 	
-		interface Config {
-			int port();
+		@interface Config {
+			int port() default 8080;
 			String host();
 		}
 		
@@ -249,7 +249,7 @@ First we should disable the creation of a component when there is no configurati
 
 	@Component(
 		name="borg",
-		configuratinoPolicy=ConfigurationPolicy.REQUIRED
+		configurationPolicy=ConfigurationPolicy.REQUIRE
 	)
 	public class FactoryInstance {
 		@Activate
@@ -262,6 +262,7 @@ We can now create a configuration that creates three components.
 
 	@Component
 	public class Creator {
+                @Reference
 		ConfigurationAdmin cm;
 		
 		@Activate
@@ -272,15 +273,10 @@ We can now create a configuration that creates three components.
 		}
 		
 		void create(int n) {
-			Configuration c = cm.createConfiguration("borg", "?");
+			Configuration c = cm.createFactoryConfiguration("borg", "?");
 			Hashtable<String,Object> ht = new Hashtable<>();
 			ht.put("borg", n);
 			c.update(ht);
-		}
-		
-		@Reference
-		void setConfigurationAdmin(ConfigurationAdmin cm) {
-			this.cm = cm;
 		}
 	}	
 

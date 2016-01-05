@@ -56,11 +56,7 @@ We now need to add a test if our service exists.
 	
 However, if we add this code we find that Eclipse can't find the `Eval` class. Remember the problem? We need to add the `com.acme.prime.eval.api` project to our build path. Double click the `bnd.bnd` file, select `Build` and add the `com.acme.prime.eval.api` project. Once the `bnd.bnd` file is saved we can import the `Eval` class and remove the error. Though the current provider now also exports the `com.acme.prime.eval` package it is bad practice to place an implementation bundle on your classpath: Always try to compile against the service contract.
 
-We're almost ready to run, ehh, test. But before we do the testing, let's think about our runtime. How should our environment look like? Let's go to the `Run` tab of the `bnd.bnd` file. The list of initial requirements is empty. What shall we add? Well, we need our shiny provider and that should be it. In the `bnd.bnd` the `Run` tab we always get the local bundle added to our run bundles.
-
-There is an issue in bndtools and this test resolve. Don't add the test bundle or you will get an unresolved on Junit. We're working on fixing this because this behavior is incorrect.
-{: .bug}
-
+We're almost ready to run, ehh, test. But before we do the testing, let's think about our runtime. How should our environment look like? Let's go to the `Run` tab of the `bnd.bnd` file. The list of initial requirements contains the `com.acme.prime.eval.test` project. During a resolve, this will drag in the provider because it has the API and the required JUnit bundles.
 
 Hit the `Resolve` button and save. We have only a few dependencies, all caused by the fact that the provider uses Declarative Services (DS) a.k.a. SCR.
 

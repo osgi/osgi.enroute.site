@@ -130,7 +130,7 @@ This window looks similar to the following picture. Note that there are no liste
 
 So save the `debug.bndrun` file and click `Debug OSGi`. First, this `bndrun` file will run in trace mode. (You can control this through the `-runtrace` property that you can see when you double click the `debug.bndrun` file and select the `Source` tab.) In trace mode, the launcher provides detailed information about the launch process as well the ongoing update process when there are changed in bndtools.
 
-Anyway, we now have the unsurpassed [Web Console](http://felix.apache.org/site/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
+Anyway, we now have the unsurpassed [Web Console](http://felix.apache.org/documentation/subprojects/apache-felix-web-console.html) running with XRay. Just click on [http://localhost:8080/system/console/xray](http://localhost:8080/system/console/xray).
 
 If you're asked for your credentials, the Apache Felix boys have given you an unforgettable user id & password: 
 

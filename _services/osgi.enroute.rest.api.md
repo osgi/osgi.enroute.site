@@ -124,6 +124,11 @@ All other exceptions are translated to a 500 SERVER ERROR error code.
 
 Clients can always set the response of the request through the servlet objects that are available on the RESTRequest arguments. However, this should in general be a last resort since most incompatibilities are caused by the sometimes really subtle interpretations of these error codes. In general it is best to try to make requests binary: succeed when all goes OK and fail in all other cases.
 
+## Example
+
+There is an example project in [the OSGi enRoute examples repository][1]. This project implements the different GET, POST, PUT, and DELETE methods and shows how to get the arguments from the path and the query parameters.
+
+<footer>This example was donated by Chuck Boecking</footer> 
 
 ## Discussion
 
@@ -137,3 +142,4 @@ Implementations must follow the PID `osgi.enroute.rest` which must support at le
 
 * `org.osgi.service.http.servlet.pattern` – The primary end-point
 
+[1]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.rest.application

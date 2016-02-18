@@ -17,8 +17,8 @@
 			
 		<li span=9>
 			<div>
-				<a class=nav-prev href="{{page.prev}}" {% unless page.prev %}disabled{%endunless%}>Prev</a>
-				<a class=nav-next href="{{page.next}}" {% unless page.next %}disabled{%endunless%}>Next</a> 
+				<a class=nav-prev href="{{page.prev.url}}" {% unless page.prev %}disabled{%endunless%}>Prev</a>
+				<a class=nav-next href="{{page.next.url}}" {% unless page.next %}disabled{%endunless%}>Next</a> 
 				<br/>
 				<hr/>
 				<h1>{{{h1}} {{page.title}}</h1>
@@ -26,8 +26,8 @@
 				{{content}}
 				</div>
 				<hr/>
-				<a class=nav-prev href="{{page.prev}}" {% unless page.prev %}disabled{%endunless%}>Prev</a>
-				<a class=nav-next href="{{page.next}}" {% unless page.next %}disabled{%endunless%}>Next</a> 
+				<a class=nav-prev href="{{page.prev.url}}" {% unless page.prev %}disabled{%endunless%}>Prev</a>
+				<a class=nav-next href="{{page.next.url}}" {% unless page.next %}disabled{%endunless%}>Next</a> 
 
 			</div>
 	</ul>

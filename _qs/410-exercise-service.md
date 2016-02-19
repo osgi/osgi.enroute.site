@@ -62,5 +62,5 @@ If the OSGi framework is still running, you likely get errors since we now have 
 
 ### Add the Provider to the Set of Run Bundles
 
-We've changed our dependencies so we need to re-resolve our run bundles. So go to the `com.acme.prime.upper.application` project and select the `bnd.bnd` file by double clicking, select the `Run` tab. Hit the `Resolve` button and then verify that the `com.acme.prime.upper.provider` has been added. Save the `bnd.bnd` file. This should automatically deploy the set of run bundles in the running framework. Just refresh the browser and check if it still works! If not, well, then your intermediate exercise is to debug it :-)
+We've changed our dependencies so we need to re-resolve our run bundles. So go to the `com.acme.prime.upper.application` project and select the `com.acme.prime.upper.bndrun` file by double clicking, select the `Run` tab. Hit the `Resolve` button and then verify that the `com.acme.prime.upper.provider` has been added. Save the `com.acme.prime.upper.bndrun` file. This should automatically deploy the set of run bundles in the running framework. Just refresh the browser and check if it still works! If not, well, then your intermediate exercise is to debug it :-)
 

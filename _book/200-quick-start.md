@@ -32,7 +32,7 @@ So, you've finished this tutorial! What's next?
 
 Well, first, since we're still in beta, we'd love feedback. Our most favorite feedback is a pull request on the documentation. As an early user you must have run into some rough edges, outright stupidities, or you had a brilliant idea. Just go to the [OSGi enRoute][enroute-doc] repository on Github. Clone it in your own account, make your changes or additions, and send a pull request. We, and others like you, highly appreciate these kind of contributions.
 
-This tutorial is only a quick start, we've not explained a lot and just tried to get you on a starting level as soon as possible. To get more background, we highly recommend doing the [Base Tutorial](220-tutorial-base.html). This tutorial follows the same route but shows how to design with service, the corner stone of OSGi enRoute.
+This tutorial is only a quick start, we've not explained a lot and just tried to get you on a starting level as soon as possible. To get more background, we highly recommend doing the [Base Tutorial](220-tutorial-base.html). This tutorial follows the same route but shows how to design with service, the cornerstone of OSGi enRoute.
 
 You then might want to read the [Service Oriented Systems](215-sos.html) chapter how to build Service Oriented Systems.
 

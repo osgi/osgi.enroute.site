@@ -1,8 +1,8 @@
 ---
 title: Debugging
 layout: tutorial
-prev: 400-run.html
-next: 500-dependencies.html
+lprev: 400-run.html
+lnext: 500-dependencies.html
 summary: How to debug a running framework
 ---
 

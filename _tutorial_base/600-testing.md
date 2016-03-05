@@ -1,8 +1,8 @@
 ---
 title: Testing in OSGi
 layout: tutorial
-prev: 500-testing.html
-next: 700-deploy.html
+lprev: 500-testing.html
+lnext: 700-deploy.html
 summary: Executing JUnit tests in a running OSGi framework
 ---
 

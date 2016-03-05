@@ -1,8 +1,8 @@
 ---
 title: Implementing the Chat API
 layout: tutorial
-prev: 140-api.html
-next: 180-command.html
+lprev: 140-api.html
+lnext: 180-command.html
 summary: Creating a simple implementation of the Chat API using the console
 ---
 

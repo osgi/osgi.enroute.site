@@ -1,8 +1,14 @@
 ---
 title: Distributed OSGi Tutorial
-layout: book
+layout: tutorial
 summary: Develops a Chat application using Distributed OSGi
+lprev: /tutorial_iot/050-start.html
+lnext: /qs/050-start.html
+noindex: true
 ---
+
+![Thumbnail for IoT Tutorial](/img/tutorial_rsa/rsa-service-0.png)
+{: .thumb200-l }
 
 This tutorial takes you through the steps to build a trivial Chat application using distributed OSGi. We first build a service API for a Chat client and use this API in an implementation. Then we add a command to test the implementation. After this works, we run a Zookeeper server from Bndtools. This Zookeeper server is used by the Amdatu Distributed OSGi implementation to distribute the Chat services. To finish it off, we create a client in the browser. 
 
@@ -10,15 +16,13 @@ A disclaimer. This tutorial is about learning to use OSGi enRoute, not about lea
 
 If you have any questions about this tutorial, please discuss them in the [forum][forum]. And as always, [pull requests][osgi.enroute.site] are highly appreciated.
 
-![Chat Service](/img/tutorial_rsa/rsa-service-0.png)
-
 ## Sections
 
 <div>
 <ol>
 
-{% for t in site.tutorial_rsa %}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
-{% endfor %}
+{% for t in site.tutorial_rsa %}{%unless t.noindex%}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
+{%endunless%}{% endfor %}
 
 </ol>
 </div>

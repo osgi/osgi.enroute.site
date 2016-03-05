@@ -1,8 +1,13 @@
 ---
 title: IoT Tutorial
-layout: book
-summary: An IoT tutorial with the Raspberry Pi
+layout: tutorial
+lprev: /tutorial_base/050-start.html
+lnext: /tutorial_rsa/050-start.html
+noindex: true
 ---
+![Thumbnail for IoT Tutorial](/img/tutorial_iot/exploring-led-breadboard-1.png)
+{: .thumb200-l }
+
 The Internet of Things ... a concept that has as many definitions as there are things you can connect to the Internet. However, most definitions place an emphasis on the _edge devices_ and the _gateways_, which is of course right in the realm that was the raison d'être of OSGi already so long ago.
 
 This tutorial uses OSGi enRoute to develop an application for a [Raspberry Pi][pi]. The Raspberry Pi is a formidable machine that would put many laptops to shame a few years ago. The OS is Linux and it has lots of inputs and outputs. For OSGi enRoute, we've developed a number of bundles that allow you to play with the Raspberry. This tutorial will explain how to get started with the Raspberry Pi and then show how to do interesting things.
@@ -16,8 +21,8 @@ If you have any questions about this tutorial, please discuss them in the [forum
 <div>
 <ol>
 
-{% for t in site.tutorial_iot %}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
-{% endfor %}
+{% for t in site.tutorial_iot %}{%unless t.noindex%}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
+{%endunless%}{% endfor %}
 
 </ol>
 </div>

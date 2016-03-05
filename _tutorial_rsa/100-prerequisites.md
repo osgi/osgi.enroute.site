@@ -1,8 +1,8 @@
 ---
 title: Prerequisites
 layout: tutorial
-prev: /book/510-tutorial-rsa.html
-next: 120-introduction.html
+lprev: /book/510-tutorial-rsa.html
+lnext: 120-introduction.html
 summary: The prerequisites for the use of OSGi enRoute (Important!)
 ---
 

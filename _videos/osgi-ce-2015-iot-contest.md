@@ -1,8 +1,8 @@
 ---
 title: OSGi Community Event 2015 IoT Contest Video
 layout: default
-prev: /book/710-videos.html
-next: /book/710-videos.html
+lprev: /videos/chuck-boecking-persistence.html
+lnext: /book/710-videos.html
 summary: A short video showing the emulator and the train used during the OSGi CE 2015 IoT Contest 
 ---
 

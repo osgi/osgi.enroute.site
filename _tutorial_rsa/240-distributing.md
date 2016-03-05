@@ -1,8 +1,8 @@
 ---
 title: Distributing 
 layout: tutorial
-prev: 220-zookeeper.html
-next: 260-gui.html
+lprev: 220-zookeeper.html
+lnext: 260-gui.html
 summary: Adding a Distribution Provider and exporting the service
 ---
 

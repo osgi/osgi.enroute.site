@@ -1,8 +1,8 @@
 ---
 title: Introduction to the Chat Tutorial
 layout: tutorial
-prev: 100-prerequisites.html
-next: 140-api.html
+lprev: 100-prerequisites.html
+lnext: 140-api.html
 summary: Introduction what we will build in this chat tutorial
 ---
 

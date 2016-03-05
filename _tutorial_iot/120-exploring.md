@@ -1,8 +1,8 @@
 ---
 title: Exploring
 layout: tutorial
-prev: 100-prerequisites.html
-next: 140-circuits.html
+lprev: 100-prerequisites.html
+lnext: 140-circuits.html
 summary: Exploring the Pi
 ---
 

@@ -1,8 +1,8 @@
 ---
 title: Prerequisites
 layout: tutorial
-prev: /book/500-tutorial_iot.html
-next: 120-exploring.html
+lprev: /book/500-tutorial_iot.html
+lnext: 120-exploring.html
 summary: The prerequisites for the use of OSGi enRoute (Important!)
 ---
 

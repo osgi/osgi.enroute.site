@@ -1,8 +1,8 @@
 ---
 title: Testing the Provider with (Standard) JUnit
 layout: tutorial
-prev: 300-provider.html
-next: 400-run.html
+lprev: 300-provider.html
+lnext: 400-run.html
 summary: Test the Provider project with a standard (non-OSGi) JUnit test
 ---
 

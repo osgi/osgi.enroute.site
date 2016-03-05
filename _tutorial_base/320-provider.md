@@ -1,8 +1,8 @@
 ---
 title: Provider Project
 layout: tutorial
-prev: 300-api.html
-next: 340-junit.html
+lprev: 300-api.html
+lnext: 340-junit.html
 summary: Create a project that provides an implementation of the Eval service.
 ---
 

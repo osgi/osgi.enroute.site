@@ -1,8 +1,8 @@
 ---
 title: Deploying an Application
 layout: tutorial
-prev: 600-testing.html
-next: 800-ci.html
+lprev: 600-testing.html
+lnext: 800-ci.html
 summary: Creating a sample application and deploying it.
 ---
 

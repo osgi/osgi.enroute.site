@@ -1,8 +1,8 @@
 ---
 title: Using Gogo to Test our Implementation
 layout: tutorial
-prev: 160-implementation.html
-next: 200-configuration.html
+lprev: 160-implementation.html
+lnext: 200-configuration.html
 summary: Using Gogo to test out our implementation of the Chat API
 ---
 

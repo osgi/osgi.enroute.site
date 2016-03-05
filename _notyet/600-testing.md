@@ -1,8 +1,8 @@
 ---
 title: Project
 layout: tutorial
-next: 700-release.html
-prev: 500-dependencies.html
+lnext: 700-release.html
+lprev: 500-dependencies.html
 summary: How to test OSGi bundles
 ---
 

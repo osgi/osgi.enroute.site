@@ -1,8 +1,13 @@
 ---
 title: Quick Start Tutorial
-layout: book
-summary: A quick-start guide to get engaged with OSGi enRoute. It shows how to quickly use the complete toolchain.
+layout: tutorial
+lprev: /book/150-tutorials.html
+lnext: /tutorial_base/050-start.html
+noindex: true
 ---
+
+![Thumbnail for Quickstart Tutorial](/img/qs/app-0.png)
+{: .thumb200-l }
 
 In this quick start we develop a little project that, creates a single page web-application.
 
@@ -19,8 +24,8 @@ If you have any questions about this quick-start, please discuss them in the [fo
 <div>
 <ol>
 
-{% for qs in site.qs %}<li><a href="{{qs.url}}">{{qs.title}}</a> – {{qs.summary}}</li>
-{% endfor %}
+{% for qs in site.qs %}{%unless qs.noindex%}<li><a href="{{qs.url}}">{{qs.title}}</a> – {{qs.summary}}</li>
+{%endunless%}{% endfor %}
 
 </ol>
 </div>

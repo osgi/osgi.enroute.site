@@ -1,8 +1,8 @@
 ---
 title: Dependencies
 layout: tutorial
-prev: 450-debug.html
-next: 600-testing.html
+lprev: 450-debug.html
+lnext: 600-testing.html
 summary: Handling external dependencies (or where is Maven Central)
 ---
 

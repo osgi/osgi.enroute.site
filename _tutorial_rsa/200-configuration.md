@@ -1,8 +1,8 @@
 ---
 title: Configuration
 layout: tutorial
-prev: 180-command.html
-next: 220-zookeeper.html
+lprev: 180-command.html
+lnext: 220-zookeeper.html
 summary: Configuring the Chat service
 ---
 

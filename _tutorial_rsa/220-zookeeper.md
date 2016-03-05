@@ -1,8 +1,8 @@
 ---
 title: Zookeeper Server 
 layout: tutorial
-prev: 200-configuration.html
-next: 240-distributing.html
+lprev: 200-configuration.html
+lnext: 240-distributing.html
 summary: Setting up a Zookeeper discovery server
 ---
 

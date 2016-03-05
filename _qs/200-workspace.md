@@ -1,8 +1,8 @@
 ---
 title: The Workspace
 layout: tutorial
-prev: 100-prerequisites.html
-next: 300-application.html
+lprev: 100-prerequisites.html
+lnext: 300-application.html
 summary: Setup a bnd workspace
 ---
 

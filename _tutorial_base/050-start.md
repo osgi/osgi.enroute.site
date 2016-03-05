@@ -1,8 +1,13 @@
 ---
 title: Base Tutorial
-layout: book
-summary: A complete tutorial to use the OSGi enRoute tool chain
+layout: tutorial
+lprev: /qs/050-start.html
+lnext: /tutorial_iot/050-start.html
+noindex: true
 ---
+
+![Thumbnail for Base Tutorial](/img/tutorial_base/debug-xray-1.png)
+{: .thumb200-l }
 
 In this tutorial we develop a little project that creates a simple server application that interacts with an OSGi console shell. 
 
@@ -15,8 +20,8 @@ If you have any questions about this tutorial, please discuss them in the [forum
 <div>
 <ol>
 
-{% for t in site.tutorial_base %}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
-{% endfor %}
+{% for t in site.tutorial_base %}{%unless t.noindex %}<li><a href="{{t.url}}">{{t.title}}</a> – {{t.summary}}</li>
+{%endunless%}{% endfor %}
 
 </ol>
 </div>

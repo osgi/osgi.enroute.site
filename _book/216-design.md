@@ -12,7 +12,7 @@ In a service based design the goal is to let all interactions between modules fl
 
 At first sight a contract seems an additional burden to take care off that is often deemed in the way for simple problems. Even the author of this text is sometimes tempted to skip the contract but so far have always regretted such short-cuts after a surprisingly short time.
 
-The understanding of  why the additional layer is actually a simplification in almost all cases is related to why the modularity works so well. Complexity grows exponentially with the number of moving parts, which means that 2 simple service APIs would when combined become a complex service API. With Export-Package and Import-Package we minimize the number of types that are visible to other bundles and with the services we can minimize the concepts that the different bundles must be aware of.
+The understanding of why the additional layer is actually a simplification in almost all cases is related to why the modularity works so well. Complexity grows exponentially with the number of moving parts, which means that 2 simple service APIs would when combined become a complex service API. With Export-Package and Import-Package we minimize the number of types that are visible to other bundles and with the services we can minimize the concepts that the different bundles must be aware of.
 
 One frequently observed reason why people balk at making service APIs is that it is seen as very hard work. Though creating a formally specified service as done by the OSGi Alliance's Expert Groups is a lot of work, this does not mean that internal service APIs amount to the same amount of work. The do not have the longevity requirement that formal specifications have.
 

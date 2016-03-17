@@ -1,7 +1,9 @@
 ---
 title: Patterns
-layout: book
 summary: OSGi Patterns
+layout: tutorial
+lprev: 217-ds.html
+lnext: 300-principles.html
 ---
 
 There are a number of patterns used in OSGi systems.

@@ -219,9 +219,9 @@ p.warning {
    	border: solid 1px #FFE0E0;
 }
 
-pre.shell {
+.shell pre {
 	color: white;
-	background-color: black;
+	background-color: #333;
 }
 
 @media print {

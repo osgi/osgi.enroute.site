@@ -1,6 +1,9 @@
 ---
-layout: book
 title: Principles
+summary: A rather rambling section of principles of enRoute
+layout: tutorial
+lprev: 218-patterns.html
+lnext: /book/210-doc.html
 ---
 
 This is the more theoretical section that only the 1% will read. You can safely skip it and belong to the 99%, it is just a section where the ideas behind OSGi enRoute, and largely behind OSGi, are given some more footing so that that minority that actually wants to know where things come from are also satisfied. 

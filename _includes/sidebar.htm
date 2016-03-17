@@ -1,9 +1,12 @@
-<ul class="side-nav">
+<table class="side-nav">
 	{% for chapter in site.book %}
+		<tr>
 		{% if chapter.title == page.title %}
-			<li class=selected>{{chapter.title}}
+			<td class=selected> </td><td>{{chapter.title}}</td>
+			
 	  	{% else %}
-			<li><a href="{{chapter.url}}">{{chapter.title}}</a>
+			<td> </td><td><a href="{{chapter.url}}">{{chapter.title}}</a></td>
 	  	{% endif %}
+	  	</tr>
   	{% endfor %}
-</ul>
+</table>

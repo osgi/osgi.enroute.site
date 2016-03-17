@@ -18,6 +18,12 @@ collections:
     output: true
   videos:
     output: true
+  appnotes:
+    output: true
+  doc:
+    output: true
+  faq:
+    output: true
 
 defaults:
   -

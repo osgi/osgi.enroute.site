@@ -1,7 +1,9 @@
 ---
-title: Overview
-layout: book
+title: About enRoute
 summary: An overview of OSGi enRoute
+layout: tutorial
+lprev: 100-about-osgi.html
+lnext: 215-sos.html
 ---
 
 OSGi enRoute is about helping you crossing the chasm between building typical Java (Enterprise) Systems (JES) and Service Oriented Systems (SOS). This is a paradigm shift because either side is seriously puzzled about what on earth the other side is thinking. Since the JESsers are today in the majority, we're going to assume you wonder what the heck SOS even is. So let's start with providing some background.

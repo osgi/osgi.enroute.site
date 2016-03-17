@@ -6,10 +6,10 @@ layout: book
 This is the OSGi enRoute Base Profile service catalog. The following services are currently available and documented.
 
 <div>
-<ol>
+<table>
 
-{% for service in site.services %}<li><a href="{{service.url}}">{{service.title}}</a> – {{service.summary}}</li>
+{% for service in site.services %}<tr><td><a href="{{service.url}}">{{service.title}}</a></td><td>{{service.summary}}</td></tr>
 {% endfor %}
 
-</ol>
+</table>
 </div>

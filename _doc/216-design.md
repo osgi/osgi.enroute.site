@@ -1,7 +1,9 @@
 ---
 title: Designing Service Oriented Systems
-layout: book
 summary: How to design with services
+layout: tutorial
+lprev: 216-sos.html
+lnext: 217-ds.html
 ---
 
 How does one design a (µ)service based system? Well, design is a skill one obtains over the years and there is no easy way to convey that knowledge. However, successful service based designs follow a number of best practices. These practices are described in this chapter.

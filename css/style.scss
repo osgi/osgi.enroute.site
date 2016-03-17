@@ -54,12 +54,14 @@ $color-vignette:	#F0F0F0;
    			color: white;
    		}
 		> a {
-		    font-size: $font-size * 1.4;
+		    font-size: $font-size * 1.2;
 			padding-top:3px;
 			margin-right: $gutter;
 		} 
    		.menu-logo {
    			height: $line-height;
+   			position: relative;
+   			top: 5px;
    		}
 		> img {
 		  padding-right: $gutter;

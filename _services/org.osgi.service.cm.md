@@ -94,7 +94,17 @@ So what should you do with the location? Well, just set it always to "?". This i
 
 You can find an example application at [OSGi enRoute Example][2]. This application is a simple web application that provides an implementation for all actors in the Configuration Admin service specification except for Configuration Admin itself. The application has a number of buttons to execute simple scenarios. Run it in debug mode, set breakpoints, and enjoy.
 
+## Discussion
+
+### How do I take an arbitrary object and ask OSGi for its configuration?
+
+In almost any other environment but OSGi the configuration model assumes that a component asks for configuration when it needs it, a so called pull model. OSGi in contrast uses a _push model_. The component gets the initial configuration pushed to it. In DS, it gets the configuration in the `activate` method. If the component wants to be updated of changes it can use the `modified` method using the `@Modified` annotation. So in general a component never has to request its configuration.
+
+Maintain this precious invariant because it keeps the components as simple as possible while always synchronized with their persistent configuration. Realize that the moment that you start to go to [Configuration Admin] to fetch properties you have the really hard responsibility to also pick up changes to that configuration.
+
+After this caveat, if you really want to get the configuration of an object then you need to know the PID (Persistent IDentity). If you have a PID, you can fetch the configuration from the [Configuration Admin] service.
 
 
 [1]: /services/org.osgi.service.component.html
 [2]: https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.cm.application
+[Configuration Admin]: /services/org.osgi.service.cm

@@ -1,6 +1,13 @@
 ## The Workspace
 
-OSGi enRoute requires that you group a number of projects in a _bnd workspace_. A bnd workspace is basically a directory with a `cnf` directory. We start with a template workspace by getting it from git. Though this could be done via EGit in Eclipse but there are about then dialogs for that. So by far the easiest way to do this is via the command line:
+
+
+OSGi enRoute requires that you group a number of projects in a _bnd workspace_. A bnd workspace is basically a directory with a `cnf` directory. We start with a template workspace by getting it from git. 
+
+Bndtools 3.2 (which is beta right now) has the following process built in (Thanks Neil!); Just create a new Eclipse workspace and then do `New/Other/Bndtools/Bnd OSGi Workspace`. Make sure you put the bnd workspace in another directory then the Eclipse workspace. If you're not yet on 3.2, continue. 
+{: .note}
+
+Though this could be done via EGit in Eclipse but there are about then dialogs for that. So by far the easiest way to do this is via the command line:
 
 	$ cd  ~/git
 	$ git init com.acme.prime

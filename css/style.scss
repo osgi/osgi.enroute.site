@@ -221,6 +221,15 @@ p.warning {
    	border: solid 1px #FFE0E0;
 }
 
+p.note {
+	&:before { font-weight: bold; content: "NOTE: "; }
+   	@include rounded(3px);
+   	background-color: rgba(12, 118, 184, 0.08);
+   	padding: $text-separation;
+   	margin: $text-separation 0 $text-separation 0;
+   	border: solid 1px #FFE0E0;
+}
+
 .shell pre {
 	color: white;
 	background-color: #333;

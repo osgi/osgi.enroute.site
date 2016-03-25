@@ -2,7 +2,7 @@
 title: Quick Start Tutorial
 layout: tutorial
 lprev: /book/150-tutorials.html
-lnext: /tutorial_base/050-start.html
+lnext: /tutorial_base/100-prerequisites.md
 noindex: true
 ---
 

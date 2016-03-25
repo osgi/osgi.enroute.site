@@ -12,6 +12,8 @@ collections:
     output: true
   tutorial_iot:
     output: true
+  tutorial_wrap:
+    output: true
   services:
     output: true
   trains:

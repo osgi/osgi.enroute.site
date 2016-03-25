@@ -6,6 +6,9 @@ lprev: /book/150-tutorials
 noindex: true
 ---
 
+This tutorial is under review. Feedback appreciated (PRs on [Github](https://github.com/osgi/osgi.enroute.site/pulls))
+{: .note }
+
 ![Thumbnail for Wrapping Tutorial](img/program.png)
 {: .thumb200-l }
 

@@ -87,3 +87,18 @@ A runtime resolution should not be expected to be identical to a
 build-time resolution
 
 
+System Types
+---------------
+There are different system types that may require different ways
+of approaching RR. For instance:
+
+ * A small, contained "Application" may be run in isolation on 
+    a known system. In such case, it would be better to resolve
+    up-front during design time, and ensure that the RR does not
+    change.
+
+ * An "application host" server may already provide a context into
+    which "applications" may be deployed. Since the applications are
+    being deployed into an existing context, RR becomes important.
+
+

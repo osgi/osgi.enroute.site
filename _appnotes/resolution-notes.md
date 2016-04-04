@@ -13,10 +13,9 @@ by some of the leading OSGi developers.
 
 ## Definitions
 
-"Resolving" is the process of wiring a bundle in a runtime system, as described in Chapter 3
+* _Resolving_ – The process of wiring a bundle in a runtime system, as described in Chapter 3
 (Module Layer) of the OSGi Core specification.
-
-"Resolution" is the process of determining a set of resources in a system such that
+* _Resolution_ is the process of determining a set of resources in a system such that
 the requirements and capabilities declared by the resources resolve to a solution.
 
 ## Overview
@@ -73,7 +72,7 @@ one having been built independently, or a system may need to run in
 different environments (example: OS specific). When creating such
 production system, the environment may therefore have differences
 from what was crafted in the different development environments. If
-you were to create a development-time "fixed" resolution for each
+you were to create a development-time _fixed resolution_ for each
 possible permutation, it would create a LOT of extra work. It also
 helps to validate that the system is running in a compatible environment.
 
@@ -87,12 +86,12 @@ build-time resolution
 There are different system types that may require different ways
 of approaching runtime resolution. For instance:
 
- * A small, contained "Application" may be run in isolation on 
+ * A small, contained _Application_ may be run in isolation on 
     a known system. In such case, it would be better to resolve
     up-front during design time, and ensure that the RR does not
     change.
 
- * An "application host" server may already provide a context into
+ * An _application host_ server may already provide a context into
     which "applications" may be deployed. Since the applications are
     being deployed into an existing context, runtime resolution becomes important.
 

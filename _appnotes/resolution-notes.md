@@ -11,16 +11,16 @@ OSGi developers are gaining more experience with this resolution process,
 and how it integrates with development and deployment of complex systems. The notes here are an attempt to collect some of the good practices employed
 by some of the leading OSGi developers.
 
-Definitions
----------------
+## Definitions
+
 "Resolving" is the process of wiring a bundle in a runtime system, as described in Chapter 3
 (Module Layer) of the OSGi Core specification.
 
 "Resolution" is the process of determining a set of resources in a system such that
 the requirements and capabilities declared by the resources resolve to a solution.
 
-Overview
----------------
+## Overview
+
 As the number of resources in a system increase, the resolution problem becomes
 exponentially more complex. It is therefore paramount to minimize the set of resources in a resolution. 
 By managing how dependencies are provided
@@ -34,15 +34,14 @@ diverge regarding the role of runtime resolution.
 
 We discuss each of these topics below.
 
-Repository Curation
--------------------
+## Repository Curation
+
 Repositories can be seen as an ever growing collection of resources, like Maven Central. Once a resource is listed it can never be removed because a build using that resource will fail. This problem is worsened when the repository is used in a resolution since also newer revisions of resources can change the resolution. Resolutions are highly sensitive to changes in their input.
 
 In Bndtools, the approach is to create a _view_ on one or more repositories and store this view in source control management system. Since this view is stored in the source control management system, the build will always see the same resources and, as long as the other inputs to the resolution process do not change, will therefore produce the same resolution in the future.
 
+## Deployment Process
 
-Deployment Process
----------------
 Resolution first happens during design time. Bndtools and OSGi enRoute
 provide a development environment that assists with resource resolution.
 The tool will produce a resolution file, which can (and should) be
@@ -51,13 +50,13 @@ also optionally be _exported_ into some other format, such as a
 Karaf feature, subsystem file, a docker image, or an executable JAR. 
 
 
-Runtime Resolution
----------------
+## Runtime Resolution
+
 There are two schools of thought regarding runtime resolution (RR):
  * It is impossible (III)
  * It-is-necessary (IIN)
 
-In the III School:
+### In the III School:
 
 In the beginning, there was a dream of automating runtime resolutions based on requirements and capabilities. However, with time and practice, this no longer appears to be a practical solution. It is a goal worth striving for, but cannot be achieved because of _optionality_. In many cases requirements are optional. For example, The Event Admin service implementation has an optional requirement on the Event Handler service. It should be clear that the resolution should not contain every possible provider in the repositories of the Event Handler service; the intention of the Event Admin is to act as event broker between bundles that are required for some other reason. That is, a resource being required by Event Admin is clearly **not** a reason to include it.
 
@@ -67,7 +66,7 @@ Even without the optionality problem, runtime resolutions are not advised becaus
 
 Therefore, the only reliable resolution can be performed at design and time when a user is present to solve the optionality problem. This resolution should be committed to source control. The resolution is then propagated to the production runtime. Otherwise, any change introduced into the runtime system creates a significant risk.
 
-In the IIN School:
+### In the IIN School:
 
 A production runtime may be an amalgamation of various systems, each
 one having been built independently, or a system may need to run in
@@ -78,14 +77,13 @@ you were to create a development-time "fixed" resolution for each
 possible permutation, it would create a LOT of extra work. It also
 helps to validate that the system is running in a compatible environment.
 
-A runtime resolution is important and possibly necessary.
-
-A runtime resolution should not be expected to be identical to a
+* A runtime resolution is important and possibly necessary.
+* A runtime resolution should not be expected to be identical to a
 build-time resolution
 
 
-System Types
----------------
+## System Types
+
 There are different system types that may require different ways
 of approaching runtime resolution. For instance:
 

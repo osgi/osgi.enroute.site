@@ -1,16 +1,14 @@
 ---
-title: Resolution Notes
-summary: Notes regarding resolution of bundle capabilities and requirements
+title: Notes about Resolution
+summary: Notes regarding resolving bundle capabilities and requirements
 ---
 
 OSGi has an advanced dependency management mechanism based on matching
-capabilities and requirements. When constructing a system, the resolution
-mechansim matches capabilities with requirements.
+_requirements_ to _capabilities_ coming from a set of _resources_, for example bundles. When constructing a system, the resolver
+can create _resolution_. A resolution is a set of resources that provide all required capabilities for that set of resources.
 
 OSGi developers are gaining more experience with this resolution process,
-and how it integrates with development and deployment of complex systems.
-
-The notes here are an attempt to collect some of the good practices employed
+and how it integrates with development and deployment of complex systems. The notes here are an attempt to collect some of the good practices employed
 by some of the leading OSGi developers.
 
 Definitions
@@ -18,57 +16,56 @@ Definitions
 "Resolving" is the process of wiring a bundle in a runtime system, as described in Chapter 3
 (Module Layer) of the OSGi Core specification.
 
-"Resolution" is the process of determining a network of resources in a system such that
+"Resolution" is the process of determining a set of resources in a system such that
 the requirements and capabilities declared by the resources resolve to a solution.
 
 Overview
 ---------------
 As the number of resources in a system increase, the resolution problem becomes
-complex [which function? exponential?]. By managing how dependencies are provided
+exponentially more complex. It is therefore paramount to minimize the set of resources in a resolution. 
+By managing how dependencies are provided
 from repositories, and by carefully crafting the declared capabilities and 
-requirements of the resources, some of this complexity can be mitigated.
+requirements of the resources, most of this complexity can be mitigated. This process is called _curation_.
 
-There is consensus in the OSGi community that repository governance is
+There is consensus in the OSGi community that repository curation is
 one of the keys to success. There appears to be consensus that design-time
 resolution management also contributes to success. Opinions currently 
 diverge regarding the role of runtime resolution.
 
 We discuss each of these topics below.
 
-Repository Governance
----------------
-[TBD]
+Repository Curation
+-------------------
+Repositories can be seen as an ever growing collection of resources, like Maven Central. Once a resource is listed it can never be removed because a build using that resource will fail. This problem is worsened when the repository is used in a resolution since also newer revisions of resources can change the resolution. Resolutions are highly sensitive to changes in their input.
+
+In Bndtools, the approach is to create a _view_ on one or more repositories and store this view in source control management system. Since this view is stored in the source control management system, the build will always see the same resources and, as long as the other inputs to the resolution process do not change, will therefore produce the same resolution in the future.
 
 
 Deployment Process
 ---------------
-Resolution first happens during design time. Bndtools and EnRoute
+Resolution first happens during design time. Bndtools and OSGi enRoute
 provide a development environment that assists with resource resolution.
 The tool will produce a resolution file, which can (and should) be
 committed to a source code management system (git). The resolution can
-also optionally be transformed into some other format, such as a
-Karaf feature. 
+also optionally be _exported_ into some other format, such as a
+Karaf feature, subsystem file, a docker image, or an executable JAR. 
 
 
 Runtime Resolution
 ---------------
 There are two schools of thought regarding runtime resolution (RR):
- * Don't-do-it-it's-dangerous (DDIID)
+ * It is impossible (III)
  * It-is-necessary (IIN)
 
-In the DDIID School:
+In the III School:
 
-In the beginning, there was a dream of automating runtime resolutions
-based on requirements and capabilities. However, with time and
-practice, this no longer appears to be a practical solution. It is a
-goal worth striving for, but cannot be achieved. 
-The only reliable
-resolution can be performed at design and build time. This resolution should be
-committed to scm and propagated to the production runtime. Otherwise,
-any change introduced into the runtime system creates a significant risk.
+In the beginning, there was a dream of automating runtime resolutions based on requirements and capabilities. However, with time and practice, this no longer appears to be a practical solution. It is a goal worth striving for, but cannot be achieved because of _optionality_. In many cases requirements are optional. For example, The Event Admin service implementation has an optional requirement on the Event Handler service. It should be clear that the resolution should not contain every possible provider in the repositories of the Event Handler service; the intention of the Event Admin is to act as event broker between bundles that are required for some other reason. That is, a resource being required by Event Admin is clearly **not** a reason to include it.
 
-A RR should not be required, and on the contrary could be very dangerous
+There is no known practical solution to this problem of optionality. It always requires a human to make a choice based on trade-offs that are not visible to the resolver. (Though it is possible to automate the choice, it should be clear that this quickly runs in a problem requiring Artificial Intelligence.)
 
+Even without the optionality problem, runtime resolutions are not advised because a resolution is highly dependent on its inputs, which includes the resolver version, the repositories (including their ordering), the artifacts, the history of the target system, and the time of day. It should be clear that this sensitivity can easily result in different results between the Q&A test system and the production system. Though this is in general benign because the resolution does a lot of checking, it should be clear that it is all to easy for hard to diagnose errors to creep in. I.e., it runs in Q&A but fails in production.
+
+Therefore, the only reliable resolution can be performed at design and time when a user is present to solve the optionality problem. This resolution should be committed to source control. The resolution is then propagated to the production runtime. Otherwise, any change introduced into the runtime system creates a significant risk.
 
 In the IIN School:
 
@@ -90,7 +87,7 @@ build-time resolution
 System Types
 ---------------
 There are different system types that may require different ways
-of approaching RR. For instance:
+of approaching runtime resolution. For instance:
 
  * A small, contained "Application" may be run in isolation on 
     a known system. In such case, it would be better to resolve
@@ -99,6 +96,6 @@ of approaching RR. For instance:
 
  * An "application host" server may already provide a context into
     which "applications" may be deployed. Since the applications are
-    being deployed into an existing context, RR becomes important.
+    being deployed into an existing context, runtime resolution becomes important.
 
 

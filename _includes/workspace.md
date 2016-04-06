@@ -14,6 +14,13 @@ Though this could be done via EGit in Eclipse but there are about then dialogs f
 	$ cd com.acme.prime
 	$ git fetch --depth=1 https://github.com/osgi/workspace master
 	$ git checkout FETCH_HEAD -- .
+	
+or one-liner (note that [shallow clone](https://git-scm.com/docs/git-clone) implies `--single-branch`)
+
+```bash
+git clone --depth 1 https://github.com/osgi/workspace.git new-project-name
+```
+
 
 ## Opening the bnd Workspace in Eclipse
 

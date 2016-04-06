@@ -13,14 +13,14 @@ by some of the leading OSGi developers.
 
 ## Definitions
 
-* _Resolving_ – The process of wiring a bundle in a runtime system, as described in Chapter 3
+* _Resolving_ is the process of wiring a bundle in a runtime system, as described in Chapter 3
 (Module Layer) of the OSGi Core specification.
 * _Resolution_ is the process of determining a set of resources in a system such that
 the requirements and capabilities declared by the resources resolve to a solution.
 
 ## Overview
 
-As the number of resources in a system increase, the resolution problem becomes
+As the number of resources in a system increases, the resolution problem becomes
 exponentially more complex. It is therefore paramount to minimize the set of resources in a resolution. 
 By managing how dependencies are provided
 from repositories, and by carefully crafting the declared capabilities and 
@@ -61,14 +61,14 @@ In the beginning, there was a dream of automating runtime resolutions based on r
 
 There is no known practical solution to this problem of optionality. It always requires a human to make a choice based on trade-offs that are not visible to the resolver. (Though it is possible to automate the choice, it should be clear that this quickly runs in a problem requiring Artificial Intelligence.)
 
-Even without the optionality problem, runtime resolutions are not advised because a resolution is highly dependent on its inputs, which includes the resolver version, the repositories (including their ordering), the artifacts, the history of the target system, and the time of day. It should be clear that this sensitivity can easily result in different results between the Q&A test system and the production system. Though this is in general benign because the resolution does a lot of checking, it should be clear that it is all to easy for hard to diagnose errors to creep in. I.e., it runs in Q&A but fails in production.
+Even without the optionality problem, runtime resolutions are not advised because a resolution is highly dependent on its inputs, which includes the resolver version, the repositories (including their ordering), the artifacts, the history of the target system, and the time of day. It should be clear that this sensitivity can easily result in different results between the Q&A test system and the production system. Though this is in general benign because the resolution does a lot of checking, it should be clear that it is all too easy for hard to diagnose errors to creep in. (i.e., it runs in Q&A but fails in production.)
 
-Therefore, the only reliable resolution can be performed at design and time when a user is present to solve the optionality problem. This resolution should be committed to source control. The resolution is then propagated to the production runtime. Otherwise, any change introduced into the runtime system creates a significant risk.
+Therefore, the only reliable resolution can be performed at the design time, when a user is present to solve the optionality problem. This resolution should be committed to the source control system. The resolution is then propagated to the production runtime. Otherwise, any change introduced directly into the runtime system creates a significant risk.
 
 ### In the IIN School:
 
 A production runtime may be an amalgamation of various systems, each
-one having been built independently, or a system may need to run in
+one having been built independently, or a system might be required to run in
 different environments (example: OS specific). When creating such
 production system, the environment may therefore have differences
 from what was crafted in the different development environments. If
@@ -78,7 +78,7 @@ helps to validate that the system is running in a compatible environment.
 
 * A runtime resolution is important and possibly necessary.
 * A runtime resolution should not be expected to be identical to a
-build-time resolution
+build-time resolution.
 
 
 ## System Types

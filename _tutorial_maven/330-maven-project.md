@@ -1,12 +1,18 @@
 ---
-title: Using bnd Bundles from Maven Projects
+title: Using bnd Workspace Projects from Maven Projects
 layout: tutorial
-lprev: 310-central
-lnext: 330-
+lprev: 320-local
+lnext: 340-application
 summary: Demonstrate how you can leverage a bnd project with a Maven (m2e) project.
 ---
 
-You should now create a Maven (**not** a Bndtools) project. Let's call this project `osgi.enroute.examples.eval.provider`. Just use the most simplest Maven project you can find (you can select this at the first wizard page). It provides the implementation of the API. The groupId should be `osgi.enroute.examples` and the artifactId to the customary Bundle Symbolic Name: `osgi.enroute.examples.eval.provider`. Let's use a snapshot version: 1.0.0-SNAPSHOT. The prolog of the `pom.xml` file should look like:
+In this section we create a Maven project and consume the API from the previous section of this tutorial.
+
+## Build a Maven Project
+
+You should now create a Maven (**not** a Bndtools) project. Let's call this project `osgi.enroute.examples.eval.provider`. Just use the most simplest Maven project you can find (you can select this at the first wizard page). It provides the implementation of the API we defined in the Bndtools `osgi.enroute.examples.eval.api` project. 
+
+The groupId should be `osgi.enroute.examples` and the artifactId to the customary Bundle Symbolic Name: `osgi.enroute.examples.eval.provider`. Let's use a snapshot version: 1.0.0-SNAPSHOT. The prolog of the `pom.xml` file should look like:
 
 	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -15,7 +21,7 @@ You should now create a Maven (**not** a Bndtools) project. Let's call this proj
 		<artifactId>osgi.enroute.examples.eval.provider</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 
- We are going to implement the Eval API with [parsii](https://github.com/scireum/parsii). We also need the OSGi component annotations and of course our API. So our `dependencies` section in the POM should look like: 
+We are going to implement the Eval API with [parsii](https://github.com/scireum/parsii) external dependency. We also need the OSGi component annotations and of course our API. So our `dependencies` section in the POM should look like: 
 
 	<dependencies>
 		<dependency>
@@ -74,11 +80,13 @@ We want to build this project with the Maven bundle plugin, so we need to add th
 
 ## Instructions for bnd
 
-Last, but not least, we need to provide an adjacent `bnd.bnd` file, we need to export the API package and we want to include the [parsii](https://github.com/scireum/parsii) JAR because it happens to be not a bundle. We do not have to wrap the Guava library because it is a proper bundle.
+Last, but not least, we need to provide an adjacent `bnd.bnd` file, we need to export the API package and we want to include the [parsii](https://github.com/scireum/parsii) JAR because it happens to be not a bundle. We do not have to wrap the Guava library because it is a proper bundle. We assume this will be linked in through the application we develop later.
 
 	Export-Package: 	osgi.enroute.examples.eval.api
 	Private-Package: 	parsii.*
 	-sources: 			true
+
+Note that the Maven plugin by default includes all the classes in the project.
 
 ## Source Code
 
@@ -121,6 +129,10 @@ If you've done everything well (and we as well) then your project should be buil
 	[INFO] Final Memory: 13M/309M
 	[INFO] ------------------------------------------------------------------------
 {:.shell}
+
+## Updates
+
+We've now a relatively unmanaged situation. In the current setup, Bndtools will install every JAR it builds immediately in the local Maven repository. However, Maven will not pick this up automatically. You will have to update the classpath manually. However, this is in general what Maven users are used to?
 
 ## What We've Done
 

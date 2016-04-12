@@ -1,14 +1,14 @@
 ---
-title: Installing in a Local Repository
+title: The Local Repository
 layout: tutorial
 lprev: 310-central
-lnext: 330-
+lnext: 330-maven-project
 summary: Install bnd JARs in the Maven local repository after a build
 ---
 
-Maven's local repository is a _cache_ but it is also used to share revisions between projects that run on the same machine. In Maven, you then _install_ a revision in the local repository as a _snapshot_, and then the other project can depend on it. This model is supported by the Bnd Maven Repository.
+Maven's local repository is a _cache_ but it is also used to share revisions between projects that run on the same machine. In Maven, you can _install_ a revision in the local repository, and then the other project can depend on it. This model is also supported by the Bnd Maven Repository.
 
-## Release Repository
+## Local Repository
 
 For this, we want to have a _local repository_. In OSGi enRoute we've already have a local repository:
 
@@ -18,14 +18,13 @@ For this, we want to have a _local repository_. In OSGi enRoute we've already ha
 	            pretty              =       true ; \
 	            local               =       ${build}/local
 
-Let's override it:
+This is an indexed repository but we can override it with a Maven Bnd Repository in the `./cnf/build.bnd` file:
 
 	-plugin.6.Local: \
-	\
         aQute.bnd.repository.maven.provider.MavenBndRepository; \
 			name				=	Local
 
-This instruction defines an _unconnected_ Maven repository. This means that we're only using it to put bundles in the local Maven repository in `~/.m2/repository`.
+This instruction defines a _local only_ Maven repository. This means that we're only using it to put bundles in the local Maven repository in `~/.m2/repository`.
 
 ## Build Repository
 
@@ -36,16 +35,17 @@ The most convenient way to use this repository is to automatically push any buil
 
 ## The POM
 
-This raises the interesting question of how is the POM created for the resulting revision? The [-pom] instruction provides this magic. In bnd there is a function that will create a POM inside the JAR at a Maven defined location. Just specifying `true` is sufficient to get this POM in your JAR. bnd will attempt to use the Manifest headers to create sensible defaults. However, we can get better results by specifying some of its options.
+This raises the interesting question of how is the POM created for the resulting revision? This magic is provied by the [-pom] instruction. In bnd there is a function that will create a POM inside the JAR at a Maven defined location. Just specifying `true` is sufficient to get this POM in your JAR. bnd will attempt to use the Manifest headers to create sensible defaults. However, we can get better results by specifying some of its options.
 
-In this case we want to release our projects as _snapshots_ and we'd like the bypass the default group id (That is set with [-groupId]):
+In this case we want to release our projects as _snapshots_. We therefore have to add the following to the `./cnf/build.bnd` file:
 
-	-pom: 					groupid	=	osgi.enroute.examples,\
-							version =	${versionmask;===;${@version}}-SNAPSHOT
+	-pom: \
+		groupid	=	osgi.enroute.examples,\
+		version =	${versionmask;===;${@version}}-SNAPSHOT
 
 We can set this instruction in the `./cnf/build.bnd` file so the same mask is used for all JARs. Notice that the `${@version}` is automatically set to the Bundle's version; you can also use `${@bsn}`. See the [-pom] instruction for the details.
  
-Though this is a general useful function, the Maven Bnd Repository plugin will use the POM file inside the JAR to find out what to do.
+Though this is a general useful function, the Maven Bnd Repository plugin will require the POM file inside the JAR to find out what to do.
 
 ## Projects
 
@@ -61,9 +61,9 @@ Now we don't have any projects yet, so create a simple API project, in here we'l
 
 If you used the standard OSGi enRoute template you should already have the package and it is also already exported.
  
-Since we already set up the [-buildrepo] and [-pom] instructions, we should have added the project's bundle to the Maven local repository. You can find it at `~/.m2/repository/osgi/enroute/examples/osgi.enroute.examples.eval.api/1.0.0-SNAPSHOT`.
+Since we already set up the [-buildrepo] and [-pom] instructions, we should have added the project's bundle to the Maven local repository. You can find it at `~/.m2/repository/osgi/enroute/examples/osgi.enroute.examples.eval.api/1.0.0-SNAPSHOT/osgi.enroute.examples.eval.api/1.0.0-SNAPSHOT.jar`.
 
-If you double click on this entry then you'll see the JAR file's contents. Open up the POM at `META-INF/maven/osgi.enroute.examples/osgi.enroute.examples.eval.api`:
+If you look inside this JAR you find the following POM at `META-INF/maven/osgi.enroute.examples/osgi.enroute.examples.eval.api`:
 	
 	<?xml version="1.0" encoding="UTF-8"?>
 	<project xmlns="http://maven.apache.org/POM/4.0.0" 
@@ -77,11 +77,13 @@ If you double click on this entry then you'll see the JAR file's contents. Open 
 	  <name>osgi.enroute.examples.eval.api</name>
 	</project>
 
+(If you have no nice viewer installed on your system for JAR files, just drop the JAR file in a Bndtools project and double click on it.)
+ 
 ## Versions
 	
-It is important to realize that we've now got 2 versions. The OSGi version is set to `1.0.0.201604081640` (where the qualifier is of course a timestamp so it will change for you). The Maven version is `1.0.0-SNAPSHOT`. Maven versions are free text that must be entered literally but OSGi versions have a formally defined syntax. That is, in Maven 1.0.0 and 1.0 are different versions, in OSGi, they are the same. 
+It is important to realize that we've now use 2 different versions in play. The OSGi version is set to `1.0.0.201604081640` (where the qualifier is of course a time-stamp so it will change for you). The Maven version is `1.0.0-SNAPSHOT`. Maven versions are free text that must be entered literally but OSGi versions have a formally defined syntax. That is, in Maven 1.0.0 and 1.0 are different versions, in OSGi, they would be the same. 
 
-The `-SNAPSHOT` suffix is quite important for Maven. There are lots of different rules in Maven for snapshot revisions.  
+The `-SNAPSHOT` suffix is quite important for Maven. There are lots of rules in Maven for snapshot revisions.  
 
 ## Headers 
 

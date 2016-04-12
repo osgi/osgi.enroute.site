@@ -3,21 +3,25 @@ title: Tutorial to work with Maven Repositories
 layout: tutorial
 summary: Shows the steps to add a remote Maven repository to a bnd workspace
 lprev: /book/150-tutorials
-lnext: /book/150-tutorials
+lnext: 100-prerequisites
 noindex: true
 ---
 
 ![Maven Tutorial](/tutorial_maven/img/maven.gif)
 {: .thumb200-l }
 
-Though OSGi enRoute's toolchain is based on Gradle but it can interact with Maven quite well. It is possible to use artifacts from Maven repositories as well as publishing to maven release or snapshot repositories.
+THIS TUTORIAL REQUIRES THE CURRENTLY UNRELEASED BNDTOOLS 3.2.0
+{:.warning}
 
-This tutorial takes you through the steps to use remote Maven repositories like Nexus and Artifactory. It shows you how to use artifacts from Maven Central as well as how to release locally  via snapshots and actual releases.
+OSGi enRoute's toolchain is based on Gradle but it can actually interact with Maven quite well. It is possible to use artifacts from Maven repositories as well as publishing to Maven local or remote, release or snapshot repositories.
+
+This tutorial takes you through the steps to use remote Maven repositories like Nexus and/or Artifactory. It shows you how to use artifacts from Maven Central as well as how to release locally  via snapshots and actual releases.
 
 The example we're using is a bit warped because we're mixing development of Maven with the development of Bndtools. Though Bndtools is in general quite good in picking up the changes from other projects in the workspace, the Maven philosophy is quite different. In general you need to execute a command to build or install a project. For Bndtools users this can be quite confusing because they expect things to be updated automatically; Maven users generally search for the buttons before they realize it has already been updated.
 
-It is therefore better not to mix bnd and Maven projects in a single workspace.
+It is therefore not recommended to mix bnd and Maven projects in a single workspace for real world projects.
  
+The result of this tutorial can be found on Github at [https://github.com/osgi/osgi.enroute.examples.maven].
 
 A disclaimer. This tutorial is about learning to use OSGi enRoute, not about learning Java, Git, Eclipse, nor the Raspberry Pi setup details. It is assumed that you have basic experience with these tools. It is also assumed you have at least done the [Quick Start Tutorial].
 

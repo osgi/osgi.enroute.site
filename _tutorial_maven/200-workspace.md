@@ -2,7 +2,7 @@
 title: The Workspace
 layout: tutorial
 lprev: 100-prerequisites
-lnext: 300-central
+lnext: 300-background
 summary: Setup a bnd workspace
 ---
 

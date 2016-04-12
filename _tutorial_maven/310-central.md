@@ -1,12 +1,12 @@
 ---
 title: Maven Central
 layout: tutorial
-lprev: 200-workspace
-lnext: 310-nexus.html
+lprev: 300-background
+lnext: 320-local
 summary: Change the plugin for Maven Central
 ---
 
-The plugin for Maven Central in OSGi enRoute points to [jpm4j]. Since this repository is largely filled with Maven Central, let's replace it with the Maven Bnd Repository. The definition is as follows in the file `./cnf/ext/enroute.bnd`:
+The plugin for Maven Central in OSGi enRoute points to [jpm4j]. Since this repository is largely filled with Maven Central, let's override it with the Maven Bnd Repository using the same . The definition is as follows in the file `./cnf/ext/enroute.bnd`:
 
 	-plugin.4.Central:  \
 	\
@@ -21,6 +21,8 @@ The plugin for Maven Central in OSGi enRoute points to [jpm4j]. Since this repos
 		        index               =       ${build}/central.json
 
 This repository definition defines 2 plugins. The _wrapper_ and the _jpm repository_. The jpm repository communicates with the central server. The function of the [Wrapper Plugin] is to provide OSGi metadata for the downloaded archives.
+
+We only need 1 wrapper for all possible Maven Bnd Repository plugins. Make sure you only define the wrapper once.
 
 ## Configuring the Plugin for Maven Central
 
@@ -60,7 +62,7 @@ Once you have a revision in the Repositories view, you can manipulate by calling
 
 * Update to a later revision
 * Delete it
-* Add all compile or runtime dependencies
+* Add all compile or runtime dependencies. Yes, this can be quite convenient.
 
 All changes that are made are immediately reflected in the file. Changes in the file are reflected in the Repositories view. 
 

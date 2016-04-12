@@ -64,6 +64,18 @@ The work you probably would like to avoid. However, sometimes you have to go int
 
 {: style='clear:both;' }
   
+## Maven Bnd Repository [BETA for bnd 3.2.0]
+
+![Thumbnail for Maven Tutorial](/tutorial_maven/img/maven.png)
+{: .thumb200-l }
+The Maven Bnd Repository Plugin provides full bi-drectional access to the local Maven repository, remote repositories like Maven Central, and company wide repositories like Nexus and Artifactory. In this tutorial we take the plugin for a ride. We first use the plugin to get access to Maven Central resources. Then we setup the build that all JARs end up in the local Maven repository so that they can be used by any Maven project. We then show how to link in Maven projects. Last but not least we demonstrate how to release snapshots and releases to Maven Central.
+
+
+[Go to the Maven Tutorial](/tutorial_maven/050-start.html)
+
+{: style='clear:both;' }
+  
+
 
 
 

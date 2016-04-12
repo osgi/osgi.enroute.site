@@ -1,8 +1,8 @@
 ---
 title: Assembling an Application in Bndtools
 layout: tutorial
-lprev: 310-central
-lnext: 330-
+lprev: 330-maven-project
+lnext: 350-nexus
 summary: Assemble an application, with the resolver, that includes the Maven Eval provider project
 ---
 
@@ -20,7 +20,7 @@ For this, create the `osgi.enroute.examples.eval.application` project. The templ
 	
 This generates some errors in the `bnd.bnd` file, just get rid of the `-includeresource` instruction that included those directories.
 
-You can change the source code to:
+You can add the following source code:
 
 	package osgi.enroute.examples.eval.gogo;
 	
@@ -48,28 +48,25 @@ You can change the source code to:
 	
 	}
 
-This implements the `eval:eval` command.
-
-## Creating the OSGi Repository
-
-The [Wrapper Plugin] is responsible for providing _requirements_ and _capabilities_ to the resolver. To configure it, we can replace the   `-plugin.4.Central`property with one that includes the wrapper. You should replace the property in `./cnf/build.bnd`.
-
-	-plugin.4.Central:  \
-	\
-	        aQute.bnd.deployer.repository.wrapper.Plugin; \
-	            location            =	"${build}/cache/wrapper"; \
-	            reindex				=	true, \
-	\
-	        aQute.bnd.repository.maven.provider.MavenBndRepository; \
-				releaseUrl			=	https://repo.maven.apache.org/maven2/; \
-				name				=	Central
-				
-
-(Notice that the wrapper plugin should only be defined once. So if you include the JPM repository, make sure it is defined once and not twice.)
+This implements the `eval:expr` command.
 
 ##  Assembly
 
-Once the wrapper is in place, all bundles are indexed and available to the resolver. You can therefore open the `osgi.enroute.examples.eval.bndrun`. Make sure the application is added to the initial requirements. You should also add the Gogo shell (`osgi.identity=osgi.enroute.gogo.shell.provider`). Although the application project provides a Gogo command, it does not have a dependency on Gogo.
+We now have to create a runtime environment where we have the following parts:
+
+* The Gogo command/application bundle (In the Workspace)
+* Gogo (In the OSGi enRoute Distro repository)
+* The provider we created in the Maven project
+
+The first entries are in our repositories but the last entry is so far invisible to us. Since this project is only locally available we need to make it available in the Local repository. We do this by editing the `./cnf/local.mvn` file. We add the coordinates of the Maven project:
+
+	osgi.enroute.examples:osgi.enroute.examples.eval.provider:1.0.0-SNAPSHOT
+
+This will make it available in the Repositories view.
+
+## Resolving
+
+We can now double click on the `osgi.enroute.examples.eval.bndrun` file in the `osgi.enroute.examples.eval.application` project. We can now drag the requirements from the repositories to the `Run Requirements` list in the usual fashion. Make sure the application is added to the initial requirements. You should also add the Gogo shell `(osgi.identity=osgi.enroute.gogo.shell.provider)`. Although the application project provides a Gogo command, it does not have a dependency on Gogo.
 
 If you resolve then you get the following bundles (or similar):
 
@@ -85,6 +82,8 @@ If you resolve then you get the following bundles (or similar):
 		osgi.enroute.gogo.shell.provider;version='[1.0.0,1.0.1)'
 
 We can now run the command by clicking on the `Debug` icon at the top right:
+
+	.
 	             ____
 	   ___ _ __ |  _ \ ___  _   _| |_ ___ 
 	  / _ \ '_ \| |_) / _ \| | | | __/ _ \

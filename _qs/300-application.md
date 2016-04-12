@@ -12,6 +12,10 @@ In the previous section we created a fresh clean OSGi enRoute workspace in `~/gi
 ## Create bndtools Project
 So let's get started by creating a new Bndtools Project. Select `File/New/Bndtools OSGi Project`.
 
+Over time the menu system can have small changes. Variations seen are `Bnd OSGi Project` and `Bndtools Project`.
+{: .warning }
+
+
 ![Create Application Project](/img/qs/app-create-0.png)
 
 This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is *crucial* since it defines the template we will use. So in the first page we enter this name.

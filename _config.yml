@@ -14,6 +14,8 @@ collections:
     output: true
   tutorial_wrap:
     output: true
+  tutorial_maven:
+    output: true
   services:
     output: true
   trains:

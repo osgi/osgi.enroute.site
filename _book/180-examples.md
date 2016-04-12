@@ -116,7 +116,13 @@ A simple skeleton of a [Apache Felix Web Console][8] plugin. Since this webconso
 
 [Go to the Web Console Plugin example](https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.webconsole.provider)
 
+## Maven Bnd Repository Plugin
 
+A bnd workspace that shows the different possibilities of the Maven Bnd Repository plugin.
+
+[Go to the Maven Bnd Repository Plugin example](https://github.com/osgi/osgi.enroute.examples.maven)
+
+ 
 [1]: https://github.com/osgi/osgi.enroute.bundles/tree/master/osgi.enroute.easse.simple.adapter 
 [2]: https://www.w3.org/TR/2011/WD-eventsource-20110208/
 [3]: http://enroute.osgi.org/services/osgi.enroute.easse.html

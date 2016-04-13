@@ -13,10 +13,9 @@ by some of the leading OSGi developers.
 
 ## Definitions
 
-* _Resolving_ is the process of wiring a bundle in a runtime system, as described in Chapter 3
-(Module Layer) of the OSGi Core specification.
-* _Resolution_ is the process of determining a set of resources in a system such that
-the requirements and capabilities declared by the resources resolve to a solution.
+* _Resolving_ is the process of wiring bundles in a runtime system, as described in Chapter 3
+(Module Layer) of the OSGi Core specification. 
+* _Resolution_ is a set of wires that satisfies all requirements. It is the result of the resolve process.
 
 ## Overview
 

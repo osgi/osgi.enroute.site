@@ -7,7 +7,10 @@ Application notes are documenting a design or a tool in a way that is useful for
 People are urged to write up their experiences in an application note and submit this as a [PR on Github].
 
 <table>
-
+	<colgroup>
+		<col style="width:30%">
+		<col style="width:70%">
+	</colgroup>
 {% for f in site.appnotes %}{%unless f.noindex%}<tr>
 	<td><a href="{{f.url}}">{{f.title}}</a></td><td> {{f.summary}}</td>
 </tr>

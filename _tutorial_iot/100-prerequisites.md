@@ -76,7 +76,7 @@ Any local electronics store has this material. If you need a reference, these pa
 
 Almost there, we only need one more install! The OSGi enRoute tool chain has a remote debugging facility. Remote debugging from bnd(tools) requires an _agent_ to be running inside an OSGi framework. However, in this case we would also like to define the actual framework in bnd(tools), we just need a program that installs a framework with an agent defined in a bnd(tools) bndrun file. This is the biz.aQute.remote.main program. Let's install it:
 
-	pi@raspberrypi ~ $ sudo jpm install -f biz.aQute.remote.main@*
+	pi@raspberrypi ~ $ sudo jpm install -f biz.aQute.remote.main
 	pi@raspberrypi ~ $ sudo bndremote -n 192.168.2.4
 	Listening for transport dt_socket at address: 1044
 {: .shell}

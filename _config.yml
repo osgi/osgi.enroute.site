@@ -1,5 +1,6 @@
 gems:
   - jekyll-redirect-from
+  - jekyll-seo-tag
 markdown: kramdown
 collections:
   book:
@@ -36,6 +37,8 @@ defaults:
     values:
       layout: default
 
+twitter:
+  username: OSGiAlliance
 
 exclude:
   - 'Gemfile'

@@ -40,6 +40,8 @@ defaults:
 twitter:
   username: OSGiAlliance
 
+google_analytics: UA-801425-1
+
 exclude:
   - 'Gemfile'
   - 'Gemfile.lock'

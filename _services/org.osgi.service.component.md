@@ -67,7 +67,7 @@ Obviously, this component will not win the Turing prize since it does not do any
 
 The fun parts of OSGi are the services. So how can we register a service? Let's implement an Event Handler service. Such a handler receives events from the [Event Admin service][3]. There are always events emitted by the OSGi framework so that allows us to see something. Registering a service is as simple as implementing its interface. Without an interface a component is an _immediate_ component. Immediate components are immediately started. With one or more implemented interfaces, we automatically register a service.
 
-	@Component
+	@Component(property={EventConstants.EVENT_TOPIC+"=osgi/enroute/*"})
 	public class EventHandlerImpl implements EventHandler {
 	
 		@Override

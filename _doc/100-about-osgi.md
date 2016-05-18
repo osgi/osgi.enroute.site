@@ -1,5 +1,5 @@
 ---
-title: About OSGi
+title: Introduction to OSGi
 summary: A quick introduction into OSGi
 layout: tutorial
 lprev: /book/doc.html

@@ -1,15 +1,15 @@
 Before you start any of the tutorials you must prepare your environment so that the right tools are installed. This page helps you to achieve this. We need to run the following tools on your computer:
 
 * [Java 8][java8], probably already got it? If not, this is a good time to get started!
-* [Eclipse Mars][mars], if you do not know which variant, pick the _Eclipse Standard_ variant, make sure it has EGit included.
+* [Eclipse Mars][mars], if you do not know which variant, pick the _Eclipse Standard_ variant
 * [Git][git], unfortunately the built-in EGit in Eclipse needs some good old command line help
 
 
 ## Installing bndtools
 
-You can install bndtools from the Eclipse market place, make sure you got version 3.1.0 or later. You can also install bndtools directly from the update site:
+You can install bndtools from the Eclipse market place, make sure you got version 3.2.0 or later. You can also install bndtools directly from the update site:
 
-	https://dl.bintray.com/bndtools/bndtools/3.1.1
+	https://dl.bintray.com/bndtools/bndtools/3.2.0
 	
 If we update bndtools with a stable release then we will place it here: 
 

@@ -1,58 +1,53 @@
 ## The Workspace
 
-
-
 OSGi enRoute requires that you group a number of projects in a _bnd workspace_. A bnd workspace is basically a directory with a `cnf` directory. We start with a template workspace by getting it from git. 
 
-Bndtools 3.2 (which is beta right now) has the following process built in (Thanks Neil!); Just create a new Eclipse workspace and then do `New/Other/Bndtools/Bnd OSGi Workspace`. Make sure you put the bnd workspace in another directory then the Eclipse workspace. If you're not yet on 3.2, continue. 
+This tutorial requires Bndtools 3.2.0 or later, the workspace templates were added in 3.2.0
 {: .note}
 
-Though this could be done via EGit in Eclipse but there are about then dialogs for that. So by far the easiest way to do this is via the command line:
+We generally advise you to place things in your home directory (~). However, Eclipse does not recognize the tile (`~`) as a reference to your home directory so different paths are shown in the pictures. 
+{: .note}
 
-	$ cd  ~/git
-	$ git init com.acme.prime
-	$ cd com.acme.prime
-	$ git fetch --depth=1 https://github.com/osgi/workspace master
-	$ git checkout FETCH_HEAD -- .
+## Two Workspaces???
 
-## Opening the bnd Workspace in Eclipse
+First get some confusing stuff out of the way. We will have two (2) workspaces:
 
-_(If you're very familiar with Eclipse then import this bnd workspace in a separate Eclipse workspace in the bndtools perspective and skip to the next section.)_	
+* _Eclipse_ – The Eclipse workspace. An Eclipse workspace is a directory with a `.metadata` directory. In OSGi enRoute tutorials we **never** place any projects in this directory. This directory will never be stored in Git or another SCM, it should therefore only contain your local preferences and information. To make it easy to switch between Eclipse workspaces, it is suggested to place all Eclipse workspaces in one easy to access directory. For example `/Ws/eclipse`.
+* _bnd_ –  All _projects_ will reside in a single _bnd workspace directory_. The bnd workspace is stored in Git or an alternative SCM. It must therefore never contain any personal stuff. A bnd workspace is _flat_, the `cnf` directory and **all** project directories must reside in exactly the same parent directory, which is the _workspace directory_. Sorry, no exceptions. The bnd workspaces could be grouped in a directory for Git. Eclipse recommends `~/git`.
 
-We can now import the bnd workspace into Eclipse. However, we must ensure that the Eclipse workspace is *not* the same as the bnd workspace. Eclipse stores tons of metadata with lots of personal preferences that we almost never want to share through git. (bnd goes out of its ways to make builds independent of Eclipse preferences.) 
+The structure is depicted in the following illustration:
 
-So start an Eclipse session and select a workspace. For our tutorials in OSGi enRoute we use the com.acme.prime workspace name, which is also the directory name. Let's place this test workspace in our home directory at `~/eclipse/com.acme.prime`.
+![Eclipse & bnd workspace](/img/workspace/workspaces-layout.png)
 
-Select `File/Switch Workspace/Other ...`. This gives you the following dialog:
+## Opening Eclipse (Or Switching Workspace)
+
+If you start Eclipse you will have to open the Eclipse workspace, see the previous issues. At the start of Eclipse (or when you do `File/Switch Workspace`) you will see the following dialog:
 
 ![Switch Workspace](/img/qs/qs-switch-0.png)
 
-After filling in the proper path and then closing the dialog by clicking `OK`, we get an Eclipse restart and should finally get:
+After filling in the proper path and then closing the dialog by clicking `OK`, we get an Eclipse restart. After Eclipse is done, we should finally get:
 
 ![Start Screen](/img/qs/qs-switch-1.png)
 
-### Import the bnd Workspace
+## Creating the bnd Workspace
 
-Select `@/Import`:
+To create a new bnd Workspace we use the `New/Other/Bndtools/Bnd OSGi Workspace` menu:
 
-![Import bnd Workspace, context menu](/img/qs/bnd-import-0.png)
+![Select New Workspace Wizard](/img/workspace/workspace-select.png)
 
-Then select `General/Existing Projects into Workspace`:
+Select `Bnd OSGi Workspace` and click `Next`. This will bring you to a dialog that allows you to specify the location of the bnd workspace. Here we must select the `Create in` radio button because it is bad practice to use the same directory for the bnd workspace as the Eclipse workspace as explained before.
 
-![Import projects, select existing projects](/img/qs/bnd-import-1.png)
+![bnd workspace location](/img/workspace/location.png)
 
-And then select the directory of the bnd workspace `~/git/com.acme.prime` (you have to manually expand the `~`).
+Clicking on `Next` will bring us to the window that selects the template that we will use. In this case we will obviously choose the OSGi enRoute template.
 
-![Import projects, select bnd workspace](/img/qs/bnd-import-2.png)
+![Select OSGi enRoute Template](/img/workspace/select-enroute.png)
 
-And then click `Finish`. This will import the cnf project into your Eclipse workspace.
+After you selected the template and clicked `Next` then Bndtools will show you proposed new content of the workspace in a list. If you would update an existing workspace you could control any conflicts.
 
-Now, select the `Bndtools` perspective with `Window/Open Perspective .../Other ...'. This opens a selection dialog:
+![Content list](/img/workspace/empty-bnd-workspace.png)
 
-![Perspective Selection Dialog](/img/qs/workspace-bndtools-0.png)
+In our case we just click `Finish` and we're done! Our Eclipse should look like:
 
-Selecting `Bndtools` and clicking `OK` ensures that you are in the proper perspective. Your Eclipse should look similar to (at least after you refresh the repository view at the left bottom):
-
-![Perspective Selection Dialog](/img/qs/workspace-bndtools-1.png)
-
+![Empty IDE with just cnf](/img/workspace/bnd-empty-workspace.png)
 

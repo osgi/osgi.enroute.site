@@ -64,7 +64,7 @@ The work you probably would like to avoid. However, sometimes you have to go int
 
 {: style='clear:both;' }
   
-## Maven Bnd Repository [BETA for bnd 3.2.0]
+## Maven Bnd Repository
 
 ![Thumbnail for Maven Tutorial](/tutorial_maven/img/maven.gif)
 {: .thumb200-l }

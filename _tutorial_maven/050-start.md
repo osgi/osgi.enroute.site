@@ -10,9 +10,6 @@ noindex: true
 ![Maven Tutorial](/tutorial_maven/img/maven.gif)
 {: .thumb200-l }
 
-THIS TUTORIAL REQUIRES THE CURRENTLY UNRELEASED BNDTOOLS 3.2.0
-{:.warning}
-
 OSGi enRoute's toolchain is based on Gradle but it can actually interact with Maven quite well. It is possible to use artifacts from Maven repositories as well as publishing to Maven local or remote, release or snapshot repositories.
 
 This tutorial takes you through the steps to use remote Maven repositories like Nexus and/or Artifactory. It shows you how to use artifacts from Maven Central as well as how to release locally  via snapshots and actual releases.

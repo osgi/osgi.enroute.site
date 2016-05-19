@@ -15,6 +15,7 @@ body {
 }
 
 .container12 {
+	box-sizing: 			border-box;
 	padding-left: 			$gutter;
 	padding-right: 			0;
 	max-width:				$max-width;
@@ -33,6 +34,9 @@ body {
 	  		padding-right:  0;
 		}
 		margin-bottom: $block-separation;
+	}
+	[span]:last-child {
+	  	padding-right: 		0;
 	}
 
     [span='1'] 	{width: 100%*1/12; min-width: $min-column-width*1; }

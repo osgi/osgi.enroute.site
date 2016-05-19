@@ -1,36 +1,36 @@
 ---
-title: A Quick Introduction to OSGi
-summary: A quick introduction into OSGi
+title: OSGi Architecture
+summary: A short overview of what OSGi is about
 layout: tutorial
-lprev: /book/doc.html
-lnext: 210-overview.html
+lprev: 090-modularity
+lnext: 210-overview
 ---
 
-## Software Complexity
+The OSGi technology is a set of specifications that define a _dynamic component system for Java_. These specifications enable a development model where an _application_ is composed of several _components_ which are packaged in _bundles_. Components are communicating through _nano-services_. 
 
-The problem that OSGi solves is the key problem of software engineering: How to keep the complexity of large systems under control. Every developer knows the dreaded feeling if an unchecked software system becomes a bloating monster. OSGi addresses this problem with _modularity_ combined with the magic sauce of _services_.
+An application in this context represents the functionality desired by the organization. For example, an expense account reporting application or a payroll application. The goal is to make the application code as small as possible because that code is not reusable. It is the code that is unique for the application and usually highly coupled to a large set of components. That, however, works two ways. Since applications are not reusable extra dependencies are very cheap.
 
-Software complexity grows exponentially with the number of _links_ inside the code base. (Where a link is a line of code calling a method or using a field.) Modularization reduces complexity because it reduces the number of links by enforcing a _private_ and a _public_ world for each module. Any line of code can now only refer to its own (private) space and the public world. Without modularity, the developers could also link to anywhere in the code base. (And they will.) Since complexity grows exponential, even a small reduction of links has significant impact on the complexity of large systems.
+Components are the reusable building blocks, a.k.a. the bricks, the components provide the implementation code. Since components should be reusable, they should watch their dependencies because any dependency will be added to any application that uses this component.
 
-The [seminal paper][parnas] from Parnas that first mentioned software modularity was called "On the Criteria To Be Used in Decomposing Systems into Modules". The paper's insight was that there was a tremendous difference in flexibility based on _how_ the system was decomposed into modules. Some decompositions required major changes for even small new requirements, other decompositions could incorporate new requirements with minimal change. 
+The OSGi specifications enable components to hide their implementations from other components while communicating through nano-services, which are objects that are explicitly shared between components.
 
-An important concept in Parnas' paper is the concept of _change_. Large software systems evolve over time at an often surprising rate. It is therefore paramount that we're not only minimizing the number of links, but that we also make those links between modules as resilient as possible to change. The relevant concept here is _cohesion_. Things that are closely related should be close together in the private space of the module. Things that are not cohesive should be in separate modules. 
-   
-Within a private space private things are unknown to the rest of the world. Removing that private thing cannot affect anybody but the local residents. For example, removing a private class from a package is invisible to any external module. Anything that is not public can be changed at will. This clearly implies that by minimizing the public parts we keep our options open for the inevitable changes.     
+Nano-services are the innovation that OSGi brought to the table. Nano services are the reified links between components. In a well designed OSGi system, all links between components go through a nano-service. Nano services have an API that is defined in a Java _package_. The API consists of a classes and/or interfaces that are needed for the collaboration between the provider of the service and the consumer of the service. (Provider and consumer does not imply implementer/user of an interface, that is why different words are used.)
 
-So far this view of modularity is widely shared in our industry. However, this view ignores the _quality_ of the link. not all links are created equal. Some links cause a long train of transitive dependencies, other links link are to very volatile constructs. These types of links might still make it very hard to evolve a large software system because small new requirements still introduce system wide changes.
+This surprisingly simple model has far reaching effects for almost any aspect of the software development process.
 
-The ideal link allows modules to collaborate but it does not constrain any one of them. All participants in the collaboration are free to seek their own implementations and private choices. So the holy grail of modularity is to turn you gigantic trees of code links into tiny little toothpicks. Meet OSGi.
-   
-## Meet OSGi
+A Bundle is the OSGi name for a module, it packages the components with their resources. Bundles are explicitly in their requirements on the environment and the capabilities they will provide to the environment. For example, a Bundle will express what Java packages it needs in what version. 
 
-The OSGi technology is a set of specifications that define a dynamic component system for Java. These specifications enable a development model where applications are (dynamically) composed of many different (reusable) components. The OSGi specifications enable components to hide their implementations from other components while communicating through services, which are objects that are specifically shared between components. This surprisingly simple model has far reaching effects for almost any aspect of the software development process.
+## Component Systems
+ 
+Though components have been on the horizon for a long time, so far they failed to make good on their promises. OSGi is the first technology that actually succeeded with a component system that is solving many real problems in software development. Adopters of OSGi technology see significantly reduced complexity in almost all aspects of development. Code is easier to write and test, reuse is increased, build systems become significantly simpler, deployment is more manageable, bugs are detected early, and the runtime provides an enormous insight into what is running. Most important, it works as is testified by the wide adoption and use in popular applications like Eclipse, Adobe Experience Manager, Liferay, and a myriad of IBM applications.
 
-Though components have been on the horizon for a long time, so far they failed to make good on their promises. OSGi is the first technology that actually succeeded with a component system that is solving many real problems in software development. Adopters of OSGi technology see significantly reduced complexity in almost all aspects of development. Code is easier to write and test, reuse is increased, build systems become significantly simpler, deployment is more manageable, bugs are detected early, and the runtime provides an enormous insight into what is running. Most important, it works as is testified by the wide adoption and use in popular applications like Eclipse and Spring.
+The OSGi technology was developed to create a collaborative software environment. We were not looking for the possibility to run multiple applications in a single VM. Application servers do that already (though they were not yet around when we started in 1998). No, our problem was harder. We wanted an application to _emerge_ from putting together different reusable components that had no a-priori knowledge of each other. Even harder, we wanted that application to emerge from _dynamically_ assembling a set of components.
 
-We developed the OSGi technology to create a collaborative software environment. We were not looking for the possibility to run multiple applications in a single VM. Application servers do that already (though they were not yet around when we started in 1998). No, our problem was harder. We wanted an application to emerge from putting together different reusable components that had no a-priori knowledge of each other. Even harder, we wanted that application to emerge from dynamically assembling a set of components. For example, you have a home server that is capable of managing your lights and appliances. A component could allow you to turn on and off the light over a web page. Another component could allow you to control the appliances via a mobile text message. The goal was to allow these other functions to be added without requiring that the developers had intricate knowledge of each other and let these components be added independently.
+For example, you have a home server that is capable of managing your lights and appliances. A component could allow you to turn on and off the light over a web page. Another component could allow you to control the appliances via a mobile text message. The goal was to allow these other functions to be added without requiring that the developers had intricate knowledge of each other and let these components be added independently.
 
-## Layering
+OSGi enRoute shows that these goals are met.
+
+## OSGi Layering
 
 The OSGi has a layered model that is depicted in the following figure.
 
@@ -51,9 +51,9 @@ These concepts are more extensively explained in the following sections.
 
 The fundamental concept that enables such a system is modularity. Modularity, simplistically said, is about assuming less. Modularity is about keeping things local and not sharing. It is hard to be wrong about things you have no knowledge of and make no assumptions about them. Therefore, modularity is at the core of the OSGi specifications and embodied in the bundle concept. In Java terms, a bundle is a plain old JAR file. However, where in standard Java everything in a JAR is completely visible to all other JARs, OSGi hides everything in that JAR unless explicitly exported. A bundle that wants to use another JAR must explicitly import the parts it needs. By default, there is no sharing.
 
-Though the code hiding and explicit sharing provides many benefits (for example, allowing multiple versions of the same library being used in a single VM), the code sharing was only there to support OSGi services model. The services model is about bundles that collaborate. the service model is about turing the giant trees into tooth picks.
+Though the code hiding and explicit sharing provides many benefits (for example, allowing multiple versions of the same library being used in a single VM), the code sharing was only there to support OSGi services model. The services model is about bundles that collaborate. the service model is about turning the giant trees into tooth picks.
 
-## Services
+## Nano-Services
 
 The reason we needed the service model is because Java shows how hard it is to write collaborative with only class sharing. The standard solution in Java is to use factories that use dynamic class loading and statics. For example, if you want a `DocumentBuilderFactory`, you call the static factory method `DocumentBuilderFactory.newInstance()`. Behind that façade, the `newInstance` methods tries every class loader trick in the book (and some that aren’t) to create an instance of an implementation subclass of the `DocumentBuilderFactory` class. Trying to influence what implementation is used is non-trivial (services loader model, properties, conventions in class name), and usually global for the VM. Also it is a passive model. The implementation code can not do anything to advertise its availability, nor can the user list the possible implementations and pick the most suitable implementation. It is also not dynamic. Once an implementation hands out an instance, it can not withdraw that object, ever. Worst of all, the factory mechanism is a convention used in hundreds of places in the VM where each factory has its own unique API and configuration mechanisms. There is no centralized overview of the implementations to which your code is bound. In other words, a nightmare.
 
@@ -63,7 +63,7 @@ A bundle can therefore register a service, it can get a service, and it can list
 
 ![Services](img/services.png)
 
-This in general called a broker.
+This in general called a broker pattern.
 
 What happens when multiple bundles register objects under the same interface or class? How can these be distinguished? First, in many cases it is not important to distinguish between individuals. Otherwise, the answer is properties. Each service registration has a set of standard and custom properties. A expressive filter language is available to select only the services in which you are interested. Properties can be used to find the proper service or can play other roles at the application level.
 
@@ -74,6 +74,8 @@ We found that the real world is actually dynamic and many problems are a lot eas
 _We found that the service registry significantly simplified application code because it handle so many common patterns_.
  
 The effect of the service registry has been that many specialized APIs can be much modeled with the service registry. Not only does this simplify the overall application, it also means that standard tools can be used to debug and see how the system is wired up.
+
+Nano-services should be looked upon as a _software design primitive_. In the eighties objects were seen as weird curiosities as structs with function tables. Only when polymorphism, inheritance, and data hiding became design primitives in people's mind did we start to reap the benefits. This is similar for nano-services. Nano-services are extremely light weight (not much more than a Java Object) but have semantics that go way beyond what a plain Object can do.         
 
 ## Standard Services
 
@@ -100,9 +102,3 @@ Bundles are deployed on an OSGi framework, the bundle runtime environment. This 
 ## Implementations
 
 The OSGi specification process requires a reference implementation for each specification. However, since the first specifications there have always been commercial companies that have implemented the specifications as well as open source implementations. Currently, there are 4 open source implementations of the framework and too many to count implementations of the OSGi services. The open software industry has discovered OSGi technology and more and more projects deliver their artifacts as bundles.
-
-## Conclusion
-
-The OSGi specifications provide a mature and comprehensive component model with a very effective (and small) API. Converting monolithic or home grown plugin based systems to OSGi almost always provides great improvements in the whole process of developing software.
-
-[parnas]: https://www.cs.umd.edu/class/spring2003/cmsc838p/Design/criteria.pdf

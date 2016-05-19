@@ -131,6 +131,7 @@ $color-vignette:	#F0F0F0;
 	@include drop-shadow(4px,4px,4px,0.2);
    	@include rounded(5px);
 	width: 100%;
+	margin-bottom: $block-separation;
 }
 
 .text-inset {

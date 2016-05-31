@@ -10,7 +10,7 @@ In this section we create a Maven project and consume the API from the previous 
 
 ## Build a Maven Project
 
-You should now create a Maven (**not** a Bndtools) project. Let's call this project `osgi.enroute.examples.eval.provider`. Just use the most simplest Maven project you can find (you can select this at the first wizard page). It provides the implementation of the API we defined in the Bndtools `osgi.enroute.examples.eval.api` project. 
+You should now create a Maven (**not** a Bndtools) project. Let's call this project `osgi.enroute.examples.eval.provider`. Just use the most simplest Maven project you can find (you can select this at the first wizard page). It provides the implementation of the API we defined in the Bndtools `osgi.enroute.examples.eval.api` project.
 
 The groupId should be `osgi.enroute.examples` and the artifactId to the customary Bundle Symbolic Name: `osgi.enroute.examples.eval.provider`. Let's use a snapshot version: 1.0.0-SNAPSHOT. The prolog of the `pom.xml` file should look like:
 
@@ -21,7 +21,7 @@ The groupId should be `osgi.enroute.examples` and the artifactId to the customar
 		<artifactId>osgi.enroute.examples.eval.provider</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 
-We are going to implement the Eval API with [parsii](https://github.com/scireum/parsii) external dependency. We also need the OSGi component annotations and of course our API. So our `dependencies` section in the POM should look like: 
+We are going to implement the Eval API with [parsii](https://github.com/scireum/parsii) external dependency. We also need the OSGi component annotations and of course our API. So our `dependencies` section in the POM should look like:
 
 	<dependencies>
 		<dependency>
@@ -39,9 +39,9 @@ We are going to implement the Eval API with [parsii](https://github.com/scireum/
 			<artifactId>org.osgi.service.component.annotations</artifactId>
 			<version>1.3.0</version>
 		</dependency>
-	</dependencies> 
+	</dependencies>
 
-We want to build this project with the Maven bundle plugin, so we need to add the following build section:
+We want to build this project with the bnd Maven plugin, so we need to add the following build section:
 
 	<build>
 		<plugins>
@@ -93,22 +93,22 @@ Note that the Maven plugin by default includes all the classes in the project.
 The source code in `src/main/java/` is:
 
 	package osgi.enroute.examples.eval.provider;
-	
+
 	import java.util.List;
-	
+
 	import org.osgi.service.component.annotations.Activate;
 	import org.osgi.service.component.annotations.Component;
-	
+
 	import osgi.enroute.examples.eval.api.Eval;
 	import parsii.eval.Expression;
 	import parsii.eval.Function;
 	import parsii.eval.Parser;
 	import parsii.eval.Scope;
-	
+
 	@Component
 	public class EvalImpl implements Eval {
 		Scope scope = new Scope();
-	
+
 		public double eval(String expression) throws Exception {
 			Expression expr = Parser.parse(expression);
 			return expr.evaluate();
@@ -139,5 +139,3 @@ We've now a relatively unmanaged situation. In the current setup, Bndtools will 
 We now build a standard Maven project that has a dependency on a Bndtools project. The Bndtools project will be updated ('installed') every time when there is a change.
 
 In the next section we take a look at how we can depend on this Maven project.
- 
-

@@ -43,7 +43,7 @@ By default, this repository is empty, nothing, nada. So why is that? Well, One o
 
 This file should be under source control management so that anytime in the future when a previous revision is checked out, it will see exactly the same contents of the repository.
 
-## Editing the scope 
+## Editing the scope
 
 The most basic way to extend the scope is editing the corresponding file. Since we did not specify this file (the configuration property is `index`), we used the default which is the name of the `./cnf/` + repository name in lower case + `.mvn`. In this case, `./cnf/central.mvn`.  The format of the file is a _maven coordinate_ per line. For example:
 
@@ -54,22 +54,23 @@ The most basic way to extend the scope is editing the corresponding file. Since 
 Obviously manually editing this file is not such an pleasant thought. There are therefore a number of ways you edit the file in the Repositories View of Bndtools.
 
 You can:
-* Drop a URL on the repository that points to a POM file. The repository will read the POM file. (Parsing a POM file may require access to a remote repository to resolve _parent poms_ so in general the POM should come from the remote repository that this repository is connected to.) 
+
+* Drop a URL on the repository that points to a POM file. The repository will read the POM file. (Parsing a POM file may require access to a remote repository to resolve _parent poms_ so in general the POM should come from the remote repository that this repository is connected to.)
 * Drop a URL to a JPM revision, just like the JPM repository.
 * Use [search.maven.org](http://search.maven.org/) and drop the link to the POM from the result on the Maven repository in the Repositories view.
 
-Once you have a revision in the Repositories view, you can manipulate by calling up a context menu.
+Once you have a revision in the Repositories view, you can manipulate it by calling up a context menu.
 
 * Update to a later revision
 * Delete it
 * Add all compile or runtime dependencies. Yes, this can be quite convenient.
 
-All changes that are made are immediately reflected in the file. Changes in the file are reflected in the Repositories view. 
+All changes that are made are immediately reflected in the file. Changes in the file are reflected in the Repositories view.
 
 ## Information in the Repositories View
 
 In the Maven Bnd Repository, each entry (repository, program, and revision) have a context menu and provide additional information when you hover over them.
 
-Revisions and programs are identified by their corresponding Bundle Symbolic Name if they are bundles. If they're not bundles, then the Maven coordinate is displayed. 
+Revisions and programs are identified by their corresponding Bundle Symbolic Name if they are bundles. If they're not bundles, then the Maven coordinate is displayed.
 
 {% include links.md %}

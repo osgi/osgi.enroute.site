@@ -7,4 +7,3 @@ summary: The prerequisites for the use of OSGi enRoute (Important!)
 ---
 
 {% include prerequisites.md %}
-

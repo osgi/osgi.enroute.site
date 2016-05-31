@@ -14,13 +14,13 @@ OSGi enRoute's toolchain is based on Gradle but it can actually interact with Ma
 
 This tutorial takes you through the steps to use remote Maven repositories like Nexus and/or Artifactory. It shows you how to use artifacts from Maven Central as well as how to release locally  via snapshots and actual releases.
 
-The example we're using is a bit warped because we're mixing development of Maven with the development of Bndtools. Though Bndtools is in general quite good in picking up the changes from other projects in the workspace, the Maven philosophy is quite different. In general you need to execute a command to build or install a project. For Bndtools users this can be quite confusing because they expect things to be updated automatically; Maven users generally search for the buttons before they realize it has already been updated.
+The example we're using is a bit warped because we're mixing development of Maven with the development of Bndtools. Though Bndtools is in general quite good in picking up the changes from other projects in the workspace, the Maven philosophy is quite different. In general you need to execute a command to build or install a project. For Bndtools users this can be quite confusing because they expect things to be updated automatically; Maven users will keep trying to launch a new build before they realize the jar has already been updated.
 
 It is therefore not recommended to mix bnd and Maven projects in a single workspace for real world projects.
- 
-The result of this tutorial can be found on Github at [https://github.com/osgi/osgi.enroute.examples.maven].
 
-A disclaimer. This tutorial is about learning to use OSGi enRoute, not about learning Java, Git, Eclipse, nor the Raspberry Pi setup details. It is assumed that you have basic experience with these tools. It is also assumed you have at least done the [Quick Start Tutorial].
+The result of this tutorial can be found on Github at [https://github.com/osgi/osgi.enroute.examples.maven][https://github.com/osgi/osgi.enroute.examples.maven].
+
+A disclaimer. This tutorial is about learning to use Maven with OSGi enRoute, not about learning Java, Git, Eclipse, nor Maven basics. It is assumed that you have basic experience with these tools. It is also assumed you have at least done the [Quick Start Tutorial].
 
 If you have any questions about this tutorial, please discuss them in the [forum][forum]. And as always, [pull requests][osgi.enroute.site] are highly appreciated.
 
@@ -44,8 +44,8 @@ We'd love some feedback. Our most favorite feedback is a pull request on the doc
 
 After you've done this tutorial you should have a basic feeling of how to build an application using Distributed OSGi with  OSGi enRoute. So the best way to continue learning is to build a small application based on these principles. Running into real problems is the best way to learn a technology. If you run into problems, use the [Forum][forum] to ask questions and get answers.
 
-And watch this space, we will expand this site with hundreds of data sheets of services you can find on the net. These data-sheets will show you how to use this service in your application with real examples. 
+And watch this space, we will expand this site with hundreds of data sheets of services you can find on the net. These data-sheets will show you how to use this service in your application with real examples.
 
 [forum]: /forum.html
 [osgi.enroute.site]: https://github.com/osgi/osgi.enroute.site
-[Quick Start Tutorial]: /qs/050-start]
+[Quick Start Tutorial]: /qs/050-start

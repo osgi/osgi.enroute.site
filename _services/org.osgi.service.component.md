@@ -147,19 +147,25 @@ This is how it looks:
 
 	@Component
 	public class DynamicLogExample {
-		final AtomicReference<LogService> log = new AtomicReference<>();
+		final AtomicReference<LogService> logRef = new AtomicReference<>();
 
 		@Reference(
 			cardinality=Cardinality.MULTIPLE, 
 			policy=Policy.DYNAMIC
 		)
 		void setLog( LogService log ) {
-			log.set(log);
+			logRef.set(log);
 		}
 		
 		void unsetLog( LogService log ) {
-			log.compareAndSet(log, null);
+			logRef.compareAndSet(log, null);
 		}
+		
+		void someMethod() {
+			LogService log = logRef.get();
+			log.log("Some String");
+		}
+
 	}
 
 ## Selective References

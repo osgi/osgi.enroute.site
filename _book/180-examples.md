@@ -122,6 +122,12 @@ A bnd workspace that shows the different possibilities of the Maven Bnd Reposito
 
 [Go to the Maven Bnd Repository Plugin example](https://github.com/osgi/osgi.enroute.examples.maven)
 
+## VAADIN
+
+VAADIN is a very nice library for Java developers that want to stay in Java for their UI. This example provides a small glue library that makes it possible to use Vaadin with services instead of the creation of classes by name which is the default mode. Paul Fraser added the Vaadin address book example using DTOs and proper services.
+
+[Go to the VAADIN example](https://github.com/osgi/osgi.enroute.examples.vaadin)
+
  
 [1]: https://github.com/osgi/osgi.enroute.bundles/tree/master/osgi.enroute.easse.simple.adapter 
 [2]: https://www.w3.org/TR/2011/WD-eventsource-20110208/

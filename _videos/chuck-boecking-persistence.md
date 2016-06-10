@@ -3,10 +3,10 @@ title: OSGi Enroute Base Tutorial Demonstration with Persistence
 layout: default
 lprev: /book/710-videos.html
 lnext: /videos/osgi-ce-2015-iot-contest.html
-summary: A short video showing the emulator and the train used during the OSGi CE 2015 IoT Contest 
+summary: An example project that demonstrates the use of the OSGi enRoute REST API
 ---
 
-A example project that demonstrates the use of the OSGi enRoute REST API from Chuck Boecking (ERP Academy). If you checkout the examples repository, then you can easily run the code and see how the REST API works.
+An example project that demonstrates the use of the OSGi enRoute REST API from Chuck Boecking (ERP Academy). If you checkout the examples repository, then you can easily run the code and see how the REST API works.
 
 [See more ...](https://github.com/osgi/osgi.enroute.examples/tree/master/osgi.enroute.examples.rest.application)
 

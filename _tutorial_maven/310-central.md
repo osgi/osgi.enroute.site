@@ -10,15 +10,15 @@ The plugin for Maven Central in OSGi enRoute points to [jpm4j]. Since this repos
 
 	-plugin.4.Central:  \
 	\
-	        aQute.bnd.deployer.repository.wrapper.Plugin; \
-	            location            =	"${build}/cache/wrapper"; \
-	            reindex				=	true, \
+	    aQute.bnd.deployer.repository.wrapper.Plugin; \
+	        location  = "${build}/cache/wrapper"; \
+	        reindex   = true, \
 	\
-	        aQute.bnd.jpm.Repository; \
-		        includeStaged   	=       true; \
-		        name                =       Central; \
-		        location            =       ~/.bnd/shacache; \
-		        index               =       ${build}/central.json
+	    aQute.bnd.jpm.Repository; \
+	        includeStaged = true; \
+	        name          = Central; \
+	        location      = ~/.bnd/shacache; \
+	        index         = ${build}/central.json
 
 This repository definition defines 2 plugins. The _wrapper_ and the _jpm repository_. The jpm repository communicates with the central server. The function of the [Wrapper Plugin] is to provide OSGi metadata for the downloaded archives.
 
@@ -29,9 +29,14 @@ We only need 1 wrapper for all possible Maven Bnd Repository plugins. Make sure 
 The `ext` bnd files are read before the `./cnf/build.bnd` is read, we can therefore reliably override the configuration, just use the same property name: `-plugin.4.Central`. Therefore we override the configuration as follows in `./cnf/build.bnd`:
 
 	-plugin.4.Central = \
-		        aQute.bnd.repository.maven.provider.MavenBndRepository; \
-					releaseUrl			=	https://repo.maven.apache.org/maven2/; \
-					name				=	Central
+	\
+	   aQute.bnd.deployer.repository.wrapper.Plugin; \
+	      location   = "${build}/cache/wrapper"; \
+	      reindex    = true, \
+	\
+	   aQute.bnd.repository.maven.provider.MavenBndRepository; \
+	      releaseUrl = https://repo.maven.apache.org/maven2/; \
+	      name       = Central
 
 ## Repositories View
 

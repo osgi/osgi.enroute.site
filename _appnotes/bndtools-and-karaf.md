@@ -1,6 +1,6 @@
 ---
-Title: Integrate Apache Karaf and Bnd toolchain
-Summary: Shows how to leverage Bnd remote debugger to integrate Bnd and Apache Karaf
+title: Integrate Apache Karaf and Bnd toolchain
+summary: Shows how to leverage Bnd remote debugger to integrate Bnd and Apache Karaf
 ---
 
 [Bnd remote launcher](http://bnd.bndtools.org/chapters/300-launching.html) allows debugging bundles and Bndrun files in Eclipse using a remote Apache Karaf instance as the target OSGi runtime. This is a very convenient way to combine Apache Karaf features with the power of Bndtools OSGi toolchain.

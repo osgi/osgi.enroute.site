@@ -23,7 +23,9 @@ because the data was shielded, one could only access it via a method. If the dat
 methods could convert the different internal structure in a backward compatible way. In the following picture we show by having the data (grey)
 shielded by the methods (the other colors).
 
-![Archetypical object](img/dtos/object.png)
+<center>
+<img src="img/dtos/object.png" title="Archetypical object" width="400px"/>
+</center>
 
 Undeniably this works well in a single process. There was just one caveat, there are no single process programs anymore. 
 I assume this previous sentence will raise some eyebrows because quite often people
@@ -39,9 +41,11 @@ Methods to shield your data is a bit like the [Maginot] line. Before World War I
 unbelievable cost. It even had munition trains deep underground. The Maginot line  was clearly unbeatable though this was never 
 proven because the Germans just decided to sneakily walk around it. 
 
-![Maginot Line](img/dtos/maginot.png)
+<center>
+<img src="img/dtos/maginot.png" title="Maginot Line" width="400px"/>
+</center>
 
-Beans, it turns out, are the software variation on the Maginot line.
+Beans, it turns out, have the software version of the strong and weak fortifications of the Maginot line.
 
 ### Distributed
 
@@ -62,7 +66,9 @@ completely different objects now provide behavior on this well defined data obje
 types over time, we now have the advantage that we can use the same data in different places, even in different processes and 
 potentially different languages. This is shown in the following picture.
 
-![Use of DTOs](img/dtos/dtos.png)
+<center>
+<img src="img/dtos/dtos.png" title="DTOs usage" width="400px"/>
+</center>
 
 ### Naked Objects
 

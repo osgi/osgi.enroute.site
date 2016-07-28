@@ -41,11 +41,11 @@ In general, a provider bundle should export the API it _provides_; in our case w
 
 ### Change the User Application
 
-We now need to change the `UserApplication` class to use our new incredibly powerful service. Currently it has no dependencies so we should add the dependency on the Upper service. 
+We now need to change the `UpperApplication` class to use our new incredibly powerful service. Currently it has no dependencies so we should add the dependency on the Upper service. 
 
 The first thing we need to do is to make sure the Upper Application can see the API project. So click on the `bnd.bnd` file, select the `Build` tab, and add the API project, just like we did in the provider project.
 
-Then we change the `UserApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation to the end of the class (convention is to place references at the end):
+Then we change the `UpperApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation to the end of the class (convention is to place references at the end):
 
 	@Reference
 	Upper		upper;

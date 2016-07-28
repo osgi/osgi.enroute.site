@@ -39,7 +39,7 @@ We then should change the `UpperImpl` class to implement the `Upper` interface f
 
 In general, a provider bundle should export the API it _provides_; in our case we provide the contract specified in the `com.acme.prime.upper.api` package. Exporting this package is a highly recommended best practice, it makes a lot of things work better later on. You can export this package by selecting the `bnd.bnd` file in the `com.acme.prime.upper.provider` project, and then the `Contents` tab. Notice the import: `com.acme.prime.upper.api`. Drag this import to the export list and save the file. The imports now disappears.
 
-### Change the User Application
+### Change the Upper Application
 
 We now need to change the `UpperApplication` class to use our new incredibly powerful service. Currently it has no dependencies so we should add the dependency on the Upper service. 
 

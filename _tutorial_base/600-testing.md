@@ -21,7 +21,7 @@ An OSGi JUnit test is a new project. So create a `com.acme.prime.eval.test` proj
 
 ![Test Project](/img/tutorial_base/test-test-0.png)
 
-A tad confusing is the fact that in an OSGi Test project you will work in the `src` directory and *not* the `test` directory because we create a test bundle; if we used the `test` source directory would never end up with any classes in the bundle. Classes in the `test` directory are never added to the JAR file.
+A tad confusing is the fact that in an OSGi Test project you will work in the `src` directory and *not* the `test` directory because we create a test bundle; if we used the `test` source directory we would never end up with any classes in the bundle. Classes in the `test` directory are never added to the JAR file.
 
 The OSGi enRoute template is already filled with a simple test case that gives us a Bundle Context but that test case does not use our service yet. 
 
@@ -40,7 +40,7 @@ The OSGi enRoute template is already filled with a simple test case that gives u
 	    }
 	}
 
-So how do we get the Eval service to test? This is a cumbersome because we do not get support from DS. Alas, back to the old days when you had to get a service by hand:
+So how do we get the Eval service to test? This is a bit cumbersome because we do not get support from DS. Alas, back to the old days when you had to get a service by hand:
 
 	<T> T getService(Class<T> clazz) throws InterruptedException {
 		ServiceTracker<T,T> st = new ServiceTracker<>(context, clazz, null);
@@ -54,9 +54,9 @@ We now need to add a test if our service exists.
 
 	Assert.assertNotNull(getService(Eval.class));
 	
-However, if we add this code we find that Eclipse can't find the `Eval` class. Remember the problem? We need to add the `com.acme.prime.eval.api` project to our build path. Double click the `bnd.bnd` file, select `Build` and add the `com.acme.prime.eval.api` project. Once the `bnd.bnd` file is saved we can import the `Eval` class and remove the error. Though the current provider now also exports the `com.acme.prime.eval` package it is bad practice to place an implementation bundle on your classpath: Always try to compile against the service contract.
+However, if we add this code we find that Eclipse can't find the `Eval` class. Remember the problem? We need to add the `com.acme.prime.eval.api` project to our build path. Double click the `bnd.bnd` file, select `Build` and add the `com.acme.prime.eval.api` project. Once the `bnd.bnd` file is saved we can import the `Eval` class and remove the error. Remember that the current provider also exports the `com.acme.prime.eval.api` package. It is bad practice to place an implementation bundle on your classpath: Always try to compile against the service contract.
 
-We're almost ready to run, ehh, test. But before we do the testing, let's think about our runtime. How should our environment look like? Let's go to the `Run` tab of the `bnd.bnd` file. The list of initial requirements contains the `com.acme.prime.eval.test` project. During a resolve, this will drag in the provider because it has the API and the required JUnit bundles.
+We're almost ready to run, ehh, test. But before we do the testing, let's think about our runtime. How should our environment look? Let's go to the `Run` tab of the `bnd.bnd` file. The list of initial requirements contains the `com.acme.prime.eval.test` project. During a resolve, this will drag in the provider because it has the API and the required JUnit bundles.
 
 Hit the `Resolve` button and save. We have only a few dependencies, all caused by the fact that the provider uses Declarative Services (DS) a.k.a. SCR.
 
@@ -64,7 +64,7 @@ Our bundles now look as follows:
 
 ![Test Project](/img/tutorial_base/test-test-1.png)
 
-To run the test, we must select the `com.acme.prime.eval.test` project, its `src` folder, a package in this folder, a class in this package, a method in the a class, or the bnd.bnd file. We can then do `@/Debug As/Bnd OSGi Test Launcher (JUnit)` or you can use the keyboard shortcut (Shift+Alt+X C). This executes the test which are then reported in the standard JUnit view. Remember the pilots and retractable gears, want to bet you confuse the entries `JUnit Test` and `Bnd OSGi Test Launcher (JUnit)`. Or even worse now, you often will accidentally select `Bnd OSGi Run Launcher`. If you do the latter, you get an error that the bundles cannot be resolved because JUnit is missing.
+To run the test we can select any of: the `com.acme.prime.eval.test` project, its `src` folder, a package in this folder, a class in this package, a method in the a class, or the bnd.bnd file. We can then do `@/Debug As/Bnd OSGi Test Launcher (JUnit)` or you can use the keyboard shortcut (Shift+Alt+X C). This executes the tests in the specified scope. The test results are then reported in the standard JUnit view. Remember the pilots and retractable gear analogy? Want to bet you confuse the entries `JUnit Test` and `Bnd OSGi Test Launcher (JUnit)`? Or even worse now, you might accidentally select `Bnd OSGi Run Launcher`. If you do the latter, you get an error that the bundles cannot be resolved because JUnit is missing.
 
 And then ... the green bar!
 

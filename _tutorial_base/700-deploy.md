@@ -20,7 +20,9 @@ The beauty of an executable JAR is that it can be started anywhere there is a ja
 
 The first thing we need to do is create a `bndrun` file. A `bndrun` file is a separate file for the `bnd.bnd` `Run` tab. It allows us to specify a runtime for our framework. 
 
-So do a `New/Bndtools OSGi Project` and use `com.acme.prime.eval.application` as the project name. The `.application` extension for this project creates an *application* project. Don't forget to use the OSGi enRoute templates! An application project should contain no code (or very little) but acts as a spear point. It contains the requirements that will drive the final application.
+So do a `New/Bndtools OSGi Project` and use `com.acme.prime.eval.application` as the project name. The `.application` extension for this project creates an *application* project. Don't forget to use the OSGi enRoute templates!
+
+An application project should contain no code (or very little) but acts as a spear point. It contains the requirements that will drive the final application.
 
 ## The Sole Content
 

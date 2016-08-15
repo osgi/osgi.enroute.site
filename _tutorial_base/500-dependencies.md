@@ -31,7 +31,7 @@ Unfortunately the browser support in Linux Eclipse does not work well with jpm4j
 More unfortunately, there is a bug in Bndtools that makes the following section not work on the `Build Path` list. Instead, drag the version vignette on the `Build` tab but on the `Central` repository, this works. Working on it. 
 {: .bug}
 
-This website provides has lots of interesting info and it contains more than Maven Central. Any JAR on there can be added to the build path of our project with a drag-and-drop operation. The drag always starts with the version vignette. The drop goes either to the `Central` repository or to the `Build` tab (where it is added to the build-path and the repository). Since we need to have the PARSII parser on our build path we first double click the `bnd.bnd` file, and the select the `Build` tab. We then drag the version vignette (the green 1.5.0 thingy) on the `Build Path` list. 
+This website provides lots of interesting info and it contains more than Maven Central. Any JAR on there can be added to the build path of our project with a drag-and-drop operation. The drag always starts with the version vignette. The drop goes either to the `Central` repository or to the `Build` tab (where it is added to the build-path and the repository). Since we need to have the PARSII parser on our build path we first double click the `bnd.bnd` file, and then select the `Build` tab. We then drag the version vignette (the green 1.5.0 thingy) on the `Build Path` list. 
 
 ![Repositories](/img/tutorial_base/dependencies-repo-3.png)
 

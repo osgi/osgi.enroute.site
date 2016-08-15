@@ -103,7 +103,7 @@ If you click on an entry then such an editor opens:
 
 ### Bundles
 
-If go back to XRay again then you can see  the bundles as boxes with rounded corners on the left side. Bundles are also color coded:
+If you go back to XRay again then you can see the bundles as boxes with rounded corners on the left side. Bundles are also color coded:
 
 * Orange – Active
 * Grey – Resolved

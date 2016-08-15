@@ -49,7 +49,7 @@ Though this is a general useful function, the Maven Bnd Repository plugin will r
 
 ## Projects
 
-We've prepared an example project that shows how to have a Eclipse workspace with a Maven project together with a Bndtools workspace. In this tutorial we'll build this example step by step.
+We've prepared an example project that shows how to have an Eclipse workspace with a Maven project together with a Bndtools workspace. In this tutorial we'll build this example step by step.
 
 Now we don't have any projects yet, so create a simple API project, in here we'll call it: `osgi.enroute.examples.eval.api`. You can of course name it differently. Let the single source file be:
 
@@ -81,7 +81,7 @@ If you look inside this JAR you find the following POM at `META-INF/maven/osgi.e
 
 ## Versions
 
-It is important to realize that we've now use 2 different versions in play. The OSGi version is set to `1.0.0.201604081640` (where the qualifier is of course a time-stamp so it will change for you). The Maven version is `1.0.0-SNAPSHOT`. Maven versions are free text that must be entered literally but OSGi versions have a formally defined syntax. That is, in Maven 1.0.0 and 1.0 are different versions, in OSGi, they would be the same.
+It is important to realize that we've now used 2 different versions. The OSGi version is set to `1.0.0.201604081640` (where the qualifier is of course a time-stamp so it will change for you). The Maven version is `1.0.0-SNAPSHOT`. Maven versions are free text that must be entered literally but OSGi versions have a formally defined syntax. That is, in Maven 1.0.0 and 1.0 are different versions, in OSGi, they would be the same.
 
 The `-SNAPSHOT` suffix is quite important for Maven. There are lots of rules in Maven for snapshot revisions.  
 

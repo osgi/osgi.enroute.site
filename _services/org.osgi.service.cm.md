@@ -9,8 +9,7 @@ summary: Provides a push and pull model to configure components.
 
 ## When to Use?
 
-Configuration Admin is, obviously, about configuration. It is probably one of the most fundamental specifications in the compendium. You should use
-Configuration Admin any time you need configuration, but you should rarely use it directly. 
+Configuration Admin is, obviously, about configuration. It is probably one of the most fundamental specifications in the compendium. You should use Configuration Admin any time you need configuration, but you should rarely use it directly. 
 
 Declarative Services, the rock solid foundation of OSGi enRoute, has a very close integration with Configuration Admin. In almost all cases you will receive your configuration in the `activate` method. So if you just want to get configuration data, then consult the [Declarative Services][1] service catalog entry. 
 
@@ -57,10 +56,7 @@ You can list all configurations with the following snippet:
 
 ## Background
 
-Most people that first see the OSGi Configuration Admin find it a rather odd API. Most developers want to get their configuration somewhere and process it. Not
-in this API. The basic model is push (or in more trendy terms: async!). To get configuration, you register a Managed Service or a Managed Service Factory and
-then ... do nothing. One day, when the Configuration Admin feels like, it will call you with the configuration properties. Only then you should start doing
-whatever you were supposed to be doing with those properties. Whenever there are new configuration properties, Configuration Admin will call you again. So Configuration Admin collapses the case of starting and getting your configuration and updating your configuration. It only knows how to update you with new properties.
+Most people that first see the OSGi Configuration Admin find it a rather odd API. Most developers want to get their configuration somewhere and process it. Not in this API. The basic model is push (or in more trendy terms: async!). To get configuration, you register a Managed Service or a Managed Service Factory and then ... do nothing. One day, when the Configuration Admin feels like it, it will call you with the configuration properties. Only then you should start doing whatever you were supposed to be doing with those properties. Whenever there are new configuration properties, Configuration Admin will call you again. So Configuration Admin collapses the case of starting and getting your configuration and updating your configuration. It only knows how to update you with new properties.
 
 Lots of developers are upset about this model because they worry that Configuration Admin is not around and they have to "wait" forever (they're not waiting, they're just being ignored). Good designers are humble and just wait until it is their turn; they understand that certain aspects of the overall system should not be managed in each component. Bad designers have no clue what this means. In a proper OSGi enRoute design the component reacts to its configuration updates.
 
@@ -80,9 +76,7 @@ The magic is in the factories, they allow you to define multiple sets of propert
 
 ### PIDs
 
-PID stands for _Persistent IDentity_. It is an identifier with a dotted name (like a Java fully qualified name) that links a bundle to a set of properties.
-A.k.a. a primary key. When a bundle wants to get its configuration it registers a Managed Service with the PID as the service property. PIDs are so fundamental
-that this is the only non-framework entity with its own OSGi Framework constant: `Constants.SERVICE_PID` (`service.pid`).
+PID stands for _Persistent IDentity_. It is an identifier with a dotted name (like a Java fully qualified name) that links a bundle to a set of properties. A.k.a. a primary key. When a bundle wants to get its configuration it registers a Managed Service with the PID as the service property. PIDs are so fundamental that this is the only non-framework entity with its own OSGi Framework constant: `Constants.SERVICE_PID` (`service.pid`).
 
 Configuration Admin detects the PID and will look in its database of configuration records. If it has a set of properties, it will call the service with those properties, otherwise it will call it with a `null`. That is, the Managed Service is _always_ called.
 
@@ -104,7 +98,7 @@ You can find an example application at [OSGi enRoute Example][2]. This applicati
 
 ### How do I take an arbitrary object and ask OSGi for its configuration?
 
-In most non-OSGi environments the configuration model assumes that a component asks for configuration when it needs it, a so called pull model. OSGi in contrast uses a _push model_. The component gets the initial configuration pushed to it. In DS, it gets the configuration in the `activate` method. If the component wants to be updated of changes it can use the `modified` method using the `@Modified` annotation. So in general a component never has to request its configuration.
+In most non-OSGi environments the configuration model assumes that a component asks for configuration when it needs it, a so called pull model. In contrast, OSGi uses a _push model_. The component gets the initial configuration pushed to it. In DS, it gets the configuration in the `activate` method. If the component wants to be notified when changes occur to it's configuration it can use the `modified` method using the `@Modified` annotation. So in general a component never has to request its configuration.
 
 Maintain this precious invariant because it keeps the components as simple as possible while always synchronized with their persistent configuration. Realize that the moment that you start to go to [Configuration Admin] to fetch properties you have the really hard responsibility to also pick up changes to that configuration.
 

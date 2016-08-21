@@ -10,7 +10,7 @@ summary: Creating a sample application and deploying it.
 
 All this work to get a working provider! However, we've only run it in a evaluation and test mode. In this section we will take a look how we can use this provider bundle in an application we can deploy.
 
-There are a myriad of deploy formats in Java (and OSGi!): WAR files, Karaf CARs, EAR files, OSGi Subsystems, OSGi Deployment Admin, etc. Bndtools can support all of those through _plugins_ but always natively supports the most humblest of all deployment formats: an executable JAR. An executable JAR has no external dependencies, everything it needs outside the JDK is embedded.
+There are a myriad of deploy formats in Java (and OSGi!): WAR files, Karaf KARs, EAR files, OSGi Subsystems, OSGi Deployment Admin, etc. Bndtools can support all of those through _plugins_ but always natively supports the most humblest of all deployment formats: an executable JAR. An executable JAR has no external dependencies, everything it needs outside the JDK is embedded.
 
 The beauty of an executable JAR is that it can be started anywhere there is a java virtual machine:
 

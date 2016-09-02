@@ -18,11 +18,11 @@ Over time the menu system can have small changes. Variations seen are `Bnd OSGi 
 
 ![Create Application Project](/img/qs/app-create-0.png)
 
-This will open a wizard. Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is *crucial* since it defines the template we will use. So in the first page we enter this name.
+This will open a wizard where we select the _template_. For this tutorial, it is mandatory to use the OSGi enRoute template since our workspace is not setup for the other templates. The OSGi enRoute templates create specific project types based on the suffix of the project name. In this case we create an application project.
 
 ![Create Application Project](/img/qs/app-create-1.png)
  
-Click on `Next` to go to the page where we select the _template_. For this tutorial, it is mandatory to use the OSGi enRoute template since our workspace is not setup for the other templates. The OSGi enRoute templates create specific project types based on the suffix of the project name. In this case we create an application project.
+Now naming is important and we've found that using Java package like names that use the workspace name as a prefix works best for projects. So we pick `com.acme.prime.upper.application`. For OSGi enRoute, this `.application` suffix is *crucial* since it defines the template we will use. So in the first page we enter this name.
  
 ![Select the OSGi enRoute template](/img/qs/app-create-2.png)
  

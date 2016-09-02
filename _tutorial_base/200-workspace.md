@@ -12,7 +12,10 @@ In this section you will learn what a bnd workspace is and how it relates to the
 
 Optionally, you can learn how Eclipse, Git, enRoute, and bnd workspaces relate to each other.
 
-Before you start this section, make sure you've checked the [prerequisites](100-prerequisites.html) for enRoute on your platform. 
+Before you start this section, make sure you've checked the [prerequisites](100-prerequisites.html) for OSGi enRoute on your platform. 
+
+In the next section you learn how to setup a workspace. For this tutorial you must ensure you have a new workspace. If you've done the quickstart
+tutorial you might already have workspace. Delete it or use another name for this tutorial to not get confused.
 
 {% include workspace.md %}
 

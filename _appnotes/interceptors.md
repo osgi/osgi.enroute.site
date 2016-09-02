@@ -3,8 +3,6 @@ title: Interceptors in OSGi
 summary: Discussion of the ins and outs of using proxies in OSGi
 ---
 
-$$$ I am having a bit of trouble digesting the main message because of the structure of the article... Perhaps (even if it is hidden) adding a TOC would help grasp the structure better? $$$
-
 A recurring question on OSGi forums is how to use _interceptors_. The [Spring framework] made it popular to use _aspects_ of Aspect Oriented programming and obviously the desire is then there to use the same mechanisms in OSGi, because they are so enticing. 
 
 ## What is an Interceptor?

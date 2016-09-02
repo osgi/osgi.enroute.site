@@ -3,11 +3,13 @@ title: Interceptors in OSGi
 summary: Discussion of the ins and outs of using proxies in OSGi
 ---
 
+$$$ I am having a bit of trouble digesting the main message because of the structure of the article... Perhaps (even if it is hidden) adding a TOC would help grasp the structure better? $$$
+
 A recurring question on OSGi forums is how to use _interceptors_. The [Spring framework] made it popular to use _aspects_ of Aspect Oriented programming and obviously the desire is then there to use the same mechanisms in OSGi, because they are so enticing. 
 
 ## What is an Interceptor?
 
-Let's say we have a function that performs some work. In the following example we need to do some pre work, post work, and handle exceptions in similar way:
+Let's say we have a function that performs some work. In the following example we need to do some "pre work", "post work", and additionally handle exceptions in similar way:
 
 	void doWork() {
 	    preWork();
@@ -31,42 +33,49 @@ Let's say we have a function that performs some work. In the following example w
 		}
 	}
 
-Obviously, the actual work gets lost in the boiler plate code. This is the kind of boiler plate every programmer distinctly dislikes. How do we get rid of this code? 
+The problem with this approach is that it creates a lot of boiler plate code, and the actual work gets lost. How can we get rid of this noisy and distracting code? 
 
-Interceptors were deemed the solutions here. You add an annotation and  now the caller is ensuring that your annotation is correctly interpreted.
+One possible solution is to use Interceptors. With this approach, you add an annotation and now the caller is ensuring that your annotation is correctly interpreted.
 
 	@Work(SOME_PARAMETER)
 	void doWork() {
 		   … do work
 	}
 
-Voila, boiler plate gone. Ok, there is the small aspect (pun intended) of how we do not shift the burden to the caller. (Imagine the caller introspecting the annotations?) There are two mechanisms. We can _weave_ the code and add the proper boiler plate that way, or we can create a _proxy_ on the target and let the proxy handle the boiler plate.
+Voila, boiler plate gone! Problem solved. Or is it?
 
+Well, there is the small aspect (pun intended) of the burden being shifted to the caller. (Imagine the caller introspecting the annotations?) There are two mechanisms we could use to avoid this. We could _weave_ in the bioler plate code, or we could create a _proxy_ on the target and let the proxy handle the boiler plate.
+
+$$$ I don't understand the next sentence...$$$
 Weaving has its own problems, here we focus on this is  _interceptor_ pattern. You can use this pattern for any boiler plate you want to add to a method.
+
+Before going deeper into these possible solutions, let us first examine the problems with Interceptors in more detail.
 
 ## Problems with the Interceptor 
 
-The reason it is absent is that the interceptor model has a few disadvantages. 
+The reason it is absent in enRoute is because the interceptor model has a few serious disadvantages. 
 
-* `this` **transparancy** – The 'this' keyword cannot be used without care since it bypasses the interceptor proxy. I.e. the interceptor is not transparent. Generall, the target object is explicitly provided access to the proxy object and it should only call its own methods on that object. Obviouosly this is error prone.
-* **debug & test** – It is also much harder to debug because there is 'magic' happening outside your source code.
-* **inflexible** –  Annotations can handle the boiler plate code but are quite inflexible when you need, for example, to take arguments to the call into account.
+* `this` **transparency** – The 'this' keyword cannot be used without care since it bypasses the interceptor proxy. I.e. the interceptor is not transparent. Generally, the target object is explicitly provided access to the proxy object and it should only call its own methods on that object. Obviously this is error prone. $$$ I am having trouble understanding this statement. Perhaps an example would help? $$$
+* **debuging & testing** – It is also much harder to debug because there is 'magic' happening outside your source code.
+* **inflexibility** –  Annotations can handle the boiler plate code but are quite inflexible when you need, for example, to take arguments to the call into account.
 * **annotations** – Though annotations are extremely useful for configuration they have the danger to be over used as a way to create your own language on top of Java. They were not designed for that purpose and have extreme limitations.
 * **strings** – The semantics of the annotations are often defined by strings. There is no way for the compiler to verify those strings.
 * **dynamics** – In OSGi we've got a dynamic system. The interceptor will be a crucial dynamic dependency and this can sometimes be quite complex because these aspects tend to cross the module boundaries.
-* **only interfaces** – Proxies cannot operate on classes, the target MUST be defined with an interface. Since the target object is pure implementation code there is often no need to create this indirection for many of the methods. (byte code weaving has this problem to a much more limited extent.)
+* **limitation to interfaces** – Proxies cannot operate on classes, the target MUST be defined with an interface. Since the target object is pure implementation code there is often no need to create this indirection for many of the methods. (Byte code weaving has this problem to a much more limited extent.)
 
 ## Plain Old Java
 
-Modularity is about assuming as little as possible. In OSGi we've taken this to our mantra and combined it with a very strong focus on type safety. If you use plain old Java as it was intended to be you rarely have unexpected problems. The pain usually starts when you try to bypass the built-in safe guards or guarantees. 
+Modularity is about assuming as little as possible. In OSGi we've taken this as our mantra and combined it with a very strong focus on type safety. If you use plain old Java as it was intended to be you rarely have unexpected problems. The pain usually starts when you try to bypass the built-in safeguards or guarantees. 
 
-The problem is that often these solutions are so incredibly enticing. Any developer that can save his co-workers a few bytes in boiler plate can count on being kept free that evening in the pub, regardless what this means for the rest of the system's complexity.
+The problem is that often these solutions are so incredibly enticing. Any developer that can save his co-workers a few bytes in boiler plate can count on being teated to free beer that evening in the pub, regardless what this means for the rest of the system's complexity.
 
-When you go to an interceptor like model you create a relatively complex machinery. So the question is, is this overall complexity worth the reduced boiler plate code? Clearly in the transaction example it was. However, we're many years further today then when that model was introduced.
+When you opt for an interceptor-like model you create relatively complex machinery. So the question is, is this overall complexity worth the reduced boiler plate code? Clearly in the transaction example it was.
+
+However, we're many years further today then when that model was introduced, and there are now better ways.
 
 ## Lambdas
 
-Since Java 8 it has lambdas! (About 42 years after Smalltalk.) Lambdas are interceptors turned inside out. In the transaction composition problem the interceptor had to do something before it ran our code, then ran our code, and then handle any exceptions and do some post-processing. With lambdas, we can achieve the same model by the method calling the interceptor and passing the function.
+Since Java 8 we now have lambdas! (About 42 years after Smalltalk.) Lambdas are interceptors turned inside out. In the transaction composition problem the interceptor had to do something before it ran our code, then ran our code, and then handle any exceptions and do some post-processing. With lambdas, we can achieve the same model by the method calling the interceptor and passing the function.
 
 	void doWork() {
 	    interceptor.doWork( () -> ... working );

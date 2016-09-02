@@ -13,7 +13,26 @@ The archetypical use case for Event Admin is the case where you have useful info
 
 The Event Admin service captures this commonality.
 
-# Example Usage
+# Examples 
+
+## Example Handler
+
+The following code shows a component that handles an event on the topic: `some/topic`. 
+
+	import org.osgi.service.event.Event;
+	import org.osgi.service.event.EventHandler;
+	import org.osgi.service.event.EventConstants;
+	
+	@Component( property= EventConstants.EVENT_TOPIC + "=some/topic")
+	public class SomeListenerImpl implements EventHandler {
+	
+	    @Override
+	    public void handleEvent(Event event) {
+	        System.out.println("Got event " + event);
+	    }
+	}
+
+## Example Generator
 
 The following code shows a component that sends an event every second using the [scheduler][scheduler]. 
 

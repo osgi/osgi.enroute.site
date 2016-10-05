@@ -34,6 +34,8 @@ The Base Tutorial is a very extensive tutorial that takes you to all the princip
 ![Thumbnail for Maven Tutorial](/tutorial_eval/img/tutorial_eval.png)
 {: .thumb200-l } 
 
+THIS IS IN BETA FOR NOW
+
 This tutorial mirrors the base tutorial but uses Maven instead of Bndtools. It
 takes you to the process of creating a small web application with an expression
 evaluator with nothing but mvn and vi. It shows how to do API based design,

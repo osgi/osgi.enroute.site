@@ -29,6 +29,21 @@ The Base Tutorial is a very extensive tutorial that takes you to all the princip
 
 {: style='clear:both;' }
 
+## A Maven ONLY Tutorial for an Eval Service
+
+![Thumbnail for Maven Tutorial](/tutorial_eval/img/tutorial_eval.png)
+{: .thumb200-l } 
+
+This tutorial mirrors the base tutorial but uses Maven instead of Bndtools. It
+takes you to the process of creating a small web application with an expression
+evaluator with nothing but mvn and vi. It shows how to do API based design,
+it creates 2 providers, a Gogo command, and a web app. It also shows how to
+do integration testing with maven.
+
+[Go to the Maven Eval Service Tutorial](/tutorial_eval/050-start.html)
+
+{: style='clear:both;' }
+
 ## IoT Tutorial
 
 ![Thumbnail for IoT Tutorial](/img/tutorial_iot/exploring-led-breadboard-1.png)
@@ -63,7 +78,8 @@ The work you probably would like to avoid. However, sometimes you have to go int
 [Go to the Wrapping Tutorial](/tutorial_wrap/050-start.html)
 
 {: style='clear:both;' }
-  
+
+
 ## Maven Bnd Repository
 
 ![Thumbnail for Maven Tutorial](/tutorial_maven/img/maven.gif)

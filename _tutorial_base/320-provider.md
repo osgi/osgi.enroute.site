@@ -8,7 +8,7 @@ summary: Create a project that provides an implementation of the Eval service.
 
 ## What you will learn in this section
 
-In this section we create another project that provides an implementation for our Eval API, a so called _provider_. We will then write some JUnit test cases to test we implemented the evaluator correctly.
+In this section we create another project that provides an implementation for our Eval API, a so called _provider_.
 
 ## Create a Provider Project
 

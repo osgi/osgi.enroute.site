@@ -8,6 +8,12 @@ This repository holds the OSGi enRoute website hosted at [http://enroute.osgi.or
 * _tutorial_base – The base tutorial
 * ... – miscellaneous stuff, should be clear for someone with some web experience 
 
+## Run Local
+
+To run Jekyll locally:
+
+	$ bundle exec jekyll serve -w
+
 ## Contributing
 
 Want to hack on osgi.enroute.site? See [CONTRIBUTING.md](CONTRIBUTING.md) for information on building, testing and contributing changes.

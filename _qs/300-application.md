@@ -26,7 +26,7 @@ Now naming is important and we've found that using Java package like names that 
  
 ![Select the OSGi enRoute template](/img/qs/app-create-2.png)
  
-Select `Next` to go to the Java settinges page, which should not change since OSGi enRoute has already set this up.
+Select `Next` to go to the Java settings page, which should not change since OSGi enRoute has already set this up.
  
 ![Select the OSGi enRoute template](/img/qs/app-create-3.png)
  

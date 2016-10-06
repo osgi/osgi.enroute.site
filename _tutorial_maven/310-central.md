@@ -29,11 +29,6 @@ We only need 1 wrapper for all possible Maven Bnd Repository plugins. Make sure 
 The `ext` bnd files are read before the `./cnf/build.bnd` is read, we can therefore reliably override the configuration, just use the same property name: `-plugin.4.Central`. Therefore we override the configuration as follows in `./cnf/build.bnd`:
 
 	-plugin.4.Central = \
-	\
-	   aQute.bnd.deployer.repository.wrapper.Plugin; \
-	      location   = "${build}/cache/wrapper"; \
-	      reindex    = true, \
-	\
 	   aQute.bnd.repository.maven.provider.MavenBndRepository; \
 	      releaseUrl = https://repo.maven.apache.org/maven2/; \
 	      name       = Central

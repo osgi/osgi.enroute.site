@@ -15,6 +15,8 @@ A disclaimer. This tutorial is about learning to use OSGi enRoute, not about lea
 
 If you have any questions about this tutorial, please discuss them in the [forum][forum].
 
+{: style='clear:both;' }
+
 ## Sections
 
 <div>

@@ -35,8 +35,6 @@ One of the great tools to debug OSGi applications is the Apache Felix Web Consol
 
 First switch back to the bndtools perspective (usuall the bndools icon is at the right top). Then double click the `bnd.bnd` file, select the `Run` tab and add the `osgi.enroute.webconsole.xray.provider` to the `Run Requirements` list. Since we use dependencies, this plugin will automatically drag in the web console and the required Jetty web server. 
 
-And that is not all, the web console makes a rather noisy start by showing an unnecessary stack trace because it missing something from Deployment Admin. You can safely ignore this.
-{: class=bug }
 
 ![Run Window for adding XRay](/img/tutorial_base/debug-xray-0.png)
 

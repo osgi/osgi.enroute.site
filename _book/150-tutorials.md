@@ -70,18 +70,6 @@ This tutorial takes you through the steps to build a trivial Chat application us
 
 {: style='clear:both;' }
 
-## Bundle Wrapping [BETA]
-
-![Thumbnail for Wrapping Tutorial](/tutorial_wrap/img/program.png)
-{: .thumb200-l }
-
-The work you probably would like to avoid. However, sometimes you have to go into the messy world of non-OSGi bundles and get your hands dirty. This tutorial takes you in minute detail through the steps that are available to you when you wrap a bundle in an OSGi enRoute workspace. It handles what to include, and what not to include. How to handle dependencies, resources, all the way to the readme and manifest headers.
-
-[Go to the Wrapping Tutorial](/tutorial_wrap/050-start.html)
-
-{: style='clear:both;' }
-
-
 ## Maven Bnd Repository
 
 ![Thumbnail for Maven Tutorial](/tutorial_maven/img/maven.gif)

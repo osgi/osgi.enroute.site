@@ -2,7 +2,13 @@
 
 OSGi enRoute requires that you group a number of projects in a _bnd workspace_. A bnd workspace is basically a directory with a `cnf` directory. We start with a template workspace by getting it from git.
 
-This tutorial requires Bndtools 3.2.0 or later, the workspace templates were added in 3.2.0
+
+This is the BETA tutorial for OSGi enRoute 2.0.0. To use the right workspace template, 
+go to Bndtools preferences and select `Workspace Templates`.  You should edit the
+OSGi enRoute template and select the `next` branch.
+{: .warning } 
+
+This tutorial requires Bndtools 3.3.0 or later, the workspace templates were added in 3.2.0
 {: .note}
 
 We generally advise you to place things in your home directory (~). However, Eclipse does not recognize the tile (`~`) as a reference to your home directory so different paths are shown in the pictures.

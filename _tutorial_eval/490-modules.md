@@ -3,7 +3,7 @@ title: Modules
 layout: tutorial
 summary: Turning the parent pom into a module pom
 lprev: 480-testing
-lnext: 500-eclipse
+lnext: 600-ci
 ---
 
 ## What you will learn in this section

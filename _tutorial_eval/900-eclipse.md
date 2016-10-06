@@ -1,7 +1,7 @@
 ---
 title: Eclipse and Bndtools
 layout: tutorial
-lprev: 480-testing
+lprev: 600-ci
 lnext: 050-start
 summary: Use Eclipse to edit debug your bundles with the Bndtools editors
 ---

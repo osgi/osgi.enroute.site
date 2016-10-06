@@ -45,6 +45,12 @@ This `UpperApplication` component implements the _REST_ interface and is thus re
 REST methods are called from an untrusted external source so they should be protected by a check for authorization.
 {: .warning}
 
+The OSGi enRoute REST support is intended for calling your app from a browser. If you must implement 
+a complex REST API then it might be better to use JAX-RS. The OSGi is in the process of standardizing
+a service API for JAX-RS. 
+{: .note}
+
+
 ## HTML Resources
 
 Since this is a single page web app we also need some static resources for the Javascript code and CSS. 

@@ -3,6 +3,7 @@ title: Quick Start Tutorial
 layout: tutorial
 lprev: /book/150-tutorials.html
 lnext: /tutorial_base/050-start.html
+version: 2.0.0-SNAPSHOT
 noindex: true
 ---
 

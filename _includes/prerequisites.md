@@ -7,9 +7,10 @@ Before you start any of the tutorials you must prepare your environment so that 
 
 ## Installing bndtools
 
-You can install bndtools from the Eclipse market place, make sure you got version 3.2.0 or later. You can also install bndtools directly from the update site:
+You can install bndtools from the Eclipse market place, make sure you got version 3.3.0 or later. 
+You can also install bndtools directly from the update site:
 
-	https://dl.bintray.com/bndtools/bndtools/3.2.0
+	https://dl.bintray.com/bndtools/bndtools/3.3.0
 
 If we update bndtools with a stable release then we will place it here:
 
@@ -48,9 +49,6 @@ There is also multi-workspace launcher plugin from Torkild U. Resheim that incor
 
 > [OS X Eclipse Launcher Utility](http://marketplace.eclipse.org/content/osx-eclipse-launcher)
 
-### Unix
-
-There is a bug in Eclipse concerning the browser support in Linux. It may be necessary to configure an external browser in the Eclipse's Preferences for `bndtools/JPM`.
 
 [java8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [mars]: https://www.eclipse.org/downloads/

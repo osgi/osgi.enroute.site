@@ -30,7 +30,6 @@ In sorted order:
 * [Gradle][gradle] - The command line based build tool used in the continuous build on Travis.
 of the OSGi enRoute project.
 * [Java](https://www.java.com) – The not so sexy 20 year old, but oh man, it is the work horse of our industry.
-* [jpm4j](https://jpm4j.org) – Since OSGi has some extra needs on top of Maven Central, we use jpm4j.org to provide an OSGi perspective. 
 * [OSGi Alliance](https://www.osgi.org) – Where would we be without this seminal standard? Ok, don't ask.
 * [Travis](https://travis-ci.org) – Travis is an eye-opener for everybody that thinks continuous integration should be reserved for real men only. It shows how amazingly simple things can be when they are designed properly.
 

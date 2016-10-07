@@ -43,22 +43,6 @@ Java 8 is now included in the [NOOBS distribution][noobs]. So in the shell, you 
 
 The build numbers should be regarded as minimum. Java is installed on the latest Raspian OS but if Java is not installed on your machine, then you can download it from [Oracle's Java Embedded site][java] and install it locally. You might want to search for [java + Raspberry Pi on Google][javapi]. 
 
-## JPM
-
-[Jpm4j][jpm] is _Just Another Package Manager for Java_, it is related to bnd which is a big part of the OSGi enRoute tool chain. You can [install jpm][jpminstall] with the following commands:
-
-	pi@raspberrypi ~ $ curl https://bndtools.ci.cloudbees.com/job/bnd.master/719/artifact/dist/bundles/biz.aQute.jpm.run/biz.aQute.jpm.run-3.0.0.jar >jpm.jar
-	  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-	                                 Dload  Upload   Total   Spent    Left  Speed
-	100 1564k  100 1564k    0     0   319k      0  0:00:04  0:00:04 --:--:--  328k
-	pi@raspberrypi ~ $ sudo java -jar jpm.jar init
-	Home dir      /var/jpm
-	Bin  dir      /usr/local/bin
-	pi@raspberry ~ $ jpm version
-	3.0.0.201506171450
-	pi@raspberry ~ $ 
-{: .shell}
-
 ## Goodies
 
 To experiment with the Raspberry Pi we will need some sensors and actuators. It also helps to have a little breadboard and wires. It is amazing what you can get at amazon nowadays. If you can afford it, the [SunFounder][sunfounder] kit is like a boy's dream but for this tutorial you just need:
@@ -74,14 +58,19 @@ Any local electronics store has this material. If you need a reference, these pa
 
 ## Remote bnd Debugging
 
-Almost there, we only need one more install! The OSGi enRoute tool chain has a remote debugging facility. Remote debugging from bnd(tools) requires an _agent_ to be running inside an OSGi framework. However, in this case we would also like to define the actual framework in bnd(tools), we just need a program that installs a framework with an agent defined in a bnd(tools) bndrun file. This is the biz.aQute.remote.main program. Let's install it:
+Almost there, we only need one more install! The OSGi enRoute tool chain has a remote debugging facility. 
+Remote debugging from bnd(tools) requires an _agent_ to be running inside an OSGi framework. 
+However, in this case we would also like to define the actual framework in bnd(tools), we just need a 
+program that installs a framework with an agent defined in a bnd(tools) bndrun file. This is the 
+`biz.aQute.remote.main` program. Let's install it
 
-	pi@raspberrypi ~ $ sudo jpm install -f biz.aQute.remote.main
-	pi@raspberrypi ~ $ sudo bndremote -n 192.168.2.4
+
+	pi@raspberrypi ~ $ curl -o bndremote.jar curl http://repo1.maven.org/maven2/biz/aQute/bnd/biz.aQute.remote.main/3.3.0/biz.aQute.remote.main-3.3.0.jar 
+	pi@raspberrypi ~ $ sudo java -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044 -jar bndremote.jar -n 192.168.2.4
 	Listening for transport dt_socket at address: 1044
 {: .shell}
 	
-This will start the bndremote program in the Java debug mode and will listen to port 1044. This will allow us to debug OSGi enRoute applications in bndtools on another machine.
+This will start the bnd remote main program in the Java debug mode and will listen to port 1044. This will allow us to debug OSGi enRoute applications in bndtools on another machine.
 
 As you can see, we start the command with `sudo`, this is required to use the general purpose IO on the device. The `-n` option indicates the network we are running on, if you don't specify this you can only use the agent from the same machine (i.e. localhost). 
 
@@ -97,8 +86,6 @@ The next setup is the Eclipse works. Please follow the [quick start tutorial][qs
 [pinetw]: https://www.raspberrypi.org/documentation/troubleshooting/hardware/networking/ip-address.md
 [noobs]: https://www.raspberrypi.org/new-raspbian-and-noobs-releases/
 [javapi]: https://www.google.fr/search?q=raspberry+pi+java
-[jpm]: https://jpm4j.org
-[jpminstall]: https://jpm4j.org/#!/md/install
 [qs]: http://enroute.osgi.org/book/200-quick-start.html
 [base]: http://enroute.osgi.org/book/220-tutorial-base.html
 [sunfounder]: http://www.amazon.com/SunFounder-modules-Raspberry-Sensor-Extension/dp/B00HU0G9TO/ref=sr_1_1?ie=UTF8&qid=1434718754&sr=8-1&keywords=raspberry+pi+sensors&pebp=1434718756184&perid=1EEX5GD8E2YX258S7SQ0

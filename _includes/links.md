@@ -1,4 +1,3 @@
-[jpm4j]: http://jpm4j.org/#!/
 [Maven Central]: http://repo2.maven.org/maven2/
 [The Big Ball of Mudd]: http://www.laputan.org/mud/
 [Wrapper Plugin]: http://bnd.bndtools.org/plugins/wrapper.html

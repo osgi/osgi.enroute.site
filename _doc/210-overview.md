@@ -42,7 +42,7 @@ Since it is impossible to compete successfully with the original we would be bet
 
 So one of the primary goals is to get a _profile_ out that contains the _base_ service APIs. However, JES is not only successful because it provided usable APIs. The fact that the industry came together caused a flurry of activity in development tools. For a long time OSGi tooling did not get the fraction of funding that JES got. Over time tools like bnd(tools) and the maven bundle plugin provided the parts of the tool chain. However, if you come out of the blue getting started requires you to be an early adopter. The vision of OSGi enRoute is therefore to create a tool chain that makes it trivial to get started building true SOS applications.
 
-The OSGi tool chain is based on Eclipse, bnd(tools), Git, Gradle, Github, jpm4j, and Travis. Through tutorials we make it really easy to get started with a working, albeit simple, application.
+The OSGi tool chain is based on Eclipse, bnd(tools), Git, Gradle, Github, and Travis. Through tutorials we make it really easy to get started with a working, albeit simple, application.
 
 ### Documentation & Tutorials
 
@@ -145,8 +145,6 @@ persistence — Provides support for JPA on OSGi
 ![Workflow](/img/book/ov/bundles.jpg)
 
 ![Workflow](/img/book/ov/bundles-closed.jpg)
-
-## jpm4j
 
 ## Assembling
 

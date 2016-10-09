@@ -48,7 +48,6 @@ And the content:
 			<groupId>org.osgi</groupId>
 			<artifactId>osgi.enroute.examples.eval</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<relativePath>..</relativePath>
 		</parent>
 		<packaging>jar</packaging>
 	
@@ -62,6 +61,8 @@ And the content:
 			</dependency>
 		</dependencies>
 	</project>
+
+We must also add command as module in the parent pom.xml, as we've done for the modules of the previous steps in this tutorial.
 
 ## The Command
 
@@ -216,7 +217,6 @@ JAR.
 	
 	              
 	G! eval 3 + 4
-	eval 3 + 4
 	7.0
 	G! 
 {: .shell }

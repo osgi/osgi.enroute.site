@@ -117,7 +117,7 @@ This will open a window (sometimes after some time) with the resolution:
 ![Resolution view](img/resolution-result.png)
 
 The result shows the required resources based on the initial requirements in the
-top list. It then shows any _optional_ resources. These are resources are included
+top list. It then shows any _optional_ resources. These are resources that are included
 because the resolution is ok without them but some resources could use them. You
 can select the desired resources and then update and resolve.
 
@@ -127,7 +127,7 @@ why that resource is included. That is, what resources required it.
 When you click `Finish` the `-runbundles` list is updated and the bnd.bnd file
 is saved.
 
-This works considerably faster and more elegant than running `mvn install`,
+This works considerably faster and is more elegant than running `mvn install`,
 get the new `-runbundles` and update the bndrun file. However, it does require
 Eclipse.
 

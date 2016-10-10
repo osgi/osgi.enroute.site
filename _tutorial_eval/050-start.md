@@ -18,7 +18,7 @@ aficionados.)
 What we will build is a similar application that is developed in the [Base Tutorial] but instead of Bndtools we use Maven. 
 
 This application is a trivial Web application. It provides a text input box and an `Eval` button. The
-box is send to the server for evaluation. There a service is used to evaluate the input. We'll
+text is sent to the server for evaluation. There a service is used to evaluate the input. We'll
 turn the application into an executable JAR that contains all its dependencies.
 
 The tutorial will only use plain Maven and vi. You can of course use your own favorite

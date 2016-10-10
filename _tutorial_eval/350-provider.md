@@ -62,7 +62,6 @@ The parent and packaging is the same as for the API project:
 	  	<groupId>org.osgi</groupId>
 	  	<artifactId>osgi.enroute.examples.eval</artifactId>
 	  	<version>1.0.0-SNAPSHOT</version>
-		<relativePath>..</relativePath>
 	  </parent>
 	  
 	  <packaging>jar</packaging>
@@ -72,9 +71,10 @@ project name defines its *type*; this is supported by OSGi enRoute templates. A 
 project must therefore have a name that ends in `.provider`. We also like to start 
 the project name with the workspace, the service API name and an indication of what 
 kind of implementation this is. Well, this is going to be an awful simple implementation, 
-so the name should be: `osgi.enroute.examples.eval.provider`. So in the POM we should have:
+so the name should be: `osgi.enroute.examples.eval.simple.provider`. So in the POM we should have:
 
 	  <artifactId>osgi.enroute.examples.eval.simple.provider</artifactId>
+	  <description>Eval Provider</description>
 
 We inherit the OSGi enRoute base API (a collection of standardized and specialized service contracts to 
 make it easy for web apps) but in this case we need the API project as dependency
@@ -190,11 +190,27 @@ There are OSGi experts who do not completely agree though.
 
 ## Build
 
-We now have enough project information to build the bundle. It is about time now to take a look 
-at how our module (bundle) really looks like. So let's build it.
+In Maven-terms we've now defined a multi-module project, currently containing two modules : api and simple.provider.
+The modules should be defined in an aggregator pom, and often this is done in the parent pom.
+We should add a <modules> section in the pom.xml in the parent folder
 
-	simple.provider $ mvn clean install
+	simple.provider $ cd ..
+	osgi.enroute.examples.eval $ vi pom.xml
+	// fill in from next section, right before the <properties> section
+{: .shell }
+
+	  <modules>
+	  	<module>api</module>
+	  	<module>simple.provider</module>
+	  </modules>
+
+We now have enough project information to build the bundle. As we've changed the parent pom, it's best to do a clean build from there.
+And then we can take a look at how our module (bundle) really looks like.
+Make sure you're in the top directory!
+
+	osgi.enroute.examples.eval $ mvn clean install
 	...
+	osgi.enroute.examples.eval $ cd simple.provider
 	simple.provider $ bnd print target/osgi.enroute.examples.eval.simple.provider-1.0.0-SNAPSHOT.jar
 	[MANIFEST osgi.enroute.examples.eval.provider-1.0.0-SNAPSHOT]
 	Bnd-LastModified                         1474989660493                           
@@ -202,24 +218,26 @@ at how our module (bundle) really looks like. So let's build it.
 	Built-By                                 aqute                                   
 	Bundle-Description                       Provides a simple implementation for an eval parser
 	Bundle-ManifestVersion                   2                                       
-	Bundle-Name                              osgi.enroute.examples.eval.provider      
-	Bundle-SymbolicName                      osgi.enroute.examples.eval.provider      
+	Bundle-Name                              osgi.enroute.examples.eval.simple.provider      
+	Bundle-SymbolicName                      osgi.enroute.examples.eval.simple.provider      
 	Bundle-Version                           1.0.0.201609271521                      
 	Created-By                               1.8.0_25 (Oracle Corporation)           
 	Export-Package                           osgi.enroute.examples.eval.api;version="1.0.0"
-	Import-Package                           osgi.enroute.examples.eval.api;version="[1.0,2)"
+	Import-Package                           osgi.enroute.examples.eval.api;version="[1.0,1.1)"
 	Manifest-Version                         1.0                                     
 	Private-Package                          osgi.enroute.examples.eval.provider      
 	Provide-Capability                       osgi.service;objectClass:List<String>="osgi.enroute.examples.eval.api.Eval"
 	Require-Capability                       osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+	Require-Capability                       osgi.extender;filter:="(&(osgi.extender=osgi.component)(version>=1.3.0)(!(version>=2.0.0)))",osgi.service;filter:="(objectClass=org.osgi.service.log.LogService)";effective:=active,osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.8))"
 	Service-Component                        OSGI-INF/osgi.enroute.examples.eval.provider.xml
 	Tool                                     Bnd-3.3.0.201609221906                  
 
 	[IMPEXP]
 	Import-Package
-	  osgi.enroute.examples.eval.api          {version=[1.0,2)}
+	  org.osgi.service.log                    {version=[1.3,2)}
+	  osgi.enroute.examples.eval.api          {version=[1.0,1.1)}
 	Export-Package
-	  osgi.enroute.examples.eval.api          {version=1.0.0, imported-as=[1.0,2)}
+	  osgi.enroute.examples.eval.api          {version=1.0.0, imported-as=[1.0,1.1)}
 {: .shell }
 
 From this we can see the following layout of our provider bundle.

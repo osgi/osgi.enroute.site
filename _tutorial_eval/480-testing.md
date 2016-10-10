@@ -25,7 +25,7 @@ with JUnit tests. Each bundle will list its test classes in the Test-Cases
 manifest header. The bnd runtime support has a tester that will look for bundles
 with this header and then automatically runs these test.
 
-In this instance, we need should have a test to verify the Eval service.
+In this instance, we want to define a test to verify the Eval service.
 
 ## Create the pom
 
@@ -48,9 +48,8 @@ Let's create the pom.
 			<groupId>org.osgi</groupId>
 			<artifactId>osgi.enroute.examples.eval</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<relativePath>..</relativePath>
 		</parent>
-		<packaging>jar</packaging>
+	
 		<artifactId>osgi.enroute.examples.eval.test</artifactId>
 
 We need the API bundle and JUnit as dependencies. We use the OSGi enRoute wrapped
@@ -257,12 +256,14 @@ We want to test the parsii provider.
 	-resolve.effective:				resolve, active
 		
 	-runsystempackages.eqnx:		javax.script
-	-runsystemcapabilities.dflt: 	${native_capability
+	-runsystemcapabilities.dflt: 	${native_capability}
 	
 
 Just like the bndrun file before, we need to resolve the file to find the bundles.
+
 	integration-test $ mvn install
 	...
+{: .shell }
 	
 	-runbundles: \
 		org.apache.felix.configadmin; version='[1.8.8,1.8.9)',\

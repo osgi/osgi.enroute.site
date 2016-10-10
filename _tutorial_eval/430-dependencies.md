@@ -42,9 +42,10 @@ directory of the `osgi.enroute.examples.eval` directory. The `pom.xml` file shou
 			<groupId>org.osgi</groupId>
 			<artifactId>osgi.enroute.examples.eval</artifactId>
 			<version>1.0.0-SNAPSHOT</version>
-			<relativePath>..</relativePath>
 		</parent>
+
 		<artifactId>osgi.enroute.examples.eval.parsii.provider</artifactId>
+		<description>Eval Provider based on Parsii library</description>
 	
 		<dependencies>
 			<dependency>
@@ -131,11 +132,13 @@ it is easy to end up with classes from long gone experiments with the bnd.bnd fi
 
 ## Building
 
+Again, don't forget to add the parsii.provider module to the parent pom.
+
 We now build the bundle:
 
 	parsii.provider $ mvn install
 	...
-	parsii.provider $ bnd target/osgi.enroute.examples.eval.parsii.provider-1.0.0-SNAPSHOT.jar 
+	parsii.provider $ bnd print target/osgi.enroute.examples.eval.parsii.provider-1.0.0-SNAPSHOT.jar 
 	[MANIFEST osgi.enroute.examples.eval.parsii.provider-1.0.0-SNAPSHOT]
 	Bnd-LastModified                         1475601027531                           
 	Build-Jdk                                1.8.0_25                                

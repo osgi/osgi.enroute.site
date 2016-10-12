@@ -157,6 +157,17 @@ snapshot bundles and/or plugins.
 				<layout>default</layout>
 			</repository>
 		</repositories>
+		
+		<pluginRepositories>
+        	<pluginRepository>
+	            <id>bnd-snapshots</id>
+	            <url>https://bndtools.ci.cloudbees.com/job/bnd.master/lastSuccessfulBuild/artifact/dist/bundles/</url>
+	            <layout>default</layout>
+	            <snapshots>
+	                <enabled>true</enabled>
+	            </snapshots>
+	        </pluginRepository>
+    	</pluginRepositories>		
 
 	</project>
 

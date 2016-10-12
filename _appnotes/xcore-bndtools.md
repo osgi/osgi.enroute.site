@@ -3,8 +3,6 @@ title: Getting Xcore to work in Bndtools
 summary: How to make an Xcore project work within Bndtools, both via the UI and command line.
 ---
 
-[![Build Status](https://travis-ci.org/CoastalHacking/xcore-bndtools-example.svg?branch=master)](https://travis-ci.org/CoastalHacking/xcore-bndtools-example)
-
 This [example project](https://github.com/CoastalHacking/xcore-bndtools-example) shows
 how Xcore can work within Bndtools. It's divided into two sub-goals:
 
@@ -53,7 +51,7 @@ High level:
 
 ### Add repositories and dependencies using bndtools semantics
 
-* Resolve the Xcore dependencies (i.e. "@GenModel" annotation) by adding the following repositories to "build.bnd" cnf project:
+* Resolve the Xcore dependencies (i.e. `@GenModel` annotation) by adding the following repositories to `build.bnd` cnf project:
 
 ```
     -plugin.5.Xtext: \
@@ -135,7 +133,7 @@ Note: Xcore shouldn't add any additional libraries to the Xcore project build pa
 
 #### Unit Test
 
-Refer to the [Testing the Provider with %28Standard%29 JUnit](tutorial_base/340-junit.html)
+Refer to the [Testing the Provider with %28Standard%29 JUnit](/tutorial_base/340-junit.html)
 section for background on unit testing in Bndtools.
 
 * In the Xcore project, add the following to `test/com.example.bndtools.xcore.model/ExampleTest.java`:

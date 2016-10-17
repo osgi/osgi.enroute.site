@@ -332,7 +332,7 @@ key.
 
 We can now sign the files with bnd:
 
-	osgi.enroute $ bnd nexus -u https://oss.sonatype.org/service/local/repositories/orgosgi-1090 files
+	osgi.enroute $ bnd nexus -u https://oss.sonatype.org/service/local/repositories/orgosgi-1090 sign
 	Password: ....
 {: .shell }
 

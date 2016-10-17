@@ -3,6 +3,7 @@ title: Base Tutorial
 layout: tutorial
 lprev: /qs/050-start.html
 lnext: /tutorial_iot/050-start.html
+version: 2.0.0
 noindex: true
 ---
 

@@ -4,6 +4,7 @@ layout: tutorial
 summary: Shows how to build an OSGi enRoute program using Maven only
 lprev: /book/150-tutorials
 lnext: 100-parent
+version: 2.0.0
 noindex: true
 ---
 

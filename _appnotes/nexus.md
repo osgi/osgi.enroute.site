@@ -18,7 +18,7 @@ This App Note expects that you have experience in working with Git, Bndtools, an
 This App Note assumes the following minimum versions:
 
 * bnd – 3.3.0
-* Gradle – 2.13 (should be download automatically
+* Gradle – 2.13 (should be downloaded automatically via gradlew
 
 Make sure your gradle.properties reflect at least bnd 3.3.0
 
@@ -65,7 +65,7 @@ The OSGi has the following repositories:
 * Osgi Snapshots – https://oss.sonatype.org/content/repositories/osgi-snapshots/
 
 The given URLs are the URLs under which the artifacts are made available, the
-deply artifacts can differ.
+deploy artifacts can differ.
 
 ## Workspace
 
@@ -92,6 +92,9 @@ The following settings in, for example `cnf/build.bnd` should do this for you:
 			name="OSGiNexus"
 	
 	-releaserepo: OSGiNexus
+
+Notice that the staging URL is fixed and has no specific name. Nexus will create
+a new temporary staging repository based on the group name.
 
 ## About the Maven Bnd Repository
 
@@ -190,7 +193,7 @@ all artifacts with a single version. We there set the Bundle-Version header in `
 As long as the projects in the workspace do not override the Bundle-Version header, they
 will all inherit this version.
 
-For normal builds we sue the `-SNAPSHOT` extension, the Maven Bnd Repository uses that,
+For normal builds we set the `-SNAPSHOT` extension, the Maven Bnd Repository uses that,
 just like Maven, as a signifier for releasing to the snapshot repository.
 
 ## POM Generation
@@ -210,7 +213,7 @@ The `${@version}` is set by the pom generator when this macro is expanded. It
 is the version calculated for the bundle itself. This allows us to
 slightly tweak the version. We are using the major, minor, and micro part but
 then only add the snapshot part if present. We ignore the qualifier. This is a
-timestamp and does not work well with maven.
+timestamp and does not work well with Maven.
 
 The POM generator uses the following Manifest headers to create the POM.
 
@@ -342,7 +345,9 @@ to nexus. This keeps your GPG key local.
 ## Release
 
 On nexus you can now close the staging repository. This could trigger rules, which might fail.
-If they fail, you might have to start over.
+If they fail, you might have to start over. 
+
+Once you've been able to close the staging repository then you can release it via Nexus. 
 
 ## Finalize
 

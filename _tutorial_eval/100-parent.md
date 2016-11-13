@@ -129,7 +129,7 @@ only.
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.enroute.base.api</artifactId>
-				<version>2.0.0-SNAPSHOT</version>
+				<version>2.0.0</version>
 			</dependency>
 
 We are adding JUnit because we will use this to test our code:

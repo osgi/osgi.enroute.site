@@ -65,7 +65,7 @@ wrappers have problems.
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.enroute.junit.wrapper</artifactId>
-				<version>4.12.0-SNAPSHOT</version>
+				<version>4.12.0</version>
 			</dependency>
 		</dependencies>
 	
@@ -214,7 +214,7 @@ allowed to resolve against.
 			<dependency>
 				<groupId>org.osgi</groupId>
 				<artifactId>osgi.enroute.pom.distro</artifactId>
-				<version>2.0.0-SNAPSHOT</version>
+				<version>2.0.0</version>
 			</dependency>
 			
 		</dependencies>

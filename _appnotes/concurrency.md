@@ -131,7 +131,7 @@ Volatile variables are not atomic. For example, the following code can fail:
 
 	volatile int v;
 	
-	void foo() { v++; }
+	void foo() { v++; } // BAD!!!!
 
 In this example it is possible to miss an increment because thread A can read the 
 variable in a register, increment it, and then store it. However, when we're unlucky

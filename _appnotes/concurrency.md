@@ -433,7 +433,7 @@ cases but sometimes the component does not want to die for the sake of an
 optional reference. In that case we can handle the situation _dynamically_.
 
 By far the easiest solution is to mark the field as _volatile_. A volatile 
-field will automatically get marked as `cardinality=ReferenceCardinality.OPTIONAL`.
+field will automatically get marked as `policy=DYNAMIC`.
 
 	@Component(service=DynamicOptionalReference.class)
 	public class DynamicOptionalReference {

@@ -103,17 +103,17 @@ a volatile read. For example,
 Another thread may see the assignment of `c` before the assignment of `a` (or not at all) but 
 after it reads `v`, the other variables must have their proper values assigned.
 
-To write proper code it is therefore paramount to understand the _before/after_ relation.
+To write proper code it is therefore paramount to understand the _happens before_ relation.
 Fortunately, the OSGi specifications make it very clear what the order of 
-certain operations is. Once the order is defined, you have a proper before/after
+certain operations is. Once the order is defined, you have a proper happens before
 relation and you're guaranteed to see anything that was written before you were 
 called.
 
-As a note, a before/after relation is always between two threads although it is 
+As a note, a happens before relation is always between two threads although it is 
 transitive between threads. In the following picture the colors of the thread
 bars show that though thread B makes lots of modifications, these modifications 
 are only defined to be visible by thread A after thread B had a write barrier
-and thread A a read barrier. That is, established a firm before-after
+and thread A a read barrier. That is, established a firm happens before
 relation.
 
 ![Write/Read Barriers](img/concurrency/conc-before-after.png)
@@ -121,7 +121,7 @@ relation.
 A bit of warning here. The tricky part is that most code that calls out to 
 other libraries tends to go through lots of read/write barriers and works 
 as intended. However, there is no guarantee until you can prove that there is
-a proper before-after relation. That is, your code works fine in the debugger
+a proper happens before relation. That is, your code works fine in the debugger
 but fails in runtime. That is, the fact that something works for you is not an
 indication that you've done your work properly.
 
@@ -141,6 +141,18 @@ will happen but it can actually also happen on a single core machine.
 
 How do we protect against this?
 
+First, there are special types in `java.util.concurrent` that provide high level
+constructs that prevent many of the problems that plague the initial `synchronized`. 
+For this example, the Atomic Integer would be the most practical solution.
+
+	final AtomicInteger	v= new AtomicInteger(0);
+	
+	void foo() { v.incrementAndGet(); }
+
+However, it helps understanding the problems these high level constructs solve by
+taking a look at the `synchronized` keyword. Some problems are easier to solve with the
+`synchronized` keyword.
+
 For this problem, Java knows the construct of a _synchronized_ block. A synchronized block takes a 
 _lock_ object. When the synchronized block is entered it attempts to get a lock
 on that object for the current thread. Only one thread can get this lock at any moment
@@ -149,6 +161,9 @@ in time.
 Once the thread has the lock, it will perform a read barrier, ensuring that the cache and the
 main memory are synchronized. This brings us in the wonderful position that
 we are the only thread that owns the locked object and has a correct view of main memory. 
+This of course does not mean other threads see the same main memory. Other threads
+should defer working with these variables except when inside a synchronized block that
+protects them.
 
 We can now read, make a decision on the value, and
 write without having to worry that other threads interfere if they lock on the same
@@ -160,10 +175,10 @@ until all writes so far are flushed to main memory. Only then will it release th
 Therefore the following code would properly count the number of calls to `foo`.
 
 	int v;
-	Object lock = new Object();
+	final Object vLock = new Object(); // protectes v 
 	
 	void foo() { 
-		synchronized(lock) {
+		synchronized(vLock) {
 			v++;
 		} 
 	}
@@ -176,13 +191,19 @@ and a write barrier just before it returns the lock we're guaranteed the followi
 
 ### Deadlocks
 
-Synchronized blocks are slow and have limitations. A synchronized block must be short
-and should not call out to _foreign_ code. Foreign code is code that is not under
+Synchronized blocks are slow due to the lock and crossing two barriers. They also have 
+limitations. 
+
+A synchronized block must be short and should not call out to _foreign_ code. Foreign code is code that is not under
 the same control as the author of the synchronized block. The danger is that 
 a synchronized block can cause a _deadlock_ that way. Thread A is in a synchronized
 block and causes Thread B to wait for that synchronized block. Since A now waits for B
 and B waits for A they are in a deadly embrace. The chance for deadlocks is increased
 massively with nested synchronizations.
+
+If you cannot avoid blocking then make sure that you always acquire locks in 
+a consistent order. If one order is always followed for multiple locks then
+a deadlock cannot occur.
 
 ### Special Lock Object
 
@@ -191,7 +212,21 @@ data structures and not call out to foreign code. The should also not use any
 object that is available outside their private scope. That is, never use a 
 service object to synchronize on since anybody can do that. Either use a private
 object that plays a role in the scenario or create a specific object for it
-with `new Object`.
+with `new Object`. If you have a number of variables that are protected by the 
+same lock then it might be a good idea to put all of them in a private class:
+
+	static private class Atomic {
+		int a;
+		int b;
+	}
+	final Atomic together = new Atomic();
+	
+	void foo() {
+		synchronized(together) {
+			together.a++;
+			together.b--;
+		}
+	} 
 
 Last but not least, never use the `wait()` and `notify()` methods associated with
 synchronized blocks. Those use cases have effectively been replaced with the
@@ -259,16 +294,6 @@ that can atomically set a memory location while returning the previous value. Th
 this must pass the memory barriers it is more efficient in comparison with
 a lock.
 
-In the increment example, we could have used the Atomic Integer class that provides
-a lock free construct to increment an integer.
-
-	final AtomicInteger n = new AtomicInteger(0);
-	
-	void foo() {
-		n.incrementAndGet();
-	}
-
-
 ## Atomically Closing
 
 There frequently is a potential race condition between the close operation
@@ -309,31 +334,33 @@ and overly locks/synchronizes parts. So let's see what we can rely on.
 ### Ordering
 
 DS provides a very strict ordering. This ordering implies that there is a very clear
-before-after relationship between the different methods. There is no gain using volatile 
+happens before relationship between the different methods. There is no gain using volatile 
 variables or other synchronization constructs between these phases because this is 
 already been done by DS. That is, if you set an instance variable in the constructor
 then there is a full guarantee that this variable is visible in the bind
 or activate methods even if these methods, as is allowed, were called on different threads.
 
-The following is the guaranteed ordering:
+The following is the guaranteed ordering that a DS component can observe:
 
 1. Constructor – DS will always create a new object, it will **never** reuse an existing object.
-2. Bind – The bind methods or field injections are called in alphabetical order. 
+2. Bind – The bind methods or field injections are called in alphabetical order when using annotations. 
    (Though dynamic methods can of course be called at any time.)
 3. Activate – Only if all methods are called is the activate method calls. If this method does
    not throw an exception, it is guaranteed that the deactivate will be called. If
    an exception is thrown the following phases are not executed.
-4. Registration – Bind the actual service object to the service. Only from this step are service 
-   calls being made to the component.
-5. Work ...
-6. Unregistration – Before we deactivate the object we unregister it so no new calls can come in.
-7. Deactivate – Clean up
-8. Unbinds – And unbind methods are called
-9. Release of object – DS will release the object so that no longer any references are held
-10. Finalize – Java garbage collects the object
+4. Active – During the active phase the following methods can be called in any order from
+   any thread and in parallel:
+   * Any methods of the registered services
+   * A modified methods that dynamically takes the modified configuration properties
+   * Any of the updated reference methods if defined 
+5. Deactivate – Clean up
+6. Unbinds – And unbind methods are called
+7. Release of object – DS will release the object so that no longer any references are held
+8. Finalize – Java garbage collects the object
 
-One caveat. Lazy services are registered before their constructor is called. The initialization of the
-DS component will take place when the service is used for the first time. 
+Lazy services are registered before their constructor is called. The initialization of the
+DS component will take place when the service is used for the first time. However, this
+should not be observable by the component itself. 
 
 ## Static References
 
@@ -735,7 +762,7 @@ See for the code [here](https://github.com/osgi/osgi.enroute.examples.concurrenc
 ## Background Threads
 
 One of the easiest way to prevent concurrency problems is to execute all code
-on a single thread. Any work then gets queued on this thread will then not
+on a single thread. This is called _thread confinement_. Any work then gets queued on this thread will then not
 require any synchronization. This pattern is used in many cases to actually increase
 performance because the only synchronization required is the queuing of the
 the work operations. All work can then be executed without locks and barriers inside
@@ -971,10 +998,10 @@ management. The basic model of a Promise is:
 		Promise<Foo>	p = startFoo();
 		return p
 			.then( this::step1 )
+			.then( this::step2 )
 			.then( this::step3 )
 			.then( this::step4 )
-			.then( this::step5 )
-			.then( this::step6, this::failure );
+			.then( this::step5, this::failure );
 	}
 
 In the real world this code will execute completely independent of its invocation.
@@ -1027,7 +1054,8 @@ to the future. In the following example we show how to use a promise to:
 
 * start the initialization in a background thread
 * block until the initialization is finished when called on a working method of the service
-* defer the deactivate method until initialization is done
+* defer the deactivate method until initialization is done. This can potentially mean that
+  the actual close method is called on another thread, much later than the deactivate method.
 
 The following code implements this. 
 
@@ -1070,6 +1098,56 @@ The following code implements this.
 
 You can find this code [here](https://github.com/osgi/osgi.enroute.examples.concurrency/tree/master/osgi.enroute.examples.concurrency.sync/src/osgi/enroute/examples/concurrency/init).
    
+## Modifying Configuration Properties
+
+If the configuration of a component changes then DS can dynamically update the 
+component if it defines a _modified_ method. This method must be marked with the
+@Modified annotation. The following is an example.
+
+	@Component(service=DynamicModifiedConfiguration.class, configurationPolicy=ConfigurationPolicy.REQUIRE)
+	public class DynamicModifiedConfiguration {
+		
+		int		config;
+		
+		@interface Config {
+			int config() default 1;
+		}
+		@Activate
+		void activate(Config config) {
+			this.config = config.config();
+		}
+		@Modified
+		void modified(Config config) {
+			this.config = config.config();
+		}
+	}
+
+You can find this code [here](https://github.com/osgi/osgi.enroute.examples.concurrency/tree/master/osgi.enroute.examples.concurrency.sync/src/osgi/enroute/examples/concurrency/modified).
+
+## Updating the Service Properties of a Reference
+
+If the service properties of a service change while a component has a reference then the 
+component must be reactivated unless it has defined an _updated_ method. The updated
+method is added by giving it the name of the reference prefixed with `updated`. The
+following code shows this:
+
+	@Component(service=DynamicUpdatedReferenceProperties.class)
+	public class DynamicUpdatedReferenceProperties {
+	
+		int foo;
+		
+		@Reference
+		void setFoo( Foo foo, Map<String,Object> map) {
+			this.foo = (int) map.getOrDefault("property", -1);
+		}
+		
+		void updatedFoo( Map<String,Object> map) {
+			this.foo = (int) map.getOrDefault("property", -2);
+		}
+	}
+
+You can find this code [here](https://github.com/osgi/osgi.enroute.examples.concurrency/tree/master/osgi.enroute.examples.concurrency.sync/src/osgi/enroute/examples/concurrency/modified_ref).
+
 ## Conclusion
 
 Concurrency and its associated areas are hard. Software is hard. We hope that this

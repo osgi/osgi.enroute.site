@@ -470,7 +470,7 @@ In general it is one of those cases where 'shit happens'. In a concurrent enviro
 like Java it is possible to end up in a sad place. Your code should always be prepared
 to accept exceptions when you call other services. This does not mean you should catch
 them, on the contrary. It is much better to forward the exceptions to the caller
-so that they do not unnecessary get wrapped up in wrapping exceptions and lose the 
+so that they do not unnecessarily get wrapped up in wrapping exceptions and lose the 
 original context.
 
 In almost all cases there is a top level function that initiated your request. It
@@ -713,7 +713,7 @@ That is, we must be able to call it multiple times without creating side effects
 services to be the list.
 
 In the `removeFoo` method we use the  `computeIfPresent` method which only calls our
-mapping function if the key did not yet exist. Again, also this function can be called multiple 
+mapping function if the key already exists. Again, also this function can be called multiple 
 times and must also be idempotent.
 
 You can find the code for these examples [here](https://github.com/osgi/osgi.enroute.examples.concurrency/tree/master/osgi.enroute.examples.concurrency.sync/src/osgi/enroute/examples/concurrency/dynamic);
@@ -724,7 +724,7 @@ A very nasty problem exists when there are cycles in your service references. If
 has a static reference to component Top and Top has references to all Bottom's then you have 
 a cycle. This is not an uncommon case but will not work in a simple way with DS
 even though the specification explicitly allows it for dynamic references. The problem is
-that many services are lazy
+that many services are lazy.
 
 DS implementations run into problems when the Top component is being injected
 with the dynamic Bottom services. If Bottom is defined _lazy_ then the construction
@@ -762,7 +762,7 @@ See for the code [here](https://github.com/osgi/osgi.enroute.examples.concurrenc
 ## Background Threads
 
 One of the easiest way to prevent concurrency problems is to execute all code
-on a single thread. This is called _thread confinement_. Any work then gets queued on this thread will then not
+on a single thread. This is called _thread confinement_. Any work that gets queued on this thread will then not
 require any synchronization. This pattern is used in many cases to actually increase
 performance because the only synchronization required is the queuing of the
 the work operations. All work can then be executed without locks and barriers inside
@@ -831,8 +831,8 @@ loop of the simple queuing example because there are more failure scenarios.
   Java IO calls. To stop these loops, it will be necessary to close the 
   server socket. 
 * We need to ensure that errors are not overloading the system. It will be necessary
-  to delay for a some time between errors
-* All connections that are opened must be closed when the component is deactivated
+  to delay for some time between errors.
+* All connections that are opened must be closed when the component is deactivated.
 
 This is surprisingly complex as the following code testifies:
 
@@ -1047,7 +1047,7 @@ before the service is registered. This method should not stay away too long.
 What to do when there is some lengthy initialization? A common pattern
 is to start the initialization on a background thread but then block in all
 methods that require the initialization to have finished. These are the
-service methods but also the deactivate method.
+service methods and also the deactivate method.
 
 An ideal object for this is the OSGi _Promise_. It can defer an operation
 to the future. In the following example we show how to use a promise to:

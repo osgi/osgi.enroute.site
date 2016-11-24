@@ -345,7 +345,7 @@ The following is the guaranteed ordering that a DS component can observe:
 1. Constructor – DS will always create a new object, it will **never** reuse an existing object.
 2. Bind – The bind methods or field injections are called in alphabetical order when using annotations. 
    (Though dynamic methods can of course be called at any time.)
-3. Activate – Only if all methods are called is the activate method calls. If this method does
+3. Activate – If this activate method does
    not throw an exception, it is guaranteed that the deactivate will be called. If
    an exception is thrown the following phases are not executed.
 4. Active – During the active phase the following methods can be called in any order from

@@ -704,7 +704,7 @@ use the `compute` methods on Concurrent Map.
 		}	
 	}
 
-Th `computer` methods map an old value to the next value. However, no lock is held,
+The `computer` methods map an old value to the next value. However, no lock is held,
 which implies that the mapping method can be called multiple times. This requires
 therefore that our mapping function is _idempotent_. 
 

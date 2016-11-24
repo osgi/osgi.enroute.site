@@ -445,7 +445,7 @@ field will automatically get marked as `policy=DYNAMIC`.
 This simple but there is now obviously a price. The following bad code shows
 a common (but horrible) pattern that people use to use `foo`:
 
-	if ( foo != null )
+	if ( foo != null ) // BAD!
 		foo.bar();
 		 
 This innocuous looking code is actually a Null Pointer Exception in the waiting.
@@ -704,7 +704,7 @@ use the `compute` methods on Concurrent Map.
 		}	
 	}
 
-The `computer` methods map an old value to the next value. However, no lock is held,
+The `compute` methods map an old value to the next value. However, no lock is held,
 which implies that the mapping method can be called multiple times. This requires
 therefore that our mapping function is _idempotent_. 
 

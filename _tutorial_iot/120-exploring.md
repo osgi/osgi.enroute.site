@@ -97,7 +97,7 @@ So first add the maven dependency into the central.xml of your bnd workspace (in
 			<version>2.0.0</version>
 		</dependency> 
 
-To see change you probably have to refresh the repository tree from eclipse repositories view. Then add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
+To see change you probably have to refresh the repository tree from eclipse repositories view. Then add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction: 
 
 	-runrequires: \
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.domotica.application)',\

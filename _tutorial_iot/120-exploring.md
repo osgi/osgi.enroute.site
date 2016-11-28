@@ -87,24 +87,30 @@ The bndtools IDE will continuously update the bundles on the remote agent. Let's
 
 ## Talking to the Hardware
 
-We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We could use this library directly but we can also use the OSGi enRoute version. The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle therefore also registers  a Pi4J GpioController.
+We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We can use this library directly. At first add the maven dependency into the central.xml of your bnd workspace (into the cnf folder) with these lines:
+	
+	<dependency>
+		<groupId>com.pi4j</groupId>
+		<artifactId>pi4j-core</artifactId>
+		<version>1.1</version>
+	</dependency>
 
-So first add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
+Then add `pi4j-core` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
 
 	-runrequires: \
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.domotica.application)',\
-		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.pi.provider)'
+		pi4j-core;version='[1.1.0,1.1.1)'
 
-Actually, the easiest way to do this is to select the `Run` tab and then drag the `osgi.enroute.iot.pi.provider` from the repositories to the Run Requirements list. Save this file, then go to the `debug.bndrun` file and click on the `Resolve` button in the `Run` tab and save this file. This will load the   `osgi.enroute.iot.pi.provider` bundle in the Pi.
+Actually, the easiest way to do this is to select the `Run` tab and then drag the `pi4j-core` from the repositories to the Run Requirements list (you probably had to refresh the repository tree from eclipse repositories view before). Save this file, then go to the `debug.bndrun` file and click on the `Resolve` button in the `Run` tab and save this file. This will load the `pi4j-core` bundle in the Pi.
 
-The `osgi.enroute.iot.pi.provider` bundle adds a GpioController service from the Pi4j project. Since we want to use that GpioController service we need access to the type. We therefore need to add  this bundle also to the `bnd.bnd` file's `-buildpath` instruction.
+The `pi4j-core` bundle adds a GpioController service from the Pi4j project. Since we want to use that GpioController service we need access to the type. We therefore need to add  this bundle also to the `bnd.bnd` file's `-buildpath` instruction.
 
 	-buildpath: \
 		osgi.enroute.base.api,\
 		osgi.enroute.logger.simple.provider,\
 		osgi.enroute.web.simple.provider;version=1.2,\
 		osgi.enroute.iot.circuit.provider,\
-		osgi.enroute.iot.pi.provider
+		pi4j-core;version=1.1
 	
 You can of course also click on the `+` in the `bnd.bnd`'s file Build tab and it from the list.
 

@@ -89,7 +89,15 @@ The bndtools IDE will continuously update the bundles on the remote agent. Let's
 
 We can now run code on the Pi so the next step is to talk to do something really "Piish". Obviously, talking to the hardware is pretty specific to the Pi. The primary library talking to the hardware in the Java world is [Pi4j][pi4j]. We could use this library directly but we can also use the OSGi enRoute version. The OSGi enRoute distro contains a bundle `osgi.enroute.iot.pi.provider`. This bundle contains [Pi4j][pi4j], which is a Java library based on [Wiring Pi][wiringpi], a native code library to control the BCM2835 chip in the Raspberry Pi, which will be our gateway to leave the cyberworld and talk to things. This bundle is designed to work with the `osgi.enroute.iot.circuit.provider` bundle, however, we will first descent to the Pi4J level. The  `osgi.enroute.iot.pi.provider` bundle therefore also registers  a Pi4J GpioController.
 
-So first add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction:
+So first add the maven dependency into the central.xml of your bnd workspace (into the cnf folder) with these lines:
+
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>osgi.enroute.iot.pi.provider</artifactId>
+			<version>2.0.0</version>
+		</dependency> 
+
+To see change you probably have to refresh the repository tree from eclipse repositories view. Then add `osgi.enroute.iot.pi.provider` to the `osgi.enroute.examples.iot.domotica.bndrun`'s `-runrequires` instruction: 
 
 	-runrequires: \
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.iot.domotica.application)',\

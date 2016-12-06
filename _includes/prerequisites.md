@@ -19,7 +19,7 @@ If we update bndtools with a stable release then we will place it here:
 You can find the details how to install bndtools on the [bndtools website](http://bndtools.org/installation.html#update-site)
 
 **Note** Do not install the development version since it is currently incompatible with the tutorials.
-{ .note }
+{: .note }
 
 ## Conventions
 

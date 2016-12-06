@@ -18,6 +18,9 @@ If we update bndtools with a stable release then we will place it here:
 
 You can find the details how to install bndtools on the [bndtools website](http://bndtools.org/installation.html#update-site)
 
+**Note** Do not install the development version since it is currently incompatible with the tutorials.
+{ .note }
+
 ## Conventions
 
 Whenever you see a text like `File/Open` we hope you treat it as a menu path. That is, go to the menu bar, click on `File`, then select `Open`. If the menu path starts with @/ then it is from the context menu on the selected object, which has then been clearly defined in the previous sentence.

@@ -1,6 +1,7 @@
 ---
 title: Concurrency
 summary: OSGi is multi-threaded and service calls will happen on different threads. This App note discusses the concurrency issues and provides a number of standard patterns that work well in OSGi (and outside).
+sponsor: SMA
 ---
 
 In OSGi you will write code that runs in a multi-threaded environment. There are 
@@ -23,6 +24,8 @@ that are used to discuss the issue. You can find this workspace on [Github](http
 If you want to understand the many patterns better then load this workspace
 in Bndtools and run the tests. (As a note, all components use service=... only
 to make them easier to test.)
+
+This App Note was sponsored by [SMA](http://www.sma.de/).
 
 ## Time is More Relative than You Think
 

@@ -172,7 +172,7 @@ in the `osgi.enroute.examples.eval/bndrun` directory:
 
 	-runrequires: \
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.eval.simple.provider)',\
-		osgi.identity;filter:='(osgi.identity=osgi.enroute.gogo.shell.provider)',\
+		osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
 		osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.eval.command)'
 

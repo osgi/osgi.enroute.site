@@ -128,7 +128,7 @@ More interesting is the fact that the current Bundle Context is also available. 
     5|Active     |    1|org.eclipse.equinox.metatype (1.4.100.v20150408-1437)
     6|Active     |    1|org.osgi.service.metatype (1.3.0.201505202024)
     7|Active     |    1|osgi.enroute.gogo.commands.provider (1.0.0.201603161954)
-    8|Active     |    1|osgi.enroute.gogo.shell.provider (1.0.0.201603041814)
+    8|Active     |    1|org.apache.felix.gogo.shell (1.0.0.201603041814)
 {: .shell }
 
 We could now also get a specific bundle:

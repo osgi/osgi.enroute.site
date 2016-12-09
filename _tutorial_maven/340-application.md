@@ -66,7 +66,7 @@ This will make it available in the Repositories view.
 
 ## Resolving
 
-We can now double click on the `osgi.enroute.examples.eval.bndrun` file in the `osgi.enroute.examples.eval.application` project. We can now drag the requirements from the repositories to the `Run Requirements` list in the usual fashion. Make sure the application is added to the initial requirements. You should also add the Gogo shell `(osgi.identity=osgi.enroute.gogo.shell.provider)`. Although the application project provides a Gogo command, it does not have a dependency on Gogo.
+We can now double click on the `osgi.enroute.examples.eval.bndrun` file in the `osgi.enroute.examples.eval.application` project. We can now drag the requirements from the repositories to the `Run Requirements` list in the usual fashion. Make sure the application is added to the initial requirements. You should also add the Gogo shell `(osgi.identity=org.apache.felix.gogo.shell)`. Although the application project provides a Gogo command, it does not have a dependency on Gogo.
 
 If you resolve then you get the following bundles (or similar):
 
@@ -79,7 +79,7 @@ If you resolve then you get the following bundles (or similar):
 		org.osgi.service.metatype;version='[1.3.0,1.3.1)',\
 		osgi.enroute.examples.eval.application;version=snapshot,\
 		osgi.enroute.examples.eval.provider;version='[1.0.0,1.0.1)',\
-		osgi.enroute.gogo.shell.provider;version='[1.0.0,1.0.1)'
+		org.apache.felix.gogo.shell;version='[1.0.0,1.0.1)'
 
 We can now run the command by clicking on the `Debug` icon at the top right:
 

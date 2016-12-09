@@ -214,7 +214,7 @@ change the `-runrequires` to use the `parsii.provider` instead of the simple pro
 {: .shell }
 
 	-runrequires: \
-		osgi.identity;filter:='(osgi.identity=osgi.enroute.gogo.shell.provider)',\
+		osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.shell)',\
 		osgi.identity;filter:='(osgi.identity=org.apache.felix.gogo.command)',\
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.eval.command)',\
 		osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.eval.parsii.provider)'
@@ -233,7 +233,7 @@ Then resolve, which should give something like:
 		org.osgi.service.metatype; version='[1.3.0,1.3.1)',\
 		osgi.enroute.examples.eval.command; version='[1.0.0,1.0.1)',\
 		osgi.enroute.examples.eval.parsii.provider; version='[1.0.0,1.0.1)',\
-		osgi.enroute.gogo.shell.provider; version='[2.0.0,2.0.1)'
+		org.apache.felix.gogo.shell; version='[2.0.0,2.0.1)'
 	...
 {: .shell }
 

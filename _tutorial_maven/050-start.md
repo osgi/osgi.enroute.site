@@ -18,7 +18,7 @@ The example we're using is a bit warped because we're mixing development of Mave
 
 It is therefore not recommended to mix bnd and Maven projects in a single workspace for real world projects.
 
-The result of this tutorial can be found on Github at [https://github.com/osgi/osgi.enroute.examples.maven][https://github.com/osgi/osgi.enroute.examples.maven].
+The result of this tutorial can be found on Github at [https://github.com/osgi/osgi.enroute.examples.maven](https://github.com/osgi/osgi.enroute.examples.maven).
 
 A disclaimer. This tutorial is about learning to use Maven with OSGi enRoute, not about learning Java, Git, Eclipse, nor Maven basics. It is assumed that you have basic experience with these tools. It is also assumed you have at least done the [Quick Start Tutorial].
 

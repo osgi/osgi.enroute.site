@@ -135,7 +135,8 @@ We now install our bundle:
 ## Adding the Command Bundle to the Runtime
 
 In the `bndrun` project we must now add the command project to the pom so that
-it becomes a dependency. 
+it becomes a dependency. We should also add the Gogo shell, since it isn't 
+included in the enRoute distro.
 
 	command $ cd ../bndrun
 	bndrun $ vi pom.xml
@@ -161,6 +162,11 @@ therefore look like the following.
 				<artifactId>osgi.enroute.examples.eval.command</artifactId>
 				<version>1.0.0-SNAPSHOT</version>
 			</dependency>		
+			<dependency>
+			    <groupId>org.apache.felix</groupId>
+			    <artifactId>org.apache.felix.gogo.shell</artifactId>
+			    <version>1.0.0</version>
+			</dependency>
 		</dependencies>
 
 We also need to add the bundle to our initial requirements in the bndrun file
@@ -182,12 +188,17 @@ And then we run the command to resolve:
 	...
 	
 	-runbundles: \
-		org.apache.felix.configadmin; version='[1.8.8,1.8.9)',\
-		org.apache.felix.log; version='[1.0.1,1.0.2)',\
-		org.apache.felix.scr; version='[2.0.2,2.0.3)',\
-		org.eclipse.equinox.metatype; version='[1.4.100,1.4.101)',\
-		org.osgi.service.metatype; version='[1.3.0,1.3.1)',\
-		osgi.enroute.examples.eval.provider; version='[1.0.0,1.0.1)'
+	    org.apache.felix.configadmin; version='[1.8.8,1.8.9)',\
+	    org.apache.felix.gogo.command; version='[0.16.0,0.16.1)',\
+	    org.apache.felix.gogo.runtime; version='[1.0.0,1.0.1)',\
+	    org.apache.felix.gogo.runtime; version='[0.16.2,0.16.3)',\
+	    org.apache.felix.gogo.shell; version='[1.0.0,1.0.1)',\
+	    org.apache.felix.log; version='[1.0.1,1.0.2)',\
+	    org.apache.felix.scr; version='[2.0.2,2.0.3)',\
+	    org.eclipse.equinox.metatype; version='[1.4.100,1.4.101)',\
+	    org.osgi.service.metatype; version='[1.3.0,1.3.1)',\
+	    osgi.enroute.examples.eval.command; version='[1.0.0,1.0.1)',\
+	    osgi.enroute.examples.eval.parsii.provider; version='[1.0.0,1.0.1)'
 	
 	[INFO] ------------------------------------------------------------------------
 	[INFO] BUILD FAILURE

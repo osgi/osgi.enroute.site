@@ -39,7 +39,7 @@ This tab does not only show you the bnd errors, it also shows you the current bu
 
 ![Adding to the Build Path](/img/tutorial_base/provider-create-2.png)
 
-You can type text in the search box to filter the list. Double click the `com.acme.prime.eval.provider.api` project and click in `Finish`. Save the `bnd.bnd` file because otherwise there is no effect.
+You can type text in the search box to filter the list. Double click the `com.acme.prime.eval.api` project and click in `Finish`. Save the `bnd.bnd` file because otherwise there is no effect.
 
 You can now go back to the `EvalImpl` class and import the `Eval` interface. Just select the `Eval` name (which is red underlined) and click `Control-1`. You then click on Command-1, and select  `Import 'Eval' (com.acme.prime.eval.api)`. This will take care of the import. Don't forget to save!
 
@@ -85,7 +85,7 @@ If we translate this to a picture with the standard OSGi notation it looks as fo
 
 ![Bundle Layout](/img/tutorial_base/provider-imports-1.png)
 
-We can see that our simple bundle is importing the `com.acme.prime.eval.api` package to get the `Eval` interface. This is quite unpleasant for our users since they are forced to always download two bundles. Since the service API package and our simple implementation are tightly coupled (virtually any change will force a change in our provider) we can simplify the life of our customers by exporting the API from our provider bundle. This can be done by dragging the imported package in the right 'Import Packages' list to the Exported Package list and dropping it there. If there is already an export of the `com.acme.prime.eval.provider.api` then you should remove it, it is a placeholder.
+We can see that our simple bundle is importing the `com.acme.prime.eval.api` package to get the `Eval` interface. This is quite unpleasant for our users since they are forced to always download two bundles. Since the service API package and our simple implementation are tightly coupled (virtually any change will force a change in our provider) we can simplify the life of our customers by exporting the API from our provider bundle. This can be done by dragging the imported package in the right 'Import Packages' list to the Exported Package list and dropping it there. If there is already an export of the `com.acme.prime.eval.api` then you should remove it, it is a placeholder.
 
 After you save the `bnd.bnd` file, you'll see that the imports disappear.
 

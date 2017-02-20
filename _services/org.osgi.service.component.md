@@ -129,17 +129,17 @@ However, there are some interesting cases that we can simplify by making things 
 
 	@Component
 	public class WhiteboardExample {
-		Set<Member> members = new HashSet<>();
+		private final Set<Member> members = new HashSet<>();
 		
 		@Reference(
-			cardinality=Cardinality.MULTIPLE, 
-			policy=Policy.DYNAMIC
+			cardinality=ReferenceCardinality.MULTIPLE, 
+			policy=ReferencePolicy.DYNAMIC
 		)
-		synchronized void addMember( Member member ) {
+		public synchronized void addMember( Member member ) {
 			members.add(member);
 		}
 		
-		synchronized void removeMember( Member member ) {
+		public synchronized void removeMember( Member member ) {
 			members.remove(member);
 		}
 	}
@@ -150,17 +150,17 @@ This is how it looks:
 
 	@Component
 	public class DynamicLogExample {
-		final AtomicReference<LogService> logRef = new AtomicReference<>();
+		private final AtomicReference<LogService> logRef = new AtomicReference<>();
 
 		@Reference(
-			cardinality=Cardinality.MULTIPLE, 
-			policy=Policy.DYNAMIC
+			cardinality=ReferenceCardinality.MULTIPLE, 
+			policy=ReferencePolicy.DYNAMIC
 		)
-		void setLog( LogService log ) {
+		public void setLog( LogService log ) {
 			logRef.set(log);
 		}
 		
-		void unsetLog( LogService log ) {
+		public void unsetLog( LogService log ) {
 			logRef.compareAndSet(log, null);
 		}
 		

@@ -131,7 +131,10 @@ However, there are some interesting cases that we can simplify by making things 
 	public class WhiteboardExample {
 		Set<Member> members = new HashSet<>();
 		
-		@Reference
+		@Reference(
+			cardinality=Cardinality.MULTIPLE, 
+			policy=Policy.DYNAMIC
+		)
 		synchronized void addMember( Member member ) {
 			members.add(member);
 		}

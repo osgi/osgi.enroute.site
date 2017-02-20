@@ -129,14 +129,14 @@ However, there are some interesting cases that we can simplify by making things 
 
 	@Component
 	public class WhiteboardExample {
-		Map<Member> members = new ConcurrentHashMap<>();
+		Set<Member> members = new HashSet<>();
 		
 		@Reference
-		void addMember( Member member ) {
+		synchronized void addMember( Member member ) {
 			members.add(member);
 		}
 		
-		void removeMember( Member member ) {
+		synchronized void removeMember( Member member ) {
 			members.remove(member);
 		}
 	}

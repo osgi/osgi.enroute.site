@@ -179,7 +179,7 @@ The dependencies we've used so far were quite promiscuous: they accepted any ser
 	@Component
 	public class SelectiveServiceExample {
 		@ProviderType
-		public static interface SelectiveService {}
+		public interface SelectiveService {}
 	
 		@Component
 		public static class Foo implements SelectiveService {}

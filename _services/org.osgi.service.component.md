@@ -156,6 +156,7 @@ This is how it looks:
 			cardinality=ReferenceCardinality.MULTIPLE, 
 			policy=ReferencePolicy.DYNAMIC
 		)
+
 		public void setLog( LogService log ) {
 			logRef.set(log);
 		}
@@ -176,12 +177,22 @@ This is how it looks:
 The dependencies we've used so far were quite promiscuous: they accepted any service with the given service interface. In certain cases you want to be a bit more selective. Maybe you only want the services with a given property. The `target` option in the `@Reference` annotation holds a filter that makes that reference more selective. You only get services injected that are matching that filter. For example, we only want to see the services that have the `foo` property set. 
 
 	@Component
-	public class DynamicLogExample {
-		Selective selective;
-		
-		@Reference( target="(foo=*)" )
-		void setSelective( Selective selective) {
-			this.selective = selective;
+	public class SelectiveServiceExample {
+		@ProviderType
+		public static interface SelectiveService {}
+	
+		@Component
+		public static class Foo implements SelectiveService {}
+	
+		@Component(property={"foo=bar"})
+		public static class FooBar implements SelectiveService {}
+
+		@Component(property={"foo=bar.batz"})
+		public static class FooBarBatz implements SelectiveService {}
+	
+		@Reference( target="(foo=bar.*)" )
+		void setSelective( SelectiveService selectiveService) {
+			System.err.println("Set selectiveService to: " + selectiveService.getClass().getCanonicalName());
 		}
 	}
 

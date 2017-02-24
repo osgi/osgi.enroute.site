@@ -26,7 +26,7 @@ The tutorial will only use plain Maven and vi. You can of course use your own fa
 editor to edit the pom and bnd files.
 
 The result of this tutorial can be found on Github at 
-[https://github.com/osgi/osgi.enroute.examples.eval](https://github.com/osgi/osgi.enroute.examples.eval]).
+[https://github.com/osgi/osgi.enroute.examples.eval](https://github.com/osgi/osgi.enroute.examples.eval).
 
 A disclaimer. This tutorial is about learning to use Maven to build an OSGi enRoute 
 executable JAR, it is not about learning vi, Java, Git, nor Maven or M2Eclipse. 

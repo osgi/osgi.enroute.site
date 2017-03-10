@@ -1,4 +1,6 @@
 ---
+title: Extending Gogo Shell
+summary: A primer on how to write commands in the Gogo shell
 ---
 
 Gogo is a surprising powerful shell in a very tiny package. It is used in virtually all OSGi installations that I meet. Newcomers to OSGi often love the shell to explore and navigate the environment. However, when I look at open source Gogo commnands they often look like:
@@ -336,5 +338,12 @@ Such a function can be called with:
     8
 {: .shell }
 
-## Formatting the Return Value
+## Output
+
+The preferred way in Gogo is to not bother about output. Each method should return normal plain Java Objects.
+
+
+
+In the enterprise world it is considered a bad habit to write to the `System.out` stream. Though shall log! I've therefore notied that few people take advantage of one of Gogo's most simplifying features: `System.out` is the preferable way to create output. The reason `System.out` is considered a bad habit is because the console is a shared resource and if everybody starts to dump their information there it becomes a mess. However, Gogo uses _threadio_, which is a service that multiplexes `System.out` and `System.err` (and also `System.in`). Each thread is associated with its own triplet of streams. So as long as you print to sysout inside a command then any Gogo user will get the information even if they run the shell remotely.
+
 

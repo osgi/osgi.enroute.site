@@ -14,19 +14,14 @@ The Gogo shell feels very bash like but has a number of differences. Primary, th
 
 Let's explore the shell to show what it can do out of the box. The examples in this OSGi enRoute application note are executed in the OSGi enRoute [osgi.enroute.gogo.commands.provider] project on Github. If you check out the workspace then you can go to the [osgi.enroute.gogo.commands.provider] project, double click the bnd.bnd file. You should then resolve it and and then debug it. This should provide you with the following output in the console:
 
-	   ___ _ __ |  _ \ ___  _   _| |_ ___ 
-	  / _ \ '_ \| |_) / _ \| | | | __/ _ \
-	 |  __/ | | |  _ < (_) | |_| | |_  __/
-	  \___|_| |_|_| \_\___/ \__,_|\__\___|
-	              http://enroute.osgi.org/
-	G! 
+	g! 
 {: .shell }
 
 ## Commands
 
 The most simple command is `echo` which works as expected.
 
-	G! echo Hello World
+	g! echo Hello World
 	Hello World
 {: .shell }
 
@@ -34,9 +29,9 @@ The most simple command is `echo` which works as expected.
 
 In the Eclipse console you can unfortunately not edit the commands. However, you can access the history using the bang ('!').
 
-	G! !ech
+	g! !ech
 	Hello World
-	G! !1
+	g! !1
 	Hello World
 {: .shell }
 
@@ -46,9 +41,9 @@ In standard terminals, you can use the cursor keys to move back and forth.
 
 Quoting (double or single) is optional if the word does not contain spaces or some special characters like '|', ';',  and some others. So in this case 2 tokens are passed to echo. Notice that we can quote the two words turning it into a single token:
 
-	G! echo Hello                     World
+	g! echo Hello                     World
 	Hello World
-	G! echo 'Hello                     World'
+	g! echo 'Hello                     World'
 	Hello                     World
 {: .shell }
 
@@ -56,17 +51,17 @@ Quoting (double or single) is optional if the word does not contain spaces or so
 
 You can execute multiple commands on a line by separating the commands with a semicolon (`';'`).
 
-	G! echo Hello; echo World
+	g! echo Hello; echo World
 	Hello 
 	World
 {: .shell }
 
 Multiple commands can also be separated by a _pipe_ character. In that case the output is the input of the next command. Gogo has a built-in `grep` command so we can use `echo` to create output and `grep` to check the output.
 
-	G! echo Hello | grep Hello
+	g! echo Hello | grep Hello
 	Hello
 	true
-	G! echo Hello | grep World
+	g! echo Hello | grep World
 	Hello
 	false
 {: .shell }
@@ -75,11 +70,11 @@ Multiple commands can also be separated by a _pipe_ character. In that case the 
 
 Two built-in commands `cat` and `tac` ( tac = reversed cat because it stores) are available to provide file data and store file data. Together with the pipe operator they replace the input and output redirection of the bash shell.
 
-	G! echo Hello | tac temp.txt
+	g! echo Hello | tac temp.txt
 	Hello
-	G! echo World | tac -a temp.txt
+	g! echo World | tac -a temp.txt
 	World
-	G! cat temp.txt
+	g! cat temp.txt
 	Hello
 	World
 {: .shell }
@@ -88,7 +83,7 @@ Two built-in commands `cat` and `tac` ( tac = reversed cat because it stores) ar
 
 Notice that You can find out about the options of a command by using `-?` (This is not implemented on commands without options and it is not always consistently implemented:
 
-	G! tac -?
+	g! tac -?
 	Usage: tac \[-al\] \[FILE\]
 		-a --append              append to FILE
 		-l --list                return List<String>
@@ -119,7 +114,7 @@ Gogo's commands are methods on objects. By default Gogo adds all public methods 
 
 More interesting is the fact that the current Bundle Context is also available. This interface has a method `getBundles` so we can now just get the bundles with the `bundles` command.
 
-	G! bundles
+    g! bundles
     0|Active     |    0|org.eclipse.osgi (3.10.100.v20150529-1857)
     1|Active     |    1|org.apache.felix.configadmin (1.8.6)
     2|Active     |    1|org.apache.felix.gogo.runtime (0.16.2)
@@ -133,7 +128,7 @@ More interesting is the fact that the current Bundle Context is also available. 
 
 We could now also get a specific bundle:
 
-	G! bundle 4
+	g! bundle 4
 	Location             reference:file:/...
 	State                32
 	Bundle                   4|Active     |    1|org.apache.felix.scr (2.0.0)
@@ -191,9 +186,9 @@ The syntax feels very natural but there is something a bit tricky going on. The 
 
 We've already use string literals. However, it is also possible to use lists and maps:
 
-	G! [1 2 3] size
+	g! [1 2 3] size
 	3
-	G! [a=1 b=2 c=3] get b
+	g! [a=1 b=2 c=3] get b
 	2
 {: .shell }
 	
@@ -229,17 +224,17 @@ The Gogo shell can store commands for later execution. The `{` and `}` delimiter
 
 You can pass arguments to the function. They are named $1..$9. $0 is the command name if available. The $it macro refers to $1.
 
-	G! f = { echo $it }
+	g! f = { echo $it }
 	echo $1
-	G! f Hello World
+	g! f Hello World
 	Hello
 {: .shell }
 
 Obviously it is not very nice that we miss the `World` because we only used $1. There is a magic variable called `$args`. This variable is list that gets expanded into separate arguments. So we can change our function to use all the arguments when the function is invoked:
  
-	G! f = { echo $args }
+	g! f = { echo $args }
 	echo $args
-	G! f Hello         World
+	g! f Hello         World
 	Hello World
 {: .shell }
 
@@ -260,21 +255,45 @@ Gogo provides a number of built in commands that use the functions to provide co
 
 We can now also use the `if` command:
 
-	G! l = []
-	G! if {$l isempty} { echo empty } { echo not empty }
+	g! l = []
+	g! if {$l isempty} { echo empty } { echo not empty }
 	empty
-	G! $l add foo
-	G! if {$l isempty} { echo empty } { echo not empty }
+	g! $l add foo
+	g! if {$l isempty} { echo empty } { echo not empty }
 	not empty
 {: .shell }
 
 You can negate with the `not` command, which takes a function:
 	
-	G! if { not {$l isempty}} { echo not empty } { echo empty }
+	g! if { not {$l isempty}} { echo not empty } { echo empty }
 	not empty
 {: .shell }
 
 TODO while, until
+
+## Adding Commands
+
+You can add any object as a command. If you add an instance then the methods of that instance will be available as commands. However, make sure that you can only add one instance of a given type. The commands would overshadow eachother. For example, we could add a list as a command. Since this is an Array List, all its methods become available. 
+
+	g! addcommand silly-scope [1 2 3 4] 
+	g! size
+	4
+	g! isempty
+	false
+	g! get 3
+	4
+	g!
+{: .shell }
+
+Clearly this is not that useful. However, it is also possible to add all static methods of a class. This is done automatically for you at startup with the System class. If you ask for the properties then this is actually calling the static method `getProperties()`. For example, we can add all the Math functions to be in the math scope.
+
+	g! addcommand math ((bundle 0) loadclass java.lang.Math) 
+	g! sin 2
+	0.9092974268256817
+	g!
+{: .shell }
+
+The `((bundle 0) loadclass java.lang.Math)` is caused by a bug in Gogo. It overloads the `addCommand()` methods in such a way that Gogo cannot coerce the string `java.lang.Math` to a class. Ah well.
 
 ## Exceptions
 

@@ -295,6 +295,29 @@ Clearly this is not that useful. However, it is also possible to add all static 
 
 The `((bundle 0) loadclass java.lang.Math)` is caused by a bug in Gogo. It overloads the `addCommand()` methods in such a way that Gogo cannot coerce the string `java.lang.Math` to a class. Ah well.
 
+## Prompt 
+
+The `g!` prompt is not hard coded. You can override the prompt by setting the variable `prompt` (Surprise!). The value can be a simple string:
+
+	g! prompt = "$ "
+	$ sin 2
+	0.9092974268256817
+	$ 
+{: .shell }
+
+However, Gogo would not be Gogo if we could not do this a little more exciting. Lets be original and add the name of the local host. For that, we need to add the InetAddress static methods to our command set.
+
+	g! addcommand inet ((bundle 0) loadclass java.net.InetAddress)
+	g!  prompt = { echo ((localhost) hostname) "$ " }
+	zeno.local $
+{: .shell }
+
+## Formatting
+Gogo was designed to format an object to a string in two places. 
+
+* Send to a pipe – This is controlled by `.Format.Pipe`
+* Send to the user – This is controlled by `.Gogo.format`
+
 ## Exceptions
 
 You (and any code you call) can throw exceptions. The last exception is stored in the `$exception` variable and there is a built in function `e` that shows the stack trace.

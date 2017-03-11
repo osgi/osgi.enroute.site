@@ -42,7 +42,7 @@ The OSGi enRoute Application template has created a complete runnable project. T
 
 The Http Server will run by (the OSGi) default on port 8080. You can change this port number by setting a run property in the `osgi.enroute.examples.iot.domotica.bndrun` file:
 
-	-runproperty: or.osgi.service.http.port = 9090
+	-runproperties: org.osgi.service.http.port = 9090
 
 So double click this file and go to the `Source` tab. In the editor, add the following instruction:
 

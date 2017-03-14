@@ -1,7 +1,12 @@
 ---
 title: Extending Gogo Shell
 summary: A primer on how to write commands in the Gogo shell
+author: Peter Kriens
 ---
+
+This application note was written out of my (Peter Kriens) frustration with many Gogo commands I meet in the wild. The way the commands are written are often taken way more lines than necessary and arenot reusable. This application note was written with support from [SMA](http://www.sma.de/)
+
+## Gogo
 
 Gogo is a surprising powerful shell in a very tiny package. It is used in virtually all OSGi installations that I meet. Newcomers to OSGi often love the shell to explore and navigate the environment. However, when I look at open source Gogo commands they often look like:
 

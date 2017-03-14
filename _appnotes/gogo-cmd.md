@@ -5,6 +5,9 @@ summary: A primer on how to write commands in the Gogo shell
 
 Gogo is a surprising powerful shell in a very tiny package. It is used in virtually all OSGi installations that I meet. Newcomers to OSGi often love the shell to explore and navigate the environment. However, when I look at open source Gogo commands they often look like:
 
+    /**
+     * DO NOT DO THIS AT HOME!
+     */
     public String devices( String cmds[] ) {
         int wait = 10;
         boolean localOnly = false;
@@ -53,14 +56,12 @@ The skeleton of a Gogo command is as follows:
         Debug.COMMAND_SCOPE + "=scope", 
         Debug.COMMAND_FUNCTION + "=function"
     })
-    public class GogoCommand
-    {
+    public class GogoCommand {
        @Descriptor("Description of the command")
        public double command( 
                 @Descriptor("Description of the argument") 
                 double times
-       )
-       {
+       ) {
           return times;
        }
     }
@@ -75,14 +76,14 @@ And yes, we are aware that setting properties on a component this way sucks. Thi
 
 The `bnd.bnd` file for such a project looks like:
 
-  -buildpath: \
-    osgi.enroute.base.api, \
-    org.apache.felix.gogo.runtime;version =1.0.2
+      -buildpath: \
+        osgi.enroute.base.api, \
+        org.apache.felix.gogo.runtime;version =1.0.2
 
-  -runrequires: \
-    osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.gogo)',\
-    osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.shell)(version>=1.0.0))',\
-    osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.command)(version>=0.16.0))'
+      -runrequires: \
+        osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.gogo)',\
+        osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.shell)(version>=1.0.0))',\
+        osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.command)(version>=0.16.0))'
 
 In OSGi enRoute, just resolve and press the Debug button. This will give you a shell:
 
@@ -108,8 +109,7 @@ For example, assume you want a command that gives you with the location of a bun
      public String location( 
               @Descriptor("Bundle conversion") 
               Bundle bundle
-     )
-     {
+     ) {
         return bundle.getLocation();
      }
 
@@ -138,8 +138,7 @@ In general, this works for all applicable types in the VM and the OSGi specifica
      public String scheme( 
               @Descriptor("The URI to get the scheme from") 
               URI uri
-     )
-     {
+     ) {
         return uri.getScheme();
      }
 
@@ -203,20 +202,18 @@ Together, options and flags are called _parameters_. Parameters are not treated 
 
 For example, in the epoch command we would like to see the results as days, not as milliseconds, when the user specifies the `-d` flag. 
 
-   public long epoch(
-        @Parameter(
-          names = "-d", 
-          presentValue = "true", 
-          absentValue = "false") 
-        boolean days,
-        Instant instant)
-   {
-      if (days)
-         return instant.toEpochMilli() / (24*60*60*1000);
-      else
-         return instant.toEpochMilli();
-
-   }
+       public long epoch(
+            @Parameter(
+              names = "-d", 
+              presentValue = "true", 
+              absentValue = "false") 
+            boolean days,
+            Instant instant) {
+          if (days)
+             return instant.toEpochMilli() / (24*60*60*1000);
+          else
+             return instant.toEpochMilli();
+       }
 
 And run it:
 
@@ -247,8 +244,7 @@ Since there are only a limited number of characters in the alphabet, shell comma
                 absentValue = "millis"
             ) 
             Unit unit,
-            Instant instant)
-       {
+            Instant instant) {
             return instant.toEpochMilli() / unit.divisor;
        }
 
@@ -293,6 +289,7 @@ For example, the following command waits for the user to type a key. It is not g
         keyboard.read();
      }
 
+And in the shell:
 
     g! anykey
     a
@@ -363,11 +360,9 @@ If we try that out:
 This looks awkward. Le'ts make it close to the output of the real ifconfig.
 
     NetworkInterface ni = (NetworkInterface) target;
-    switch (level)
-    {
+    switch (level) {
     case LINE:
-       try (Formatter f = new Formatter();)
-       {
+       try (Formatter f = new Formatter();) {
           byte[] ether = ni.getHardwareAddress();
           f.format("%2d %-10s %17s %s", ni.getIndex(), ni.getName(),
                    printHexBinary(ether == null ? new byte[0] : ether).replaceAll("(..e)(?=..)", "$1:"),
@@ -390,21 +385,17 @@ We now get:
 
 So let's now add  a method to inspect a single interface.
 
-    public NetworkInterface ifconfig(NetworkInterface networkInterface)
-    {
+    public NetworkInterface ifconfig(NetworkInterface networkInterface) {
       return networkInterface;
     }
 
 This won't work out of the box so we add the following to the convert method:
 
-      if (desiredType == NetworkInterface.class)
-      {
-         if (in instanceof CharSequence)
-         {
+      if (desiredType == NetworkInterface.class) {
+         if (in instanceof CharSequence) {
             return NetworkInterface.getByName(in.toString());
          }
-         if (in instanceof Number)
-         {
+         if (in instanceof Number) {
             return NetworkInterface.getByIndex(((Number) in).intValue());
          }
       }
@@ -514,6 +505,7 @@ We now create a command that takes the Command Session and two options:
 * `-q`, `--quit` – Quit an earlier log listener
 * `-l`, `--level` – The highest level to log. This is a member of Level
 
+We can declare the following method to have these options:
 
     public void logt(CommandSession session,
         @Parameter(

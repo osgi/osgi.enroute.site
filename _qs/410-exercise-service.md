@@ -35,7 +35,14 @@ If you have another API in the future, you can then add it to the same project i
 
 Now create a provider project for the Upper API. Call the project `com.acme.prime.upper.provider` and use the OSGi enRoute template. By default, this project does not see the API project so we should add it. This is done by double clicking on the `bnd.bnd` file in the `com.acme.prime.upper.provider` project and selecting the `Build` tab. On this tab, select the `+` and add the API project (double clicking works). This is added as `latest`, meaning that we use the version from the workspace.
 
-We then should change the `UpperImpl` class to implement the `Upper` interface from our API project. This class already is marked as a _component_ so that it registers its implemented interface as a service.
+We then should change the `UpperImpl` class to implement the `Upper` interface from our API project, so we must import `com.acme.prime.upper.api.Upper`. This class already is marked as a _component_ so that it registers its implemented interface as a service.
+
+	@Component(name = "com.acme.prime.upper")
+	public class UpperImpl implements Upper {
+		public String upper(String input) {
+			return input.toUpperCase();
+		}
+	}
 
 In general, a provider bundle should export the API it _provides_; in our case we provide the contract specified in the `com.acme.prime.upper.api` package. Exporting this package is a highly recommended best practice, it makes a lot of things work better later on. You can export this package by selecting the `bnd.bnd` file in the `com.acme.prime.upper.provider` project, and then the `Contents` tab. Notice the import: `com.acme.prime.upper.api`. Drag this import to the export list and save the file. The imports now disappears.
 
@@ -45,14 +52,18 @@ We now need to change the `UpperApplication` class to use our new incredibly pow
 
 The first thing we need to do is to make sure the Upper Application can see the API project. So click on the `bnd.bnd` file, select the `Build` tab, and add the API project, just like we did in the provider project.
 
-Then we change the `UpperApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation to the end of the class (convention is to place references at the end):
+Then we change the `UpperApplication` component class. We must add a setter method for the `Upper` service with a `@Reference` annotation, which means we must import `org.osgi.service.component.annotations.Reference`. No we can add the reference to the end of the class (convention is to place references at the end):
 
-	@Reference
-	Upper		upper;
-	
+	public class UpperApplication implements REST {
+		...
+
+		@Reference
+		Upper upper;
+	}
+
 The `@Reference` annotation creates a dependency on this service; the `UpperApplication` component is not started until the service registry contains an Upper service. 
 
-The next step is to use the `upper` instance variable that we've just set in the `getUpper` method.
+The next step is to use the `upper` instance variable that we've just set in the `getUpper` method (so we must import `com.acme.prime.upper.api.Upper` again).
 
 	public String getUpper(String string) {
 		return upper.upper(string);

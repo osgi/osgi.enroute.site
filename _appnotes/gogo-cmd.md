@@ -4,12 +4,13 @@ summary: A primer on how to write commands in the Gogo shell
 author: Peter Kriens
 ---
 
-This application note was written out of my (Peter Kriens) frustration with many Gogo commands I meet in the wild. The way the commands are written are often taken way more lines than necessary and arenot reusable. This application note was written with support from [SMA](http://www.sma.de/)
+This application note was written out of my (Peter Kriens) frustration with many Gogo commands I meet in the wild. The way the commands are written often take way more lines than necessary and are not reusable. This application note was written with support from [SMA](http://www.sma.de/)
 
 ## Gogo
 
 Gogo is a surprising powerful shell in a very tiny package. It is used in virtually all OSGi installations that I meet. Newcomers to OSGi often love the shell to explore and navigate the environment. However, when I look at open source Gogo commands they often look like:
 
+```java
     /**
      * DO NOT DO THIS AT HOME!
      */
@@ -46,15 +47,17 @@ Gogo is a surprising powerful shell in a very tiny package. It is used in virtua
           return f.toString();
         }
     }
+```
 
 Sadly, this is not the way you should write commands for Gogo. Though Gogo feels like a normal shell it actually is a scripting language with real objects. When you write Gogo commands you should accept Java objects and not just strings and for the return value you should return a plain old Java object. Out of the box, Gogo supports many useful types and it provides an extension mechanism for custom types.
 
-In the upcoming sections we will take  a tour of how to write Gogo commands and at the end come back and rewrite this example.
+In the upcoming sections we will take a tour of how to write Gogo commands and at the end come back and rewrite this example.
 
 ## Component Skeleton
 
 The skeleton of a Gogo command is as follows:
 
+```java
     @Component(
       service = GogoCommand.class,
       property = {
@@ -70,8 +73,9 @@ The skeleton of a Gogo command is as follows:
           return times;
        }
     }
+```
 
-The `COMMAND_SCOPE` defines the scope (surprise!). The `COMMAND_FUNCTION` is the name of the function as it will be used from the command line. If there is no method with that name Gogo will apply the bean patterns to for example a `getFoo()` method will be an implementation for a `foo` command.
+The `COMMAND_SCOPE (osgi.command.scope)` defines the scope (surprise!). The `COMMAND_FUNCTION (osgi.command.function)` is the name of the function as it will be used from the command line. If there is no method with that name Gogo will apply the bean patterns to, for example, a `getFoo()` method will be an implementation for a `foo` command.
 
 The `@Descriptor` annotation can be applied to methods and parameters. It is used by the Gogo `help` command to help the user. If you wisely sprinkle them over your beautiful commands you can get a nice man page for free.
 
@@ -81,6 +85,7 @@ And yes, we are aware that setting properties on a component this way sucks. Thi
 
 The `bnd.bnd` file for such a project looks like:
 
+```
       -buildpath: \
         osgi.enroute.base.api, \
         org.apache.felix.gogo.runtime;version =1.0.2
@@ -89,6 +94,7 @@ The `bnd.bnd` file for such a project looks like:
         osgi.identity;filter:='(osgi.identity=osgi.enroute.examples.gogo)',\
         osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.shell)(version>=1.0.0))',\
         osgi.identity;filter:='(&(osgi.identity=org.apache.felix.gogo.command)(version>=0.16.0))'
+```
 
 In OSGi enRoute, just resolve and press the Debug button. This will give you a shell:
 
@@ -100,16 +106,17 @@ In OSGi enRoute, just resolve and press the Debug button. This will give you a s
     g!
 {: .shell }
 
-In the following sections we will add commands that you can add to the skeleton. As always, do not restart the framework, eveyrhting will be updated automatically.
+In the following sections we will add commands that you can add to the skeleton. As always, do not restart the framework, everything will be updated automatically.
 
 And ... don't forget to add the command to the `@Component` property. This my common mistake. It always takes me 5 minutes to realise that the reason it does not work is my own forgetfullness.
 
 ## Arguments
 
-If there is one principle behind Gogo then it is the fact that you should normal plain old type safe java. Despite its tiny size, Gogo takes care of all type conversions and formatting behind the scenes. 
+If there is one principle behind Gogo it is that you should use normal, plain old, type safe java. Despite its tiny size, Gogo takes care of all type conversions and formatting behind the scenes. 
 
-For example, assume you want a command that gives you with the location of a bundle. You could take a `long` for the bundle's id or a `String` for its bundle symbolic name. However, Gogo automatically converts a number to a Bundle when there is a command that takes a bundle.
+For example, assume you want a command that gives you the location of a bundle. You could take a `long` for the bundle's id or a `String` for its bundle symbolic name. However, Gogo automatically converts a number to a Bundle when there is a command that takes a bundle.
 
+```java
      @Descriptor("Demonstrate the use of type conversion with a bundle argument")
      public String location( 
               @Descriptor("Bundle conversion") 
@@ -117,6 +124,7 @@ For example, assume you want a command that gives you with the location of a bun
      ) {
         return bundle.getLocation();
      }
+```
 
 So now you can do:
 
@@ -132,13 +140,14 @@ Now the question, does this work with the bundle symbolic name?
     g!
 {: .shell }
 
-Obviously! In software, this is close to perfection when you do not write code but still get lots of functionality!
+Obviously! In software, it is close to perfection when you do not write code but still get lots of functionality!
 
-Clearly Gogo knows how to handle a `Bundle` object but 
+Clearly Gogo knows how to handle a `Bundle` object but... 
 If this does not work, then you probably forgot to add the command to the `@Component` annotation `property` field?
 
-In general, this works for all applicable types in the VM and the OSGi specification. For example, if you want have a Bundle object then just specify a `Bundle` object. However, any object that has a String constructor can be used. For example, a `URI` works fine in Gogo
+In general, this works for all applicable types in the VM and the OSGi specification. For example, if you want a Bundle object then just specify a `Bundle` object. However, any object that has a String constructor can be used. For example, a `URI` works fine in Gogo
 
+```java
      @Descriptor("Demonstrate the use of type conversion with a bundle argument")
      public String scheme( 
               @Descriptor("The URI to get the scheme from") 
@@ -146,6 +155,7 @@ In general, this works for all applicable types in the VM and the OSGi specifica
      ) {
         return uri.getScheme();
      }
+```
 
 When we run this:
 
@@ -156,10 +166,11 @@ When we run this:
 
 ## Custom Arguments
 
-The simplest way to make your objects interact with Gogo is to implement a String constructor. However, this does not work for interfaces and many extremely useful objects that can only be created through a factory. For example, Java 8 introduced an `Instant` class for the time. This class has no String constructor but it has a static `parse(String)` method. We can tell Gogo how to turn a String into an `Instant` by registering as a _converter_ and converting a String to an `Instant`.
+The simplest way to make your objects interact with Gogo is to implement a String constructor. However, this does not work for interfaces and many extremely useful objects that can only be created through a factory. For example, Java 8 introduced an `Instant` class for handling time. This class has no String constructor but it has a static `parse(String)` method. We can tell Gogo how to turn a String into an `Instant` by registering as a _converter_ and converting a String to an `Instant`.
 
 You can register a converter by registering a _Converter_ service. The `Converter` interface has a `convert(Class,Object)` method. The class represents the desired type and the object is the input. This can be any type, not just `String`. This supports all types because sometimes an object from another function must be converted. The method can return `null` if the combination of class and object is not recognized. So let's add the `Converter` interface to our `GogoCommand` class.
 
+```java
     @Component(
       property = {
         Debug.COMMAND_SCOPE + "=scope", 
@@ -172,11 +183,13 @@ You can register a converter by registering a _Converter_ service. The `Converte
        }
        ...
     }
+```
 
-We also need to add a `format` method. This method will be discussed later, just return null. Since we now implement an interface the `service` field in the `Component` annotation is now no longer needed and _must_ be. If it is not removed the Converter service will not be registered.
+We also need to add a `format` method. This method will be discussed later, just return null. Since we now implement an interface the `service` field in the `Component` annotation is now no longer needed and _must_ be removed. If it is not removed the `Converter` service will not be registered.
 
 For an `Instant` we want to convert from a String with the ISO-8601 representation. This is like `2011-12-03T10:15:30Z`. So we can fill in the convert method:
 
+```java
        @Override
        public Object convert(Class<?> desiredType, Object in) throws Exception { 
           if ( desiredType == Instant.class ) {
@@ -186,12 +199,15 @@ For an `Instant` we want to convert from a String with the ISO-8601 representati
           }
           return null;
        }
-     
+```
+
 To test this we add a command:
 
+```java
      public long epoch( Instant instant) {
         return instant.toEpochMilli();
      }
+```
 
 And run it:
 
@@ -201,12 +217,13 @@ And run it:
 
 ## Options and Flags
 
-Shells generally heavily use _options_ and _flags_. An option is an identifier, general starting with a `-` character, and a subsequent value. For example `-t 67` is an option. A flag is a a similar identifier but it has no subsequent value. The presence of the flag gives a value and the absence of the flag gives another value. For example, `-f` might indicate `true` but if the flag is not specified the value is `false`.
+Shells generally heavily use _options_ and _flags_. An option is an identifier, generally starting with a `-` character, and a subsequent value. For example `-t 67` is an option. A flag is a similar identifier but it has no subsequent value. The presence of the flag gives a value and the absence of the flag gives another value. For example, `-f` might indicate `true` but if the flag is not specified the value is `false`.
 
 Together, options and flags are called _parameters_. Parameters are not treated any differently in the method that executes the function, they are plain old arguments. However, Gogo is provided their extra semantics with the `@Parameter` annotation. This annotation provides the name and optional aliases of the parameter (option or flags), the value when the parameter is not specified (absentValue) and for a flag it specifies a value when the parameter is specified.
 
 For example, in the epoch command we would like to see the results as days, not as milliseconds, when the user specifies the `-d` flag. 
 
+```java
        public long epoch(
             @Parameter(
               names = "-d", 
@@ -219,6 +236,7 @@ For example, in the epoch command we would like to see the results as days, not 
           else
              return instant.toEpochMilli();
        }
+```
 
 And run it:
 
@@ -228,6 +246,7 @@ And run it:
 
 Since there are only a limited number of characters in the alphabet, shell commands often have long names for parameters. The `@Parameter` annotation can therefore take an array of arguments. For example, instead of having flag for the _units_ of the output we can also specify an enum:
 
+```java
        public enum Unit { 
           years(365*24*60*60*1000L), 
           days(24*60*60*1000), 
@@ -252,6 +271,7 @@ Since there are only a limited number of characters in the alphabet, shell comma
             Instant instant) {
             return instant.toEpochMilli() / unit.divisor;
        }
+```
 
 And run it:
 
@@ -261,8 +281,9 @@ And run it:
 
 ## Variable Number Of Arguments
 
-Java allows the last argument of a method to hold a variable number of arguments. This is perfectly well supported in Gogo. When the parameter are parsed and the arguments filled and remaining arguments are coerced in the vararg argument if present. This pattern is very useful since it allows the user to specify many variables that the command can operate on. For example, a command to start bundles can be written as follows:
+Java allows the last argument of a method to hold a variable number of arguments. This is perfectly well supported in Gogo. When the parameters are parsed and the arguments filled, remaining arguments are coerced in the vararg argument if present. This pattern is very useful since it allows the user to specify many variables that the command can operate on. For example, a command to start bundles can be written as follows:
 
+```java
      public void begin( 
               @Parameter( names={"-t","--transient"}, absentValue="0", presentValue="1") 
               int transnt, 
@@ -276,6 +297,7 @@ Java allows the last argument of a method to hold a variable number of arguments
            b.start(options);
         }
      }
+```
 
 We call it `begin` because the Gogo shell usually already has a `start` command.
 
@@ -283,16 +305,18 @@ We call it `begin` because the Gogo shell usually already has a `start` command.
 
 Sometimes you really want to ask the user. However, the way Gogo is designed means that your user could be in another continent. This clearly will void the use of the Console. So how do you talk to the user?
 
-If the first argument of the  command function is a `CommandSession` then Gogo will automatically insert it. The Command Session is the way to to talk to the user and Gogo. For our purpose it has a `getKeyBoard()` method. This method bypasses any pipes and directoy goes to the user. This allows you to wait for input from the user. If the session is attached to a file as input a null is returned.
+If the first argument of the  command function is a `CommandSession` then Gogo will automatically insert it. The Command Session is the way Gogo talks to the user. For our purpose it has a `getKeyBoard()` method. This method bypasses any pipes and directly goes to the user. This allows you to wait for input from the user. If the session is attached to a file as input a null is returned.
 
 For example, the following command waits for the user to type a key. It is not guaranteed that each character is returned, some streams are buffered and wait until eof or return to send the content.
 
+```java
     public void anyKey(CommandSession session) throws Exception {
         InputStream keyboard = session.getKeyboard();
         if(keyboard==null)
            return;
         keyboard.read();
      }
+```
 
 And in the shell:
 
@@ -311,10 +335,11 @@ Gogo supports _functions_. The user can make a function in the shell and pass it
     --3--
 {: .shell }
 
-These functions are represented by the `Function` interface. This is not the Java 8 Function interface, it is an interface that long before Java 8 was a glimmer in the eyes of its makers existed in Gogo. Its only fault was a name that was a tad too common. 
+These functions are represented by the `Function` interface. This is not the Java 8 Function interface, it is an interface that existed in Gogo long before Java 8 was a glimmer in the eyes of its makers. Its only fault was a name that was a tad too common. 
 
 The following code implements a mapping function. It takes an iterable and a function and returns a list of objects that were processed by the function.
 
+```java
      public List<Object> map(CommandSession session, Iterable<?> it, Function f) throws Exception {
         List<Object> list = new ArrayList<>();
         for ( Object o : it) {
@@ -323,6 +348,7 @@ The following code implements a mapping function. It takes an iterable and a fun
         }
         return list;
      }
+```
 
 Such a function can be called with:
 
@@ -336,21 +362,25 @@ Such a function can be called with:
 
 The preferred way in Gogo is to not bother about output. Each method should return normal Plain Old Java Objects. By returning normal objects you automatically get formatted output and you can also use the methods in expressions. By default, the `toString()` method is used to print any objects. However, in Gogo you can use the converter to also _format_. The Gogo Converter interface has another method we ignored earlier. 
 
+```java
     CharSequence format(Object target, int level, Converter escape) throws Exception;
+```
 
 If you want to format a specific object, then you can return a formatted string for that object. However. This object takes a _level_ as parameter. This level is a hint to the formatter. In general, the formatting is a recursive process. For example if you return a list of File objects then the first level is the list, the second level is the file object, and the third level consists of the name, access rights, size, etc. In the interface these three levels are identified by 3 constants:
 
-* `INSPECT` – Format the details of the objects. In general the object is the top level object being formatted. For this level you think think of having a table to show your object.
-* `LINE` – Used when the object is listed as a member of another object, for example in a list or structure. There is sufficient information to show more than just a unique identifier.  You can think of having a row in a table.
+* `INSPECT` – Format the details of the objects. In general the object is the top level object being formatted. For this level you can think of having a table to show your object.
+* `LINE` – Used when the object is listed as a member of another object, for example in a list or structure. There is sufficient information to show more than just a unique identifier. You can think of having a row in a table.
 * `PART` – Used when the object is used as part of a line. The information should suffice to identify it. You can think of having a cell in a table.
 
 Gogo has a large number of default formatters built in that are used when there is no more specific formatter. One of the defaults is actually following the bean standard. It will get all public methods and display their value recursively. (Using the INSPECT, LINE, PART rule.)
 
 For example, let's implement some commands that show the Java network interfaces. First lets list them:
 
+```java
     public List<NetworkInterface> ifconfig() throws SocketException {
         return Collections.list(NetworkInterface.getNetworkInterfaces());
     }
+```
 
 If we try that out:
 
@@ -361,9 +391,11 @@ If we try that out:
     name:en0 (en0)
     name:lo0 (lo0)
     g!
+{: .shell }
 
-This looks awkward. Le'ts make it close to the output of the real ifconfig.
+This looks awkward. Let's make it close to the output of the real ifconfig.
 
+```java
     NetworkInterface ni = (NetworkInterface) target;
     switch (level) {
     case LINE:
@@ -377,6 +409,7 @@ This looks awkward. Le'ts make it close to the output of the real ifconfig.
     case INSPECT:
     case PART:
     }
+```
 
 We now get:
 
@@ -387,15 +420,19 @@ We now get:
      4 en0        78:31:C1:CD:81:F8 [/fe80:0:0:0:cc2:307f:93f6:c355%en0, /192.168.67.105]
      1 lo0                          [/fe80:0:0:0:0:0:0:1%lo0, /0:0:0:0:0:0:0:1, /127.0.0.1]
     g!
+{: .shell }
 
-So let's now add  a method to inspect a single interface.
+So let's now add a method to inspect a single interface.
 
+```java
     public NetworkInterface ifconfig(NetworkInterface networkInterface) {
       return networkInterface;
     }
+```
 
 This won't work out of the box so we add the following to the convert method:
 
+```java
       if (desiredType == NetworkInterface.class) {
          if (in instanceof CharSequence) {
             return NetworkInterface.getByName(in.toString());
@@ -404,6 +441,7 @@ This won't work out of the box so we add the following to the convert method:
             return NetworkInterface.getByIndex(((Number) in).intValue());
          }
       }
+```
 
 We can now call this method with:
 
@@ -422,6 +460,7 @@ We can now call this method with:
 
 This is clearly not looking that good ... So let's add an output that looks like the official Unix `ifconfig` command.
 
+```java
     case INSPECT:
        try (Formatter f = new Formatter();) {
           List<String> l = new ArrayList<>();
@@ -454,6 +493,7 @@ This is clearly not looking that good ... So let's add an output that looks like
 
           return f.toString();
        }
+```
 
 And in the shell it looks now like:
 
@@ -469,41 +509,49 @@ Implement the `PART` is left as an exercise for the reader.
 
 ## Console Output 
 
-In the enterprise world it is considered a bad habit to write to the `System.out` stream. Though shall log! I've therefore noticed that few people take advantage of one of Gogo's most simplifying features: `System.out` is the preferable way to create output. The reason `System.out` is considered a bad habit is because the console is a shared resource and if everybody starts to dump their information there it quickly becomes a mess. However, Gogo uses _Threadio_, which is a service that multiplexes `System.out` and `System.err` (and also `System.in`). Each thread is associated with its own triplet of streams. So as long as you print to sysout inside a command then any Gogo user will get the information even if they run the shell remotely. It will therefore also handle piping and other cool features the Gogo shell provides.
+In the enterprise world it is considered a bad habit to write to the `System.out` stream. Though shalt log! I've therefore noticed that few people take advantage of one of Gogo's most simplifying features: `System.out` is the preferable way to create output. The reason `System.out` is considered a bad habit is because the console is a shared resource and if everybody starts to dump their information there it quickly becomes a mess. However, Gogo uses _Threadio_, which is a service that multiplexes `System.out` and `System.err` (and also `System.in`). Each thread is associated with its own triplet of streams. So as long as you print to sysout inside a command then any Gogo user will get the information even if they run the shell remotely. It will therefore also handle piping and other cool features the Gogo shell provides.
 
 So when you need to prepare a real report it makes sense to use System.out instead of using an object and the formatting support.
 
+```java
     public void hello() {
         System.out.println("Hello Gogo");
     }
+```
 
 And in the shell:
 
     g! hello
     Hello Gogo
     g!
- 
+{: .shell }
  
 ## Console
 
-If you need to send information to the current user then you can also directly talk to the console. As discussed before, the best solution is to return plain old Java objects. The second best solution is to use System.out since it is redirected in the shell. However, sometimes you want to do something in the background. For example, you want to check that the log is not receiving any errors. In those case you need to directly write to the console. You can access the console via the `CommandSession` method argument. The `getConsole()` method provides you with access tot he console.
+If you need to send information to the current user then you can also directly talk to the console. As discussed before, the best solution is to return plain old Java objects. The second best solution is to use `System.out` since it is redirected in the shell. However, sometimes you want to do something in the background. For example, you want to check that the log is not receiving any errors. In those case you need to directly write to the console. You can access the console via the `CommandSession` method argument. The `getConsole()` method provides you with access to the console.
 
 So let's make an example that tracks the log. We then add a command to do it in the background.
 
 First we need a reference to the LogReader service:
 
+```java
        @Reference
        LogReaderService logr;
+```
 
 For convenience, we'd like to input the level symbolically. We can use  an `enum` for this.
 
+```java
        public enum Level {
           ERROR, WARNING, INFO, DEBUG
        }
+```
 
 Since we are in a concurrent environment we use an Atomic Reference to manage the Log Listener.
 
+```java
     AtomicReference<LogListener> listener = new AtomicReference<>();
+```
 
 We now create a command that takes the Command Session and two options:
 
@@ -512,6 +560,7 @@ We now create a command that takes the Command Session and two options:
 
 We can declare the following method to have these options:
 
+```java
     public void logt(CommandSession session,
         @Parameter(
             names = {"-q", "--quit"}, 
@@ -540,9 +589,11 @@ We can declare the following method to have these options:
         logr.addLogListener(l);
             System.out.println("Added log trace");
     }
+```
 
 Some utilities to do housekeeping:
 
+```java
     private void reset(LogListener l) {
       LogListener old = listener.getAndSet(l);
       if ( old != null) {
@@ -554,6 +605,7 @@ Some utilities to do housekeeping:
     void deactivate() {
       reset(null);
     }
+```
 
 And in the shell:
 
@@ -569,6 +621,7 @@ And in the shell:
     DEBUG  BundleEvent STARTED
     DEBUG  BundleEvent STARTED
     g!
+{: .shell }
 
 ## Using Variables
 
@@ -581,7 +634,7 @@ Each session maintains a map of variables. These variables can be read and set f
     g! 
 {:.shell}
 
-These variables are available to you when write commands. To access them you need to get the Command Session. The Command Session has the following methods:
+These variables are available to you when writing commands. To access them you need to get the Command Session. The Command Session has the following methods:
 
 * `Object get(String)` – Get a variable
 * `Object put(String, Object)` – Set a variable, the return is the previous value
@@ -590,6 +643,7 @@ These variables are available to you when write commands. To access them you nee
 
 We started with the following command and promised to rewrite it:
 
+```java
     public String devices( String cmds[] ) {
         int wait = 10;
         boolean localOnly = false;
@@ -627,9 +681,11 @@ We started with the following command and promised to rewrite it:
           return f.toString();
         }
     }
+```
 
 So here is the rewrite:
 
+```java
     @Descriptor("List the devices")
     public List<Device devices( 
         @Descriptor( "Wait seconds for the devices to be discovered" )
@@ -642,9 +698,11 @@ So here is the rewrite:
     ) {
         return driver.findDevices( wait, localOnly );
     }
+```
 
 Since we're using objects now we must provide a format function. 
 
+```java
     public String format( Object target, int level, Converter escape ) {
         if ( target instanceof Device ) {
             Device dev = (Device) target;
@@ -666,7 +724,8 @@ Since we're using objects now we must provide a format function.
         }
         return null; 
     }
+```
 
 ## Conclusion
 
-Gogo is a surprisingly powerful shell that makes it very easy to provide commands that can be called from a shell. Since it uses the domain objects natively the commands are often just calling directd domain code or in many cases the domain is also used to provide the command function. Enjoy it!
+Gogo is a surprisingly powerful shell that makes it very easy to provide commands that can be called from a shell. Since it uses the domain objects natively the commands are often just calling directly to domain code or in many cases the domain is also used to provide the command function. Enjoy it!

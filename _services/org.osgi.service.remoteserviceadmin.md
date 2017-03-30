@@ -79,4 +79,4 @@ Anatomy of an RSA Consumer
 Implementations
 ===============
 
-For a list of available Remote Services Admin implementations, see https://en.wikipedia.org/wiki/OSGi_Specification_Implementations
+For a list of available Remote Services Admin implementations, see [https://en.wikipedia.org/wiki/OSGi_Specification_Implementations](https://en.wikipedia.org/wiki/OSGi_Specification_Implementations)

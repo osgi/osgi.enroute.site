@@ -79,40 +79,4 @@ Anatomy of an RSA Consumer
 Implementations
 ===============
 
-<table>
-<thead>
-<tr class="header">
-<th align="left"><p>Implementation</p></th>
-<th align="left"><p>Specification Version</p></th>
-<th align="left"><p>Link</p></th>
-<th align="left"><p>Certification</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><p>Apache CXF</p></td>
-<td align="left"><p>1.0</p></td>
-<td align="left"><p><a href="http://cxf.apache.org/distributed-osgi.html">http://cxf.apache.org/distributed-osgi.html</a></p></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><p>Eclipse ECF</p></td>
-<td align="left"><p>1.0</p></td>
-<td align="left"><p><a href="http://eclipse.org/ecf">http://eclipse.org/ecf</a></p></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left"><p>Paremus Nimble Distribution</p></td>
-<td align="left"><p>1.0</p></td>
-<td align="left"><p><a href="http://www.paremus.com/nimble">http://www.paremus.com/nimble</a></p></td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left"><p>R-OSGi remote service admin</p></td>
-<td align="left"><p>1.0</p></td>
-<td align="left"><p><a href="http://code.google.com/p/remoteserviceadmin/">http://code.google.com/p/remoteserviceadmin/</a></p></td>
-<td align="left"></td>
-</tr>
-</tbody>
-</table>
-
+For a list of available Remote Services Admin implementations, see https://en.wikipedia.org/wiki/OSGi_Specification_Implementations

@@ -34,14 +34,9 @@ of the OSGi enRoute project.
 * [Travis](https://travis-ci.org) – Travis is an eye-opener for everybody that thinks continuous integration should be reserved for real men only. It shows how amazingly simple things can be when they are designed properly.
 
 
-### Open Source Projects
+### Projects
 
-In sorted order:
-
-* [Apache Felix](http://felix.apache.org) – Apache Felix provides numerous bundles to the OSGi enRoute distro; taking great care to make them run on all frameworks. Richard Hall, the initiator of this project is an OSGi Fellow and invited researcher of the OSGi Alliance. An active contributor is [Adobe](http://adobe.com) who is an OSGi Strategic Member and part of the OSGi Alliance board.
-* [bndtools](http://bndtools.org) – bndtools is not only the provider of the underlying bnd engine, it also has the [`bndtools.rt`](https://github.com/bndtools/bndtools.rt) repository. Several bundles of this repository made it into the OSGi distro. bndtools is primarily shepherded by [Paremus Inc](https://www.paremus.com), an OSGi Strategic member and part of the board. [IBM](http://ibm.com) and [Luminis](http://luminus.nl) are active committers.
-* [Eclipse](http://eclipse.org) – Eclipse is the open source foundation sheperding this incredible tool the Eclipse IDE. However, they also provides one of the popular OSGi framework Equinox (which is also the basis for the OSGi Alliance RI) and have implemented almost all OSGi compendium specifications. They therefore provide a number of OSGi enRoute distro bundles. The Eclipse Foundation is a Contributing Associate member of the OSGi Alliance.
-* [Knopflerfish](http://www.knopflerfish.org/) – Knopflerfish is an open source distro of the OSGi specifications, they have implementations for almost all specifications. Several bundles in the OSGi enRoute distro are coming from Knopflerfish. The guardian company of Knopflerfish is [Makewave](http://www.makewave.com), who is a Principal member of the OSGi Alliance, tracing their membership back to the early beginnings.
+Projects providing implementations of OSGi specifications can be found on the following wikipedia page: [https://en.wikipedia.org/wiki/OSGi_Specification_Implementations](https://en.wikipedia.org/wiki/OSGi_Specification_Implementations)
 
 
 [enroute-doc]: https://github.com/osgi/osgi.enroute.site

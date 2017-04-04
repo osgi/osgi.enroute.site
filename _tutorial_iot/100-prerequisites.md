@@ -65,7 +65,7 @@ program that installs a framework with an agent defined in a bnd(tools) bndrun f
 `biz.aQute.remote.main` program. Let's install it
 
 
-	pi@raspberrypi ~ $ curl -o bndremote.jar curl http://repo1.maven.org/maven2/biz/aQute/bnd/biz.aQute.remote.main/3.3.0/biz.aQute.remote.main-3.3.0.jar 
+	pi@raspberrypi ~ $ curl -o bndremote.jar http://repo1.maven.org/maven2/biz/aQute/bnd/biz.aQute.remote.main/3.3.0/biz.aQute.remote.main-3.3.0.jar 
 	pi@raspberrypi ~ $ sudo java -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=1044 -jar bndremote.jar -n 192.168.2.4
 	Listening for transport dt_socket at address: 1044
 {: .shell}

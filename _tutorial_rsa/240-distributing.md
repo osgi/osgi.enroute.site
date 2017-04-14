@@ -24,11 +24,7 @@ In the runtime we need the following roles:
 * A Topology Manager
 * A Discovery model
 
-The OSGi enRoute distro does not contain the Zookeeper discovery bundle. We need to add this from Maven Central. 
-Look for `org.amdatu.remote.discovery.zookeeper` and copy the `<dependency>` element to the `cnf/central.xml` file.
-
-Make sure to touch (change and save the `cnf/build.cnf` file) to refresh the workspace. 
-{: .bug }
+The OSGi enRoute distro does not contain the Zookeeper discovery bundle. Unfortunately, this bundle is not on Maven Central. You can find it here http://repository.amdatu.org/release/org.amdatu.remote.discovery.zookeeper/. You can drag the URL to the latest version on the `Local` repository in the Bndtools Repository view. This will store the bundle in your cnf/local folder and make it available to bnd.
 
 Then click on the `osgi.enroute.examples.chat.bndrun` file and select the `Run` tab. 
 

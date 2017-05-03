@@ -18,9 +18,9 @@ The beauty of an executable JAR is that it can be started anywhere there is a ja
 
 ## Creating an Application
 
-The first thing we need to do is create a `bndrun` file. A `bndrun` file is a separate file for the `bnd.bnd` `Run` tab. It allows us to specify a runtime for our framework. 
+The first thing we need to do is create a `bndrun` file. Don't confuse a `bndrun` file with the `Run` tab of the `bnd.bnd` file. These are two distinct files. A `bndrun` file allows us to specify a runtime for our framework. 
 
-So do a `New/Bndtools OSGi Project` and use `com.acme.prime.eval.application` as the project name. The `.application` extension for this project creates an *application* project. Don't forget to use the OSGi enRoute templates!
+So do a `New/Bndtools/Bnd OSGi Project` and use `com.acme.prime.eval.application` as the project name. The `.application` extension for this project creates an *application* project. Don't forget to use the OSGi enRoute template!
 
 An application project should contain no code (or very little) but acts as a spear point. It contains the requirements that will drive the final application.
 
@@ -51,7 +51,7 @@ By default, an application only contains a Gogo shell command, in this case in t
 
 This code registers a dummy service that now provides the `eval:eval` command to Gogo shell (notice the imaginative difference between the `test:eval` command we created in the provider.
 
-Just like the test project, we need to add a dependency on the API project. As usual, go to the `Build` tab and add the `com.acme.prime.eval.api` project.
+Just like the test project, we need to add a dependency on the API project. As usual, go to the `Build` tab of the `bnd.bnd` file and add the `com.acme.prime.eval.api` project.
 
 ## Defining the Application
 

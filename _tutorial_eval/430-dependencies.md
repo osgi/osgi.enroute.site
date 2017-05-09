@@ -3,7 +3,7 @@ title: Dependencies
 layout: tutorial
 lprev: 400-command
 lnext: 450-web
-summary: Use a standard parsers instead of our simplistic parser
+summary: Use a standard parser instead of our simplistic parser
 ---
 
 ## What You Will Learn in this Section
@@ -164,10 +164,7 @@ We now build the bundle:
 	  osgi.enroute.examples.eval.api         {version=1.0.0, imported-as=[1.0,1.1)}
 {: .shell }
 
-The Private-Package header added by bnd clearly shows that we've added the `parsii` packages that
-it found in the bundle. We specified a wild card in the bnd.bnd file for Private-Package
-but in the manifest we can clearly see that there is a ` parsii.tokenizer` and `parsii.eval` 
-package on the classpath.
+The Private-Package header added by bnd clearly shows that we've added the `parsii` packages that it found in the bundle. We specified a wild card in the `bnd.bnd` file for Private-Package but in the manifest we can clearly see that there are `parsii.tokenizer` and `parsii.eval` packages on the classpath.
 
 ## Running It
 
@@ -188,9 +185,9 @@ it can be used by the resolver. The dependencies should therefore look like:
                         <version>1.0.0-SNAPSHOT</version>
                 </dependency>
                 <dependency>
-                        <groupId>org.osgi</groupId>
-                        <artifactId>osgi.enroute.examples.eval.simple.provider</artifactId>
-                        <version>1.0.0-SNAPSHOT</version>
+                        <groupId>org.apache.felix</groupId>
+                        <artifactId>org.apache.felix.gogo.shell</artifactId>
+                        <version>1.0.0</version>
                 </dependency>
                 <dependency>
                         <groupId>org.osgi</groupId>
@@ -200,7 +197,7 @@ it can be used by the resolver. The dependencies should therefore look like:
                 <dependency>
                         <groupId>org.osgi</groupId>
                         <artifactId>osgi.enroute.pom.distro</artifactId>
-                        <version>2.0.0-SNAPSHOT</version>
+                        <version>2.0.0</version>
                 </dependency>
         </dependencies>
   

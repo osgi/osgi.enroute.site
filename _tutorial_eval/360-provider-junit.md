@@ -42,14 +42,14 @@ In Maven, we have to write our test cases in `src/test/java`.
 {: .shell }
 
 	package osgi.enroute.examples.eval.simple.provider;
+
 	import junit.framework.TestCase;
 	import osgi.enroute.examples.eval.provider.EvalImpl;
 	
 	public class EvalImplTest extends TestCase {
-	
 		public void testSimple() throws Exception {
 			EvalImpl t = new EvalImpl();
-			assertEquals( 3.0,  t.eval("1 + 2"));
+			assertEquals(3.0, t.eval("1 + 2"));
 		}
 	}
 

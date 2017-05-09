@@ -16,7 +16,7 @@ In the previous section we created an API for an expression evaluator. We now ne
 
 	com.acme.prime.eval.provider
 
-So let's create a new project with this name. `New/Bndtools OSGi Project`. Enter the new (`com.acme.prime.eval.provider`), select the OSGi enRoute templates, and follow the defaults.
+So let's create a new project with this name. In Eclipse, choose `New/Bndtools/Bnd OSGi Project`. Enter the new name (`com.acme.prime.eval.provider`), select the OSGi enRoute templates, and follow the defaults.
 
 ![Provider Project](/img/tutorial_base/provider-create-0.png)
 
@@ -35,7 +35,7 @@ The dependencies of bnd are defined in the `bnd.bnd` file. We can control the bu
 
 ![Build Tab](/img/tutorial_base/provider-create-1.png)
 
-This tab does not only show you the bnd errors, it also shows you the current build path (OSGi enRoute API, JUnit, etc). To add the API project, click on the green plus ('+') just above the list. This pops up a list of all the *repositories*. As you can see, the top repository is the workspace and contains our API project. 
+This tab not only shows you the bnd errors, it also shows you the current build path (OSGi enRoute API, JUnit, etc). To add the API project, click on the green plus ('+') just above the list. This pops up a list of all the *repositories*. As you can see, the top repository is the workspace and contains our API project. 
 
 ![Adding to the Build Path](/img/tutorial_base/provider-create-2.png)
 
@@ -73,7 +73,7 @@ Ok, ok, simple might still give it too much credit but we're not here to learn p
 
 ## Imports
 
-It is about time now to take a look at how our module (bundle) really looks like. Let's double click on `bnd.bnd` and select the `Contents` tab. This tab shows us how the bundle is layed out:
+It is about time now to take a look at what our module (bundle) really looks like. Let's double click on `bnd.bnd` and select the `Contents` tab. This tab shows us how the bundle is layed out:
 
 * Private packages – Packages that are only available inside the bundle. Another bundle could have the same name for the package but different contents.
 * Exported packages – Packages that we provide to other bundles and which we are supposed to maintain over time.
@@ -103,7 +103,7 @@ Anyway, our bundle now looks different:
 
 ## How Does it Work?
 
-The concepts of consumers and providers can be confusing, mostly because it is often confused with implementers of an interface and the clients of an interface. However, providers of a service API can both implement and/or be a client of interfaces in the service package. A provider is responsible for providing the value of the contract, and a consumer receives the value of the contract. The reason we need to distinguish between these two roles is that they have far ranging consequences for how you package and version bundles.
+The concepts of consumers and providers can be confusing, mostly because they are often confused with implementers of an interface and clients of an interface. However, providers of a service API can both implement and/or be a client of interfaces in the service package. A provider is responsible for providing the value of the contract and a consumer receives the value of the contract. The reason we need to distinguish between these two roles is that they have far ranging consequences for how you package and version bundles.
 
 Lets say you buy a house from me. In this scenario you are consumer of the contract and I am the provider of the contract. These roles are, surprisingly, not symmetrical. For example, if the seller adds an extra room after the contract was signed then the buyer will not object (ok, in general, you get my point). However, if the seller removes a room the buyer is going to be upset. A consumer can expect backward compatibility but a provider is closely bound to the contract. Virtually any change in the service contract will require a provider to be updated to provide the new functions. 
 

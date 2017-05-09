@@ -25,7 +25,7 @@ Make sure you are in the top directory:
 
 ## Creating a POM 
 
-We need to create a directory called `command` in the `osgi.enroute.examples.eval' 
+We need to create a directory called `command` in the `osgi.enroute.examples.eval` 
 directory. In this directory we need to create a `pom.xml` file. The POM is quite standard now:
 
 

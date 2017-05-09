@@ -29,7 +29,7 @@ Duh, that is only in stuffy classic environments! In an OSGi environment we do n
 
 ## What's Inside?
 
-Of course OSGi enRoute will never let you down, you're life will be tranquil, and you can spend lots of time on the beach. Ehh, well, we will try but computer intelligence is generally not that advanced yet and in the mean time you will have to do some debugging and diagnosing to make actual applications work. Sad, but true.
+Of course OSGi enRoute will never let you down, your life will be tranquil, and you can spend lots of time on the beach. Ehh, well, we will try but computer intelligence is generally not that advanced yet and in the mean time you will have to do some debugging and diagnosing to make actual applications work. Sad, but true.
 
 One of the great tools to debug OSGi applications is the Apache Felix Web Console. The Web Console provides insight in everything you wanted to know about OSGi, and actually a lot more.  Especially XRay, a web console plugin, is very useful for beginners because it visualizes the services layer very well. In Xray, each service type is represented by an icon and wires run back and forth to the bundles registering and getting them (and even just listening).
 

@@ -26,7 +26,7 @@ We do have a very lonely Chat service in our service registry. The easiest way t
 Gogo was designed to call methods on services, it only requires permission to do so from the implementation. The implementation gives this permission with the following service properties:
 
 * `Debug.COMMAND_SCOPE` – This is the _scope_ of the command. If command names overlap between different services then the scope can be used to disambiguate by using the scope, a colon, and  the command. For example: `chat:members`.
-* `Debug.COMMAND_FUNCTION` – This the _name_ of the command. This name must be the name of one or public more methods in the implementation class. Gogo will coerce any parameters in the command line to the parameters to a matching method.
+* `Debug.COMMAND_FUNCTION` – This the _name_ of the command. This name must be the name of one or more public methods in the implementation class. Gogo will coerce any parameters in the command line to the parameters to a matching method.
 
 
 

@@ -77,13 +77,13 @@ In the Java code we require several Javascript resources and CSS resources. If y
 		src="/osgi.enroute.webresource/${bsn}/${Bundle-Version}/*.js">
 	</script>
 		
-OSGi enRoute will automatically insert any CSS or Javascript code in these places that your bundle requires through the annotation. Additionally, at the and it will add any such code in your bundle's `web` directory. 
+OSGi enRoute will automatically insert any CSS or Javascript code in these places that your bundle requires through the annotation. Additionally, at the end it will add any such code in your bundle's `web` directory. 
 
 We won't go into more detail now because we just want to see it run! Understanding is a lot easier when you see it all run.
 
 ## Defining a Runtime
 
-Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could add any of the other bundles listed on the left side as a requirement but lets assume we're good for now.
+Double click on the `com.acme.prime.upper.bndrun` file and select the `Run` tab. In this tab we can express the requirements we have on the runtime. Since we specified our requirements via the annotations, we're good to go as long as our application is listed in the initial requirements. This is the case by default. You could add any of the other bundles listed on the left side as a requirement but let's assume we're good for now.
 
 ![Runtime Requirements](/img/qs/resolve-initial-0.png)
 
@@ -101,7 +101,7 @@ Save the `com.acme.prime.upper.bndrun` file and then click on the `Debug OSGi` b
 
 ![Resolved set](/img/qs/run-buttons-0.png)
 
-You are app is running and waiting for customers to enjoy the terrific upper casing: 
+Your app is running and waiting for customers to enjoy the terrific upper casing: 
 
 [http://localhost:8080/com.acme.prime.upper](http://localhost:8080/com.acme.prime.upper)!
 
@@ -161,7 +161,7 @@ At the top of this window you see the following buttons:
 
 ![Run buttons](/img/qs/run-buttons-0.png)
 
-The `Export` button creates an executable JAR out of the specification of its corresponding `bndrun` file. The execution will be identical to when you run your code inside eclipse. So click on the `Export` button:
+The `Export` button creates an executable JAR out of the specification of its corresponding `bndrun` file. The execution will be identical to when you run your code inside Eclipse. So click on the `Export` button:
 
 ![Resolved set](/img/qs/export-0.png)
 

@@ -8,7 +8,7 @@ summary: Using services in the Demo Application
 
 ## Using a Service
 
-Currently we make a mortal error for Service Oriented Systems; we mix different types of functionality. The purpose of the `UpperApplication` class is to be a facade to the underlying services; it is very wrong to actually provide functionality in such a facade; its only purpose is to to protect against outside evil and dispatch to the underlying (unprotected) service. 
+Currently we make a mortal error for Service Oriented Systems; we mix different types of functionality. The purpose of the `UpperApplication` class is to be a facade to the underlying services; it is very wrong to actually provide functionality in such a facade; its only purpose is to protect against outside evil and dispatch to the underlying (unprotected) service. 
 
 So in this exercise you should create a service API and a provider. From a high level, this will consists of the following steps:
 
@@ -21,7 +21,7 @@ So in this exercise you should create a service API and a provider. From a high 
 
 It is important to keep API code away from implementation code. If you store API and implementation in the same project it is too easy to leak implementation code to other projects that only require the API.
  
-In OSGi enRoute this means the name of the project should end with `.api` and you should select the OSGi enRoute template. Let's to call our general API project `com.acme.prime.api`. Why not `com.acme.prime.upper.api`? Well, we plan for the future; we want to reuse this project for other API as well. We could create a project per API but that tends to create hundreds of almost empty projects over time. Since a workspace should be a cohesive module, the APIs we define in this general API project are very likely to be also cohesive.
+In OSGi enRoute this means the name of the project should end with `.api` and you should select the OSGi enRoute template. Let's call our general API project `com.acme.prime.api`. Why not `com.acme.prime.upper.api`? Well, we plan for the future; we want to reuse this project for other API as well. We could create a project per API but that tends to create hundreds of almost empty projects over time. Since a workspace should be a cohesive module, the APIs we define in this general API project are very likely to be also cohesive.
 
 In this new project, we rename the template API to reflect our semantics. So rename the `com.acme.prime.api` package to `com.acme.prime.upper.api` and the `Prime.java` file to `Upper.java`. Then change the `Upper` class so that we can use it to change a word to upper case:
 

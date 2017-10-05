@@ -2,7 +2,9 @@
 
 ## OSGi's Best Kept Secret
 
-This Application Note is about _resolving_ in OSGi. Resolving is the process of constructing an application out of _resources_. Resolving takes a list of _initial requirements_, a description of the _target system(s)_, and one or more _repositories_. It will use the list of initial requirements to find resources in the repository that provide the required capabilities. Clearly, these resources have their own requirements, retrieveing applicable modules is therefore a recursive process. A _resolver_ will find a solution consisting of a set of resources where all requirements are satisfied or indicates there is no solution.
+This Application Note is about _resolving_ in OSGi. The OSGi Framework has always used a _resolver_ to _wire_ a given set of bundles together. However, the same resolver can also be used to select a set of bundles from a much larger set. This application note discusses this secondary usage.
+
+Resolving in this Appnote is therefore the process of constructing an application out of _resources_. Resolving takes a list of _initial requirements_, a description of the _target system(s)_, and one or more _repositories_. It will use the list of initial requirements to find resources in the repository that provide the required capabilities. Clearly, these resources have their own requirements, retrieveing applicable modules is therefore a recursive process. A _resolver_ will find a solution consisting of a set of resources where all requirements are satisfied or indicates there is no solution.
 
 The resolver model is based on technology developed in OSGi since 2006 with [RFC-0112 Bundle Respository](http://www.openehealth.org/download/attachments/688284/rfc-0112_BundleRepository.pdf). This RFC layed out a model that was gradually implemented in the OSGi specifications and for which many tools were developed. Resolving automates a task that is mostlyy done manually today.
 
@@ -35,6 +37,8 @@ The basic model of the resolving model is quite simple. It consists of just thre
 * **Resource** – A resource is a _description_ of anything that can be _installed_ in an environment. When it is installed, it adds functions to that environment but before it can be installed it requires certain functions to be present. A resoruce can describe a bundle but it could also describe a piece of hardware or a certificate. It is important to realise that a resource is _not_ the artifact, it is a description of the _relation_ between the artifact and the target environment. For example, in OSGi the bundle is a JAR file that can be installed in a framework. A resource describes formally what that bundle can contribute to the environment and what it needs from the environment.
 * **Capability** – A capability is a description of a resource's contribution to the environment when its artifact is installed. A capability has a _type_ and a set of _properties_. That is, it is a bit like a DTO. The type is defined by name and is therefore called the _namespace_. The properties are key value pairs, where the values can be scalars or collections of a `String`, `Integer`, `Double`, and `Long`. 
 * **Requirement** – A requirement represents the _needs_ of an artifact when it is installed in the environment. Since we describe the environment with capabilities, we need a way to assert the properties of a capability in a given namespace. A requirement therefore consists of a type and an _OSGi filter_. The type is the same as for the capabilities, it is the namespace. The filter is buildup of a powerful filter language based on LDAP. A filter can assert expressions of arbitrary complexity. A requirement can be _mandatory_ or _optional_.
+* **Namespace** – Since a requirement can match any set of properties it is necessary to scope the capabilities it can be asserted agains. This is achieved by giving a requirement and a capability a namespace. A requirement can only match a capability when the capability has the same namespace.
+
 
 It is important to realise that a resource and its capabilities and requirements are descriptions. They provide a formal representation of an external artifact. Since these formal representations can be read by a computer, we can calculate a closure of resources that, when installed together, have only resources where all their mandatory requirements are _satisfied_ by the other resources in the closure.
 
@@ -104,6 +108,8 @@ The previous diagram adds the resolver to the earlier diagram of the basic model
 * **Resolver** – The Resolver is the entity that takes a set of _initial requirements_, _system capabilities_, a set of repositories, and produces a _resolution_. 
 * **Resolution** – A resolution is a _wiring_ of resources. It provides detailed information what requirements are matched with what capabilities from the included resources.
 
+An important variable in the resolving process is `effective`. The resolver will only look at requirements that it deems _effective_. The default effective is `resolve` and `active` is commonly used for situations that do not need to be resolved by the OSGi framework but are relevant in using the resolver for building an application. 
+
 ## Repositories
 
 A _repository_ is a collection of resources. This could be Maven Central or it could be a single bundle. That said, neither is a good idea in practice. The repository is the _scope_ of the resolution. Only resources in the repository can be selected. Although the naive idea then is to make the scope as large as possible to let the computer do the work, it is better to _curate_ the repository. 
@@ -135,6 +141,8 @@ A natural repository is the bnd _workspace_ since a workspace is a collection of
 ## Resolving in Bndtools
 
 By far the best way to get experience with the resolver is using the Bndtools `bndrun` files. Bndtools provides a friendly user interface that makes it easy to use the OSGi Resolver in an interactive way. You can play along with the following explanations by creating an [OSGi enRoute Application project](http://enroute.osgi.org/qs/050-start.html) from the templates.
+
+A `bndrun` describes the runtime configuration for an application. This can either be a standalone executable JAR or an application that should be hosted in a container like a Java EE server or Karaf. By default, the target is an executable JAR in this app note.
 
 If you double click on the `osgi.enroute.examples.resolver.application.bndrun` file (or whatever name you picked) it opens a _Run_ pane.
 
@@ -268,6 +276,211 @@ Just create a new `bndrun` file and only add the bundle you think should provide
 However, often you find that even on its own it does not resolve. In most case the error message and the `Reasons` list provide sufficient information to understand why it does not resolve.
 
 It is still a mystery, try checking the `Run Blacklist` list. If it is not there, it might be time to raise a bug.
+
+## The Source View
+
+So far this App Note only visited the _graphic user interface_ (GUI). However, bnd always keeps all information in simple properties files that can also edited as text. In the Run editor (that edits `bndrun` files) you can also select the `Source` view. Not all features of a `bndrun` file can be manipulated through the GUI. This section therefore shows what is in the source and it can be manipulated.
+
+Notice that most instructons are [_merge properties_](http://bnd.bndtools.org/chapters/820-instructions.html). That is, bnd will first find all properties that start with the instruction name and merge their values together. For example, if you set `-runrequires`, `-runrequires.foo`, and `-runrequires.bar` bnd will use the combination of these properties. The order is the sorting order of the names used.
+
+### `-runfw`
+
+The `-runfw` instruction sets the framework to use. This framework will be added to the `-runpath`. Any exported packages or capabilities listed in the manifest of the framework are automatically added to the system capabilities.
+
+For example:
+
+	-runfw: org.eclipse.osgi; version=3.10
+
+**Note** – Do not use `runframework`, this instruction is deprecated and had very different intent and syntax.
+
+### `-runbundles`
+
+The primary function of the `-runbundles` instruction is to list the bundles that are part of the final application. Although this list can be maintained manually it is normally calculated by the resolver. That is, when a resolve is run then it will, without warning, override this list.
+
+For example:
+
+	-runbundles: \
+		org.apache.felix.configadmin;version='[1.8.8,1.8.9)',\
+		org.apache.felix.http.jetty;version='[3.2.0,3.2.1)',\
+		org.apache.felix.http.servlet-api;version='[1.1.2,1.1.3)',\
+		...
+		osgi.enroute.twitter.bootstrap.webresource;version='[3.3.5,3.3.6)',\
+		osgi.enroute.web.simple.provider;version='[2.1.0,2.1.1)'
+
+### `-runsystemcapabilities`
+
+Although resolver analyses the `-runpath` (and thus `-runfw`) for system capabilities, this is not always sufficient. For example, if the target system has special hardware then this might be described with a capability. Such an external capability must be explicitly given to the resolver. These _extra_ capabilities maybe given with the `-runsystemcapabilities` instruction.
+
+For example:
+
+	-runsystemcapabilities: \
+		some.namespace; \
+			some.namespace=foo
+### `-runsystempackages`
+
+The resolver will analyses the `-runpath` and `-runfw` JARs for any exported packages and make these available as system packages to the bundles. However, in certain cases this automatic analysis does not suffice. In that case extra packages can be added. These packages must, of course, be available on the class path.
+
+For example:
+
+	-runsystempackage: \
+		com.sun.misc
+
+### `-runrequires`
+
+The `-runrequires` instruction is the set of initial requirements for the resolver. 
+
+For example:
+
+	-runrequires: \
+		osgi.identity;
+			filter:='(osgi.identity=osgi.enroute.examples.resolver.application)'
+
+
+### `-runprovidedcapabilities`
+
+This instruction works only with the `-distro` instruction. It provides the capabilities that are not listed in the distro file but that are still provided by the target system.
+
+	-runprovidedcapabilities: \
+		some.namespace; \
+			some.namespace=foo
+
+### `-runblacklist`
+
+The blacklist is a set of requirements. These requirements are used to get a set of resources from the repositories that match any of these requirements. This set is then removed from any result from the repositories, effectively making it impossible to use.
+
+
+### `-runee`
+
+The `-runee` instruction adds the capabilities of an _execution environment_ to the system capabilities. Every Java edition has a set of standard packages and OSGi has also defined a number of execution environments that define which packages can be found. The `-runee` allows these capabilities to be defined by using the name of the execution environment. Additionally, this instruction also adds an `osgi.ee` requirement with the given name and version. You can use the following execution environment names:
+
+	OSGi/Minimum-1.0
+	OSGi/Minimum-1.1 
+	OSGi/Minimum-1.2
+	JRE-1.1
+	J2SE-1.2
+	J2SE-1.3
+	J2SE-1.4
+	J2SE-1.5
+	JavaSE-1.6
+	JavaSE-1.7
+	JavaSE/compact1-1.8
+	JavaSE/compact2-1.8
+	JavaSE/compact3-1.8
+	JavaSE-1.8
+	JavaSE-9
+
+An example:
+
+	-runee: JavaSE-1.7
+
+### `-runpath`
+
+An OSGi application will have a set of bundles and an environment created by the framework and any additional JARs on the classpath. The `-runpath` instruction sets these additional bundles. These JARs can actually export packages and provide capabilities that the launcher will automatically add to the system capabilities. The resolver will do the same. Any packages exported by bundles or provided capabilities on the `-runpath` are automatically added to the system capabilities.
+
+### `-runrepos`
+
+The `-runrepos` instruction is used to restrict or order the available repositories. A `bndrun` file can be based on a workspace or can be standalone. In the workspace case the, the repositories are defined in `build.bnd` or in a `*.bnd` file in the `cnf/ext` directory as bnd plugins. In the standalone case the repositories are either OSGi XML repositories listed in the `-standalone` instruction or they are also defined as plugins but now in the `bndrun` file.
+
+In both cases there is an _ordered_ list of repositories. In the `-standalone` it is easy to change this order or exclude repositories. However, in the workspace case this is harder because the set of repositories is shared with many other projects. The `-runrepos` can then be used to exclude and reorder the list repositories. It simply lists the names of the repositories in the desired order. Each repository has its own name.
+
+**Note** The name of a repository is not well defined. It is either the name of the repository or the `toString()` result. In the later case the name is sometimes a bit messy.
+
+For example:
+
+	-runrepos: Maven Central, Main, Distro
+
+### `-augment`
+
+The `-augment` instruction adds _virtual_ capabilities and requirements to a resource in the repository. Augments can be part of the `bndrun` file and in the case of a workspace `bndrun` the can also be defined in the an `cnf/ext` `bnd` file or `cnf/build.bnd`. 
+
+The syntax of the `-augment` instruction is a bit convoluted. 
+
+	-augment   	::= augment ( ',' augment )*
+	augment    	::= wcbsn 
+				( ';capability:=' capabilities )?  
+				( ';requirement:=' requirements )?  
+	wcbsn		::= <Bundle Symbolic Name with wildcard>
+	capabilities 	::= capability ( ',' capability )*
+	capability 	::= NAMESPACE  (';version:Version=' VERSION)? ( ';' KEY '=' VALUE )*
+	requirements	::= requirement ( ',' requirement )*
+	requirement	::= NAMESPACE  ( ';filter:=' filter )? ( ';' KEY '=' VALUE )*
+	filter		::= <OSGi filter>
+
+To match the OSGi header format it is generally necessary to quote the `capabilities` and `requirements` terms since they can contain commas (',') and semi-colons (';') which would interfere with the outer syntax.
+
+The `wcbsn` is a Bundle Symbolic Name with an optional wildcard, the syntax must follow the OSGi filter value syntax. It is used to select a number of resources in the repositories. Each of these resources is _replaced_ with a new resource that is an except copy but with the additional capabilities and requirements.
+
+These virtual resources only exist during a resolve operation. That is, they cannot influence the resolve in the OSGi Framework when the resources are deployed. Their purpose is purely for the selection process.
+
+For example:
+
+	-augment.foo: \
+		com.example.foo.*; \
+			requirement:="osgi.extender; \
+				filter:='(osgi.extender=bar)'"
+
+### `-distro`
+
+The `-distro` instruction is used in the case that your application must run in a host environment, for example Karaf. In such cases it is not possible to calculate the system capabilities from the framework and the run path. Each of these host environments has a specific set of capabilities that should be used as input to the resolver. 
+
+The `-distro` capability has the same syntax as the `-runpath`, a list of bundle specifications. The resolver will parse these bundles and treat their capabilities specified with the `Provide-Capability` header in their Manifest as the system capabilities. These files can be generated manually. However, the bnd command line tool can create a distro bundle using the remote agent.
+
+When the `-distro` is present in the `bndrun` file it overrides any other definition that are used to derive capabilities. If additional capabilities are needed the `-runprovidedcapabilities` should be used.
+
+For example:
+
+	-distro: karaf-4.1.jar;version=file
+
+### `-resolve.effective`
+
+Each requirement and capability has an `effective` or is `effective=resolve`. An effective of `resolve` is always processed by the resolver. In OSGi enRoute, also any effective of `active` is processed since this is the mode that is compatible with bnd. However, in (very) special cases it is necessary to provide more rules. 
+
+The `-resolve.effective` syntax is as follows:
+
+	-resolve.effective 	::= effective ( ',' effective )*
+	effective		::= NAME (';skip:=' skip )
+	skip			::= skip = '"' namespace ( ',' namespace ) * '"'
+
+The simplest model is to just list the names, for example:
+
+	-resolve.effective: resolve,active
+
+In this case, the resolver will only look at requirements that are either resolve or active (which is the default in OSGi enRoute). 
+
+Adding a `meta` effective could then be:
+
+	-resolve.effective: resolve,active, meta
+
+However, in very, very rare (usually error) cases it is necessary to exclude certain namespaces. This can be done by using the `skip:` directive.
+
+	-resolve.effective: resolve,active, meta;skip:='osgi.extender,osgi.wiring.package'
+
+### `-resolve.preferences`
+
+The resolver normally finds a lost of capabilities that match a given requirement. This list has an order defined by the context. However, in certain occaisions this order is not the desired order. The `-resolve.preferences` allows you to override this context order. It is an ordered list of Bundle Symbolic Names. The list of capabilities will always be adjusted to have the bundles in the `-resolver.preferences` always first when they are present.
+
+For example:
+
+	`-resolve.preferences` : \
+		com.example.bundle.most.priority, \
+		com.example.bundle.less.priority, \
+		com.example.whatever
+
+Given that for a requirement the capabilties come from:
+
+	com.example.some.bundle, 
+	om.example.bundle.less.priority, 
+	com.example.another.bundle, 
+	com.example.most.priority
+
+Then the resulting order will be:
+
+	com.example.most.priority
+	om.example.bundle.less.priority, 
+	com.example.some.bundle, 
+	com.example.another.bundle, 
+
+Preferences should only be used when blacklisting is not a better solution.
 
 ## Augmenting Legacy Bundles
 

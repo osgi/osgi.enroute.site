@@ -138,7 +138,7 @@ By far the best way to get experience with the resolver is using the Bndtools `b
 
 If you double click on the `osgi.enroute.examples.resolver.application.bndrun` file (or whatever name you picked) it opens a _Run_ pane.
 
-![Run pane](https://user-images.githubusercontent.com/200494/31168440-9b5ff29e-a8f5-11e7-857f-22ec30202fd7.png){:width="50%"}
+<img alt="Run pane" src="https://user-images.githubusercontent.com/200494/31168440-9b5ff29e-a8f5-11e7-857f-22ec30202fd7.png" width="50%">>
 
 Even though most lists are hidden, the pane is already quite overwhelming. So let's go through the GUI and explain it one by one.
 
@@ -146,7 +146,7 @@ Even though most lists are hidden, the pane is already quite overwhelming. So le
 
 Remember that a resolution is for a specific environment. In the `Core Runtime` pane we specify the OSGi framework that will be used as well as the _execution environment_. The execution environment is from a list of Java VM versions and OSGi specifications.
 
-![image](https://user-images.githubusercontent.com/200494/31168839-0ea01c56-a8f7-11e7-988f-faf2aea7e233.png){:width="50%"}
+<img src="https://user-images.githubusercontent.com/200494/31168839-0ea01c56-a8f7-11e7-988f-faf2aea7e233.png" width="50%">
 
 These are used to calculate the _system capabilities_. That is, the environment is treated as a single resource that provides the capabilities of the Framework as well as the capabilities of the OSGi defined execution environments. The system resource is always included in the resolution but can of course never be downloaded, it is provided by the target environment.
 
@@ -154,7 +154,7 @@ These are used to calculate the _system capabilities_. That is, the environment 
 
 This is a list of the resources that are found in the active repositories. A search field makes it easy to find specific resources. For example, if you type in `gogo` it will list all Gogo bundles.
 
-![image](https://user-images.githubusercontent.com/200494/31168644-59c03bc2-a8f6-11e7-800b-5abb32609f67.png){:width="50%"}
+<img src="https://user-images.githubusercontent.com/200494/31168644-59c03bc2-a8f6-11e7-800b-5abb32609f67.png" width="50%">
 
 One or more resources from the `Browse Repos` list can selected and then dragged to the `Run Requirements` list to the left. This adds an _identity requirement_ to the set of initial requirements. You can also drag to the `Run Blacklist` and `Run Bundles` lists.
 
@@ -162,7 +162,7 @@ One or more resources from the `Browse Repos` list can selected and then dragged
 
 This is the main list to watch. It contains the set of _initial requirements_ given to the resolver. The GUI makes it possible to add identity requirements and remove listed requirements. The easiest way is to use drag and drop form the `Browse Repos` list but it is also possible to use the green `+`, which opens a dialog from which bundles can be added directly from the selected repositories.
 
-![Run Requirements](https://user-images.githubusercontent.com/200494/31171486-26d66416-a900-11e7-8856-0e4debb85e24.png){:width="50%"}
+<img alt="Run Requirements" src="https://user-images.githubusercontent.com/200494/31171486-26d66416-a900-11e7-8856-0e4debb85e24.png" width="50%">
 
 ### Additional Panes
 
@@ -177,7 +177,7 @@ There are some more panes that are useful but they will be handled in diagnosing
 
 Taking the initial requirement it is possible to resolve by clicking on the `Resolve` button. This will show a rather large dialog window with the resolution.
 
-![Resolution](https://user-images.githubusercontent.com/200494/31171747-285c920a-a901-11e7-978c-b6fb46c9c5aa.png){:width="50%"}
+<img al="Resolution" src="https://user-images.githubusercontent.com/200494/31171747-285c920a-a901-11e7-978c-b6fb46c9c5aa.png" width="50%">
 
 This dialog window is divided in three main parts:
 
@@ -189,7 +189,7 @@ If some of the listed optional resources are desired then they can all be select
 
 If the `Finish` button is pressed then the current required resources list is converted to the list of `Run Bundles`. You can inspect them at the right bottom of the `bndrun` editor window.
 
-![image](https://user-images.githubusercontent.com/200494/31172730-0528b2ba-a905-11e7-8e75-1ff36f9556b9.png){:width="50%"}
+<img src="https://user-images.githubusercontent.com/200494/31172730-0528b2ba-a905-11e7-8e75-1ff36f9556b9.png" width="50%">
 
 After a succesful resolve you can either `Run`, `Debug`, or `Export` the `bndrun` file.
 
@@ -227,7 +227,7 @@ As indicated, you really need to understand that this is the last path the resol
 
 That said, it is better to look at the `Missing Requirements` list since this reports quite nicely what is missing.
 
-![image](https://user-images.githubusercontent.com/200494/31177786-5aae5c3c-a917-11e7-98aa-112c380fb83b.png){:width="50%"}
+<img src="https://user-images.githubusercontent.com/200494/31177786-5aae5c3c-a917-11e7-98aa-112c380fb83b.png" width="50%">
 
 The icon and the text more clearly indicate that it cannot resolve the `osgi.enroute.examples.resolver.missingapi.api` bundle due to the `compile-only` requirement.
 
@@ -251,11 +251,11 @@ This will cause a requirement for an exported package `org.osgi.service.wireadmi
 
 However, when the resolve will then drag in the OSGi compendium bundle. 
 
-![image](https://user-images.githubusercontent.com/200494/31179074-3153a0d2-a91b-11e7-972e-622c7db59dd5.png){:width="50%"}
+![image](https://user-images.githubusercontent.com/200494/31179074-3153a0d2-a91b-11e7-972e-622c7db59dd5.png)
 
 If we look at the reasons when we select the compendium bundle we see that also the Configuration Admin imports from the compendium even though it actually might provide a higher version. 
 
-![image](https://user-images.githubusercontent.com/200494/31178847-8d5ca4d8-a91a-11e7-9df1-4a586bc191c1.png){:width="50%"}
+<img src="https://user-images.githubusercontent.com/200494/31178847-8d5ca4d8-a91a-11e7-9df1-4a586bc191c1.png" width="50%">
 
 To get rid of the compendium bundle we can drag and drop it to the `Run Blacklist` window. Any requirement in the `Run Blacklist` list will automatically exclude all bundles that are selected by that requirement. 
 
@@ -325,3 +325,4 @@ Creating applications from reusable models is a goal that the software industry 
 The resolver model provides an alternative (working inside maven if so desired) to establish a class path that optimises the whole application class path instead of just slavishly following transitively dependencies. Experience shows that organisations that use the resolver have a much better grip of what is actually running in their runtime. Not only minimises this runtime errors, it generally also makes it easier to migrate and evolve the code base.
 
 AConverting an existing build into a resolve based build can be daunting but the efforts are worth it. For bnd users that use the workspace model the advantages will flow freely.
+

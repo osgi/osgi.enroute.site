@@ -86,12 +86,12 @@ For a bundle to be a good citizen in a resolution it suffices to follow the stan
 
 To see the requirements and capabilities of a bundle Bndtools has a special `Resolution` view. This shows the requirements and capabilities of a selected JAR file or a bnd.bnd file. This view uses a number of icons to represent the requirements/capabilities. You can hover over them to see further details.
 
-* ![service](https://user-images.githubusercontent.com/200494/31222248-c962b09c-a9c6-11e7-99ac-1977a6c736fd.png)
-* ![bullet_green](https://user-images.githubusercontent.com/200494/31222315-f8e60454-a9c6-11e7-82d8-bbaa7acc46b1.png)
-* ![package](https://user-images.githubusercontent.com/200494/31222346-1153abf4-a9c7-11e7-97df-1bfa7a967505.gif)
-* ![java](https://user-images.githubusercontent.com/200494/31222445-6a2231ce-a9c7-11e7-8242-c226709f9a76.png)
-* ![wand](https://user-images.githubusercontent.com/200494/31222450-7156a204-a9c7-11e7-800e-9c67837f4cef.png)
-* ![bundle](https://user-images.githubusercontent.com/200494/31222500-9460eade-a9c7-11e7-9a75-50ae25a35c00.png)
+* ![service](https://user-images.githubusercontent.com/200494/31222248-c962b09c-a9c6-11e7-99ac-1977a6c736fd.png) – `osgi.service`. 
+* ![bullet_green](https://user-images.githubusercontent.com/200494/31222315-f8e60454-a9c6-11e7-82d8-bbaa7acc46b1.png) – `osgi.identity`
+* ![package](https://user-images.githubusercontent.com/200494/31222346-1153abf4-a9c7-11e7-97df-1bfa7a967505.gif) – `osgi.wiring.package`
+* ![java](https://user-images.githubusercontent.com/200494/31222445-6a2231ce-a9c7-11e7-8242-c226709f9a76.png) – `osgi.ee`
+* ![wand](https://user-images.githubusercontent.com/200494/31222450-7156a204-a9c7-11e7-800e-9c67837f4cef.png) – `osgi.extender`
+* ![bundle](https://user-images.githubusercontent.com/200494/31222500-9460eade-a9c7-11e7-9a75-50ae25a35c00.png) – `osgi.bundle`
 
 
 ## Resolving

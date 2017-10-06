@@ -2,9 +2,7 @@
 
 ## OSGi's Best Kept Secret
 
-This Application Note is about _resolving_ in OSGi. The OSGi Framework has always used a _resolver_ to _wire_ a given set of bundles together. However, the same resolver can also be used to select a set of bundles from a much larger set. This application note discusses this secondary usage.
-
-Resolving in this App note is therefore the process of constructing an application out of _resources_. Resolving takes a list of _initial requirements_, a description of the _target system(s)_, and one or more _repositories_. It will use the list of initial requirements to find resources in the repository that provide the required capabilities. Clearly, these resources have their own requirements, retrieving applicable modules is therefore a recursive process. A _resolver_ will find a solution consisting of a set of resources where all requirements are satisfied or indicates there is no solution.
+This Application Note is about _resolving_ in OSGi. The OSGi Framework has always used a _resolver_ to _wire_ a given set of bundles together, ensuring that only valid wires are made. However, the same OSGi resolver can also be used to select a set of bundles from a much larger set. This application note discusses this secondary usage.
 
 The resolver model is based on technology developed in OSGi since 2006 with [RFC-0112 Bundle Repository](http://www.openehealth.org/download/attachments/688284/rfc-0112_BundleRepository.pdf). This RFC laid out a model that was gradually implemented in the OSGi specifications and for which many tools were developed. Resolving automates a task that is mostly done manually today.
 
@@ -15,16 +13,18 @@ This application note is sponsored by <a href="https://www.sma.de"><img src=http
 
 ## What Problem is Being (Re)Solved?
 
-The pain that the resolver solves is well known to anybody that builds application from modules, the so called _assembly_ process. All developers know the dreadful feeling of having to drag in more and more dependencies to get rid of Class Not Found errors when the application starts (or after running for an hour). For many, Maven was a godsend because it made this process so much easier because dependencies in Maven are _transitive_. If you depend on some artefact, then this artefact brings its own dependencies to the final application.
+The pain that the resolver solves is well known to anybody that builds application from modules, the so called _assembly_ process. All developers know the dreadful feeling of having to drag in more and more dependencies to get rid of Class Not Found errors when the application starts (or after running for an hour). For many, Maven was a godsend because it made this process so much easier because dependencies in Maven are _transitive_. If you depend on some artefact, then this artefact drags in its own dependencies to the runtime.
 
-Unfortunately, that godsend is also tainted because of a number of reasons. Though it has become easier to get _a_ result, the result is often littered with unnecessary or wrong artefacts.
+Unfortunately, that godsend is also tainted because of a number of reasons. Though it undeniably has become easier to get _a_ result, the result is often littered with unnecessary or wrong artefacts. Often the application developers have no real clue what is in their runtime.
 
-* **Our small minds** – The limitation of the human mind/motivation properly maintain meta-data is limited. Many open source projects show unnecessary dependencies that were once needed but no longer necessary. Fortunately, Maven Central/Sonatype now has become much more restrictive but before this filter a lot of Maven dependencies had errors.
-* **Aggregate problem** – The aggregate problem is a dependency that is used for one small part but where a co-packaged part drags in other (and therefore unnecessary) dependencies. For example, many JARs provided support for Ant, a former build tool. This was useful if you happened to use Ant but it caused the addition of the Ant runtime in environments that never used Ant. The aggregate problem causes a serious increase of dependency fan-out in most projects.
-* **Version Conflicts** – When you drag in a lot of dependencies then you invariably run into a situation where 2 of your dependencies require the same third dependency but in a different version. (This is called the _diamond_ problem.) Sometimes these versions are really incompatible, sometimes the higher would suffice.
-* **Variations** – In many situations it is necessary to create different variations of an application. For example, an application could be delivered for different platforms or a demo and a full version. Since the Maven transitive dependency model creates a fixed graph it is not suitable to assemble these variations easily. That is, there often is not a single runtime.
+These are the causes:
 
-The result is that all too often the class path of the final application is littered with never used byte codes and/or overlapping packages that came from artefacts with different versions. 
+* **Our small minds** – The limitation of the human mind/motivation properly maintain meta-data is limited. Many open source projects show unnecessary dependencies that were once needed but no longer necessary. Fortunately, Maven Central/Sonatype now has become much more restrictive but before this filter, a lot of Maven dependencies were quite bad.
+* **Aggregate problem** – The aggregate problem is a dependency that is used for one small part but where a co-packaged part drags in other (and therefore unnecessary) dependencies. For example, many JARs provided support for Ant, a former build tool. This was useful if you happened to use Ant but it caused the addition of the Ant runtime in systems that never used Ant. The aggregate problem causes a serious increase of dependency fan-out in many projects.
+* **Version Conflicts** – When you drag in a lot of dependencies then you invariably run into a situation where two of your dependencies require the same third dependency but in a different version. (This is called the _diamond_ problem for obvious reasons if you draw the graph.) Sometimes these versions are really incompatible, sometimes the higher would suffice. However, in Maven, the first artefact encountered in a breadth first search defines the version.
+* **Variations** – In many situations it is necessary to create different variations of an application. For example, an application could be delivered for different platforms or in a demo variation and a full monty variation. Since the Maven transitive dependency model creates a fixed graph it is not suitable to assemble these variations easily. That is, there often is not a single runtime.
+
+The result is that all too often the class path of the final application is littered with never used byte codes and/or overlapping packages that came from artefacts with different versions. If the customer could see the mess the average class path is they would run away screaming.
 
 Establishing the perfect class path for an application is a process for which the human mind is extremely badly suited and the transitive model of Maven has too many sharp edges. The resolver provides an alternative model that focuses on looking at the whole solution space instead of having to live with the (sometimes arbitrary) decisions of developers of the often 5-6 layers deep transitive dependencies.
 
@@ -32,63 +32,68 @@ Establishing the perfect class path for an application is a process for which th
 
 ![image](https://user-images.githubusercontent.com/200494/31130842-cf5299d2-a858-11e7-907c-d6cb43954501.png)
 
-The basic model of the resolving model is quite simple. It consists of just three entities:
+The basic model of the resolving model is quite simple. It consists of the following entities:
 
-* **Resource** – A resource is a _description_ of anything that can be _installed_ in an environment. When it is installed, it adds functions to that environment but before it can be installed it requires certain functions to be present. A resource can describe a bundle but it could also describe a piece of hardware or a certificate. It is important to realise that a resource is _not_ the artefact, it is a description of the _relation_ between the artefact and the target environment. For example, in OSGi the bundle is a JAR file that can be installed in a framework. A resource describes formally what that bundle can contribute to the environment and what it needs from the environment.
-* **Capability** – A capability is a description of a resource's contribution to the environment when its artefact is installed. A capability has a _type_ and a set of _properties_. That is, it is a bit like a DTO. The type is defined by name and is therefore called the _namespace_. The properties are key value pairs, where the values can be scalars or collections of a `String`, `Integer`, `Double`, and `Long`. 
-* **Requirement** – A requirement represents the _needs_ of an artefact when it is installed in the environment. Since we describe the environment with capabilities, we need a way to assert the properties of a capability in a given namespace. A requirement therefore consists of a type and an _OSGi filter_. The type is the same as for the capabilities, it is the namespace. The filter is buildup of a powerful filter language based on LDAP. A filter can assert expressions of arbitrary complexity. A requirement can be _mandatory_ or _optional_.
+* **Resource** – A resource is a _description_ of an artefact that can be _installed_ in a system. When it is installed, it adds functions to that system. However, before it can be installed it requires certain functions to be already present. A resource can describe a bundle but it could also describe a piece of hardware or a certificate. It is important to realise that a resource is _not_ the artefact, it is a description of the _relation_ between the artefact and the target system. For example, in OSGi the bundle is a JAR file that can be installed in a framework, this is the artefact. A resource describes formally what that bundle can contribute to the system and what it needs from the system.
+* **Capability** – A capability is a description of a resource's contribution to the system when its artefact is installed. A capability has a _type_ and a set of _properties_. That is, it is a bit like a DTO. The type is defined by name and is therefore called the _namespace_. The properties are key value pairs, where the values can be scalars or collections of a `String`, `Integer`, `Double`, and `Long`. 
+* **Requirement** – A requirement represents the _needs_ of an artefact when it is installed in the system. Since we describe the system with capabilities, we need a way to assert the properties of a capability in a given namespace. A requirement therefore consists of a type and an _OSGi filter_. The type is the same as for the capabilities, it is the namespace. The filter is buildup of a powerful filter language based on LDAP. A filter can assert expressions of arbitrary complexity. A requirement can be _mandatory_ or _optional_.
 * **Namespace** – Since a requirement can match any set of properties it is necessary to scope the capabilities it can be asserted against. This is achieved by giving a requirement and a capability a namespace. A requirement can only match a capability when the capability has the same namespace.
 
+Resolving in this App note is therefore the process of constructing an application out of _resources_. Resolving takes a list of _initial requirements_, a description of the _system capabilities_, and one or more _repositories_. It will use the list of initial requirements to find resources in the repository that provide the required capabilities. Clearly, these resources have their own requirements, retrieving applicable resources is therefore a recursive process. A _resolver_ will find a solution consisting of a set of resources where all requirements are satisfied or indicates there is no solution.
 
 It is important to realise that a resource and its capabilities and requirements are descriptions. They provide a formal representation of an external artefact. Since these formal representations can be read by a computer, we can calculate a closure of resources that, when installed together, have only resources where all their mandatory requirements are _satisfied_ by the other resources in the closure.
 
-## Core Namespaces
+### Core Namespaces
 
-Although the OSGi specifications started out with a set of headers that each had their own semantics, over time the specification migrated completely to the more simple and formal model of Resources, Capabilities, and Requirements. Since the function of the legacy headers were still needed, it was necessary to map these legacy headers to the formal model. This resulted in a number of OSGi core namespaces. 
+Although the OSGi specifications started out with a set of headers that each had their own semantics, over time the specification migrated fully to the more simple and formal model of Resources, Capabilities, and Requirements. Since the function of the legacy headers were still needed, it was necessary to map these legacy headers to the formal model. This resulted in a number of OSGi core namespaces. 
 
 * `osgi.wiring.identity` – `Bundle-SymbolicName` header.
-* `osgi.wiring.bundle` – `Require-Bundle` header.
+* `osgi.wiring.bundle` – `Bundle-SymbolicName` and `Require-Bundle` header.
 * `osgi.wiring.package` – `Import-Package` and `Export-Package` headers.
-* `osgi.wiring.host` – `Fragment-Host` header.
+* `osgi.wiring.host` – `Bundle-SymbolicName` and `Fragment-Host` header.
 * `osgi.ee` – `Bundle-RequiredExecutionEnvironment` header.
 * `osgi.native` – `Bundle-NativeCode` header.
 * `osgi.content` – Provides the URL and checksum to download the corresponding artefact. (This namespace is defined in the compendium Repository specification.)
 
 Each namespace defines the names of the properties and their semantics. For the OSGi namespaces, there are classes like `org.osgi.framework.namespace.IdentityNamespace` that contain the details of a namespace.
 
-## Example
+### Example Resource Model
 
 To make the model more clear let's take a closer look to a simple bundle `com.example.bundle` that exports package `com.example.pe` and imports a package `com.example.pi`. When the bundle is installed it will require that some other bundle, or the framework, provides package `com.example.pi`. We can describe this bundle then as follows:
 
      Resource for bundle B
        capabilities:
-         osgi.wiring.identity; osgi.wiring.identity=com.example.bundle
-         osgi.wiring.bundle; osgi.wiring.bundle=com.example.bundle
-         osgi.wiring.host; osgi.wiring.host=com.example.bundle
-         osgi.wiring.package; osgi.wiring.package=com.example.pe
+         osgi.wiring.identity;  osgi.wiring.identity=com.example.bundle
+         osgi.wiring.bundle;    osgi.wiring.bundle=com.example.bundle
+         osgi.wiring.host;      osgi.wiring.host=com.example.bundle
+         osgi.wiring.package;   osgi.wiring.package=com.example.pe
        requirements:
-         osgi.ee; filter:="(&(osgi.ee=JavaSE)(version=1.8))"
-         osgi.wiring.package; filter:='(osgi.wiring.package=com.example.pi)'
+         osgi.ee;               filter:="(&(osgi.ee=JavaSE)(version=1.8))"
+         osgi.wiring.package;   filter:='(osgi.wiring.package=com.example.pi)'
 
 ## Who Wants to Provide That Gibberish???
 
-Clearly, an `Export-Package: com.example.pe` is a bit easier to read than the corresponding capability, let alone the filter in the requirement, especially when the versions are taken into account the filters become quite unreadable. Clearly, if this had to be maintained by human developers than a model like Maven would be far superior. Fortunately, almost all of the metadata that is needed to make this work does not require any extra work from the developer. For example, the `bnd` tool that is available in Maven, Gradle, Eclipse, Intellij and others can easily analyse a JAR file and automatically generate the requirements and capabilities. 
+Clearly, an `Export-Package: com.example.pe` is a bit easier to read than the corresponding capability, let alone the filter in the requirement. This is especially true when the versions are taken into account, with the assertion of the version range the filters become quite unreadable. Clearly, if this had to be maintained by human developers than a model like Maven would be far superior. Fortunately, almost all of the metadata that is needed to make this work does not require much extra work from the developer. For example, the `bnd` tool that is available in Maven, Gradle, Eclipse, Intellij and others can easily analyse a JAR file and automatically generate the requirements and capabilities based on the source code. 
 
 In certain cases it is necessary to provide requirements and capabilities that bnd cannot infer but then it the [Manifest annotations](http://bnd.bndtools.org/chapters/230-manifest-annotations.html) support in bnd can be used to define an annotation that will add parameterised requirements to the resource.
 
-Really, when you use Bndtools none of this gibberish is visible to normal developers unless they have a special case. The gibberish is left to the tools to process this. 
+Really, when you use Bndtools none of this gibberish is visible to normal developers unless they have a special case. The gibberish is left to the tools that prefer gibberish over natural language. 
 
 ## How to Write Resolvable Bundles
 
 For a bundle to be a good citizen in a resolution it suffices to follow the standard rules of good software engineering. However, since there is so much software out there that does not follow these rules, a short summary.
 
-* **Minimise Dependencies** – Every dependency has a cost. Always consider if all dependencies are _really_ necessary. Although a dependency can provide a short term gain for the coder, it will have consequences for the later stages in the development process. Perfect bundles are bundles that have no dependencies. Unfortunately they are also then useless. Therefore, a developer must alway be aware of this trade off.
-* **API Driven** – Always, always, always separate API and implementation. A lot of developers avoid the overhead of developing an API when they consider the (initial) problem too simple to do the effort of a separate API. The author of this App note is one of them but he never ever did not regret this. Usually he spent a lot of extra effort to add an API afterwards.
-* **Service Oriented** – The best dependencies are service oriented dependencies. Services make the coupling between modules explicit and allow different implementations to provide the same service. For example, in OSGi enRoute there is a simple DTOs service that handles type conversions and JSON parsing/generating. In projects where I see the use of Jackson it always seems to cause a mess of requirements.
+* **Minimise Dependencies** – Every dependency has a cost. Always consider if all dependencies are _really_ necessary. Although a dependency can provide a short term gain for the coder, it will have consequences for the later stages in the development process. Perfect bundles are bundles that have no dependencies. Unfortunately they are also useless. Therefore, a developer must alway be aware of this trade off.
+* **API Driven** – Always, always, always separate API and implementation. A lot of developers avoid the overhead of developing an API when they consider the (initial) problem too simple to do the effort of a separate API. The author of this App note is one of them but he never ever did not regret this. Usually he then spent a lot of extra effort to add an API afterwards.
+* **Service Oriented** – The best dependencies are service oriented dependencies. Services make the coupling between modules explicit and allow different implementations to provide the same service. For example, in OSGi enRoute there is a simple DTOs service that handles type conversions and JSON parsing/generating. In projects where I see the use of Jackson it always seems to cause a mess of requirements JARs visible in each bundle project.
 * **Package Imports** – A bundle can require other bundles (the Maven model) or it can import packages from other bundles. The best imported packages are the ones used for services since they are _specification only_. Second best are _libraries_. Library packages have no internal state nor use statics. Importing implementation packages for convenience is usually deemed bad practice because it often indicates that the decomposition in bundles is not optimal.
 * **Import the Exports** – If a package is exported **and** used inside the same bundle then the exported package should also be imported. This allows the resolver more leeway.
 
-To see the requirements and capabilities of a bundle Bndtools has a special `Resolution` view. This shows the requirements and capabilities of a selected JAR file or a bnd.bnd file. This view uses a number of icons to represent the requirements/capabilities. You can hover over them to see further details.
+To see the requirements and capabilities of a bundle Bndtools has a special `Resolution` view. This shows the requirements and capabilities of a selected JAR file or a bnd.bnd file. 
+
+<img src="https://user-images.githubusercontent.com/200494/31276722-9cf2df0a-aa9d-11e7-9f9a-6dd58fc16972.png" width="50%">
+
+This view uses a number of icons to represent the requirements/capabilities. You can hover over them to see further details.
 
 * ![service](https://user-images.githubusercontent.com/200494/31222248-c962b09c-a9c6-11e7-99ac-1977a6c736fd.png) – `osgi.service`. 
 * ![bullet_green](https://user-images.githubusercontent.com/200494/31222315-f8e60454-a9c6-11e7-82d8-bbaa7acc46b1.png) – `osgi.identity`
@@ -97,6 +102,7 @@ To see the requirements and capabilities of a bundle Bndtools has a special `Res
 * ![wand](https://user-images.githubusercontent.com/200494/31222450-7156a204-a9c7-11e7-800e-9c67837f4cef.png) – `osgi.extender`
 * ![bundle](https://user-images.githubusercontent.com/200494/31222500-9460eade-a9c7-11e7-9a75-50ae25a35c00.png) – `osgi.bundle`
 
+Developers that are keen on develping good bundles should pay close attention to this pane.
 
 ## Resolving
 
@@ -112,7 +118,7 @@ An important variable in the resolving process is `effective`. The resolver will
 
 ## Repositories
 
-A _repository_ is a collection of resources. This could be Maven Central or it could be a single bundle. That said, neither is a good idea in practice. The repository is the _scope_ of the resolution. Only resources in the repository can be selected. Although the naive idea then is to make the scope as large as possible to let the computer do the work, it is better to _curate_ the repository. 
+A _repository_ is a collection of resources. This could be Maven Central or it could be a single bundle. That said, neither is a good idea in practice. The repository is the _scope_ of the resolution. Only resources in the repository can be selected. Although the naive idea then is to make the scope as large as possible to let the computer do the work, it is much better to _curate_ the repository. 
 
 The are many reasons why you need a curated repository but basically it comes down is the GIGO principle: garbage is garbage out. Another reason is running time. The resolver gets overwhelmed quickly when there are too many alternatives for a requirement. Resolving is an NP complete problem and this means that the resolution time quickly becomes very long when a lot of alternatives need to be examined.
 
@@ -136,13 +142,13 @@ This model is in contrast with Maven Central and most other Maven repositories. 
 
 ### Workspace Repository
 
-A natural repository is the bnd _workspace_ since a workspace is a collection of _related_ projects. Since these projects are build together it is trivial to keep them compatible. The metadata burden can be mitigated by sharing metadata between these releated projects. For example, in bnd all bundles share the same version. Although this might sometimes release unchanged bundles under a newer version, the only cost is a bit of disk space since the process is fully automated. A small price to pay for an otherwise very error prone manual process. The Gradle build can release to a Nexus repository and automatically generate an index.
+A natural repository is the bnd _workspace_ since a workspace is a collection of _related_ projects. Since these projects are build together it is trivial to keep them compatible. The metadata burden can be mitigated by sharing metadata between these related projects. For example, in bnd all bundles share the same version. Although this might sometimes release unchanged bundles under a newer version, the only cost is a bit of disk space. A small price to pay for an otherwise very error prone manual process. The Gradle build can release to a Nexus repository and automatically generate an index that can be used as repository.
 
 ## Resolving in Bndtools
 
 By far the best way to get experience with the resolver is using the Bndtools `bndrun` files. Bndtools provides a friendly user interface that makes it easy to use the OSGi Resolver in an interactive way. You can play along with the following explanations by creating an [OSGi enRoute Application project](http://enroute.osgi.org/qs/050-start.html) from the templates.
 
-A `bndrun` describes the runtime configuration for an application. This can either be a standalone executable JAR or an application that should be hosted in a container like a Java EE server or Karaf. By default, the target is an executable JAR in this app note.
+A `bndrun` describes the runtime configuration for an application. This can either be a standalone executable JAR or an application that should be hosted in a container like a Java EE server or Karaf. In this app note, the target is an executable JAR unless otherwise noted.
 
 If you double click on the `osgi.enroute.examples.resolver.application.bndrun` file (or whatever name you picked) it opens a _Run_ pane.
 
@@ -152,19 +158,19 @@ Even though most lists are hidden, the pane is already quite overwhelming. So le
 
 ### Core Runtime
 
-Remember that a resolution is for a specific environment. In the `Core Runtime` pane we specify the OSGi framework that will be used as well as the _execution environment_. The execution environment is from a list of Java VM versions and OSGi specifications.
+Remember that a resolution is for a specific system, in our case an executable JAR. In the `Core Runtime` pane we specify the OSGi framework that will be used as well as the _execution environment_. The execution environment is from a list of Java VM versions and OSGi specifications.
 
 <img src="https://user-images.githubusercontent.com/200494/31168839-0ea01c56-a8f7-11e7-988f-faf2aea7e233.png" width="50%">
 
-These are used to calculate the _system capabilities_. That is, the environment is treated as a single resource that provides the capabilities of the Framework as well as the capabilities of the OSGi defined execution environments. The system resource is always included in the resolution but can of course never be downloaded, it is provided by the target environment.
+The execution environment is used to calculate the _system capabilities_. That is, the system is treated as a single resource that provides the capabilities of the Framework as well as the capabilities of the OSGi defined execution environments. The system resource is always included in the resolution but can of course never be downloaded, it is the target environment.
 
 ### Browse Repos
 
-This is a list of the resources that are found in the active repositories. A search field makes it easy to find specific resources. For example, if you type in `gogo` it will list all Gogo bundles.
+The `Browse Repos` is a list of the resources that are found in the active repositories. A search field makes it easy to find specific resources. For example, if you type in `gogo` it will list all Gogo bundles.
 
 <img src="https://user-images.githubusercontent.com/200494/31168644-59c03bc2-a8f6-11e7-800b-5abb32609f67.png" width="50%">
 
-One or more resources from the `Browse Repos` list can selected and then dragged to the `Run Requirements` list to the left. This adds an _identity requirement_ to the set of initial requirements. You can also drag to the `Run Blacklist` and `Run Bundles` lists.
+One or more resources from the `Browse Repos` list can selected and then dragged to the `Run Requirements` list to the left. This adds an _identity requirement_ to the set of initial requirements. You can also drag a resource to the `Run Blacklist` and `Run Bundles` lists.
 
 ### Run Requirements
 
@@ -179,7 +185,7 @@ There are some more panes that are useful but they will be handled in diagnosing
 * **Repositories** – Allows the selection/unselection of some of the repositories. Can also switch the `bndrun` file to _standalone_. A standalone `bndrun` file has no relation to the workspace it resides in and establishes its own repositories.
 * **Runtime Properties** – Makes it possible to define OSGi framework properties, command line arguments, and VM arguments.
 * **Run Blacklist** – Any resources selected by the requirements in the blacklist can never be used in a resolution.
-* **Run Bundles** – This is normally the output of the resolver. However, it is possible to add/remove bundles from this list when the resolver is bypassed.
+* **Run Bundles** – This is normally the output of the resolver. However, it is possible to add/remove bundles from this list when the resolver is bypassed. The `Run`, `Debug`, and `Export` functions always work from the `-runbundles` list.
 
 ## Resolving
 
@@ -191,9 +197,9 @@ This dialog window is divided in three main parts:
 
 * **Required Resources** – The required resources are the solution that the resolver found based on the initial requirements and the system capabilities. 
 * **Optional Resources** – During resolving some resources are included by an _optional_ requirement. The resolver cannot automatically add optional resources, optional resources require human choice. 
-* **Reasons** – Clicking on a required resource or an optional resource will show a _requirements trace_ in this list. Sometimes a resource is added and it is not clear why it was added. Traversing through this list can then help finding out what caused its inclusion. This list is a great debugging tool.
+* **Reasons** – Clicking on a required resource or an optional resource will show a _requirements trace_ in this list. Sometimes a resource is added and it is not clear why it was added. Traversing through this list can then help finding out what caused its inclusion. If no solution was found, this list can also contain very useful information. This list is a great debugging tool.
 
-If some of the listed optional resources are desired then they can all be selected. Pressing the `Update and Resolve` button will restart the resolver but now with the selected optional resources as mandatory. 
+If some of the listed optional resources are desired then they can be selected. Pressing the `Update and Resolve` button will restart the resolver but now with the selected optional resources as mandatory. 
 
 If the `Finish` button is pressed then the current required resources list is converted to the list of `Run Bundles`. You can inspect them at the right bottom of the `bndrun` editor window.
 
@@ -205,7 +211,7 @@ After a successful resolve you can either `Run`, `Debug`, or `Export` the `bndru
 
 So far the ideal process of happy resolves and satisfied bundles has been described. It is now necessary to leave this rosy world and descent to the world of failed resolves. Unfortunately, the provided diagnostic information when a resolve fails is quite low.
 
-When a resolve fails it returns a cause but more often than not this is not the real cause. This is not some shortcoming from the current resolver but a fundamental logical problem. The simplest form of a resolution is if you have for example 3 numbers 1,4,8. You need to find the sum 10 using only addition and subtraction. If you try out all the combination then you find that no combination works. A failure report could be that -3 is not available because the last tried permutation was 1+4+8. Clearly, before that permutation many other numbers were missing as well, the missing -3 just happened to be the last one ...
+When a resolve fails it returns a cause but more often than not this is not the real cause. This is not some shortcoming from the current resolver but a fundamental logical problem. The simplest form of a resolution is if you have for example 3 numbers 1,4,8. You need to find the numbers that sum to 10 using only addition and subtraction. If you try out all the combination then you find that no combination works. A failure report could be that -3 is not available because the last tried permutation was 1+4+8. Clearly, before that permutation many other numbers were missing as well, the missing -3 just happened to be the last one ...
 
 That said, there are a number of scenarios where the resolver does give a hint where the problem is.
 
@@ -213,7 +219,7 @@ That said, there are a number of scenarios where the resolver does give a hint w
 
 This rather obscure message indicates that the resolver tries to include a _api_ bundle that was made unresolvable. 
 
-In OSGi enRoute it is generally recommended (although also disputed by some) to include the API package of a service in the provider bundle. Since a provider has a very tight relation to the API there is no loss of flexibility by including the package. For this reason, OSGi enRoute templates make the API bundle _compile only_. Each API has a special Require-Capability header:
+In OSGi enRoute it is recommended to include the API package of a service in the provider bundle. Since a provider has a very tight relation to the API there is no loss of flexibility by including the package. For this reason, OSGi enRoute templates make the API bundle _compile only_. Each API has a special Require-Capability header:
 
      Require-Capability: \
 	  compile-only
@@ -229,9 +235,9 @@ In the resolver, you will see the following error chain:
      ->  Unable to resolve osgi.enroute.examples.resolver.missingapi.api version=1.0.0.201710041249:
         missing requirement false]]
 
-**Note:** Unfortunately, the output is blurred by a misguided attempt to make the output more concise. Because of this, the distinction between a bundle and a package is unclear. Sadly you can only see the difference between a requirement for a bundle and a package by looking at the version. If this is a range then it is a package and if it is a version with a timestamp it is a bundle. (This works most of the time.) This is a bug in bnd and must be corrected.
+**Note:** Unfortunately, the output is blurred by a misguided attempt to make the output more concise. Because of this, the distinction between a bundle and a package is not very clear. Sadly you can only see the difference between a requirement for a bundle and a package by looking at the version. If this is a range then it is a package and if it is a version with a timestamp it is a bundle. (This works most of the time.) This is a bug in bnd and should be corrected.
 
-As indicated, you really need to understand that this is the last path the resolver took. The `osgi.enroute.examples.resolver.missingapi.provider` bundle tries to find a provider for the package `osgi.enroute.examples.resolver.missingapi.api` and has found the `osgi.enroute.examples.resolver.missingapi.api` bundle. However, this API bundle has the impossible to satisfy `compile-only` requirement.
+As indicated, you really need to understand that the diagnostic is just the last path the resolver took. The `osgi.enroute.examples.resolver.missingapi.provider` bundle tries to find a provider for the package `osgi.enroute.examples.resolver.missingapi.api` and has found the `osgi.enroute.examples.resolver.missingapi.api` bundle. However, this API bundle has the impossible to satisfy `compile-only` requirement.
 
 That said, it is better to look at the `Missing Requirements` list since this reports quite nicely what is missing.
 
@@ -257,11 +263,11 @@ For example, we create a bundle that implements the Wire Admin service.
 
 This will cause a requirement for an exported package `org.osgi.service.wireadmin`. Since the OSGi enRoute does not provide an implementation in its distro this API is not available from the OSGi base API. We therefore add the OSGi compendium bundle to the `-buildpath`. This then compiles fine.
 
-However, when the resolve will then drag in the OSGi compendium bundle. 
+However, the resolve will then drag in the OSGi compendium bundle. 
 
 ![image](https://user-images.githubusercontent.com/200494/31179074-3153a0d2-a91b-11e7-972e-622c7db59dd5.png)
 
-If we look at the reasons when we select the compendium bundle we see that also the Configuration Admin imports from the compendium even though it actually might provide a higher version. 
+If we look at the reasons when we select the compendium bundle we see that also the Configuration Admin imports from the compendium even though it actually might provide a higher version. (This maybe understandable but a really bad practice.)
 
 <img src="https://user-images.githubusercontent.com/200494/31178847-8d5ca4d8-a91a-11e7-9df1-4a586bc191c1.png" width="50%">
 
@@ -271,7 +277,7 @@ To get rid of the compendium bundle we can drag and drop it to the `Run Blacklis
 
 Sometimes the resolver can complain about a missing requirement but you are sure that it is in the repository. The first thing is to try to isolate the problem. Almost any problem can be solved if you remove the redundant parts. Quite often developers are trying to debug this situation in a complex large `bndrun` file and then get overwhelmed.
 
-Just create a new `bndrun` file and only add the bundle you think should provide the resource to the `Run Requires` list and then resolve. If this resolves fine then at least you know that that bundle can potentially resolve.
+Just create a new `bndrun` file and only add the bundle you think should provide the resource to the `Run Requires` list, keep only one requirement, and then resolve. If this resolves fine then at least you know that that bundle can potentially resolve.
 
 However, often you find that even on its own it does not resolve. In most case the error message and the `Reasons` list provide sufficient information to understand why it does not resolve.
 
@@ -283,35 +289,33 @@ So far this App Note only visited the _graphic user interface_ (GUI). However, b
 
 Notice that most instructions are [_merge properties_](http://bnd.bndtools.org/chapters/820-instructions.html). That is, bnd will first find all properties that start with the instruction name and merge their values together. For example, if you set `-runrequires`, `-runrequires.foo`, and `-runrequires.bar` bnd will use the combination of these properties. The order is the sorting order of the names used.
 
-* [-runfw](http://bnd.bndtools.org/instructions/runfw.html)
-* [-runbundles](http://bnd.bndtools.org/instructions/runbundles.html)
-* [-runsystemcapabilities](http://bnd.bndtools.org/instructions/runsystemcapabilities.html)
-* [-runsystempackages](http://bnd.bndtools.org/instructions/runsystempackages.html)
-* [-runrequires](http://bnd.bndtools.org/instructions/runrequires.html)
-* [-runprovidedcapabilities](http://bnd.bndtools.org/instructions/runprovidedcapabilities.html)
-* [-runblacklist](http://bnd.bndtools.org/instructions/runblacklist.html)
-* [-runee](http://bnd.bndtools.org/instructions/runee.html)
-* [-runpath](http://bnd.bndtools.org/instructions/runpath.html)
-* [-runrepos](http://bnd.bndtools.org/instructions/runpath.html)
-* [-augment](http://bnd.bndtools.org/instructions/augment.html)
-* [-distro](http://bnd.bndtools.org/instructions/distro.html)
-* [-resolve.effective](http://bnd.bndtools.org/instructions/resolve.effective.html)
-* [-resolve.preferences](http://bnd.bndtools.org/instructions/resolve.preferences.html)
+* [-runfw](http://bnd.bndtools.org/instructions/runfw.html) – Defines the framework to use
+* [-runbundles](http://bnd.bndtools.org/instructions/runbundles.html) – List of the bundles to run, calculated by the resolver.
+* [-runsystemcapabilities](http://bnd.bndtools.org/instructions/runsystemcapabilities.html) – Additional capabilities provided by the framework.
+* [-runsystempackages](http://bnd.bndtools.org/instructions/runsystempackages.html) – Additional packages exported by the framework.
+* [-runrequires](http://bnd.bndtools.org/instructions/runrequires.html) – The initial requirements
+* [-runprovidedcapabilities](http://bnd.bndtools.org/instructions/runprovidedcapabilities.html) – Only use with the `-distro` option, it contains additional capabilities that are not in the distro files.
+* [-runblacklist](http://bnd.bndtools.org/instructions/runblacklist.html) – Requirements that select resources that should never be part of the resolution.
+* [-runee](http://bnd.bndtools.org/instructions/runee.html) – The execution environment
+* [-runpath](http://bnd.bndtools.org/instructions/runpath.html) – The JARs that should be on the classpath. Exports and provided capabilities defined in the manifests of these JARs are added to the system capabilities.
+* [-runrepos](http://bnd.bndtools.org/instructions/runpath.html) – Optional list of ordered repo names. If this is not set, the current set of repo plugins is used.
+* [-augment](http://bnd.bndtools.org/instructions/augment.html) – Adds virtual capabilities and requirements to resources in the repository.
+* [-distro](http://bnd.bndtools.org/instructions/distro.html) – Directly provides the system capabilities in a JAR with Manifest. Is used when the resulotion is not used to create an executable JAR but to create a Java EE WAR or Karaf KAR where the application is running in a host environment.
+* [-resolve.effective](http://bnd.bndtools.org/instructions/resolve.effective.html) – Sets the effectives for the resolver.
+* [-resolve.preferences](http://bnd.bndtools.org/instructions/resolve.preferences.html) – Can be used to make some resources more equal than others.
 
 ## Augmenting Legacy Bundles
 
-The problem with metadata is that it can also be wrong. Especially legacy bundles lack the proper metadata to inform the resolver that they provide a service or require an implementation of a specification. Although this is not a problem in runtime since these requirements are generally not used by the Framework, they are designed for using the resolver in selecting a closure of bundles as is described in this app note. 
+The problem with metadata is that it can also be wrong. Especially legacy bundles lack the proper metadata to inform the resolver that they provide a service or require an implementation of a specification. This is not a problem in runtime since these requirements are generally not used by the Framework, they are designed for using the resolver in selecting a closure of bundles. However, in certain cases adding a capability or a requirement to a bundle in the repository would simplify things. Clearly it is possible to wrap the legacy bundle but this is extremely cumbersome and can create confusion down the line.
 
-However, in certain cases it is really necessary to add a capability or a requirement to a bundle in the repository. Clearly it is possible to wrap the legacy bundle but this is cumbersome and can create confusion down the line.
-
-Another method is to use the _augments_ that the bnd repositories support. Augments can add capabilities and requirements to existing bundles in a repository. However, it can only do this for the interactive resolve process. When the OSGi Framework resolves a number of bundles it will never takes augments into account.
+Therefore, another method is to use the _augments_ that the bnd repositories support. Augments can add capabilities and requirements to existing bundles in a repository. However, it can only do this for the interactive resolve process. When the OSGi Framework resolves a number of bundles it will never takes augments into account.
 
 There are two different ways to add the augments. 
 
-* **Bndrun file** – Provide the augments in the `bndrun` file. This is an ad-hoc mechanism that is normally a last resort.
-* **Resource** – Provide a resource in a repository that contains an `bnd.augment` capability. Such a resource has a file with properties that describe the augment for that repository. This is a good way when you have to curate a repository and need to fixup some legacy bundles. This resource can also add to the blacklist.
+* **Bndrun file** – Provide the augments in the `bndrun` file. This is an ad-hoc mechanism that is normally a last resort. For non-standalone bndrun files you can also add augments in the `cnf/ext` directory since any bnd file in there will add its properties to the bndrun file. It is of course also possible to include file in any `bnd`/`bndrun` file.
+* **Resource** – Provide a resource in a repository that contains an `bnd.augment` capability. Such a resource has a file with properties that describe the augment for that repository. This is a good way when you have to curate a repository and need to fixup some legacy bundles. This resource can also add to the blacklist. See the [OSGi enRout distro](https://github.com/osgi/osgi.enroute/tree/master/osgi.enroute.pom.distro) for an example.
 
-In both cases the augments are described using the standard OSGi/bnd syntax. The syntax is not a beauty since it stretches what you can do with the OSGi header format. However, augmenting should really be a last resort hack so maybe it is not really bad that the syntax is cumbersome.
+In both cases the augments are described using the standard OSGi/bnd syntax. The syntax is not a beauty since it stretches what you can do with the OSGi header format. However, augmenting should really be a last resort so maybe it is not really bad that the syntax is cumbersome.
 
 You can add an augment with the `-augment` instruction in the `bndrun` file.
 
@@ -337,11 +341,11 @@ For example, we need to provide an extender capability to a bundle with the bund
                     osgi.extender=some.extender; \
                     version:Version=1.2@'
 
-The `capability:` and `requirement:` directives follow all the rules of the Provide-Capability and Require-Capability headers respectively. For the resolver, it is as if these headers were specified in their manifests. Since these headers can contain semicolons and commas they must be quoted. bnd will allow double quotes inside normal quotes and vice versa when it is necessary to nested quotes.
+The `capability:` and `requirement:` directives follow all the rules of the Provide-Capability and Require-Capability headers respectively. For the resolver, it is as if these headers were specified in their manifests. Since these headers can contain semicolons and commas they must be quoted. bnd will allow double quotes inside normal quotes and vice versa when it is necessary to nest quotes.
 
 ## First Time Curating a Repository
 
-A workspace setup with bnd will generally provide a good start. However, when you need to grandfather in a lot of bundles from Maven Central then it is likely that you will need to spend some time to augment these bundles. This can be a depressing task since you'll find out how messy the world is. However, experience shows that once the repository is resolvable, maintaining it is less of a problem. 
+A workspace setup with bnd will generally provide a good start. However, when you need to grandfather in a lot of bundles from Maven Central then it is likely that you will need to spend some time to augment these bundles. This can be a depressing task since you'll find out how messy the world is. However, experience shows that once the repository is resolvable, maintaining it has very little overhead. Better, it tends to signal probems very early in the development process.
 
 A good example of a curated repository is the [OSGi enRoute Distro](https://github.com/osgi/osgi.enroute/blob/master/osgi.enroute.pom.distro/augments.bndrun). If you're responsible for a repository it might help to take a good look at the `augments.bndrun` file.
 

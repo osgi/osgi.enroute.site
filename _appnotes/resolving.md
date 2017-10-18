@@ -4,9 +4,6 @@ summary: Resolving is one of the cornerstones of OSGi. This app note discusses t
 sponsor: SMA
 ---
 
-
-# Resolving
-
 ## OSGi's Best Kept Secret
 
 This Application Note is about _resolving_ in OSGi. The OSGi Framework has always used a _resolver_ to _wire_ a given set of bundles together, ensuring that only valid wires are made. However, the same OSGi resolver can also be used to select a set of bundles from a much larger set. This application note discusses this secondary usage.

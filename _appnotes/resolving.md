@@ -1,3 +1,10 @@
+---
+title: Resolving
+summary: Resolving is one of the cornerstones of OSGi. This app note discusses the backrgound of resolving and outlines how to work with the resolver.
+sponsor: SMA
+---
+
+
 # Resolving
 
 ## OSGi's Best Kept Secret

@@ -11,7 +11,7 @@ This Application Note is about _resolving_ in OSGi. The OSGi Framework has alway
 The resolver model is based on technology developed in OSGi since 2006 with [RFC-0112 Bundle Repository](http://www.openehealth.org/download/attachments/688284/rfc-0112_BundleRepository.pdf). This RFC laid out a model that was gradually implemented in the OSGi specifications and for which many tools were developed. Resolving automates a task that is mostly done manually today.
 
 <div>
-This application note is sponsored by [SMA](https://www.sma.de")
+This application note is sponsored by [SMA](https://www.sma.de)
 
 
 ## What Problem is Being (Re)Solved?

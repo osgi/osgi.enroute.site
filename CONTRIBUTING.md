@@ -193,7 +193,7 @@ In order to install Jekyll:
   * Open a console
   * Type `bundle install`
 
-There should be a lot of console ouput if you are doing this for the first time. At the end there should be some sort of success report.
+There should be a lot of console output if you are doing this for the first time. At the end there should be some sort of success report.
 
 Run Jekyll in the root directory to build:
 

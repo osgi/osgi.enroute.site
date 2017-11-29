@@ -3,6 +3,8 @@ title: Tutorials
 layout: book
 ---
 
+{% include r7alignment.md %}
+
 This section is an entry to the hopefully growing collection of tutorials that OSGi enRoute provides. If you want to develop an additional tutorial, please submit a PR.
 
 ## Quick Start

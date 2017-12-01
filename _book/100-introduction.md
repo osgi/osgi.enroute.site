@@ -3,6 +3,8 @@ title: Guide
 layout: book
 ---
 
+{% include r7alignment.md %}
+
 We _strongly_ believe that OSGi's Service Oriented Systems is the best paradigm available today for software development. But we are also frustrated when we see how hard it is for people to cross the chasm to reach that new paradigm. Out of this frustration, the OSGi enRoute project was born.
 
 This OSGi Alliance initiative is about removing the barriers to adoption. It is about creating an environment where development of applications is almost as easy to get started with as Ruby on Rails applications without loosing the key advantages of OSGi/Java for projects that grow beyond their initial size.

@@ -3,6 +3,8 @@ title: Example Projects
 layout: book
 ---
 
+{% include r7alignment.md %}
+
 This section is an entry to the hopefully growing collection of examples that OSGi enRoute provides. If you want to develop an additional example, please submit a PR.
 
 The examples are all in a workspace that you can clone from Github. Some examples are combined together, others have their own workspace. It is highly suggested to clone the workspace and play with the example.

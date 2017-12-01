@@ -3,6 +3,8 @@ title: Where to Find Stuff
 layout: book
 ---
 
+{% include r7alignment.md %}
+
 ## Where to Find Stuff 
 
 This page provides you with a map for the components that we use and love to depend on.

@@ -381,5 +381,5 @@ The resolver model provides an alternative (working inside maven if so desired) 
 Converting an existing build into a resolve based build can be daunting but the efforts are worth it. For bnd users that use the workspace model the advantages will flow freely.
 
 
-[2] http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.remote.agent/3.5.0/biz.aQute.remote.agent-3.5.0.jar
-[3] http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.bnd/3.5.0/biz.aQute.bnd-3.5.0.jar
+[2]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.remote.agent/3.5.0/biz.aQute.remote.agent-3.5.0.jar
+[3]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.bnd/3.5.0/biz.aQute.bnd-3.5.0.jar

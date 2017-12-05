@@ -366,7 +366,7 @@ How do you create a distro?
 3. Take the jar `ws.liberty-5.6.7.jar` created by that and place it into the the directory containing the bndrun file that is used to resolve your deployment jars.
 4. in the bndrun file add:
 
-	-distro: file:${.}/ws.liberty-5.6.7.jar
+		-distro: file:${.}/ws.liberty-5.6.7.jar
 
 5. resolve... the result of the resolve should be the set of bundles you need to install to openliberty.
 
@@ -380,3 +380,6 @@ The resolver model provides an alternative (working inside maven if so desired) 
 
 Converting an existing build into a resolve based build can be daunting but the efforts are worth it. For bnd users that use the workspace model the advantages will flow freely.
 
+
+[2] http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.remote.agent/3.5.0/biz.aQute.remote.agent-3.5.0.jar
+[3] http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.bnd/3.5.0/biz.aQute.bnd-3.5.0.jar

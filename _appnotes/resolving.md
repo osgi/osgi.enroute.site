@@ -355,22 +355,22 @@ There are a number of (rudimentary) functions in the command line version of bnd
 
 ## Distro
 
-The enroute model tends to guide you to resolve an executable. Meanwhile with openliberty or WebSphere Liberty you are deploying into a container which already has a lot of capabilities. The crux of the issue becomes resolving only what you need to deploy. What you need at that point is a way to find out what the container already provides in a way that you can use this during resolve time.
+The enroute model tends to guide you to resolve an executable. Meanwhile with openliberty, WebSphere Liberty, Karaf, Liferay, etc. you are deploying into a container which already has a lot of capabilities. The crux of the issue becomes resolving only what you need to deploy. What you need at that point is a way to find out what the container already provides in a way that you can use this during resolve time.
 
 Currently the way to do that is to create what's called a "distro" jar of the target container. This distro is a JAR file which provides all the capabilities that the target container provides at one point in time.
 
 How do you create a distro?
 
-1. Install the bnd remote agent bundle [2] in the target container runtime. This will automatically open a local socket on a default port used to the remote cli next.
-2. Execute the following command using the bnd cli [3]: `bnd remote distro -o ws.liberty-5.6.7.jar ws.liberty 5.6.7`
-3. Take the jar `ws.liberty-5.6.7.jar` created by that and place it into the the directory containing the bndrun file that is used to resolve your deployment jars.
+1. Install the bnd remote agent bundle [1] in the target container runtime. This will automatically open a local socket on a default port used by the bnd cli next.
+2. Execute the following command using the bnd cli [2]: `bnd remote distro -o container-5.6.7.jar container 5.6.7`
+3. Take the jar `container-5.6.7.jar` created in 2. and place it into the the directory containing the bndrun file that is used to resolve your deployment jars.
 4. in the bndrun file add:
 
-		-distro: file:${.}/ws.liberty-5.6.7.jar
+		-distro: ${.}/container-5.6.7.jar;version=file
 
-5. resolve... the result of the resolve should be the set of bundles you need to install to openliberty.
+5. resolve... the result of the resolve should be the set of bundles you need to install in the container, minus everything the container already provides.
 
-What you need to bear in mind is that the distro file needs to be regenerated each time the liberty installation changes in any significant way otherwise you won't get the real state of the system needed to resolve against.
+What you need to bear in mind is that the distro file needs to be regenerated each time the target container changes in any significant way otherwise you won't get the real state of the system needed to resolve against.
 
 ## Conclusion
 
@@ -381,5 +381,5 @@ The resolver model provides an alternative (working inside maven if so desired) 
 Converting an existing build into a resolve based build can be daunting but the efforts are worth it. For bnd users that use the workspace model the advantages will flow freely.
 
 
-[2]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.remote.agent/3.5.0/biz.aQute.remote.agent-3.5.0.jar
-[3]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.bnd/3.5.0/biz.aQute.bnd-3.5.0.jar
+[1]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.remote.agent/3.5.0/biz.aQute.remote.agent-3.5.0.jar
+[2]: http://search.maven.org/remotecontent?filepath=biz/aQute/bnd/biz.aQute.bnd/3.5.0/biz.aQute.bnd-3.5.0.jar

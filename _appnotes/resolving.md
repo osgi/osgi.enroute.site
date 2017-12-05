@@ -353,6 +353,25 @@ A good example of a curated repository is the [OSGi enRoute Distro](https://gith
 
 There are a number of (rudimentary) functions in the command line version of bnd that might be useful. Unfortunately, the commands currently assume an OSGi repository.
 
+## Distro
+
+The enroute model tends to guide you to resolve an executable. Meanwhile with openliberty or WebSphere Liberty you are deploying into a container which already has a lot of capabilities. The crux of the issue becomes resolving only what you need to deploy. What you need at that point is a way to find out what the container already provides in a way that you can use this during resolve time.
+
+Currently the way to do that is to create what's called a "distro" jar of the target container. This distro is a JAR file which provides all the capabilities that the target container provides at one point in time.
+
+How do you create a distro?
+
+1. Install the bnd remote agent bundle [2] in the target container runtime. This will automatically open a local socket on a default port used to the remote cli next.
+2. Execute the following command using the bnd cli [3]: `bnd remote distro -o ws.liberty-5.6.7.jar ws.liberty 5.6.7`
+3. Take the jar `ws.liberty-5.6.7.jar` created by that and place it into the the directory containing the bndrun file that is used to resolve your deployment jars.
+4. in the bndrun file add:
+
+	-distro: file:${.}/ws.liberty-5.6.7.jar
+
+5. resolve... the result of the resolve should be the set of bundles you need to install to openliberty.
+
+What you need to bear in mind is that the distro file needs to be regenerated each time the liberty installation changes in any significant way otherwise you won't get the real state of the system needed to resolve against.
+
 ## Conclusion
 
 Creating applications from reusable models is a goal that the software industry has been trying to achieve for a long time. To a certain extent, the Maven dependency model provides this model. However, it also is a model where dependencies are not strictly managed and much is left to chance. 

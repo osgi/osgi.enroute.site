@@ -353,13 +353,13 @@ A good example of a curated repository is the [OSGi enRoute Distro](https://gith
 
 There are a number of (rudimentary) functions in the command line version of bnd that might be useful. Unfortunately, the commands currently assume an OSGi repository.
 
-## Distro
+## Resolving against existing container
 
-The enroute model tends to guide you to resolve an executable. Meanwhile with openliberty, WebSphere Liberty, Karaf, Liferay, etc. you are deploying into a container which already has a lot of capabilities. The crux of the issue becomes resolving only what you need to deploy. What you need at that point is a way to find out what the container already provides in a way that you can use this during resolve time.
+The enroute model tends to guide you to resolve an executable. Meanwhile with openliberty, WebSphere Liberty, Karaf, Liferay, etc. you are deploying into an existing container which already has a lot of capabilities. The crux of the issue becomes resolving only what you need to deploy. What you need at that point is a way to find out what the container already provides in a format which can be used during resolve time.
 
-Currently the way to do that is to create what's called a "distro" jar of the target container. This distro is a JAR file which provides all the capabilities that the target container provides at one point in time.
+Currently the way to do that is to create a __distro__ of the target container. This __distro__ is a JAR file which provides all the capabilities that the target container provides at one point in time. It includes the capabilities of all currently installed bundles. It also contains all capabilities provided by the system bundle which may have been configured by framework properties. It is an aggregate view of all the capabilities available in the framework contained in a single JAR.
 
-How do you create a distro?
+### How do you create a distro?
 
 1. Install the bnd remote agent bundle [1] in the target container runtime. This will automatically open a local socket on a default port used by the bnd cli next.
 2. Execute the following command using the bnd cli [2]: `bnd remote distro -o container-5.6.7.jar container 5.6.7`
@@ -370,7 +370,10 @@ How do you create a distro?
 
 5. resolve... the result of the resolve should be the set of bundles you need to install in the container, minus everything the container already provides.
 
-What you need to bear in mind is that the distro file needs to be regenerated each time the target container changes in any significant way otherwise you won't get the real state of the system needed to resolve against.
+What you do with those resolved bundles is dependent on the goal of the developer. They can be directly installed in the existing container, or they could be assembled into a package format native to the container, or possibly a subsystem.
+
+### Considerations
+What you need to bear in mind is that the __distro__ needs to be re-created each time the target container changes in any significant way, otherwise it won't reflect the true capabilities of the system needed to resolve against.
 
 ## Conclusion
 

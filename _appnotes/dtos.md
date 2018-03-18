@@ -200,7 +200,7 @@ For example, the OSGi enRoute REST service was designed with DTOs in mind. This 
         }
     
         public BundleDTO getBundle(long id) {
-            return getBundle(context.getBundle(id));
+            return toDTO(context.getBundle(id));
         }
     
         BundleDTO toDTO( Bundle b) {

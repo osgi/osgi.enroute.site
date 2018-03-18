@@ -187,26 +187,26 @@ For example, the OSGi enRoute REST service was designed with DTOs in mind. This 
     @Component
     public class MyManager implements REST {
         BundleContext context;
-        
+    
         @Activate
         void activate(BundleContext context) {
-           this.context = context;
+            this.context = context;
         }
-
+    
         public List<BundleDTO> getBundle() {
-		  return Stream.of(context.getBundles())
-		          .map( this::toDTO )
-		          .collect(Collectors.toList());        
-		}
-        
-        public BundleDTO getBundle(long id) {
-        	return getBundle(context.getBundle(id));
+            return Stream.of(context.getBundles())
+                   .map( this::toDTO )
+                   .collect(Collectors.toList());
         }
-	    
-	    BundleDTO toDTO( Bundle b) {
-	        return b.adapt( BundleDTO.class );
-	    }
-	}           
+    
+        public BundleDTO getBundle(long id) {
+            return getBundle(context.getBundle(id));
+        }
+    
+        BundleDTO toDTO( Bundle b) {
+            return b.adapt( BundleDTO.class );
+        }
+    }
 
 ## DTOs Service
 

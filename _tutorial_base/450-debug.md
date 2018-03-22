@@ -85,7 +85,11 @@ _component_. If it is green then it is happy, if it is red it misses either a de
 
 ![XRay](/img/tutorial_base/debug-component-0.png)
 
-Most important is of course if its references are satisfied, and if so, by whom. In general, if a component is `active` or `registered` then it is happy. 
+Note: If the components tab is not available on your web console, you need to install the Apache Felix Web Console DS Plugin bundle. You can download it from
+[http://felix.apache.org/downloads.cgi](http://felix.apache.org/downloads.cgi).
+After downloading the .jar file, drag it from your file manager to the Local repository in Eclipse's Repositories view. Then add it as a Run Requirement in your application's `bnd.bnd` file. (This may be necessary since as of version 4 of Web Console, the Declarative Services support has been moved from the original `org.apache.felix.webconsole` bundle to a separate bundle, `org.apache.felix.webconsole.plugins.ds`.
+
+The most important thing to check for a component is if its references are satisfied, and if so, by whom. In general, if a component is `active` or `registered` then it is happy. 
 
 A tip. There is one puzzling use case. Sometimes a component is not satisfied but all its references are present. In that case you're likely missing configuration. Components can declare that they must be configured.
 

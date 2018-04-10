@@ -1,0 +1,34 @@
+<header class="site-header">
+
+
+<a class="site-title" href="{{ site.baseurl }}/"><img src="{{ site.baseurl }}/img/OSGienRoute4Web.png" alt="enRoute Docs" height="75" width="154"></a>
+
+    <nav class="site-nav">
+      <img class="menu-icon" src="{{ site.baseurl }}/img/gi.svg">
+      {% assign pages = site.pages  | sort:"order" %}
+      <div class="trigger">
+      	<!--<a class="page-link" href="{{ site.baseurl }}/">Welcome</a>-->
+        <!-- get current page title and "collection" to figure out which nav
+             link should be "active" -->
+        {% assign current = page.title  %}
+        {% assign url_array = page.url | split: "/" %}
+        {% assign collection = url_array[1] | capitalize %}
+        {% for page in pages %}
+          {% if page.title != 'Administration' %}
+            {% if page.title != 'Blog' %}
+              {% if page.title and page.order %}
+                {% if page.title == current or page.title == collection %}
+                  <a class="page-link active" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+                {% else %}
+                  <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        </div>
+      </div>
+
+    </nav>
+
+</header>

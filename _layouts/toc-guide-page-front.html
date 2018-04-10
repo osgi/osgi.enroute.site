@@ -1,0 +1,20 @@
+---
+layout: bootstrap-front
+---
+
+<div class="container-fluid">
+
+<div class="row-fluid">
+    <!--Nav Bar -->
+    {% include sidebar.html %}
+
+    <!--Main Content -->
+    <div class="col-xs-12 col-md-9">
+
+          <p>{% include byline.html %}</p>
+
+          {{ content }}
+
+    </div>
+</div>
+</div>

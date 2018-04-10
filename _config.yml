@@ -2,35 +2,28 @@ plugins:
   - jekyll-redirect-from
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-feed
 markdown: kramdown
+
+theme: minima
+
+syntax_highlighter_opts:
+  disable: true
+
 collections:
-  book:
-    output: true
-  qs:
-    output: true
-  tutorial_base:
-    output: true
-  tutorial_rsa:
-    output: true
-  tutorial_iot:
-    output: true
-  tutorial_wrap:
-    output: true
-  tutorial_eval:
-    output: true
-  tutorial_maven:
-    output: true
-  services:
-    output: true
-  trains:
-    output: true
-  videos:
-    output: true
-  appnotes:
+  about:
     output: true
   doc:
     output: true
-  faq:
+  tutorial:
+    output: true
+  FAQ:
+    output: true
+  resources:
+    output: true
+  examples:
+    output: true
+  external:
     output: true
 
 defaults:

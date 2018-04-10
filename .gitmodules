@@ -1,0 +1,3 @@
+[submodule "osgi.enroute"]
+	path = _includes/osgi.enroute
+	url = https://github.com/osgi/osgi.enroute.git

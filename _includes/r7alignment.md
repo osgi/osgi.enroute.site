@@ -1,2 +1,0 @@
-The OSGi Alliance is working towards the release of the R7 version of the OSGi specifications. enRoute will be updated to align with R7 so please expect significant changes to enRoute examples and website content. Current enRoute website content and repos will be deprecated, though they will remain available for the foreseeable future. Migration guidance will be provided for users with current enRoute based applications and systems. Please e-mail any questions to the developer mailing list (osgi-dev@mail.osgi.org) or in confidence to help@osgi.org.
-{: .warning}

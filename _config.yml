@@ -19,8 +19,6 @@ collections:
     output: true
   FAQ:
     output: true
-  resources:
-    output: true
   examples:
     output: true
   external:

@@ -2,14 +2,15 @@
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="1;url={{page.redirect}}">
         <script type="text/javascript">
-            window.location.href = "{{page.redirect}}"
+            window.open("{{page.redirect}}")
         </script>
         <title>{{page.title}}</title>
+<!--        <meta http-equiv="refresh" content="1;url="window.location.href""> -->
     </head>
     <body>
-        <!-- Note: don't tell people to `click` the link, just tell them that it is a link. -->
-        If you are not redirected automatically, follow the <a href='{{page.redirect}}'>link to example</a>
+        <script type="text/javascript">
+        location.replace(document.referrer);
+        </script>
     </body>
 </html>

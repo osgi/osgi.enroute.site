@@ -1,0 +1,629 @@
+
+/* Mimicing GitHub's font styling, but puttin Segou UI higher (the Grasshopper font) for Windows users */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  font-style: normal;
+  font-variant: normal;
+  color: #111;
+  background-color: white;
+  -webkit-text-size-adjust: 100%;
+}
+
+
+.header-link {
+  position: absolute;
+  left: -0.5em;
+  opacity: 0;
+
+  \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  \-moz-transition: opacity 0.2s ease-in-out 0.1s;
+  \-ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}
+
+/*
+ * Next and Previous navigation
+ */
+
+.nav-prev {
+    &:before { content: "\25C0\00A0"; }
+        float: left;
+}
+
+.nav-next {
+    &:after { content: "\00A0\25B6"; }
+        float: right;
+}
+
+p.bug {
+        &:before { font-weight: bold; content: "BUG: "; }
+        @include rounded(3px);
+        background-color: #FFF0F0;
+        padding: $text-separation;
+        margin: $text-separation 0 $text-separation 0;
+        border: solid 1px #FFE0E0;
+}
+
+p.warning {
+        &:before { font-weight: bold; content: "WARNING: "; }
+        @include rounded(3px);
+        background-color: rgb(247, 252, 180);
+        padding: $text-separation;
+        margin: $text-separation 0 $text-separation 0;
+        border: solid 1px #FFE0E0;
+}
+
+p.note {
+        &:before { font-weight: bold; content: "NOTE: "; }
+        @include rounded(3px);
+        background-color: rgba(12, 118, 184, 0.08);
+        padding: $text-separation;
+        margin: $text-separation 0 $text-separation 0;
+        border: solid 1px #FFE0E0;
+}
+
+.shell pre {
+        color: white;
+        background-color: #333;
+}
+
+
+.tab-content .tab-pane {
+  display: none;
+}
+
+.site-nav .page-link {
+  color:#337ab7
+}
+
+.tab-content .active {
+  display: block;
+}
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout-danger {
+    border-left-color: #ce4844;
+}
+
+.guide_byline {
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* Search input form and search results styling */
+
+#sitesearch {
+    float:right;
+    margin-left:20px;
+    margin-top:4px;
+    margin-right:0px;
+    margin-bottom:0px;
+}
+
+.searchBox {
+	background:white;
+	background-repeat: no-repeat;
+	padding-left: 20px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white;
+	cursor: pointer;
+  background-image: url('/img/searchicon.png');
+	vertical-align: middle;
+    line-height: 18px;
+    padding-bottom:15px;
+    padding-top: 2px;
+    margin-top:4px;
+    height:25px;
+}
+.searchBoxBeta {
+	background:white;
+	border-style: solid;
+	border-width: 1px;
+	border-color: white;
+	cursor: pointer;
+	vertical-align:middle;
+}
+
+#heading #cse-search-boxBeta {
+    padding:0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    bottom:16px;
+    z-index: 100;
+}
+
+
+#search-box {
+	margin-top:12px;
+    line-height:24px;
+}
+
+#searchtext {
+	height:22px;
+	padding:0px;
+    padding-top:2px;
+	line-height:18px;
+}
+
+#cse-search-results iframe {
+	height : 1150px;
+}
+
+#bcs-results-div h1 a, h2 a {
+color: #337ab7 !important;
+margin-bottom: 2px;
+}
+
+#bcs-results-div h1 a:visited, h2 a:visited {
+color: #1756a9 !important;
+margin-bottom: 2px;
+}
+
+
+.bcs-result h2 {
+margin: 0px !important;
+padding-bottom:0px !important;
+}
+
+.bcs-result {
+margin-top: 0px !important;
+padding-top: 0px !important;
+margin-left: 25px !important;
+}
+
+/* Coordinating the codeblock background with pre container baockground */
+pre {
+	background-color: #f8f8f8;
+}
+
+
+/* kbd overrides */
+kbd
+{
+    -moz-border-radius:3px;
+    -moz-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+    -webkit-border-radius:3px;
+    -webkit-box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+    background-color:#f7f7f7;
+    border:1px solid #ccc;
+    border-radius:3px;
+    box-shadow:0 1px 0 rgba(0,0,0,0.2),0 0 0 2px #fff inset;
+	text-shadow:0 1px 0 #fff;
+    color:#333;
+    display:inline-block;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    line-height:1.4;
+    margin:0 .1em;
+    padding:.1em .6em;
+}
+
+/*
+##############################################################################
+## code block (highlight.js) overrides.
+##############################################################################
+*/
+
+.hljs-line-numbers {
+    text-align: right;
+    border-right: 1px solid #ccc;
+    color: #999;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.hljs-line-numbers {
+	display:none;
+}
+
+.line-numbers code{
+	display:block;
+}
+
+/* prevent code blocks from wrapping so line numbers line up
+   see https://github.com/wcoder/highlightjs-line-numbers.js/issues/4 */
+pre {
+    overflow: auto;
+    word-break: normal;
+    word-wrap: normal;
+}
+pre code {
+    white-space: pre;
+}
+
+/*
+##############################################################################
+## inline code overrides.
+##############################################################################
+*/
+
+code {
+	color: #000000;
+	background-color: transparent;
+
+}
+
+/*
+##############################################################################
+## Image float overrides. Allows to wrap text around images.
+## {: .float-img-right}
+## To finish the wrapping, insert this text under next block object:
+## {: .clear-img}
+## That assures the next block element will stay clear of the image.
+##############################################################################
+*/
+.float-img-right {
+  float: right;
+  padding-left: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.float-img-left {
+  float: left;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.img-center {
+  text-align:center;
+  display:block;
+  padding-right: 25px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-left: auto;
+  margin-right: auto
+}
+
+.clear-img {
+  clear:both;
+}
+
+figcaption {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+/*
+##############################################################################
+##  MathJax_Display for math formulas.  justifies al to the left.
+## This might be wrong in some cases, but cannot determine hoew to differentiate
+##############################################################################
+*/
+
+/*
+
+.MathJax_Display { 
+    text-align: left !important;
+    display: inline !important;
+}
+
+.MathJax { 
+    text-align: left !important;
+    display: inline !important;
+}
+*/
+
+/*
+##############################################################################
+##  Index.md Page
+##############################################################################
+*/
+.index_use_images {
+/* Use only width to control an img-responsive img.  Bootstrap will float the height. */
+	width:290px;
+}
+tbody.index_table tr td{
+	vertical-align:middle;
+}
+.index_table_icon {
+	width:32px;
+	height:32px;
+}
+.index_table_primary_use {
+	margin:10px;
+	font-size:1.0em;
+}
+
+
+/*
+##############################################################################
+##  Essential Mathematics .md Page for Table of contents
+##############################################################################
+*/
+.index_use_images {
+/* Use only width to control an img-responsive img.  Bootstrap will float the height. */
+	width:290px;
+}
+#math_table table{
+	width="100%";
+}
+
+#math_table tr td{
+	vertical-align:top;
+}
+
+#math_table td{
+	width="30%";
+}
+
+#math_table_icon {
+	width:32px;
+	height:32px;
+}
+.math_table_primary_use {
+	margin:10px;
+	font-size:1.0em;
+}
+
+#math_table ol{
+	list-style-type: none;
+}
+
+
+/*
+##############################################################################
+##  Essential Mathematics div element for word wrapped notes
+##  Start a markdown section with:
+##  <div class="note" markdown="1">
+##############################################################################
+*/
+
+.note p{
+	width: 80%;
+	margin: auto;
+	margin-bottom: 20px;
+	margin-top: 20px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: DarkRed;
+	padding: 5px;
+}
+
+
+/*
+##############################################################################
+##  guides.md Page
+##############################################################################
+*/
+
+.guide_icon {
+	width:36px;
+	height:36px;
+}
+
+
+
+/*
+##############################################################################
+##  bootstrap docs sidebar - table of contents (toc)
+##############################################################################
+*/
+
+.toc-title {
+  background: white;
+}
+.toc-header {
+  background: white;
+}
+.toc-header .toc-subheader {
+  background: white;
+}
+.fixed {
+    position: fixed;
+}
+
+
+/* sidebar */
+.bs-docs-sidebar {
+    padding-left: 0px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.bs-docs-sidebar .nav {
+  margin-left:0px;
+}
+
+.bs-docs-sidebar .nav .nav {
+  /*margin-left:20px;*/
+  /*padding-left:20px;*/
+}
+
+.bs-docs-sidebar .nav .nav .nav {
+  /*margin-left:20px;*/
+  /*padding-left:40px;*/
+}
+
+/*.bs-docs-sidebar .nav .nav .nav .nav {
+  margin-left:20px;
+}*/
+
+.bs-docs-sidebar .nav>li {
+  margin-top: 0;
+}
+
+/* title links */
+.bs-docs-sidebar .nav>li>a {
+    color: #999;
+    border-left: 1px solid transparent;
+    padding: 4px 20px 4px 18px;
+    font-size: 13px;
+    font-weight: 400;
+
+}
+
+/* nested links */
+.bs-docs-sidebar .nav .nav>li>a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 28px;
+    font-size: 12px;
+}
+
+/* sub-nested links */
+.bs-docs-sidebar .nav .nav .nav>li>a {
+    /*padding-top: 1px;*/
+    /*padding-bottom: 1px;*/
+    padding-left: 38px;
+    font-size: 10px;
+}
+
+/* sub-sub-nested links */
+.bs-docs-sidebar .nav .nav .nav .nav>li>a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 58px;
+    font-size: 10px;
+}
+
+/* active & hover links */
+.bs-docs-sidebar .nav>.active>a,
+.bs-docs-sidebar .nav>li>a:hover,
+.bs-docs-sidebar .nav>li>a:focus {
+    /*color: #563d7c;*/
+    color: #111;
+    text-decoration: none;
+    background-color: transparent;
+    /*border-left-color: #563d7c;*/
+    border-left-color: #111;
+}
+
+.bs-docs-sidebar .nav>.active>a {
+  border-left: 2px solid #111
+}
+
+/* all active links */
+.bs-docs-sidebar .nav>.active>a,
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active:focus>a {
+    font-weight: 700;
+}
+/* nested active links */
+.bs-docs-sidebar .nav .nav>.active>a,
+.bs-docs-sidebar .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav>.active:focus>a {
+    font-weight: 500;
+}
+
+/* sub-nested active links */
+.bs-docs-sidebar .nav .nav .nav>.active>a,
+.bs-docs-sidebar .nav .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav .nav>.active:focus>a {
+    font-weight: 500;
+}
+
+/* hide inactive nested list */
+.bs-docs-sidebar .nav ul.nav {
+    display: none;
+}
+
+/* show active nested list */
+.bs-docs-sidebar .nav>.active>ul.nav {
+    display: block;
+}
+
+@media screen and (max-width: 990px) { .bs-docs-sidebar {
+    display: none;
+} }
+
+@media print {
+  .bs-docs-sidebar {
+    display: none;
+  }
+}
+
+
+/*
+##############################################################################
+##  Multiline text tables for code explanation.  Look in Primer
+##############################################################################
+*/
+
+table.multiline {
+	rules:rows;
+	vertical-align:top;
+	margin:20px 0px;
+	border-bottom: 1px solid #ddd;
+}
+
+table.multiline th{
+     padding:0px 5px 0px 15px;
+	 margin: 0px 15px 0px 15px;
+	 border-bottom: 1px solid #ddd;
+}
+
+
+table.multiline tr {
+	vertical-align:top;
+    text-align:right;
+    border-bottom: 1px solid #ddd;
+}
+
+table.multiline td {
+	 vertical-align:top;
+	 padding:0px 5px 0px 15px;
+	 margin: 0px 15px 0px 15px;
+	 text-align: left;
+}
+
+table.multiline td:first-child{
+	 text-align:right;
+	 padding:0px 5px 0px 0px;
+	 margin: 0px 15px 0px 0px;
+}
+
+/*
+##############################################################################
+##  Formula text tables for code explanation.  Look in Primer
+##############################################################################
+*/
+
+table.multiline-middle {
+	rules:rows;
+	vertical-align:middle;
+	margin:20px 0px;
+	border-bottom: 1px solid #ddd;
+}
+
+table.multiline-middle th{
+     padding:0px 5px 0px 15px;
+	 margin: 0px 15px 0px 15px;
+	 border-bottom: 1px solid #ddd;
+}
+
+
+table.multiline-middle tr {
+	vertical-align:middle;
+    text-align:center;
+    border-bottom: 1px solid #ddd;
+}
+
+table.multiline-middle img{
+	margin:10px;
+}
+

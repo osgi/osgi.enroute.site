@@ -1,5 +1,4 @@
 /_site/
 /.sass-cache/
 /.project
-/.bundle/
-/vendor/
+.DS_Store

@@ -1,0 +1,12 @@
+<table class="side-nav">
+	{% for chapter in site.external %}
+		<tr>
+		{% if chapter.title == page.title %}
+			<td class=selected> </td><td>{{chapter.title}}</td>
+			
+	  	{% else %}
+			<td> </td><td><a href="{{chapter.url}}">{{chapter.title}}</a></td>
+	  	{% endif %}
+	  	</tr>
+  	{% endfor %}
+</table>

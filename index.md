@@ -14,6 +14,6 @@ enRoute is based upon the latest OSGi Alliance Specifications and best practices
 
 **So lets get started!**
 
-* [Take me to the tutorials...](tutorial)
-* [Browse the examples](examples)
-* [Frequently asked Questions](faq)
+* [Take me to the tutorials...](Tutorial)
+* [Browse the examples](Examples)
+* [Frequently asked questions](FAQ)

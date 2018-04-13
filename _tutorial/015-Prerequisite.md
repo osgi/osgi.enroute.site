@@ -3,32 +3,32 @@ title: Prerequisites
 layout: toc-guide-page
 lprev: 032-tutorial_microservice-jpa.html 
 lnext: 017-enRoute-ArcheTypes.html 
-summary: Prerequistes & configurations required for running these Tutorials.
+summary: Prerequisites and configurations required for running these tutorials.
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
 Before you start any of the tutorials you must prepare your environment so that the right tools are installed. This page helps you to achieve this. 
 
-## Required tools
+## Required Tools
 
 We need to run the following tools on your computer - without them you won't get very far at all.
 
-* [Java][java8], probably already got it? If not, this is a good time to get started! enRoute projects target Java 8 by default, so make sure your Java is at least that version
+* [Java][java8], probably already got it? If not, this is a good time to get started! enRoute projects target Java 8 by default, so make sure your Java is at least that version.
 * [Maven][Maven], a popular build tool for Java applications with an enormous repository behind it. Make sure that you're on at least 3.3.9
 
-## Useful tools
+## Useful Tools
 
 These tools aren't strictly required but we think that they'll improve your experience of using the tutorials, and that they'll help you in starting your own projects.
 
-* [Eclipse][mars], A powerful, flexible IDE for Java if you do not know which variant you want then pick the _Eclipse Standard_ variant. Make sure that you use version _Mars_ or higher
-* [Bndtools][bndtools] A plugin for Eclipse that adds IDE support for OSGi development. This includes automatically building your projects and nice editors for bnd metadata. Make sure that you have 4.0.0 as enRoute makes use of lots of new OSGi features!
+* [Eclipse][mars], A powerful, flexible IDE for Java if you do not know which variant you want then pick the _Eclipse Standard_ variant. Make sure that you use version _Mars_ or higher.
+* [Bndtools][bndtools] A plugin for Eclipse that adds IDE support for OSGi development. This includes automatically building your projects and nice editors for bnd metadata. Make sure that you have at least Bndtools 4.0.0 as enRoute makes use of lots of new OSGi features!
 * [Git][git], Eclipse does include git support through EGit, but when it comes to git nothing really beats the good old command line.
 
 
-### Installing bndtools
+### Installing Bndtools
 
-You can't install bndtools 4.0.0 from the Eclipse market place yet as it hasn't been formally released, but you can install the bndtools development snapshot directly from an update site using the instructions at:
+You can't install Bndtools 4.0.0 from the Eclipse market place yet as it hasn't been formally released, but you can install the Bndtools development snapshot directly from an update site using the instructions at:
 
         http://bndtools.org/installation.html#nonstandard_versions
 
@@ -64,7 +64,7 @@ There is also multi-workspace launcher plugin from Torkild U. Resheim that incor
 
 ### Unix
 
-We aren't currently aware of any challenges on Unix systems. Please let us know if you have any!
+We aren't currently aware of any challenges on Unix systems. Please [let us know](mailto:osgi-dev@mail.osgi.org) if you have any!
 
 [java8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [Maven]: https://maven.apache.org

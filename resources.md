@@ -9,7 +9,7 @@ sponsor: OSGi™ Alliance
 
 ## OSGi Specifications
 
-enRoute is based upon the lastest OSGi Allaince Specifications, see:
+enRoute is based upon the latest OSGi Alliance Specifications, see:
 
 * [R7 Core Specifications](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/index.html)
 * [R7 Compendium Specifications](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/index.html)
@@ -35,9 +35,9 @@ The current certification program is intended for experienced hands-on OSGi Deve
 
 ## OSGi Testimonials
 
-It is increasingly realised that OSGi Specifications provide the modular foundations upon which economically sustainable software solutions can be built. The following testimonials are from Solutions providers (Enterprise, E-Commerce, IoT) that have realised this unique opportunity.
-   
-[OSGi Testimonials](https://www.osgi.org/about-us/testimonials/)
+It is increasingly realized that OSGi Specifications provide the modular foundations upon which economically sustainable software solutions can be built. The following [OSGi testimonials](https://www.osgi.org/about-us/testimonials/) demonstrate the variety of industries and uses that OSGi is being used. 
+
+If you are already using OSGi then please share your testimonial with us ([Submission guidelines](https://www.osgi.org/about-us/testimonials/testimonial-guidelines/)).
 
 
 ## The 'OSGi Enabled' Ingredient Mark

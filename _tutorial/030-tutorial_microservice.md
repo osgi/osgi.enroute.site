@@ -126,7 +126,7 @@ For further detail see [Semantic Versioning](../FAQ/210-semantic_versioning.html
 
 ### Defining the DTO 
 
-Data transfer between the components is achieved via the use of [Data Transfer Objects (DTO's)](../FAQ/420--dtos.html).
+Data transfer between the components is achieved via the use of [Data Transfer Objects (DTOs)](../FAQ/420--dtos.html).
 
 To achieve this create the following two files:
 
@@ -286,7 +286,7 @@ The `dao-impl` has a dependency on `dao-api`. Also `PersonalDaoImpl.java` and `A
 
 ### Visibility
 
-Implmentations should **NOT** be shared; hence no `package-info.java` file.
+Implementations should **NOT** be shared; hence no `package-info.java` file.
 {: .note } 
 
 ## The REST Service
@@ -489,7 +489,7 @@ index: target/index.xml
 
 ### Dependencies
 
-By adding the following dependencies inside the `<dependencies>` section of the file `rest-app/pom.xml`, we added the necessary Capabilities to the `rest-app`'s respository.
+By adding the following dependencies inside the `<dependencies>` section of the file `rest-app/pom.xml`, we added the necessary Capabilities to the `rest-app`'s repository.
 
 {% highlight xml %}
 <dependency>
@@ -561,7 +561,7 @@ We now generate the required OSGi indexes from the project dependencies.
     mvn bnd-resolver:resolve
 {: .shell }
 
-And finally generate the runnable jar from the top level project directory:
+And finally generate the runnable jar from the top level project directory.
 
     mvn package
 {: .shell }

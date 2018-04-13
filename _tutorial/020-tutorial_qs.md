@@ -3,18 +3,18 @@ title: Quick Start
 layout: toc-guide-page
 lprev: 017-enRoute-ArcheTypes.html 
 lnext: 022-tutorial_osgi_runtime.html
-summary: Your first really simple OSGi™ REST Microservice (< 5 minutes).
+summary: Your first really simple OSGi REST Microservice (< 5 minutes).
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
 ## Summary 
 
-In this tutorial we'll first run, and then re-create and re-run, a simple OSGi™ Microservice.
+In this tutorial we'll first run, and then re-create and re-run, a simple OSGi Microservice.
 
-## Build & Run
+## Build and Run
 
-We start by first downloading, building and running the enRoute `quickstart` example. In addition to demonstrating the simple application this will also confirm that your local [environment](015-Prerequisite.html#required-tools) meets the require prerequisites.
+We start by first downloading, building and running the enRoute `quick start` example. In addition to demonstrating the simple application this will also confirm that your local [environment](015-Prerequisite.html#required-tools) meets the required prerequisites.
 
 Download the [enroute examples](https://github.com/osgi/osgi.enroute) from GitHub and change directory into `examples/quickstart`.
 
@@ -28,7 +28,7 @@ Build the Application with the following commands:
 
 ### Running the example
 
-We now have a runnable artifact which can be started with the command 
+We now have a runnable artifact which can be started with the command:
 
     $ java -jar app/target/app.jar
 {: .shell }
@@ -37,25 +37,25 @@ To test that the application is running visit the [quickstart](http://localhost:
 
 ![Quickstart](img/quickstart.png){: height="400px" width="400px"}
 
-or if minimalisim is more your thing, the raw REST endpoint [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
+or if minimalism is more your thing, the raw REST endpoint [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
 
 When you want to terminate the application press **Ctrl+C**.
 
-## Recreating Quickstart
+## Recreating Quick Start
 
-We'll now recreate the quickstart example locally as though it were your own greenfield OSGi project. 
+We'll now recreate the quick start example locally as though it were your own greenfield OSGi project. 
 
 It is assumed that you have the required [environment](015-Prerequisite.html#required-tools) installed on your laptop and created the [settings.xml](017-enRoute-ArcheTypes.html#project-setup-for-snapshot-archetypes) project skeleton in your project root directory. 
 {: .note }
 
 ### Project Setup
 
-First issue the command to create the project template
+First issue the command to create the project template:
 
     $ mvn -s settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
 
-Fillng the the project details with appropriate values 
+Fillng the project details with appropriate values: 
 
     Define value for property 'groupId': org.osgi.enroute.examples.quickstart
     Define value for property 'artifactId': quickstart
@@ -69,10 +69,10 @@ Fillng the the project details with appropriate values
     Y: : 
 {: .shell }
 
-If you're using an IDE then this would be a good time to import the generated maven projects
+If you're using an IDE then this would be a good time to import the generated maven projects.
 {: .note }
 
-### Implementing the MicroService
+### Implementing the Microservice
 
 Having created the project skeleton, edit `quickstart/impl/src/main/java/org/osgi/enroute/examples/quickstart/rest/ComponentImpl.java` 
 
@@ -109,12 +109,12 @@ and add the following implementation details
 and then save the file.
 
 The important modifications include:
-* A JAX-RS resource method implementation, replacing the the `TODO` section
-* The `@Component` is modified to register this component as an OSGi service
+* A JAX-RS resource method implementation, replacing the the `TODO` section.
+* The `@Component` is modified to register this component as an OSGi service.
 * The `@JaxrsResource` annotation is used to mark this as a JAX-RS whiteboard resource.
 * Remember to change the name of the component from `ComponentImpl.java` to `Upper.java`
 
-### Building the implementation
+### Building the Implementation
 
 It's now time to build the implementation project.
 
@@ -131,7 +131,7 @@ From the `quickstart/impl` project we now build the impl bundle.
     $ mvn install
 {: .shell }
       
-Here, we use the `install` goal to make sure that the built artifact is available to other projects in later steps
+Here, we use the `install` goal to make sure that the built artifact is available to other projects in later steps.
 
 If the `install` fails, continue to the next stage - resolve - then repeate `mvn install` 
 {: .warning }
@@ -238,7 +238,7 @@ Note that in this version of `quickstart` only the REST endpoint will be availab
 
  <div class="tab-content">
   <div markdown="1" role="tabpanel" class="tab-pane active" id="run-cli">
-Now that the initial development is done we're ready to build and package the whole application by running the following command in the project root
+Now that the initial development is done we're ready to build and package the whole application by running the following command in the project root.
       
     $ mvn package
 {: .shell }

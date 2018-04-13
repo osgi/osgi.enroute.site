@@ -27,13 +27,13 @@ Semantic versioning in OSGi is achieved in the following manner:
 * Export-Package (or Capabilities) - Here the decision was taken to support a single export version (i.e. `Export-Package: com.acme.foo; version=1.0.2`). So a  non-breaking to `com.acme.foo` might be represented by a version change 1.0.2 ➞ 1.1.0; where as the subsequent version change 1.1.0 ➞ 2.0.0 represents a breaking change.
 * Import-Package (or Requirements) now specified the range of acceptable Export-Packages (Capabilities) versions (i.e. Import-Package: com.acme.bar; version="[1,2)"). Square brackets ‘[‘ and ‘]‘ are used to indicate inclusive and parentheses ‘(‘ and ‘)‘ to indicate exclusive. Hence a range [1.0.0, 2.0.0) means any Capability with version at or above  1.0.0 is acceptable up to, but not including 2.0.0. 
 
-In the this example we know that `com.acme.bar` will work with `com.acme.foo 1.0.2 & 1.1.0`; however we also know that we have a breaking change if we move to com.acme.foo 2.0.0 without without appropriate updates to `com.acme.bar`.
+In the this example we know that `com.acme.bar` will work with `com.acme.foo 1.0.2 & 1.1.0`; however we also know that we have a breaking change if we move to com.acme.foo 2.0.0 without appropriate updates to `com.acme.bar`.
 {: .note } 
 
 
-## Dont Aggregate Dependencies!
+## Don't Aggregate Dependencies!
 
-OSGi versioning is on packages, not on bundles. The reasoning for this is simply that Bundles are an ‘‘aggregate’’ artefact and so must move as fast as the fastest moving exported packages they contain. 
+OSGi versioning is on packages, not on bundles. The reasoning for this is simply that Bundles are an ‘‘aggregate’’ artifact and so must move as fast as the fastest moving exported packages they contain. 
 
 Lets pretend for the moment that this is not the case, and that we only version Bundles.
 
@@ -41,7 +41,7 @@ Consider a scenario where a bundle contains just two exported packages `foo` and
 * `foo` is not changed
 * `bar` has a major change.
  
-To reflect this the bundle version must also have a major change. However this now requires an unnecessary updates for bundle that only have an actual dependence on `foo`. Aggregating dependencies in this way increases the fan out of the _transitive dependencies_; rapidly resulting in brittle composite systems where where all of the constituent parts must be simultaneously updated.
+To reflect this the bundle version must also have a major change. However this now requires an unnecessary updates for bundle that only have an actual dependence on `foo`. Aggregating dependencies in this way increases the fan out of the _transitive dependencies_; rapidly resulting in brittle composite systems where all of the constituent parts must be simultaneously updated.
 
 Note that exactly the same problems applies with respect to REST based Microservices and relying on container image versions: yet another reason to use OSGi as the basis for modular Microservices.
 
@@ -58,9 +58,9 @@ package org.osgi.enroute.examples.microservice.dao;
 {% endhighlight %}
 
 
-The [bnd plugin](../520-bnd) will pickup this information and add it to the OSGi Bundle manifest. As a Developers you should change the version information in `package-info.java` when you make changes to the package content.
+The [bnd plugin](../520-bnd) will pickup this information and add it to the OSGi Bundle manifest. As a developer you should change the version information in `package-info.java` when you make changes to the package content.
 
-**Note** - This is automatically managed if you are using bndtools.
+**Note** - This is automatically managed if you are using Bndtools.
 {: .note }
 
 

@@ -31,10 +31,10 @@ There are two enRoute project Archetypes:
 
 The project archetype is designed to get you up and running as fast as possible, setting up a top-level reactor POM and a simple OSGi enRoute application.
 
-This simple application consists of a Declarative Services component project and an enRoute application project. Together these provide a simple application, just like you can see in the quickstart example.
+This simple application consists of a Declarative Services component project and an enRoute application project. Together these provide a simple application, just like you can see in the [quick start example](../Examples/).
 
 ### The project-bare Archetype
-The project-bare archetype creates an absolutely minimal enRoute workspace. It doesn’t contain any modules, giving you the maximum flexibility to create your own application modules
+The project-bare archetype creates an absolutely minimal enRoute workspace. It doesn’t contain any modules, giving you the maximum flexibility to create your own application modules.
 
 ## Module Archetypes
 
@@ -71,7 +71,7 @@ These requirements are provided in a bndrun file, which defines how the OSGi app
 
 In addition to gathering requirements an application module also defines the configuration that will be supplied to the application. This configuration is supplied as a bundle which gets deployed into the application framework and is processed by an [OSGi configurator implementation](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.configurator.html).
 
-## Project Setup For SNAPSHOT Archetypes
+## Project Setup for SNAPSHOT Archetypes
 
 <div class="alert alert-warning">
   Maven automatically searches for archetypes in the Maven Central repository, but it will not discover archetypes from other repositories without additional configuration. This section describes the configuration necessary to use the OSGi enRoute SNAPSHOT archetypes. It is not necessary for enRoute archetypes with release versions.

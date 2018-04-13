@@ -8,14 +8,14 @@ author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-This tutorial is Maven and command-line based; the reader may follow this verbatim or use their favorite Java/IDE.
+This tutorial is Maven and command-line based; the reader may follow this verbatim or use their favorite Java IDE.
 
 ## Introduction
 
-Using the [enRoute ArcheTypes](017-enRoute-ArcheTypes.html) this tutorial walks through the creation of REST microservice comprised of the following structural elements:
+Using the [enRoute ArcheTypes](017-enRoute-ArcheTypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
 * An API module
 * A DAO Implementation module
-* A Rest Service Implementation module 
+* A REST Service Implementation module 
 * The Composite Application module
 
 with each module having a POM that describes its dependencies.
@@ -178,9 +178,7 @@ and again, we advertise this Capability by creating the following `package-info.
 </div>
 
 
-
-
-## The DAO implementation 
+## The DAO Implementation 
 
 In the `microservice` project director now create the `impl` module using the [ds-component Archetype](017-enRoute-ArcheTypes.html#the-ds-component-archetype):
 
@@ -402,7 +400,7 @@ Finally, place the following `index.html` file in directory `rest-service/src/ma
 </div>
 </div>
 
-and create the directory `rest-service/src/main/resources/static/main/img` into which save the following icon with the name `enroute-logo-64.png`
+and create the directory `rest-service/src/main/resources/static/main/img` into which save the following icon with the name `enroute-logo-64.png`.
 
 ![enRoute logo](img/enroute-logo-64.png) 
 
@@ -466,7 +464,7 @@ with the following values:
 ### Define Runtime Entity
 
 Our Microservice is composed of the following elements:
-* A rest-service
+* A REST Service
 * An implementation of JSON-P (org.apache.johnzon.core)
 * An in memory database (H2).
 
@@ -548,10 +546,9 @@ All that is required is to pass in the appropriate configuration by overwrite th
 </div>
 </div>
 
-
 ## Build
 
-Build the modules and install in local maven repository from the top level project directory
+Build the modules and install in the local maven repository from the top level project directory
 
     mvn install
 {: .shell }
@@ -564,7 +561,7 @@ We now generate the required OSGi indexes from the project dependencies.
     mvn bnd-resolver:resolve
 {: .shell }
 
-And finally generate the runnable jar from the top level project directory
+And finally generate the runnable jar from the top level project directory:
 
     mvn package
 {: .shell }
@@ -612,17 +609,16 @@ index: target/index.xml
         tx-control-service-xa;version='[1.0.0,1.0.1)'
 {% endhighlight %}
 
-
 ## Run 
 
-To dynamically assembled and run the resultant REST Microservice; simply change back to the top level project directory and type the command: 
+To dynamically assemble and run the resultant REST Microservice simply change back to the top level project directory and type the command:
 
     java -jar rest-app/target/rest-app.jar
 {: .shell }
 
 The REST service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)
 
-![MicroService demo](img/MicroService.png){: height="450px" width="450px"}
+![Microservice demo](img/MicroService.png){: height="450px" width="450px"}
 
 Stop the application using Ctrl+C in the console.
 

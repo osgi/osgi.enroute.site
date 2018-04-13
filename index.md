@@ -8,7 +8,7 @@ layout: toc-guide-page-front
 <br>
 enRoute Tutorials and Examples provide a simple developer onramp for those unfamiliar with OSGi™. 
 
-enRoute is based upon the latest OSGi Alliance Specifications and best practices; and at least initially takes an opinionated approach to the development toolchain focusing on Maven.
+enRoute is based upon the latest OSGi Alliance Specifications and best practices. It uses Maven and bnd to build modular standalone applications.
 
 > I hear and I forget. I see and I remember. I do and I understand!
 

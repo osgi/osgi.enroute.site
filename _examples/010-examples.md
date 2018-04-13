@@ -8,9 +8,9 @@ author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-The quickstart example is a simple OSGi enRoute application created from the [enRoute project archetype](../tutorial/017-enRoute-ArcheTypes). Quickstart contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
+The quick start example is a simple OSGi enRoute application created from the [enRoute project archetype](../tutorial/017-enRoute-ArcheTypes). Quick start contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
 
-As the quickstart example project uses Apache Maven as a build tool, at the root of the project we have a _reactor pom.xml_.
+As the quick start example project uses Apache Maven as a build tool, at the root of the project we have a _reactor pom.xml_.
 
     $ pwd
     ~/quickstart 
@@ -64,9 +64,9 @@ The OSGi reference implementations used in OSGi enRoute are included at runtime 
 The remaining dependencies are made available at test scope so that they may be used when unit testing, integration testing, or debugging OSGi enRoute applications.
 
 
-## The rest Module
+## The REST Module
 
-The rest module contains the main bundle for the application. It contains a simple declarative services component in under `src/main/java`, and a unit test in `src/test/java`. The `src/main/resources` folder contains files contributing a Web User Interface for the component.
+The REST module contains the main bundle for the application. It contains a simple declarative services component in under `src/main/java`, and a unit test in `src/test/java`. The `src/main/resources` folder contains files contributing a Web User Interface for the component.
 
 ### The POM
 
@@ -97,9 +97,9 @@ The DS component contains a number of important annotations.
 
 The @Path, @GET and @PathParam annotations are defined by JAX-RS, and used to map incoming requests to the resource method “toUpper(String)” which converts the incoming String to upper case and then returns it.
 
-### The Unit test
+### The Unit Test
 
-The unit test makes use of JUnit 4 to perform a basic test on the Upper service
+The unit test makes use of JUnit 4 to perform a basic test on the Upper service.
 
 ## The app module
 

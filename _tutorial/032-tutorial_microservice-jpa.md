@@ -3,7 +3,7 @@ title: Persistence with JPA
 layout: toc-guide-page
 lprev: 030-tutorial_microservice.html 
 lnext: 015-Prerequisite.html
-summary: Demonstrates how to upgrade an Application and the use JPA & Hibernate (< 10 minutes).
+summary: Demonstrates how to upgrade an Application and then use JPA and Hibernate (< 10 minutes).
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
@@ -12,10 +12,10 @@ The previous Microservices example which uses `jdbc` provides the start-point fo
 
 In this tutorial we'll modify the Microservice to switch the data-layer from a JDBC to a JPA. Because of the de-coupling provided by the [DTO](../FAQ/420--dtos.html)'s, all we need do is re-implement `dao-impl` and the composite application.
 
-**Note** - because of the use of DTO's, OSGi allows us, via setting one property, to seperate the data-layer and rest-services layers of our Microservice across a local IP local network using secure low latency [Remote Services](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.remoteservices.html).
+**Note** - because of the use of DTO's, OSGi allows us, via setting one property, to seperate the data-layer and REST Services layers of our Microservice across a local IP local network using secure low latency [Remote Services](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.remoteservices.html).
 {: .note }   
 
-## A JPA implementation 
+## A JPA Implementation 
  
 In the `microservice` project root directory, create the `jpa` project.
 
@@ -68,7 +68,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
 </div>
 
 
-To address a hibernate bug we need to add the following `dao-impl-jpa/bnd.bnd`file
+To address a hibernate bug we need to add the following `dao-impl-jpa/bnd.bnd`file:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#bnd" aria-expanded="false" aria-controls="bnd">
     bnd.bnd
@@ -105,7 +105,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
 </div>
 
 
-Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/PersonEntity.java`
+Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/PersonEntity.java`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonEntity" aria-expanded="false" aria-controls="PersonEntity">
     PersonEntity.java
@@ -120,7 +120,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
   </div>
 </div>
 
-The resultant persistence bundle has a Requirement for a JPA service extender. Hence we add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/package-info.java`
+The resultant persistence bundle has a Requirement for a JPA service extender. Hence we add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/package-info.java`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info" aria-expanded="false" aria-controls="package-info">
     package-info.java
@@ -138,7 +138,7 @@ The resultant persistence bundle has a Requirement for a JPA service extender. H
 
 ## JPA Resources
 
-Create the following JPA resources
+Create the following JPA resources:
 
 `dao-impl-jpa/src/main/resources/META-INF/persistence.xml`
 <p>
@@ -172,7 +172,6 @@ Create the following JPA resources
 </div>
 
 
-
 ### Dependencies
 
 Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependencies>` section:
@@ -193,7 +192,7 @@ Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependenc
 
 ## The JPA Composite Application 
 
-Create the alternative jpa application project
+Create the alternative JPA application project.
 
      $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
@@ -219,7 +218,7 @@ Create the alternative jpa application project
 
 ### Define Runtime Entity
 
-Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`
+Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`:
 
 {% highlight shell-session %}
 -resolve.effective: active
@@ -234,13 +233,13 @@ Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`
     javax.xml.stream.util;version=1.0.0 
 {% endhighlight %}
 
-The `-runpath` needs to be specified because the JRE has a split package for javax.transaction and a uses constraint between javax.sql and javax.transaction. This breaks JPA unless the JTA API is always provided from outside the OSGi framework.
+The `-runpath` needs to be specified because the JRE has a split package for javax.transaction and a uses constraint between javax.sql and javax.transaction. This breaks JPA unless the JTA API is always provided from outside of the OSGi framework.
 {: .note }
 
-The `-runsystempackages` is required because hibernate has versioned imports for JTA, and its dependency dom4j has versioned imports for the STAX API. Both of these should come from the JRE.
+The `-runsystempackages` is required because Hibernate has versioned imports for JTA, and its dependency dom4j has versioned imports for the STAX API. Both of these should come from the JRE.
 {: .note }
 
-Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include the Composite Application's requirements:
+Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include the composite application's requirements:
 
 {% highlight shell-session %}
 -runrequires: \
@@ -311,7 +310,6 @@ Add the following configuration file `rest-app-jpa/src/main/resources/OSGI-INF/c
 
 We build and run the examples as in the previous JDBC Microservices example.
 
-
     mvn install
 {: .shell }
 
@@ -327,6 +325,6 @@ We build and run the examples as in the previous JDBC Microservices example.
     java -jar rest-app/target/rest-app.jar
 {: .shell }
 
-The REST service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)
+The REST Service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)
 
 Stop the application using Ctrl+C in the console.

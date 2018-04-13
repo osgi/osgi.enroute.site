@@ -8,9 +8,9 @@ author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-These Tutorials focus on creating, running and modifying an OSGi application. We start with the simple `Quick Start` introduction, and then move on to  development  a more sophisticated three tier Microservices applicaton. 
+These tutorials focus on creating, running and modifying an OSGi application. We start with the simple `Quick Start` introduction, and then move on to  develop a more sophisticated three-tier Microservices applicaton. 
 
-A basic familiarity with Java, Git, Eclipse & Maven is assumed. The approximate time required to complete each tutorial is indicated in each Tutorial's description.
+A basic familiarity with Java, Git, Eclipse and Maven is assumed. The approximate time required to complete each tutorial is indicated in each tutorial's description.
 
 <br>
 <hr>

@@ -3,7 +3,7 @@ title: Resolving - OSGi's Best Kept Secret?
 layout: toc-guide-page
 lprev: 520-bnd.html
 lnext: 210-semantic_versioning.html  
-summary: Resolving is one of the cornerstones of OSGi, but what actually is going on?
+summary: Resolving is one of the cornerstones of OSGi, but what is actually going on?
 author: enRoute@paremus.com
 sponsor: OSGi Alliance 
 ---
@@ -14,23 +14,23 @@ The OSGi Framework uses the Resolver to _wire_ together a given set of bundles a
 
 As soon as you create Modules, you create a dependency management problem.
 
-Realising this the OSGi Alliance has evolved, through extensive experience, a generic Requirements-Capabilities [dependency management model](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.module.html#framework.module.dependencies). 
+Realizing this the OSGi Alliance has evolved, through extensive experience, a generic Requirements-Capabilities [dependency management model](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.module.html#framework.module.dependencies). 
 
 This model consists of a small number of primitive concepts:
 
-* **Artifact** (a.k.a _Thing_) - For OSGi the primary Artifact is the OSGi Bundle (a JAR file); but other  examples of Artefacts include software Certificates, or physical components such as a secure USB key store.
+* **Artifact** (a.k.a _Thing_) - For OSGi, the primary Artifact is the OSGi Bundle (a JAR file); but other examples of Artifacts include software Certificates, or physical components such as a secure USB key store.
 
-* **Environment** - The runtime Environment within which an Artefact may be installed: i.e. a physical host, a container, or an OSGi framework.
+* **Environment** - The runtime Environment within which an Artifact may be installed: i.e. a physical host, a container, or an OSGi framework.
 
-* **Resource** - A formal description of the Artifact specifying what that Artefact can contribute to the host Environment (its _Capabilities_) and what it needs from the Environment to function (its _Requirements_).
+* **Resource** - A formal description of the Artifact specifying what that Artifact can contribute to the host Environment (its _Capabilities_) and what it needs from the Environment to function (its _Requirements_).
 
-* **Namespace** Capabilities and Requirements are defined in appropriate [namespaces](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html); every _Requirement_ belongs to a namespace and can only require _Capabilities_ in the same namespace.
+* **Namespace** - Capabilities and Requirements are defined in appropriate [namespaces](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html); every _Requirement_ belongs to a namespace and can only require _Capabilities_ in the same namespace.
 
-* **Capability** - Describes a feature or function of the Resource when installed in the Environment. A Capability has a _type_ (specifying namespace) and a set of key/value  _properties_. Properties are key value pairs, where the keys are strings and values can be scalars or collections of `String`, `Integer`, `Double`, and `Long`.
+* **Capability** - Describes a feature or function of the Resource when installed in the Environment. A Capability has a _type_ (specifying namespace) and a set of key/value _properties_. Properties are key value pairs, where the keys are strings and values can be scalars or collections of `String`, `Integer`, `Double`, and `Long`.
 
 * **Requirement** - Specifies a Capability needed in an Environment. A Requirement consists of a type and an _OSGi filter_ expressed as an LDAP expression. A Requirement can be _mandatory_ or _optional_.
 
-**Resolving** is then the process of constructing a complete, closed set of _Resources_ from a list of _initial Requirements_, a description of the Environment's _Capabilities_, and one or more _repositories_ with available _Resources_. Once this list of resources is known the associated artefacts can be installed. 
+**Resolving** is then the process of constructing a complete, closed set of _Resources_ from a list of _initial Requirements_, a description of the Environment's _Capabilities_, and one or more _repositories_ with available _Resources_. Once this list of resources is known the associated artifacts can be installed. 
 
 ![image](https://user-images.githubusercontent.com/200494/31130842-cf5299d2-a858-11e7-907c-d6cb43954501.png)
 
@@ -44,7 +44,7 @@ The Requirements / Capabilities Namespaces currently defined are:
 
 * [_osgi.native_](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.namespaces.html#framework.namespaces.osgi.native) - Used to describe the native environment in which the Framework is executing. An OSGi Framework must provide a capability in the `osgi.native` namespace that represents the native environment in which the Framework is executing.
 
-* [_osgi.content_](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.repository.html#i3224340) -  Via which repositores can advertise different formats; each of those format capabilities being identified with a unique SHA-256 checksum and a URL.
+* [_osgi.content_](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.repository.html#i3224340) -  Via which repositories can advertise different formats; each of those format capabilities being identified with a unique SHA-256 checksum and a URL.
 
 * [_osgi.wiring.package_](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.namespaces.html#i1773241) - A Requirements / Capabilities representation of the information in the Bundle manifest: i.e. Import-Package, DynamicImport-Package, and Export-Package. 
 
@@ -52,7 +52,7 @@ The Requirements / Capabilities Namespaces currently defined are:
 
 * [_osgi.wiring.host_](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.namespaces.html#i1773243) - Used to allow a [Fragment](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.wiring.html#framework.wiring-fragments) to attach itself to a host Bundle. 
 
-Of these, the last three are concerned with low-level wire-up of the Bundle assembles and can ususally be ignored. For further information see the [Framework Namespace Specification](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.namespaces.html#d0e16016).
+Of these, the last three are concerned with low-level wire-up of the Bundle assembles and can usually be ignored. For further information see the [Framework Namespace Specification](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.namespaces.html#d0e16016).
 
 
 ## Resolving & Repositories 
@@ -65,9 +65,9 @@ One might consider a single large repository with all possible resources (e.g.  
 
 Each approach has its drawbacks: 
 * Resolving is an NP complete problem so resolution times quickly become long when the repository becomes large
-* Without appropriate tooling many small tightly scoped repositories - while in principle a good idea - can become an management burden.
+* Without appropriate tooling many small tightly scoped repositories - while in principle a good idea - can become a management burden.
 
-Hence usually a small number of _curated_ repositories, each aligned to each Organisational business unit, is usually a good compromise.
+Hence usually a small number of _curated_ repositories, each aligned to each Organizational business unit, is usually a good compromise.
 
 The relationship between Repositories and the Resolution process is shown: 
 
@@ -87,11 +87,11 @@ This is the approach taken by OSGi enRoute. The OSGi enRoute project provides a 
 Working in this way reduces the repository management overhead in maintaining the dependencies in your applications pom file. If any of the other modules in the application change their dependencies then this is automatically reflected in the OSGi repository generated by the indexer. The only time a change is needed to the application project is if a new leaf module (i.e. one that isn’t depended on by other modules in the application) is added to the application.
 
 
-## Resolving in quickstart?  
+## Resolving in Quick Start?  
 
-When working through the quickstart tutorial the OSGi resolver was run ether in [eclipse](../tutorial/020-tutorial_qs.html#resolving-the-application), or manually via the [cli](../tutorial/020-tutorial_qs.html#resolving-the-application): if in eclipse you'll have seen the `Resolution Results` window lists the set of Bundles required.
+When working through the quick start tutorial the OSGi resolver was run ether in [eclipse](../tutorial/020-tutorial_qs.html#resolving-the-application), or manually via the [cli](../tutorial/020-tutorial_qs.html#resolving-the-application): if in eclipse you'll have seen the `Resolution Results` window lists the set of Bundles required.
 
-The enRoute release artefact `app.jar` was then created with its own internal respository with contents determined by the resolution: to see this `jar xf app.jar`. 
+The enRoute release artifact `app.jar` was then created with its own internal repository with contents determined by the resolution: to see this `jar xf app.jar`. 
 
     $ ls
     META-INF		    app.jar	    launcher.properties	    start.bat
@@ -117,15 +117,15 @@ The enRoute release artefact `app.jar` was then created with its own internal re
     slf4j-api-1.7.25.jar
 {: .shell }
 
-Once the application is started the resolver in the OSGi framework runs, wiring together the Bundles in the application's local respository to create your application.
+Once the application is started the resolver in the OSGi framework runs, wiring together the Bundles in the application's local repository to create your application.
 
-Note that enRoute supports a simple standalone Application release/run model. More sophisticatied runtime behaviours are enabled by OSGi including: 
+Note that enRoute supports a simple standalone Application release/run model. More sophisticated runtime behaviors are enabled by OSGi including: 
 * Dynamic Bundle updates at runtime.
-* Runtime assembly influced by the runtime Environment's Capabilities.   
+* Runtime assembly influenced by the runtime Environment's Capabilities.   
 
 
 ## Conclusion
 
-The OSGi Resolver is responsible for assembling composite artefacts from selected sets of self-describing OSGi Bundles: so enabling substitution and re-use.
+The OSGi Resolver is responsible for assembling composite artifacts from selected sets of self-describing OSGi Bundles: so enabling substitution and re-use.
 
 For further details concerning the OSGi Resolver & Repository consult [OSGi Core Release 7 specifications](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/index.html). 

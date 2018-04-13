@@ -8,22 +8,22 @@ author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-Good API design is critical in any software system, and OSGi is no different. In fact the tools available to you in OSGi make it easier to write clean, loosely coupled APIs.
+Good API design is critical in any software system, and OSGi is no different. In fact, the tools available to you in OSGi make it easier to write clean, loosely coupled APIs.
 
-* Use the service registry to share implementations, not API factory classes
-* Use DTOs for data transfer when calling services
-* There should be no statics and no state in the API
-* Avoid unnecessary uses constraints
+* Use the service registry to share implementations, not API factory classes.
+* Use DTOs for data transfer when calling services.
+* There should be no statics and no state in the API.
+* Avoid unnecessary uses constraints.
 
 ## OSGi Services and Interface Based Design
 
 It is widely accepted that using interfaces in your API is a good thing. Using interfaces prevents your code from coupling to the implementation details of other modules and components in the system. The issue with purely interface-based APIs is that they leave us with a bootstrapping problem - how do we obtain an instance when all we have is an interface?
 
-In standard Java a common pattern is to define an API factory class, however this has many limitations
+In standard Java, a common pattern is to define an API factory class, however this has many limitations:
 
-* The API is now coupled to the implementation, as it has to instantiate it
-* The client, not the provider, now dictates the lifecycle of the implementation object
-* Replacing the API involves updating the factory
+* The API is now coupled to the implementation, as it has to instantiate it.
+* The client, not the provider, now dictates the lifecycle of the implementation object.
+* Replacing the API involves updating the factory.
 
 The `ServiceLoader` was introduced into Java to improve this model, but it still has many of the same limitations. In OSGi, however, we have the Service Registry! The OSGi Service Registry allows us to share instances between bundles transparently, without the need for any factories. 
 
@@ -45,7 +45,7 @@ In enRoute we do this using Declarative Services, for example:
 
 ## Passing Data
 
-Almost all useful methods operate on and return data. Where possible it's a good idea to use DTOs to represent this data. The main reason for this is that DTOs provide an easily convertible, transformable data model. When you call a service you don't actually know whether the implementation is local, remote, or even written in another language. Using DTOs gives implementors the maximum flexibility when providing an implementation of your API
+Almost all useful methods operate on and return data. Where possible it's a good idea to use DTOs to represent this data. The main reason for this is that DTOs provide an easily convertible, transformable data model. When you call a service you don't actually know whether the implementation is local, remote, or even written in another language. Using DTOs gives implementers the maximum flexibility when providing an implementation of your API.
 
 ## State in the API
 
@@ -76,17 +76,17 @@ Another option, however, is to make your service prototype scoped. Prototype sco
         ...
     }
 
-## Uses constraints
+## Uses Constraints
 
 A uses constraint occurs whenever one API package directly exposes another API package. This may be:
 
-* Through inheritance - one or more API types extend or implement types from another package
-* Receiving method parameters with types from another package
-* Returning types from another package
+* Through inheritance - one or more API types extend or implement types from another package.
+* Receiving method parameters with types from another package.
+* Returning types from another package.
 
-It is relatively common to have some uses constraints in your API, however you should be careful to minimise them, and to understand the effect that they can have. Typically, if the used packages are defined as part of the same API then there isn't a problem. For example, the `javax.servlet.http` package uses the `javax.servlet` package. If, however, the used packages are from a different bundle, or from a different separable API then this is not a good thing
+It is relatively common to have some uses constraints in your API, however you should be careful to minimize them, and to understand the effect that they can have. Typically, if the used packages are defined as part of the same API then there isn't a problem. For example, the `javax.servlet.http` package uses the `javax.servlet` package. If, however, the used packages are from a different bundle, or from a different separable API then this is not a good thing.
 
-### Why are uses constraints a problem
+### Why are Uses Constraints a Problem?
 
 When you have a uses constraint in your API it forces all clients to also import that API, and crucially they must use *exactly the same* API package that you do. This places limitations on the way that the client can be implemented.
 

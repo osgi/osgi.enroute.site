@@ -9,25 +9,25 @@ author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  
 ---
 
-Increasingly Declarative Services ( _abbrv_ DS) is the backbone of OSGi. While other Dependency Injection frameworks can be used with OSGi, the OSGi Alliance strongly recommend DS.
+Increasingly Declarative Services (DS) is the backbone of OSGi. While other Dependency Injection (DI) frameworks can be used with OSGi, the OSGi Alliance strongly recommend DS.
 
-All of the enRoute [examples](../examples) are DS based, and walk you from the simplest of DS Components [quickstart](../examples/010-examples.html#the-ds-component) through DS range of capabilities.
+All of the enRoute [examples](../examples) are DS based, and walk you from the simplest of DS components [quickstart](../examples/010-examples.html#the-ds-component) through DS range of capabilities.
 
 
 ## Background
 
-DS (a.k.a _Service Component Runtime_  _abbrv_ SCR) is an [Extender Pattern]() that creates components from an XML resource in your bundle. Code annotations allow the toolchain to write the required XML on the fly; so no direct interaction with XML is required. The XML file defines the Bundle's dependencies, properties, and registered services; allowing DS to automatically instantiate the class, inject the dependencies, activate the component, and register the services.
+DS (a.k.a _Service Component Runtime_ (SCR)) is an [Extender Pattern]() that creates components from an XML resource in your bundle. Code annotations allow the toolchain to write the required XML on the fly so no direct interaction with XML is required. The XML file defines the Bundle's dependencies, properties, and registered services; allowing DS to automatically instantiate the class, inject the dependencies, activate the component, and register the services.
 
 
 
-## DS & Dynamism
+## DS and Dynamism
 
-The most significant and compelling difference between DS, and other dependency injection frameworks, is that DS has a life-cycle and handles _dynamic_ dependencies: resource can be found and resource can be lost.
+The most significant and compelling difference between DS, and other dependency injection frameworks, is that DS has a lifecycle and handles _dynamic_ dependencies: resource can be found and resource can be lost.
 
 The concepts of  _time_ & _change_ are utterly lacking in any other DI engines. 
 {: .note }
 
-DS deals with the complexity of potentially volatile services through the use of stronh guarantees.
+DS deals with the complexity of potentially volatile services through the use of strong guarantees.
 
 
 ### Ordering
@@ -42,13 +42,13 @@ DS provides a very strict ordering.
     * If an exception is thrown the following phases are not executed.
 * Active – During the active phase the following methods can be called in any order from
    any thread and in parallel:
-    * Any methods of the registered services
-    * A modified methods that dynamically takes the modified configuration properties
-    * Any of the updated reference methods if defined
+    * Any methods of the registered services.
+    * A modified methods that dynamically takes the modified configuration properties.
+    * Any of the updated reference methods if defined.
 * Deactivate – Clean up
-    * Unbinds – And unbind methods are called
-    * Release of object – DS will release the object so that no longer any references are held
-    * Finalize – Java garbage collects the object
+    * Unbinds – And unbind methods are called.
+    * Release of object – DS will release the object so that no longer any references are held.
+    * Finalize – Java garbage collects the object.
 
 Lazy services are registered before their constructor is called. The initialization of the
 DS component will take place when the service is used for the first time. However, this
@@ -129,7 +129,7 @@ A better way is to do:
 By using a local variable we guarantee that the check (is `foo null`?) is using the same object as the one we will call `bar()` on. This is a very cheap form of synchronization.
 
 
-## What If The Service Disappears?
+## What if the Service Disappears?
 
 Your code should always be prepared to accept exceptions when you call other services. This does not mean you should catch them, on the contrary. It is much better to forward the exceptions to the caller so that they do not unnecessarily get wrapped up in wrapping exceptions and lose the
 original context.

@@ -3,15 +3,15 @@ title: OSGi Runtime & Debug
 layout: toc-guide-page
 lprev: 020-tutorial_qs.html  
 lnext: 030-tutorial_microservice.html 
-summary: A peek behind the curtain - the OSGi™ µServices runtime!
+summary: A peek behind the curtain - the OSGi µServices runtime!
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  
 ---
 
 
-In the `quickstart` tutorial we created and ran a simple OSGi™ Microservice. Before progressing to more sophisticated examples we'll first take a quick look at the OSGi™ runtime and the software DNA of your Microservices application.
+In the `quickstart` tutorial we created and ran a simple OSGi Microservice. Before progressing to more sophisticated examples we'll first take a quick look at the OSGi runtime and the software DNA of your Microservices application.
 
-## Creating the debug version of `quickstart` 
+## Creating the Debug Version of `quickstart` 
 
 To gain access to the OSGi runtime we need to create a **debug** version of `quickstart`.
 
@@ -74,16 +74,16 @@ and run the new debug version.
 {: .shell } 
 
 
-## Gogo & the OSGi runtime
+## Gogo and the OSGi Runtime
 
 When interacting with a running OSGi a framework, if you are presented with the prompt `g!` then you are using the [Gogo shell](../FAQ/500-gogo). 
 
         g!
 {: .shell }
 
-### Bundle level diagnostics
+### Bundle Level Diagnostics
 
-The list of installed bundles used to create `quickstart` may be shown with either the `lb` or `bundles` command, 
+The list of installed bundles used to create `quickstart` may be shown with either the `lb` or `bundles` command. 
 
      g! lb
      START LEVEL 1
@@ -147,14 +147,14 @@ Example of usage.
         osgi.wiring.package; javax.ws.rs 2.1.0 from org.apache.aries.javax.jax.rs-api [5]
 {: .shell }
 
-Indicates that looking at the `osgi.wiring.package` namespacem, `org.osgi.enroute.examples.quickstart.rest.impl` has a runtime Requirement on `javax.ws.rs 2.1.0`, which has been successfully satisfied by `org.apache.aries.javax.jax.rs-api`.
+Indicates that looking at the `osgi.wiring.package` namespace, `org.osgi.enroute.examples.quickstart.rest.impl` has a runtime Requirement on `javax.ws.rs 2.1.0`, which has been successfully satisfied by `org.apache.aries.javax.jax.rs-api`.
 
 
-### Component level diagnostics
+### Component Level Diagnostics
 
-Your bundles may be correctly installed and running, but your application still not functioning as is it should. 
+Your bundles may be correctly installed and running, but your application may still not be functioning as is it should. 
 
-The Declarative Services `scr` commands provide information on the runtime status and configuration of your Declarative Services Components.
+The Declarative Services `scr` commands provide information on the runtime status and configuration of your Declarative Services (DS) components.
 
 The `scr:list` lists all running DS components.
 

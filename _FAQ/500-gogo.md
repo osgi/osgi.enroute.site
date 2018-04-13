@@ -8,7 +8,7 @@ author: Peter.Kriens@aQute.biz
 sponsor: OSGi™ Alliance 
 ---
 
-The Gogo shell is a unix `bash` like shell for OSGi frameworks. However unlike `bash` (which coerces all arguments to strings), the Gogo shell manipulates data objects and their public methods as command names. Gogo supports programmatic features like variables and closures. 
+The Gogo shell is a unix `bash` like shell for OSGi frameworks. However, unlike `bash` (which coerces all arguments to strings), the Gogo shell manipulates data objects and their public methods as command names. Gogo supports programmatic features like variables and closures. 
 
 
 ## Built-in Commands
@@ -18,7 +18,7 @@ When interacting with a running OSGi a framework, as in the [Debug Tutorial](../
         g!
 {: .shell }
 
-Issue the command `help` to list available commands
+Issue the command `help` to list available commands.
 
      felix:bundlelevel
      felix:cd
@@ -40,7 +40,7 @@ Issue the command `help` to list available commands
 
 Notice that the commands are grouped. In the above we can see three command scopes: i.e. `felix`, `gogo` & `scr`; other command groups may also be created.
 
-The following set of commands are immediate of use: follwoing examples using [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime).
+The following set of commands are immediate of use: (The following examples use [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime)).
 
 ### felix:lb, lb
 
@@ -79,7 +79,7 @@ The `felix:lb` command lists the installed bundles.
 
 ### felix:bundle, bundle
 
-Detailed information on a select bundle is provided by the `bundle` command
+Detailed information on a select bundle is provided by the `bundle` command.
 
      g! bundle 19
      Location             jar/impl-1.0-SNAPSHOT.jar
@@ -161,7 +161,7 @@ The `scr:info` command can then be used to list detailed information for a selec
 
 ### System Functions
 
-By default Gogo adds all public methods on the `java.lang.System` class and the public methods on the session's `BundleContext` as command. This gives us access to some interesting System functions:
+By default, Gogo adds all public methods on the `java.lang.System` class and the public methods on the session's `BundleContext` as command. This gives us access to some interesting System functions:
 
         g! currenttimemillis
         1458158111374
@@ -192,7 +192,7 @@ The most simple command is `echo` which works as expected.
 
 ### History/Editing
 
-In the Eclipse console you can unfortunately not edit the commands. However, you can access the history using the bang ('!').
+In the Eclipse console, you can unfortunately not edit the commands. However, you can access the history using the bang ('!').
 
 	g! !ech
 	Hello World
@@ -345,7 +345,7 @@ You can pass arguments to the function. They are named $1..$9. $0 is the command
 	Hello
 {: .shell }
 
-Obviously it is not very nice that we miss the `World` because we only used $1. There is a magic variable called `$args`. This variable is list that gets expanded into separate arguments. So we can change our function to use all the arguments when the function is invoked:
+Obviously, it is not very nice that we miss the `World` because we only used $1. There is a magic variable called `$args`. This variable is list that gets expanded into separate arguments. So we can change our function to use all the arguments when the function is invoked:
  
 	g! f = { echo $args }
 	echo $args
@@ -388,7 +388,7 @@ TODO while, until
 
 ## Adding Commands
 
-You can add any object as a command. If you add an instance then the methods of that instance will be available as commands. However, make sure that you can only add one instance of a given type. The commands would overshadow eachother. For example, we could add a list as a command. Since this is an Array List, all its methods become available. 
+You can add any object as a command. If you add an instance then the methods of that instance will be available as commands. However, make sure that you can only add one instance of a given type. The commands would overshadow each other. For example, we could add a list as a command. Since this is an Array List, all its methods become available. 
 
 	g! addcommand silly-scope [1 2 3 4] 
 	g! size
@@ -400,7 +400,7 @@ You can add any object as a command. If you add an instance then the methods of 
 	g!
 {: .shell }
 
-Clearly this is not that useful. However, it is also possible to add all static methods of a class. This is done automatically for you at startup with the System class. If you ask for the properties then this is actually calling the static method `getProperties()`. For example, we can add all the Math functions to be in the math scope.
+Clearly, this is not that useful. However, it is also possible to add all static methods of a class. This is done automatically for you at startup with the System class. If you ask for the properties then this is actually calling the static method `getProperties()`. For example, we can add all the Math functions to be in the math scope.
 
 	g! addcommand math ((bundle 0) loadclass java.lang.Math) 
 	g! sin 2
@@ -420,7 +420,7 @@ The `g!` prompt is not hard coded. You can override the prompt by setting the va
 	$ 
 {: .shell }
 
-However, Gogo would not be Gogo if we could not do this a little more exciting. Lets be original and add the name of the local host. For that, we need to add the InetAddress static methods to our command set.
+However, Gogo would not be Gogo if we could not do this a little more exciting. Let's be original and add the name of the local host. For that, we need to add the InetAddress static methods to our command set.
 
 	g! addcommand inet ((bundle 0) loadclass java.net.InetAddress)
 	g!  prompt = { echo ((localhost) hostname) "$ " }
@@ -543,7 +543,7 @@ Since we have an absent value, we do not need the value to be specified. So we c
 	
 ### Naming
 
-So far we have had a 1:1 relation between the command name and the method. However, it was a primary design goal of Gogo to make it _feel_ like a shell but interact seamlessly with standard Java code. In Java we often use _design patterns_ like prefixing the name of a property with `get`. Gogo will therefore try to match a command to a method removing the prefixes and case sensitivity. So if we add a method `getFoo` then we can stil call it:
+So far we have had a 1:1 relation between the command name and the method. However, it was a primary design goal of Gogo to make it _feel_ like a shell but interact seamlessly with standard Java code. In Java we often use _design patterns_ like prefixing the name of a property with `get`. Gogo will therefore try to match a command to a method removing the prefixes and case sensitivity. So if we add a method `getFoo` then we can still call it:
 
 	public String getFoo() {
 		return "Foo";

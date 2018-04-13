@@ -35,7 +35,7 @@ The current certification program is intended for experienced hands-on OSGi Deve
 
 ## OSGi Testimonials
 
-It is increasingly realized that OSGi Specifications provide the modular foundations upon which economically sustainable software solutions can be built. The following [OSGi testimonials](https://www.osgi.org/about-us/testimonials/) demonstrate the variety of industries and uses that OSGi is being used. 
+It is increasingly realized that OSGi Specifications provide the modular foundations upon which economically sustainable software solutions can be built. The following [OSGi testimonials](https://www.osgi.org/about-us/testimonials/) demonstrate some of the variety of industries and real world uses that depend upon OSGi. 
 
 If you are already using OSGi then please share your testimonial with us ([Submission guidelines](https://www.osgi.org/about-us/testimonials/testimonial-guidelines/)).
 

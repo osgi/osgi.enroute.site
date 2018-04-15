@@ -1,7 +1,7 @@
 ---
 title: enRoute Sponsors 
 layout: toc-guide-page
-lprev: 110-What-is-enRoute.html 
+lprev: 112-enRoute-Archetypes.html  
 lnext: 100-Why-OSGi.html 
 summary: Organizations involved in creating and maintaining enRoute. 
 author: enRoute@paremus.com

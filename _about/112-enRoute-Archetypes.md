@@ -1,9 +1,9 @@
 ---
 title: OSGi enRoute Archetypes 
 layout: toc-guide-page
-lprev: 015-Prerequisite.html 
-lnext: 020-tutorial_qs.html
-summary: Explanation of the Maven Archetypes used by enRoute
+lprev: 110-What-is-enRoute.html 
+lnext: 120-Sponsors.html
+summary: Explanation of the Maven Archetypes provided by enRoute
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  
 ---
@@ -77,7 +77,7 @@ In addition to gathering requirements an application module also defines the con
   Maven automatically searches for archetypes in the Maven Central repository, but it will not discover archetypes from other repositories without additional configuration. This section describes the configuration necessary to use the OSGi enRoute SNAPSHOT archetypes. It is not necessary for enRoute archetypes with release versions.
 </div>
 
-To prepare for the tutorials paste the following Maven project skeleton to a file named `settings.xml` in your project root directory.
+To use SNAPSHOT versioned enRoute archetypes you will need to have the following Maven settings.
 
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

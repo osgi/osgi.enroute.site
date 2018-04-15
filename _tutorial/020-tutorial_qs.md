@@ -1,7 +1,7 @@
 ---
 title: Quick Start 
 layout: toc-guide-page
-lprev: 017-enRoute-ArcheTypes.html 
+lprev: 015-Prerequisite.html 
 lnext: 022-tutorial_osgi_runtime.html
 summary: Your first really simple OSGi REST Microservice (< 5 minutes).
 author: enRoute@paremus.com
@@ -45,7 +45,7 @@ When you want to terminate the application press **Ctrl+C**.
 
 We'll now recreate the quick start example locally as though it were your own greenfield OSGi project. 
 
-It is assumed that you have the required [environment](015-Prerequisite.html#required-tools) installed on your laptop and created the [settings.xml](017-enRoute-ArcheTypes.html#project-setup-for-snapshot-archetypes) project skeleton in your project root directory. 
+It is assumed that you have the required [environment](015-Prerequisite.html#required-tools) installed on your laptop and have created the [settings.xml](015-Prerequisite.html#project-setup-for-snapshot-archetypes) necessary if you are using SNAPSHOT archetypes. 
 {: .note }
 
 ### Project Setup

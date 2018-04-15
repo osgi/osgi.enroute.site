@@ -2,7 +2,7 @@
 title: Prerequisites 
 layout: toc-guide-page
 lprev: 032-tutorial_microservice-jpa.html 
-lnext: 017-enRoute-ArcheTypes.html 
+lnext: 020-tutorial_qs.html 
 summary: Prerequisites and configurations required for running these tutorials.
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
@@ -16,6 +16,53 @@ We need to run the following tools on your computer - without them you won't get
 
 * [Java][java8], probably already got it? If not, this is a good time to get started! enRoute projects target Java 8 by default, so make sure your Java is at least that version.
 * [Maven][Maven], a popular build tool for Java applications with an enormous repository behind it. Make sure that you're on at least 3.3.9
+
+### Project Setup for SNAPSHOT Archetypes
+
+<div class="alert alert-warning">
+  Maven automatically searches for archetypes in the Maven Central repository, but it will not discover archetypes from other repositories without additional configuration. Until the OSGi R7 release has completed the enRoute archetypes and indexes must all have SNAPSHOT versions.
+</div>
+
+To complete the tutorials with a SNAPSHOT version of the enRoute archetypes paste the following Maven project skeleton to a file named `settings.xml` in your project root directory.
+
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    settings.xml 
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-block">
+
+{% highlight html %}
+    <settings>
+      <profiles>
+        <profile>
+          <id>OSGi</id>
+          <activation>
+            <activeByDefault>true</activeByDefault>
+          </activation>
+          <repositories>
+            <repository>
+              <id>osgi-archetype</id>
+              <url>https://oss.sonatype.org/content/groups/osgi</url>
+              <releases>
+                <enabled>true</enabled>
+                <checksumPolicy>fail</checksumPolicy>
+              </releases>
+              <snapshots>
+                <enabled>true</enabled>
+                <checksumPolicy>warn</checksumPolicy>
+              </snapshots>
+            </repository>
+          </repositories>
+        </profile>
+      </profiles>
+    </settings>
+{% endhighlight %}
+
+  </div>
+</div>
+
 
 ## Useful Tools
 

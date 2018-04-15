@@ -1,5 +1,5 @@
 ---
-title: OSGi enRoute 
+title: Why is enRoute Needed?
 layout: toc-guide-page
 lprev: 100-Why-OSGi.html 
 lnext: 120-Sponsors.html 
@@ -7,21 +7,6 @@ summary: The scope and objectives of the enRoute project.
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
-
-## What is enRoute?
-enRoute is intended to provide a gentle, hands-on introduction to those who wish to start building modular systems. 
-
-* enRoute enables the quick and simple creation of stand-alone OSGi applications:
-    * Providing basic guidance for using R7 specifications
-    * Providing a simple set of dependencies for using OSGi R7 Reference Implementations
-* enRoute takes an opinionated approach focusing on: 
-    * Declarative Services (DS)
-    * A Maven based toolchain
-* All enRoute examples are based on the latest OSGi R7 Specifications and Reference Implementations.
-
-enRoute is not intended to be an encyclopedia for experienced OSGi developers, nor is enRoute aligned with any particular open source initiative. enRoute is intended to be a useful toolbox, and to give a solid understanding of the basics of OSGi. 
-
-## Why is enRoute Needed?
 
 [Java is the software industry's leading language](https://www.tiobe.com/tiobe-index/), a position broadly held since 2003. Yet despite this the average Java developer is not an OSGi developer. 
 

@@ -12,7 +12,7 @@ This tutorial is Maven and command-line based; the reader may follow this verbat
 
 ## Introduction
 
-Using the [enRoute ArcheTypes](017-enRoute-ArcheTypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
+Using the [enRoute Archetypes](../about/112-enRoute-Archetypes.html/017-enRoute-ArcheTypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
 * An API module
 * A DAO Implementation module
 * A REST Service Implementation module 
@@ -24,7 +24,7 @@ We start by creating the required project skeleton.
 
 ## Creating the Project
 
-Using the [bare-project Archetype](017-enRoute-ArcheTypes.html#the-project-archetype), in your project root directory (i.e. the directory containing your [`settings.xml` configuration](017-enRoute-ArcheTypes.html#project-setup-for-snapshot-archetypes)), create the **microservice** project:
+Using the [bare-project Archetype](../about/112-enRoute-Archetypes.html#the-project-archetype), in your project root directory (i.e. the directory containing your [`settings.xml` configuration](../about/112-enRoute-Archetypes.html#project-setup-for-snapshot-archetypes)), create the **microservice** project:
 
     $ mvn -s settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project-bare -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
@@ -51,7 +51,7 @@ We now create the required modules.
 
 ## The DAO API 
 
-Change directory into the newly created `microservice` project directory; then create the `api` module using the [api Archetype](017-enRoute-ArcheTypes.html#the-api-archetype) as shown:
+Change directory into the newly created `microservice` project directory; then create the `api` module using the [api Archetype](../about/112-enRoute-Archetypes.html#the-api-archetype) as shown:
 
     $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=api -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
@@ -180,7 +180,7 @@ and again, we advertise this Capability by creating the following `package-info.
 
 ## The DAO Implementation 
 
-In the `microservice` project director now create the `impl` module using the [ds-component Archetype](017-enRoute-ArcheTypes.html#the-ds-component-archetype):
+In the `microservice` project director now create the `impl` module using the [ds-component Archetype](../about/112-enRoute-Archetypes.html#the-ds-component-archetype):
 
     $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
@@ -291,7 +291,7 @@ Implementations should **NOT** be shared; hence no `package-info.java` file.
 
 ## The REST Service
 
-In the `microservice` project director now create the `rest-component` module using the [rest-component Archetype](017-enRoute-ArcheTypes.html#the-rest-component-archetype):
+In the `microservice` project director now create the `rest-component` module using the [rest-component Archetype](../about/112-enRoute-Archetypes.html#the-rest-component-archetype):
 
     $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=rest-component -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
@@ -436,7 +436,7 @@ Implmentations should **NOT** be shared; hence no `package-info.java` file.
 
 We now pull these Modules together to create the Composite Application.
  
-In the `microservice` project directory create the `application` module using the [application Archetype](017-enRoute-ArcheTypes.html#the-application-archetype):
+In the `microservice` project directory create the `application` module using the [application Archetype](../about/112-enRoute-Archetypes.html#the-application-archetype):
 
     $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }

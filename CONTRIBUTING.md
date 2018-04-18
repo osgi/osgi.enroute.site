@@ -1,6 +1,6 @@
 # Contributing to osgi.enroute.site
 
-Want to hack on osgi.enroute.site? Great!
+Want to improve the osgi.enroute.site? Great!
 Here are instructions to get you started.
 
 ## Table of Contents
@@ -79,9 +79,9 @@ If you are not satisfied with only reporting issues and want to get your hands d
 **Do it!**
 **We will appreciate it.**
 
-The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the `gh-pages` branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading.
+The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the `gh-pages` branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading. This site also makes use of [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to pull in the [OSGi enRoute GitHub repository](https://github.com/osgi/osgi.enroute) so that code examples can be easily pulled from the enRoute examples.
 
-Or you already are a pro at working with GitHub Pages? You have set up the [git triangular workflow](https://www.sociomantic.com/blog/2014/05/git-triangular-workflow/) for this repository and have Ruby, Bundler and Jekyll running? Then what are you waiting for? Read the [contributing guidelines](#contributing-guidelines) section and start writing!
+Or you already are a pro at working with GitHub Pages? You have set up the [git triangular workflow](https://www.sociomantic.com/blog/2014/05/git-triangular-workflow/) for this repository and have Ruby, Bundler and Jekyll running? You have pulled down the enRoute submodule? Then what are you waiting for? Read the [contributing guidelines](#contributing-guidelines) section and start writing!
 
 Github pages can be created either with usual HTML or you can use [Jekyll](https://jekyllrb.com/), a static web site generator, which takes [Markdown](https://daringfireball.net/projects/markdown/) files and transforms them into a static webpage. Usually you want to write in markdown, as this is way more convenient than writing pure HTML.
 
@@ -161,9 +161,13 @@ After forking the main osgi.enroute.site repo on GitHub, you can clone the main 
     git clone https://github.com/osgi/osgi.enroute.site.git
 
 This will clone the main repo to a local repo on your disk and set up the `origin` remote in Git.
-Next you will set up the the second side of the triangle to your fork repo.
+Next you need to populate the data in the OSGi enRoute submodule, this is effectively a second checkout which will pull in the rest of the code needed to build the site.
 
     cd osgi.enroute.site
+    git submodule update --init --checkout
+
+Next you will set up the the second side of the triangle to your fork repo.
+
     git remote add fork git@github.com:<YourUserName>/osgi.enroute.site.git
 
 Make sure to replace the URL with the SSH URL to your fork repo on GitHub. Then we configure

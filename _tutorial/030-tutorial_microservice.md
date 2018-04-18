@@ -12,7 +12,7 @@ This tutorial is Maven and command-line based; the reader may follow this verbat
 
 ## Introduction
 
-Using the [enRoute Archetypes](../about/112-enRoute-Archetypes.html/017-enRoute-ArcheTypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
+Using the [enRoute Archetypes](../about/112-enRoute-Archetypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
 * An API module
 * A DAO Implementation module
 * A REST Service Implementation module 

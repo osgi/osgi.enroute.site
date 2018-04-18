@@ -1,8 +1,8 @@
 ---
 title: Quick Start  
 layout: toc-guide-page
-lprev: 020-tutorial_qs.html 
-lnext: 015-Prerequisite.html
+lprev: 010-examples.html 
+lnext: 010-examples.html
 summary: A walkthrough of the Quick Start example
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 

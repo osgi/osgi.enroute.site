@@ -1,14 +1,14 @@
 ---
 title: Quick Start  
 layout: toc-guide-page
-lprev: 020-tutorial_qs.html 
-lnext: 015-Prerequisite.html
+lprev: 020-examples-microservice.html 
+lnext: 020-examples-microservice.html
 summary: A walkthrough of the Quick Start example
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-The quick start example is a simple OSGi enRoute application created from the [enRoute project archetype](../tutorial/017-enRoute-ArcheTypes). Quick start contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
+The quick start example is a simple OSGi enRoute application created from the [enRoute project archetype](../about/112-enRoute-Archetypes.html#the-project-archetype). Quick start contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
 
 As the quick start example project uses Apache Maven as a build tool, at the root of the project we have a _reactor pom.xml_.
 

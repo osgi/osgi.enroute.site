@@ -36,3 +36,9 @@ The bnd-resolver-maven-plugin is not normally part of the main build, but it can
 
 ## The bnd-baseline-maven-plugin
 The bnd-baseline-maven-plugin is used to validate the [semantic versioning](/FAQ/210-semantic_versioning.md) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
+
+## The bnd-testing-maven-plugin
+
+The bnd-testing-maven-plugin is used to provide bundle-level testing. The tests are written using JUnit and packaged into a tester bundle (often produced in the same build project). The bnd-testing-maven-plugin then uses one or more bndrun files to launch an OSGi framework containing the tester bundle and the bundles under test. The test cases are then run by the bnd-testing-maven-plugin.
+
+As the test cases are run inside an OSGi framework they are able to install bundles and interact with the service registry. This allows for validation of the external behaviour of your OSGi bundles.

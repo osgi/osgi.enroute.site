@@ -2,7 +2,7 @@
 title: OSGi enRoute Archetypes 
 layout: toc-guide-page
 lprev: 110-What-is-enRoute.html 
-lnext: 120-Sponsors.html
+lnext: 115-bnd-plugins.html
 summary: Explanation of the Maven Archetypes provided by enRoute
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  

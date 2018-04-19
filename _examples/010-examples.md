@@ -1,14 +1,14 @@
 ---
 title: Quick Start  
 layout: toc-guide-page
-lprev: 020-tutorial_qs.html 
-lnext: 015-Prerequisite.html
+lprev: 020-examples-microservice.html 
+lnext: 020-examples-microservice.html
 summary: A walkthrough of the Quick Start example
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 
 ---
 
-The quick start example is a simple OSGi enRoute application created from the [enRoute project archetype](../tutorial/017-enRoute-ArcheTypes). Quick start contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
+The quick start example is a simple OSGi enRoute application created from the [enRoute project archetype](../about/112-enRoute-Archetypes.html#the-project-archetype). Quick start contains a single OSGi service which exposes a REST endpoint and some static files. The application project then packages up the service and its dependencies into a runnable JAR file.
 
 As the quick start example project uses Apache Maven as a build tool, at the root of the project we have a _reactor pom.xml_.
 
@@ -25,34 +25,7 @@ The reactor POM is responsible for setting common configuration for the build pl
 
 As the enRoute example projects all live in a single workspace each of their reactor poms inherit configuration from this root reactor. In scenarios where application projects have their own dedicated workspaces, then the following items would be included directly in each of their reactor poms.
 
-The root reactor pom defines configuration for the following plugins:
-
-### The bnd-maven-plugin
-
-The `bnd-maven-plugin` is a key plugin when producing OSGi bundles. The bnd maven plugin is responsible for parsing the bytecode of the classes included in the JAR file being produced by a module. Based on the discovered annotations and dependencies the bnd-maven-plugin will construct an OSGi Manifest file for the bundle, and any other required metadata.
-
-Note that the `maven-jar-plugin` must be configured to accept this externally generated manifest.
-{: .note }
-
-OSGi enRoute further configures the `bnd-maven-plugin` to give a more friendly symbolic name for projects that use short artifact ids, to include sources in the generated bundle, and to use [OSGi Contracts (_Requirements_ & _Capabilities_](../faq/200-resolving.html) when they are available
-
-### The bnd-export-maven-plugin
-The `bnd-export-maven-plugin` is used to export an OSGi application as a runnable JAR.
-
-### The bnd-indexer-maven-plugin
-The `bnd-indexer-maven-plugin` is used to generate an OSGi repository index from the set of maven dependencies in your module’s pom. This repository index can be used for resolving or exporting the application.
-
-The indexes used in OSGi enRoute are typically for intermediate or local usage, so the repository URLs in the index point at files on the local file system. Also, by default the index contains only the compile and runtime scoped dependencies, so this plugin defines a second execution for generating an index of the test scoped dependencies. This is used when running and resolving the application with debug utilities, and for use in integration testing
-
-### The bnd-resolver-maven-plugin
-
-The `bnd-resolver-maven-plugin` is not normally part of the main build, but it can be used from the command line to resolve an application or integration testing bndrun.
-
-### The bnd-baseline-maven-plugin
-The `bnd-baseline-maven-plugin` is used to validate the [semantic versioning](TO DO) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
-
-## Dependency Configuration
-The pom also defines the following common dependencies.
+The root reactor pom defines configuration for the [bnd plugins](/about/115-bnd-plugins.html) used by enRoute, and the following common dependencies.
 
 ### APIs
 The OSGi and Java EE APIs commonly used in OSGi enRoute applications are included at provided scope. This is because they should not be used at runtime, instead being provided by implementations, such as the OSGi framework.

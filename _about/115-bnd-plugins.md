@@ -19,7 +19,7 @@ Note that the `maven-jar-plugin` must be configured to accept this externally ge
 
 ### enRoute customisations
 
-OSGi enRoute further configures the `bnd-maven-plugin` to give a more friendly symbolic name for projects that use short artifact ids, to include sources in the generated bundle, and to use [OSGi Contracts (_Requirements_ & _Capabilities_](/faq/200-resolving.html) when they are available
+OSGi enRoute further configures the `bnd-maven-plugin` to give a more friendly symbolic name for projects that use short artifact ids, to include sources in the generated bundle, and to use [OSGi Contracts (_Requirements_ & _Capabilities_)](../FAQ/200-resolving.html) when they are available
 
 ## The bnd-export-maven-plugin
 
@@ -32,10 +32,10 @@ The indexes used in OSGi enRoute are typically for intermediate or local usage, 
 
 ## The bnd-resolver-maven-plugin
 
-The bnd-resolver-maven-plugin is not normally part of the main build, but it can be used from the command line to [resolve](/faq/200-resolving.html) an application or integration testing `bndrun`. This resolve operation takes a set of run requirements and uses an OSGi repository index to find the complete set of bundles that need to b deployed to satisfy the run requirements.
+The bnd-resolver-maven-plugin is not normally part of the main build, but it can be used from the command line to [resolve](../FAQ/200-resolving.html) an application or integration testing `bndrun`. This resolve operation takes a set of run requirements and uses an OSGi repository index to find the complete set of bundles that need to b deployed to satisfy the run requirements.
 
 ## The bnd-baseline-maven-plugin
-The bnd-baseline-maven-plugin is used to validate the [semantic versioning](/FAQ/210-semantic_versioning.md) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
+The bnd-baseline-maven-plugin is used to validate the [semantic versioning](../FAQ/210-semantic_versioning.md) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
 
 ## The bnd-testing-maven-plugin
 

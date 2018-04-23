@@ -156,7 +156,7 @@ The DS JSON Serializer component contains a number of important annotations.
   </div>
 </div>
 
-* **@Component** - This annotation indicates that `JsonpConvertingPlugin` is a [Declarative Services](../faq/300-declarative-services) component. Note that unlike the `RestComponentImpl` this component *does* implement interfaces and will be automatically registered as a service using the `MessageBodyReader` and `MessageBodyWriter` interfaces. Also the `@Component` annotation declares this component to be `PROTOTYPE` scope - this means that the person using the service can ask for multiple separate instances, and is recommended for all JAX-RS extensions. 
+* **@Component** - This annotation indicates that `JsonpConvertingPlugin` is a [Declarative Services](../FAQ/300-declarative-services) component. Note that unlike the `RestComponentImpl` this component *does* implement interfaces and will be automatically registered as a service using the `MessageBodyReader` and `MessageBodyWriter` interfaces. Also the `@Component` annotation declares this component to be `PROTOTYPE` scope - this means that the person using the service can ask for multiple separate instances, and is recommended for all JAX-RS extensions. 
 
 * **@JaxrsExtension** - This annotation marks the `JsonpConvertingPlugin` service as a JAX-RS extension type that should be processed by the [JAX-RS whiteboard](../FAQ/400-patterns.html#whiteboard-pattern).
 

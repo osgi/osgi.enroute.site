@@ -35,7 +35,7 @@ The indexes used in OSGi enRoute are typically for intermediate or local usage, 
 The bnd-resolver-maven-plugin is not normally part of the main build, but it can be used from the command line to [resolve](../FAQ/200-resolving.html) an application or integration testing `bndrun`. This resolve operation takes a set of run requirements and uses an OSGi repository index to find the complete set of bundles that need to b deployed to satisfy the run requirements.
 
 ## The bnd-baseline-maven-plugin
-The bnd-baseline-maven-plugin is used to validate the [semantic versioning](../FAQ/210-semantic_versioning.md) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
+The bnd-baseline-maven-plugin is used to validate the [semantic versioning](../FAQ/210-semantic_versioning.html) of a bundle’s exported API by comparing it against the last released version. This plugin will fail the build if the API version has not been increased when a change has been made, or if the version increase is insufficient to communicate the semantics of the change.
 
 ## The bnd-testing-maven-plugin
 

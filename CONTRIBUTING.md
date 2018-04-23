@@ -197,7 +197,7 @@ In order to install Jekyll:
   * Open a console
   * Type `bundle install`
 
-There should be a lot of console ouput if you are doing this for the first time. At the end there should be some sort of success report.
+There should be a lot of console output if you are doing this for the first time. At the end there should be some sort of success report.
 
 Run Jekyll in the root directory to build:
 
@@ -208,6 +208,21 @@ You can also run a local server to test the site:
 	$ bundle exec jekyll serve
 
 Then go to [http://localhost:4000](http://localhost:4000). The pages are automatically updated when you edit a markdown file, though you do have to refresh the browser to see these changes. Eclipse later revisions have a decent markdown editor build in.
+
+#### Fix Problems with Jekyll on Linux
+
+If, after running `bundle exec jekyll build`, you get an error like the following, you need to install the `ruby-dev` package, e.g., with `apt-get install ruby-dev`.
+
+	ERROR:  Error installing jekyll:
+		ERROR: Failed to build gem native extension.
+
+		current directory: /var/lib/gems/2.3.0/gems/ffi-1.9.18/ext/ffi_c
+	/usr/bin/ruby2.3 -r ./siteconf20171117-322-1cr2dl9.rb extconf.rb
+	mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+	extconf failed, exit code 1
+
+Installing the `ruby-dev` package makes the required header files available so the error does not occur.
 
 #### Fix Problems with Jekyll on Windows
 

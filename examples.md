@@ -7,7 +7,7 @@ order: 2
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance
 ---
-enRoute examples illustrate the use of the enRoute indexes and [archetypes](/About/112-enRoute-Archetypes.html). They also demonstrate the more frequently used OSGi™ specifications. Additional examples will be added over time: requests, suggestions and contributions are most welcome.
+enRoute examples illustrate the use of the enRoute indexes and [archetypes](../about/112-enRoute-Archetypes.html). They also demonstrate the more frequently used OSGi™ specifications. Additional examples will be added over time: requests, suggestions and contributions are most welcome.
 
 All of the examples are available on Github, so clone the workspaces and play!
 

@@ -129,7 +129,7 @@ The DS REST component contains a number of important annotations.
   </div>
 </div>
 
-* **@Component** - This annotation indicates that `RestComponentImpl` is a [Declarative Services](../faq/300-declarative-services) component. The `service` attribute means that even though `RestComponentImpl` does not directly implement any interfaces it will still be registered as a service. The `@Component` annotation also acts as a runtime _Requirement_; prompting the host OSGi framework to automatically load a Declarative Services implementation.
+* **@Component** - This annotation indicates that `RestComponentImpl` is a [Declarative Services](../FAQ/300-declarative-services) component. The `service` attribute means that even though `RestComponentImpl` does not directly implement any interfaces it will still be registered as a service. The `@Component` annotation also acts as a runtime _Requirement_; prompting the host OSGi framework to automatically load a Declarative Services implementation.
 
 * **@JaxrsResource** - This annotation marks the `RestComponentImpl` service as a JAX-RS resource type that should be processed by the [JAX-RS whiteboard](../FAQ/400-patterns.html#whiteboard-pattern). It also acts as a runtime _Requirement_; prompting the host OSGi framework to automatically load a JAX-RS Whiteboard implementation.
 

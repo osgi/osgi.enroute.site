@@ -11,7 +11,7 @@ sponsor: OSGi™ Alliance
 
 Increasingly Declarative Services (DS) is the backbone of OSGi. While other Dependency Injection (DI) frameworks can be used with OSGi, the OSGi Alliance strongly recommend DS.
 
-All of the enRoute [examples](../examples) are DS based, and walk you from the simplest of DS components [quickstart](../examples/010-examples.html#the-ds-component) through DS range of capabilities.
+All of the enRoute examples are DS based and walk you from the simplest of DS components [quickstart](../examples/010-examples.html#the-ds-component) through a range of DS capabilities.
 
 
 ## Background

@@ -20,10 +20,9 @@ Download the [enroute examples](https://github.com/osgi/osgi.enroute) from GitHu
 
 ### Building the example
  
-Build the Application with the following commands:
+Build the Application with the following command:
 
-    $ mvn bnd-resolver:resolve
-    $ mvn package
+    $ mvn verify
 {: .shell } 
 
 ### Running the example

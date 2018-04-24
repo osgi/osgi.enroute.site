@@ -75,6 +75,6 @@ The org.osgi.dto package defines the basic rules and the abstract base DTO class
 
 For further information see:
 
-* [Data Transfer Objects](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/framework.dto.html) - link to the DTO specification. 
-* [Converter](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/util.converter.html) - link to the Converter specification
+* [Data Transfer Objects](https://osgi.org/specification/osgi.core/7.0.0/framework.dto.html) - link to the DTO specification. 
+* [Converter](https://osgi.org/specification/osgi.cmpn/7.0.0/util.converter.html) - link to the Converter specification
 

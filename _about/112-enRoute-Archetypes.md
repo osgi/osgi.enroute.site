@@ -69,7 +69,7 @@ The application archetype is different from the other enRoute modules, in that i
 
 These requirements are provided in a bndrun file, which defines how the OSGi application should be launched, and what should be contained in it. This bndrun can be resolved to turn its requirements into a list of bundles to run, and then exported into a runnable jar file.
 
-In addition to gathering requirements an application module also defines the configuration that will be supplied to the application. This configuration is supplied as a bundle which gets deployed into the application framework and is processed by an [OSGi configurator implementation](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/service.configurator.html).
+In addition to gathering requirements an application module also defines the configuration that will be supplied to the application. This configuration is supplied as a bundle which gets deployed into the application framework and is processed by an [OSGi configurator implementation](https://osgi.org/specification/osgi.cmpn/7.0.0/util.converter.html).
 
 ## Project Setup for SNAPSHOT Archetypes
 

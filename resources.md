@@ -11,8 +11,8 @@ sponsor: OSGi™ Alliance
 
 enRoute is based upon the latest OSGi Alliance Specifications, see:
 
-* [R7 Core Specifications](https://osgi.org/hudson/job/build.core/lastSuccessfulBuild/artifact/osgi.specs/generated/html/core/index.html)
-* [R7 Compendium Specifications](https://osgi.org/hudson/job/build.cmpn/lastSuccessfulBuild/artifact/osgi.specs/generated/html/cmpn/index.html)
+* [R7 Core Specifications](https://osgi.org/specification/osgi.core/7.0.0/ch01.html)
+* [R7 Compendium Specifications](https://osgi.org/specification/osgi.cmpn/7.0.0/introduction.html)
 
 Each OSGi Alliance Specification is accompanied by a Reference Implementation and an associated Conformance Test suite. These resources maintained by the OSGi Alliance Members: [OSGi Specification Implementations](https://en.wikipedia.org/wiki/OSGi_Specification_Implementations) lists implementations of released Specifications.
 

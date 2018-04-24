@@ -16,7 +16,7 @@ All of the enRoute examples are DS based and walk you from the simplest of DS co
 
 ## Background
 
-DS (a.k.a _Service Component Runtime_ (SCR)) is an [Extender Pattern]() that creates components from an XML resource in your bundle. Code annotations allow the toolchain to write the required XML on the fly so no direct interaction with XML is required. The XML file defines the Bundle's dependencies, properties, and registered services; allowing DS to automatically instantiate the class, inject the dependencies, activate the component, and register the services.
+DS (a.k.a _Service Component Runtime_ (SCR)) is an [Extender Pattern](400-patterns.html#extender-pattern) that creates components from an XML resource in your bundle. Code annotations allow the toolchain to write the required XML on the fly so no direct interaction with XML is required. The XML file defines the Bundle's dependencies, properties, and registered services; allowing DS to automatically instantiate the class, inject the dependencies, activate the component, and register the services.
 
 
 

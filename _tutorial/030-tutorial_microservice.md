@@ -12,7 +12,7 @@ This tutorial is Maven and command-line based; the reader may follow this verbat
 
 ## Introduction
 
-Using the [enRoute Archetypes](../about/112-enRoute-Archetypes.html/017-enRoute-ArcheTypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
+Using the [enRoute Archetypes](../about/112-enRoute-Archetypes.html) this tutorial walks through the creation of a REST Microservice comprised of the following structural elements:
 * An API module
 * A DAO Implementation module
 * A REST Service Implementation module 
@@ -514,7 +514,7 @@ By adding the following dependencies inside the `<dependencies>` section of the 
 
 Finally, our Microservice will be configured using the new R7 Configurator mechanism.
 
-The [application Archetype](017-enRoute-ArcheTypes.html#the-application-archetype) enables this via `rest-app/src/main/java/config/package-info.java`. 
+The [application Archetype](../about/112-enRoute-Archetypes.html##the-application-archetype) enables this via `rest-app/src/main/java/config/package-info.java`. 
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info-config" aria-expanded="false" aria-controls="package-info-config">
     package-info.java

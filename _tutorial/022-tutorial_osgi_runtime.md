@@ -15,7 +15,7 @@ In the `quickstart` tutorial we created and ran a simple OSGi Microservice. Befo
 
 To gain access to the OSGi runtime we need to create a **debug** version of `quickstart`.
 
-From the `quickstart` project root directory you previously created, change directory to `./app` edit the `pom.xml`, and changing the first occurance of `<bndrun>app.bndrun</bndrun>` 
+From the `quickstart` project root directory you previously created, change directory to `./app` edit the `pom.xml`, and changing the first occurrence of `<bndrun>app.bndrun</bndrun>` 
 
       <plugin>
           <groupId>biz.aQute.bnd</groupId>
@@ -60,12 +60,14 @@ to `<bndrun>debug.bndrun</bndrun>` as shown
            </configuration>
        </plugin>
 
+If you didn't run through the quickstart tutorial before this tutorial then you should make sure your indexes are present and up to date by running `mvn bnd-indexer:index bnd-indexer:index@test-index` in the app module. If you don't do this then the resolve operation in the next step may fail due to missing indexes.
+{: .note }
 
-Now re-build your `quickstart` application
+Now resolve your bndrun files (always a good idea after making pom or bndrun changes) and re-build the `app` module of your `quickstart` application
 
-    $ mvn install
+    $ cd app/
     $ mvn bnd-resolver:resolve
-    $ mvn package 
+    $ mvn verify 
 {: .shell }
 
 and run the new debug version.
@@ -76,7 +78,7 @@ and run the new debug version.
 
 ## Gogo and the OSGi Runtime
 
-When interacting with a running OSGi a framework, if you are presented with the prompt `g!` then you are using the [Gogo shell](../FAQ/500-gogo). 
+When interacting with a running OSGi a framework, if you are presented with the prompt `g!` then you are using the [Gogo shell](../FAQ/500-gogo). Note that you may need to hit the enter key once or twice to get the prompt to appear.
 
         g!
 {: .shell }

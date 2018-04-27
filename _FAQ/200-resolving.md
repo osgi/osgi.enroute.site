@@ -48,11 +48,17 @@ The Requirements / Capabilities Namespaces currently defined are:
 
 * [_osgi.wiring.package_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773241) - A Requirements / Capabilities representation of the information in the Bundle manifest: i.e. Import-Package, DynamicImport-Package, and Export-Package. 
 
+* [_osgi.service_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.service.namespace) - A Requirements / Capabilities representation of the OSGi services used and provided by an OSGi bundle. This namespace is part of the OSGi compendium and is usually added automatically by tools.
+
+* [_osgi.implementation_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.implementation.namespace) - Used as a capability to indicate when a bundle implements a feature that is designed to be used indirectly. A good example is when a bundle implements a [whiteboard pattern](400-patterns.html). In this case there is no direct package or service link from the consumer to the implementation, and so a requirement for the `osgi.implementation` capability is usually added to the consumer instead. This namespace is part of the OSGi compendium and is usually added through the use of annotations.
+
+* [_osgi.contract_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.contract.namespace) - A Requirements / Capabilities representation of an API contract which does not use semantic versioning. You will commonly see this used for packages that come from Enterprise Java specifications. This namespace is part of the OSGi compendium and is usually added through the use bnd's `-contract` instruction.
+
 * [_osgi.wiring.bundle_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773242) - Reflects the information in the bundle headers for the purpose of requiring another bundle: i.e. a Require-Bundle header creates a wire from the requiring bundle to the required bundle. 
 
 * [_osgi.wiring.host_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773243) - Used to allow a [Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.wiring.html#d0e13908) to attach itself to a host Bundle. 
 
-Of these, the last three are concerned with low-level wire-up of the Bundle assembles and can usually be ignored. For further information see the [Framework Namespace Specification](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html).
+Of these, the last two are concerned with low-level wire-up of the Bundle assembles and can usually be ignored. For further information see the [Framework Namespace Specification](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html) and the [Common Namespace Specification](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html).
 
 
 ## Resolving & Repositories 

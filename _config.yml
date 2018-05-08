@@ -44,4 +44,7 @@ exclude:
   - 'LICENSE'
   - 'run.sh'
   - '.travis.yml'
+  - '.gitignore'
+  - '.gitmodules'
+  - 'run.sh'
   - '/vendor'

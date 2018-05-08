@@ -2,7 +2,7 @@
 title: The Microservice Example  
 layout: toc-guide-page
 lprev: 010-examples.html 
-lnext: 010-examples.html 
+lnext: 023-examples-microservice-jdbc.html 
 summary: A walkthrough of the Microservice example front end
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance 

@@ -12,7 +12,7 @@ In a graph of interconnected software components how do we know if a node change
 
 Versioning of the nodes addresses the first problem; semantic versioning of nodes addresses both problems.
 
-For the last 18 years the OSGi Alliance has been a vocal proponent of [Semantic Versioning](http://www.osgi.org/wiki/uploads/Links/SemanticVersioning.pdf). Since ~2009 [semver.org](https://semver.org) has also argued the merits of Semantic Versioning.
+For the last 18 years the OSGi Alliance has been a vocal proponent of [Semantic Versioning](https://www.osgi.org/wp-content/uploads/SemanticVersioning.pdf). Since ~2009 [semver.org](https://semver.org) has also argued the merits of Semantic Versioning.
 
 ## Semantic Versioning
 

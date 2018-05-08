@@ -9,7 +9,7 @@ sponsor: OSGi™ Alliance
 ---
 
 
-Realizing the need for a simple onramp for developers, the [OSGi Alliance](https://www.osgi.org) engaged [Peter Kriens from aQute](http://aqute.biz); the results of Peter's efforts [were announced in 2015](http://blog.osgi.org/2015/10/osgi-enroute-10.html). enRoute 1.x and 2.x shaped several important OSGi R7 Specifications, and perhaps more importantly provided the _context_ against which the OSGi Alliance could discuss next steps.  
+Realizing the need for a simple onramp for developers, the [OSGi Alliance](https://www.osgi.org) engaged [Peter Kriens from aQute](http://aqute.biz); the results of Peter's efforts [were announced in 2015](https://blog.osgi.org/2015/10/osgi-enroute-10.html). enRoute 1.x and 2.x shaped several important OSGi R7 Specifications, and perhaps more importantly provided the _context_ against which the OSGi Alliance could discuss next steps.  
 
 This enRoute _refresh_ project (enRoute for OSGi R7) is the result of those discussions and experiences. [Paremus](http://www.paremus.com) was engaged by the OSGi Alliance to refocus enRoute around the R7 Specifications and a Maven-based toolchain. 
 

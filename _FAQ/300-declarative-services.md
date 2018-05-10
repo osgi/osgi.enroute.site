@@ -7,6 +7,7 @@ lnext: 400-patterns.html
 summary: An overview of the Declarative Services DI framework 
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  
+redirect_from: /services/org.osgi.service.component.html
 ---
 
 Increasingly Declarative Services (DS) is the backbone of OSGi. While other Dependency Injection (DI) frameworks can be used with OSGi, the OSGi Alliance strongly recommend DS.

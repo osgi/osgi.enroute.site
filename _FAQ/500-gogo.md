@@ -6,6 +6,7 @@ lprev: 450-Designing-APIs.html
 lnext: 520-bnd.html 
 author: Peter.Kriens@aQute.biz 
 sponsor: OSGi™ Alliance 
+redirect_from: /appnotes/gogo.html
 ---
 
 The Gogo shell is a unix `bash` like shell for OSGi frameworks. However, unlike `bash` (which coerces all arguments to strings), the Gogo shell manipulates data objects and their public methods as command names. Gogo supports programmatic features like variables and closures. 

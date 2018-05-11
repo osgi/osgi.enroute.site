@@ -48,7 +48,7 @@ A module archetype defines an enRoute Maven module that will be built and output
 
 ### The api Archetype
 
-The api archetype is used to build an API bundle for your enRoute application. This type of bundle is where you should define your [public interfaces](../FAQ/450-Designing-APIs.html) and [DTO](../FAQ/420--dtos.html)s. These packages should be versioned and exported.
+The api archetype is used to build an API bundle for your enRoute application. This type of bundle is where you should define your [public interfaces](../FAQ/450-Designing-APIs.html) and [DTO](../FAQ/420-dtos.html)s. These packages should be versioned and exported.
 
 
 ### The ds-component Archetype 

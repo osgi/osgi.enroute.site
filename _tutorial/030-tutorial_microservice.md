@@ -126,7 +126,7 @@ For further detail see [Semantic Versioning](../FAQ/210-semantic_versioning.html
 
 ### Defining the DTO 
 
-Data transfer between the components is achieved via the use of [Data Transfer Objects (DTOs)](../FAQ/420--dtos.html).
+Data transfer between the components is achieved via the use of [Data Transfer Objects (DTOs)](../FAQ/420-dtos.html).
 
 To achieve this create the following two files:
 

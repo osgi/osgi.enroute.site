@@ -41,7 +41,7 @@ The remaining dependencies are made available at test scope so that they may be 
 
 ## The DAO API Module
 
-The DAO API module contains the API for the data access service. The packages contain the service interfaces and the [Data Transfer Objects](../FAQ/420--dtos.html) used to pass data between the service client and implementation. 
+The DAO API module contains the API for the data access service. The packages contain the service interfaces and the [Data Transfer Objects](../FAQ/420-dtos.html) used to pass data between the service client and implementation. 
 
 ### The API packages
 

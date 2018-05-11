@@ -1,7 +1,7 @@
 ---
 title: API Design
 layout: toc-guide-page
-lprev: 420--dtos.html 
+lprev: 420-dtos.html 
 lnext: 500-gogo.html 
 summary: General best practises  
 author: enRoute@paremus.com

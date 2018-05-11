@@ -3,7 +3,7 @@ title: Patterns
 summary: Core OSGi design patterns
 layout: toc-guide-page
 lprev: 300-declarative-services.html
-lnext: 420--dtos.html
+lnext: 420-dtos.html
 ---
 
 There are a number of patterns used in OSGi systems.

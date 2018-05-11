@@ -10,7 +10,7 @@ sponsor: OSGi™ Alliance
 
 The previous Microservices example which uses `jdbc` provides the start-point for this tutorial. 
 
-In this tutorial we'll modify the Microservice to switch the data-layer from a JDBC to a JPA. Because of the de-coupling provided by the [DTOs](../FAQ/420--dtos.html)'s, all we need do is re-implement `dao-impl` and the composite application.
+In this tutorial we'll modify the Microservice to switch the data-layer from a JDBC to a JPA. Because of the de-coupling provided by the [DTOs](../FAQ/420-dtos.html)'s, all we need do is re-implement `dao-impl` and the composite application.
 
 **Note** - because of the use of DTOs, OSGi allows us, via setting one property, to separate the data-layer and REST Services layers of our Microservice across a local IP local network using secure low latency [Remote Services](https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html).
 {: .note }   

@@ -2,9 +2,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>{% if page.title %}{% if page.languages %}{{ page.title }} with {{ page.languages | join: ', ' }}{% else %}{{ page.title }}{% endif %}{% else %}{{ site.title }}{% endif %}</title>
-  <meta name="description" content="{% if page.description %}{% if page.languages %}{{ page.description | strip_html | strip_newlines }}  Using {{ page.languages | join: ', ' }}{% else %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% endif %}{% else %}{{ site.description }}{% endif %}">
+  {% seo %}
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -27,12 +25,10 @@
   <!-- Bootstrap override -->
   <link rel="stylesheet" href="{{ '/css/bootstrap-override.css' | prepend: site.baseurl }}" />
 
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.github.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | prepend: site.github.url }}" />
 
   <link rel="shortcut icon" href="{{ '/img/favicon.ico?v=2' | prepend: site.baseurl }}" />
   
-  {% seo %}
   {% if jekyll.environment == 'production' %}
   {% include analytics.html %}
   {% endif %}

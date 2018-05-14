@@ -30,6 +30,12 @@ defaults:
       path: ""
     values:
       layout: default
+      author: OSGiAlliance
+      image: /img/enroute-logo-64.png
+
+title: OSGi enRoute
+
+logo: /img/enroute-logo-64.png
 
 twitter:
   username: OSGiAlliance

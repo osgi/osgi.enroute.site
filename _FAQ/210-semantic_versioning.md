@@ -50,7 +50,7 @@ Note that exactly the same problems applies with respect to REST based Microserv
 
 So packages may be shared between Bundles, and those that are, are versioned: this information recorded in the package's directory via the `package-info.java` file.
 
-The following `package-info.java` file is for the [`dao-api`](../tutorial/030-tutorial_microservice.html#the-microservice-dao-api) package in the microservices example.  
+The following `package-info.java` file is for the [`dao-api`](../tutorial/030-tutorial_microservice.html#the-dao-api) package in the microservices example.  
 {% highlight java tabsize=4 %}
 @org.osgi.annotation.bundle.Export
 @org.osgi.annotation.versioning.Version("1.0.0")
@@ -58,7 +58,7 @@ package org.osgi.enroute.examples.microservice.dao;
 {% endhighlight %}
 
 
-The [bnd plugin](../520-bnd) will pickup this information and add it to the OSGi Bundle manifest. As a developer you should change the version information in `package-info.java` when you make changes to the package content.
+The [bnd plugin](520-bnd.html) will pickup this information and add it to the OSGi Bundle manifest. As a developer you should change the version information in `package-info.java` when you make changes to the package content.
 
 **Note** - This is automatically managed if you are using Bndtools.
 {: .note }

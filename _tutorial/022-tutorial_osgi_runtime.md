@@ -78,7 +78,7 @@ and run the new debug version.
 
 ## Gogo and the OSGi Runtime
 
-When interacting with a running OSGi a framework, if you are presented with the prompt `g!` then you are using the [Gogo shell](../FAQ/500-gogo). Note that you may need to hit the enter key once or twice to get the prompt to appear.
+When interacting with a running OSGi a framework, if you are presented with the prompt `g!` then you are using the [Gogo shell](../FAQ/500-gogo.html). Note that you may need to hit the enter key once or twice to get the prompt to appear.
 
         g!
 {: .shell }

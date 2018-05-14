@@ -1,9 +1,11 @@
 ---
-title: front 
+title: OSGi enRoute Home Page
+summary: enRoute Tutorials and Examples provide a simple developer onramp for those unfamiliar with OSGi™.
+description: OSGi enRoute - The Easy Way Towards Real Modularity
 layout: toc-guide-page-front
 ---
 
-<img src="/img/front-page-1000.jpg">
+<img src="/img/front-page-1000.jpg" />
 
 <br>
 enRoute Tutorials and Examples provide a simple developer onramp for those unfamiliar with OSGi™. 

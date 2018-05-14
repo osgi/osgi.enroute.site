@@ -140,7 +140,7 @@ In almost all cases there is a top level function that initiated your request. I
 
 ## Tracking Multiple Services
 
-If you use a [whiteboard pattern](../faq/420-patterns) or other listener like model then in general you want to use dynamics. 
+If you use a [whiteboard pattern](400-patterns.html#whiteboard-pattern) or other listener like model then in general you want to use dynamics. 
 
 The reason is that you have _multiple_ references and building and destroying the component at every change in the set of services we're interested in (the _tracked_ services) becomes expensive.
 

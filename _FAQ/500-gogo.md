@@ -14,7 +14,7 @@ The Gogo shell is a unix `bash` like shell for OSGi frameworks. However, unlike 
 
 ## Built-in Commands
 
-When interacting with a running OSGi a framework, as in the [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime), if you see a `q!` prompt then you are using Gogo. 
+When interacting with a running OSGi a framework, as in the [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime.html), if you see a `q!` prompt then you are using Gogo. 
 
         g!
 {: .shell }
@@ -41,7 +41,7 @@ Issue the command `help` to list available commands.
 
 Notice that the commands are grouped. In the above we can see three command scopes: i.e. `felix`, `gogo` & `scr`; other command groups may also be created.
 
-The following set of commands are immediate of use: (The following examples use [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime)).
+The following set of commands are immediate of use: (The following examples use [Debug Tutorial](../tutorial/022-tutorial_osgi_runtime.html)).
 
 ### felix:lb, lb
 

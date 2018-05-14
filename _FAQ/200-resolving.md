@@ -32,7 +32,7 @@ This model consists of a small number of primitive concepts:
 
 **Resolving** is then the process of constructing a complete, closed set of _Resources_ from a list of _initial Requirements_, a description of the Environment's _Capabilities_, and one or more _repositories_ with available _Resources_. Once this list of resources is known the associated artifacts can be installed. 
 
-![image](https://user-images.githubusercontent.com/200494/31130842-cf5299d2-a858-11e7-907c-d6cb43954501.png)
+![image](img/resolving-principles.png)
 
 ### Namespaces 
 
@@ -77,7 +77,7 @@ Hence usually a small number of _curated_ repositories, each aligned to each Org
 
 The relationship between Repositories and the Resolution process is shown: 
 
-![Resolving](https://user-images.githubusercontent.com/200494/31221580-73596198-a9c4-11e7-8d11-1e1fe7e37199.png)
+![Resolving](img/resolving-repository.png)
 
 An important variable in the resolving process is `effective` which defines the _effectiveness_ under which the resolve operation is performed. The resolver will only look at requirements that it deems _effective_. The default effectiveness is `resolve`. The effectiveness `active` is a convention commonly used for situations that do not need to be resolved by the OSGi framework but are relevant in using the resolver for assembling applications. 
 

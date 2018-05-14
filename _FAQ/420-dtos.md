@@ -6,7 +6,9 @@ lprev: 400-patterns.html
 lnext: 450-Designing-APIs.html 
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance   
-redirect_from: /appnotes/dtos.html
+redirect_from:
+ - /appnotes/dtos.html
+ - /FAQ/420--dtos.html
 ---
 
 Whenever two parts of a software system want to communicate they need to exchange data. Data Transfer Objects (DTOs) are all about how this data is represented. If you know C then a DTO is a `struct`. If you don't know C then a DTO is an object without methods, it is pure data.

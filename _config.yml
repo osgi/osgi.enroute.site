@@ -40,7 +40,7 @@ logo: /img/enroute-logo-64.png
 twitter:
   username: OSGiAlliance
 
-google_analytics: UA-801425-1
+google_tag_manager: GTM-W6DT68N
 
 exclude:
   - 'Gemfile'

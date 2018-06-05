@@ -455,7 +455,7 @@ with the following values:
     artifactId: rest-app
     version: 0.0.1-SNAPSHOT
     package: org.osgi.enroute.examples.microservice
-    impl-artifactId: dao-impl
+    impl-artifactId: rest-service
     impl-groupId: org.osgi.enroute.examples.microservice
     impl-version: 0.0.1-SNAPSHOT
     Y: :

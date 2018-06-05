@@ -61,10 +61,10 @@ Fillng the project details with appropriate values:
     Define value for property 'version' 1.0-SNAPSHOT: :
     Define value for property 'package' org.osgi.enroute.examples: : org.osgi.enroute.examples.quickstart.rest
     Confirm properties configuration:
-    groupId: com.acme.example
+    groupId: org.osgi.enroute.examples.quickstart
     artifactId: quickstart
     version: 1.0-SNAPSHOT
-    package: com.acme.example
+    package: org.osgi.enroute.examples.quickstart.rest
     Y: : 
 {: .shell }
 

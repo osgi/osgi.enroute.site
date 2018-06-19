@@ -27,12 +27,12 @@ input the following values:
     Define value for property 'groupId': org.osgi.enroute.examples.microservice
     Define value for property 'artifactId': dao-impl-jpa
     Define value for property 'version' 1.0-SNAPSHOT: : 0.0.1-SNAPSHOT
-    Define value for property 'package' org.osgi.enroute.examples.microservice: : org.osgi.enroute.examples.microservice.dao.impl.jpa
+    Define value for property 'package' org.osgi.enroute.examples.microservice.dao.impl.jpa: :
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.microservice
     artifactId: dao-impl-jpa
     version: 0.0.1-SNAPSHOT
-    package: org.osgi.enroute.examples.microservice
+    package: org.osgi.enroute.examples.microservice.dao.impl.jpa
     Y: : 
 {: .shell } 
 

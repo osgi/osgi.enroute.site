@@ -59,7 +59,7 @@ Fillng the project details with appropriate values:
     Define value for property 'groupId': org.osgi.enroute.examples.quickstart
     Define value for property 'artifactId': quickstart
     Define value for property 'version' 1.0-SNAPSHOT: :
-    Define value for property 'package' org.osgi.enroute.examples: : org.osgi.enroute.examples.quickstart.rest
+    Define value for property 'package' org.osgi.enroute.examples.quickstart.quickstart: : org.osgi.enroute.examples.quickstart.rest
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.quickstart
     artifactId: quickstart

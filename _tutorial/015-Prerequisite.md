@@ -75,7 +75,9 @@ These tools aren't strictly required but we think that they'll improve your expe
 
 ### Installing Bndtools
 
-You can't install Bndtools 4.0.0 from the Eclipse market place yet as it hasn't been formally released, but you can install the Bndtools development snapshot directly from an update site using the instructions at:
+You can install Bndtools 4.0.0.REL or higher directly from the Eclipse market place.
+
+Alternatively you can install the Bndtools development snapshot directly from an update site using the instructions at:
 
         http://bndtools.org/installation.html#nonstandard_versions
 

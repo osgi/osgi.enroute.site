@@ -14,7 +14,7 @@ Before you start any of the tutorials you must prepare your environment so that 
 
 We need to run the following tools on your computer - without them you won't get very far at all.
 
-* [Java][java8], probably already got it? If not, this is a good time to get started! enRoute projects target Java 8 by default, so make sure your Java is at least that version.
+* [Java][java8], probably already got it? If not, this is a good time to get started! enRoute projects target Java 8. The enRoute projects are affected by some breaking changes in Java 9, so for now use Java 8 only.
 * [Maven][Maven], a popular build tool for Java applications with an enormous repository behind it. Make sure that you're on at least 3.3.9
 
 ### Project Setup for SNAPSHOT Archetypes

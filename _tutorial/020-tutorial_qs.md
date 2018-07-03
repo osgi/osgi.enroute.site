@@ -158,7 +158,7 @@ index: target/index.xml
 -standalone: ${index}
 
 -runrequires: osgi.identity;filter:='(osgi.identity=org.osgi.enroute.examples.quickstart.impl)'
--runfw: org.apache.felix.framework
+-runfw: org.eclipse.osgi
 -runee: JavaSE-1.8
 {% endhighlight %}
 
@@ -197,29 +197,7 @@ Now click **Finish** button...
 If you look again at the `app.bndrun` file you will now see that our rest service implementation `org.osgi.enroute.examples.quickstart.impl`, OSGi Declarative Services implementation `org.apache.felix.scr`, and a number of other bundles required at runtime are now listed by `runbundles`.
 
 {% highlight shell-session %}
-index: target/index.xml
-
--standalone: ${index}
-
--runrequires: osgi.identity;filter:='(osgi.identity=org.osgi.enroute.examples.quickstart.impl)'
--runfw: org.apache.felix.framework
--runee: JavaSE-1.8
--runbundles: \
-        ch.qos.logback.classic;version='[1.2.3,1.2.4)',\
-        ch.qos.logback.core;version='[1.2.3,1.2.4)',\
-        javax.json-api;version='[1.0.0,1.0.1)',\
-        org.apache.aries.javax.annotation-api;version='[0.0.1,0.0.2)',\
-        org.apache.aries.javax.jax.rs-api;version='[0.0.1,0.0.2)',\
-        org.apache.aries.jax.rs.whiteboard;version='[0.0.1,0.0.2)',\
-        org.apache.felix.configadmin;version='[1.9.0,1.9.1)',\
-        org.apache.felix.http.jetty;version='[3.4.7,3.4.8)',\
-        org.apache.felix.http.servlet-api;version='[1.1.2,1.1.3)',\
-        org.apache.felix.scr;version='[2.1.0,2.1.1)',\
-        org.osgi.enroute.examples.quickstart.impl;version='[1.0.0,1.0.1)',\
-        org.osgi.service.jaxrs;version='[1.0.0,1.0.1)',\
-        org.osgi.util.function;version='[1.1.0,1.1.1)',\
-        org.osgi.util.promise;version='[1.1.0,1.1.1)',\
-        slf4j.api;version='[1.7.25,1.7.26)'
+{% include osgi.enroute/examples/quickstart/app/app.bndrun %}
 {% endhighlight %}
 
 ### Running the application

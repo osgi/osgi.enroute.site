@@ -163,6 +163,59 @@ The `debug.bndrun` inherits the requirements and launch parameters from the `app
 
 As a result when this bndrun file is resolved and run it includes the main application and the debug bundles, making this an easy way to debug the application when running in an IDE. If command line debugging is preferred then the export maven plugin can be reconfigured to export the `debug.bndrun`, rather than the `rest-app.bndrun`.
 
+## Using a different database
+
+This example currently uses the H2 library, which is a popular, easily embedded database implementation.
+
+However, it is easy to use other *OSGi-friendly* database implementations. By *OSGi-friendly*, we mean implementations which publish a `org.osgi.service.jdbc.DataSourceFactory` service, such as PostgreSQL.
+
+The changes required to use PostgreSQL instead of H2 are outlined below:
+
+### Install PostgreSQL
+
+The H2 database is *embedded*, so requires no installation. To use PostgreSQL you either need access to an existing installation or you need to install it yourself from [here](https://www.postgresql.org/).
+
+
+### Dependencies
+
+Replace the H2 dependency with the PostgreSQL dependency in the `dependencies` section of the file `rest-app/pom.xml`.
+
+{% highlight xml %}
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <version>42.2.5</version>
+    <scope>runtime</scope>
+</dependency>
+{% endhighlight %}
+
+
+### Configuration
+
+Configure the rest-app to use PostgreSQL instead of H2 in `configuration.json`.
+
+Note that PostgreSQL requires a username and password for authentication, which are also configured here:
+
+{% highlight json %}
+// Configure PostgrSQL JDBC resource provider
+"org.apache.aries.tx.control.jdbc.xa~microservice": {
+       "name": "microservice.database",
+       "osgi.jdbc.driver.class": "org.postgresql.Driver",
+       "url": "jdbc:postgresql://dbhost/dbname",
+       "user": "demo",
+       "password": "secret"
+   }
+{% endhighlight %}
+
+### Requirements
+
+Replace the initial requirement for H2 with PostgreSQL in `rest-app.bndrun`:
+
+{% highlight shell-session %}
+-runrequires: \
+    osgi.identity;filter:='(osgi.identity=org.postgresql.jdbc42)'
+{% endhighlight %}
+
 ## The JPA implementation
 
 The JPA DAO implementations, and the resulting application packaging, are described in the next page.

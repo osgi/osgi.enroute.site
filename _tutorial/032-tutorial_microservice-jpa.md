@@ -204,6 +204,7 @@ Create the alternative JPA application project.
     Define value for property 'impl-artifactId': rest-service 
     Define value for property 'impl-groupId' org.osgi.enroute.examples.microservice: : 
     Define value for property 'impl-version' 0.0.1-SNAPSHOT: : 
+    Define value for property 'app-target-java-version' 8: :
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.microservice
     artifactId: rest-app-jpa
@@ -212,6 +213,7 @@ Create the alternative JPA application project.
     impl-artifactId: dao-impl-jpa
     impl-groupId: org.osgi.enroute.examples.microservice
     impl-version: 0.0.1-SNAPSHOT
+    app-target-java-version: 8
     Y: : 
 {: .shell }
 
@@ -233,10 +235,10 @@ Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`:
     javax.xml.stream.util;version=1.0.0 
 {% endhighlight %}
 
-The `-runpath` needs to be specified because the JRE has a split package for javax.transaction and a uses constraint between javax.sql and javax.transaction. This breaks JPA unless the JTA API is always provided from outside of the OSGi framework.
+The `-runpath` needs to be specified for Java 8 because the Java 8 JRE has a split package for javax.transaction and a uses constraint between javax.sql and javax.transaction. This breaks JPA unless the JTA API is always provided from outside of the OSGi framework. When using Java 9 and above the javax.transaction package is no longer provided by the JRE,
 {: .note }
 
-The `-runsystempackages` is required because Hibernate has versioned imports for JTA, and its dependency dom4j has versioned imports for the STAX API. Both of these should come from the JRE.
+The `-runsystempackages` is required because Hibernate has versioned imports for JTA, and its dependency dom4j has versioned imports for the STAX API. When using Java 8 both of these should come from the JRE. When using Java 9 and above the APIs can be provided by bundles in the OSGi framework.
 {: .note }
 
 Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include the composite application's requirements:

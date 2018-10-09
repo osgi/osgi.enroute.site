@@ -99,6 +99,9 @@ The remaining section `-runbundles` is automatically when resolving. It contains
 
 If you are in an IDE then this file can be run and resolved directly, otherwise the file can be resolved from the command line and run as an executable JAR file.
 
+The default target Java version for the OSGi enRoute examples is Java 8. Due to the incompatible changes made in Java 9 you may need to change the `-runee` instruction to point at your JRE version and re-resolve if you want to use a later version of Java to run the example.
+{: .note }
+
 ### The debug.bndrun
 
 The `debug.bndrun` inherits the requirements and launch parameters from the `app.bndrun`, and adds:

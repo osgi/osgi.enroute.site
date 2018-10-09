@@ -25,6 +25,9 @@ Build the Application with the following command:
     $ mvn verify
 {: .shell } 
 
+If you're using a Java version higher than 8 to run this tutorial then you'll need to set the appropriate `runee` in the `examples/quickstart/app/app.bndrun`. For Java 9 use `JavaSE-9`, for Java 10 use `JavaSE-10` and for Java 11 use `JavaSE-11`.
+{: .note } 
+
 ### Running the example
 
 We now have a runnable artifact which can be started with the command:
@@ -54,17 +57,19 @@ First issue the command to create the project template:
     $ mvn -s settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0-SNAPSHOT
 {: .shell }
 
-Fillng the project details with appropriate values: 
+Filling the project details with appropriate values: 
 
     Define value for property 'groupId': org.osgi.enroute.examples.quickstart
     Define value for property 'artifactId': quickstart
     Define value for property 'version' 1.0-SNAPSHOT: :
     Define value for property 'package' org.osgi.enroute.examples.quickstart.quickstart: : org.osgi.enroute.examples.quickstart.rest
+    Define value for property 'app-target-java-version' 8: :
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.quickstart
     artifactId: quickstart
     version: 1.0-SNAPSHOT
     package: org.osgi.enroute.examples.quickstart.rest
+    app-target-java-version: 8
     Y: : 
 {: .shell }
 

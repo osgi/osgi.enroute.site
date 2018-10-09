@@ -450,6 +450,7 @@ with the following values:
     Define value for property 'impl-artifactId': rest-service 
     Define value for property 'impl-groupId' org.osgi.enroute.examples.microservice: :
     Define value for property 'impl-version' 0.0.1-SNAPSHOT: :
+    Define value for property 'app-target-java-version' 8: :
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.microservice
     artifactId: rest-app
@@ -458,6 +459,7 @@ with the following values:
     impl-artifactId: rest-service
     impl-groupId: org.osgi.enroute.examples.microservice
     impl-version: 0.0.1-SNAPSHOT
+    app-target-java-version: 8
     Y: :
 {: .shell }
 

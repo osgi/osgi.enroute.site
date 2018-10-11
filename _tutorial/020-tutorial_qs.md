@@ -25,7 +25,7 @@ Build the Application with the following command:
     $ mvn verify
 {: .shell } 
 
-If you're using a Java version higher than 8 to run this tutorial then you'll need to set the appropriate `runee` in the `examples/quickstart/app/app.bndrun`. For Java 9 use `JavaSE-9`, for Java 10 use `JavaSE-10` and for Java 11 use `JavaSE-11`.
+If you're using a Java version higher than 8 to run this tutorial then you'll need to set the appropriate `runee` in the `examples/quickstart/app/app.bndrun` and then resolve the application. For Java 9 use `JavaSE-9`, for Java 10 use `JavaSE-10` and for Java 11 use `JavaSE-11`. Once you have made this edit issue the command `mvn bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve` to generate the index, test index, and resolve the bndrun (you should be able to see the changes in the `runbundles` list afterwards). Once you've done this the first time then you can `mvn verify` to your heart's content.
 {: .note } 
 
 ### Running the example
@@ -132,12 +132,12 @@ It's now time to build the implementation project.
   <div markdown="1" role="tabpanel" class="tab-pane active" id="impl-build-cli">
 From the `quickstart/impl` project we now build the impl bundle.
 
-    $ mvn install
+    $ mvn package
 {: .shell }
       
-Here, we use the `install` goal to make sure that the built artifact is available to other projects in later steps.
+Here, we use the `package` goal to check that the code compiles and can be successfully packaged into a bundle. If we had tests or other post-packaging checks then we could have used the `verify` goal instead.
 
-If the `install` fails, continue to the next stage - resolve - then repeate `mvn install` 
+If the `package` fails then check your code and try again. Once you can package it cleanly then continue to the next stage. 
 {: .warning }
   </div>
   <div  markdown="1" role="tabpanel" class="tab-pane" id="impl-build-eclipse">
@@ -167,6 +167,9 @@ index: target/index.xml
 -runee: JavaSE-1.8
 {% endhighlight %}
 
+Note that your `runee` may be different if you chose to use a higher version of Java
+{: .note }
+
 As shown, the bndrun contains a `runrequires` statement that specifies a [capability](../FAQ/200-resolving.html#namespaces); i.e. the implementation for `quickstart`. However, no `runbundles` a currently listed; i.e. the actual bundles needed at runtime to create `quickstart`.
 
 The `runbundles` are automatically calculated for us via the process of [resolving](../FAQ/200-resolving.html).
@@ -179,10 +182,13 @@ The `runbundles` are automatically calculated for us via the process of [resolvi
 
  <div class="tab-content">
   <div markdown="1" role="tabpanel" class="tab-pane active" id="resolve-cli">
-From the `quickstart/app` project we now resolve the application using the bnd-resolver-maven-plugin
+From the root of the `quickstart` project we now generate our indexes and resolve the application using the bnd-resolver-maven-plugin. As the `app` project references other projects in the same reactor we use the `-pl` flag to pick the `app` project and the `-am` flag to be sure all of our dependencies are up to date:
 
-    $ mvn bnd-resolver:resolve
+    $ mvn -pl app -am package bnd-resolver:resolve
 {: .shell }
+
+Note that the indexes are automatically generated in the package phase. If you want to generate the indexes for the `app` module without packaging everything then you can do so by issuing `mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index`
+{: .note }
 
   </div>
   <div markdown="1" role="tabpanel" class="tab-pane" id="resolve-eclipse">
@@ -195,6 +201,9 @@ Click the **Resolve** button...
 Now click **Finish** button...
 
 ![Modularity and complexity](img/6.png){: height="400px" width="400px"}
+
+Note that Bndtools automatically keeps your indexes up to date, so there is no need to manually generate them.
+{: .note }
   </div>
  </div>
 </div>
@@ -204,6 +213,9 @@ If you look again at the `app.bndrun` file you will now see that our rest servic
 {% highlight shell-session %}
 {% include osgi.enroute/examples/quickstart/app/app.bndrun %}
 {% endhighlight %}
+
+Note that your runbundles list may be different if you are using a different version of Java
+{: .note }
 
 ### Running the application
 

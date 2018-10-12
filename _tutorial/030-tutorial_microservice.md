@@ -428,7 +428,7 @@ As the `rest-service` module has dependencies on the `dao-api` and `json-api` th
 
 ### Visibility
 
-Implmentations should **NOT** be shared; hence no `package-info.java` file.
+Implementation types should **NOT** be shared; hence we have no `package-info.java` file in the REST component.
 {: .note }
 
 
@@ -550,22 +550,25 @@ All that is required is to pass in the appropriate configuration by overwrite th
 
 ## Build
 
-Build the modules and install in the local maven repository from the top level project directory
+Check the modules that make up your application build cleanly from the top level project directory
 
-    mvn install
+    mvn -pl !rest-app verify
 {: .shell }
 
-**Note** - if `rest-app` fails, run the following resolve command and then re-run `mvn install` 
+**Note** - if this build fails then check your code and pom dependencies and try again.
 {: .note }
 
-We now generate the required OSGi indexes from the project dependencies.
+We now generate the required OSGi indexes from the project dependencies, and resolve our application.
 
-    mvn bnd-resolver:resolve
+    mvn -pl app -am bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve
 {: .shell }
+
+**Note** Don't do a clean before running this step, it's building the indexes and resolution from the bundles you made in the previous step. Also, you don't need to run this step every time, just if your dependency graph needs to be recalculated.
+{: .note }
 
 And finally generate the runnable jar from the top level project directory.
 
-    mvn package
+    mvn verify
 {: .shell }
 
 Re-inspecting `rest-app/rest-app.bndrun` we can see that this now explicitly references the acceptable version range for each required OSGi bundle. At runtime the OSGi framework resolves these _requirements_ against the _capabilities_ in the specified target repository: i.e. `target/index.xml`.  

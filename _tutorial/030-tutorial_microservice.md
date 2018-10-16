@@ -24,9 +24,9 @@ We start by creating the required project skeleton.
 
 ## Creating the Project
 
-Using the [bare-project Archetype](../about/112-enRoute-Archetypes.html#the-project-archetype), in your project root directory (i.e. the directory containing your [`settings.xml` configuration](../about/112-enRoute-Archetypes.html#project-setup-for-snapshot-archetypes)), create the **microservice** project:
+Using the [bare-project Archetype](../about/112-enRoute-Archetypes.html#the-project-archetype), in your project root directory create the **microservice** project:
 
-    $ mvn -s settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project-bare -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project-bare -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -43,7 +43,7 @@ with the following values:
     Y: :
 {: .shell }
 
-**Note** - if you use alternative `groupId`, `artifactId` values remember to update the `packageinfo` and `import` statements in the files used throughout the rest of this tutorial.
+**Note** - if you use alternative `groupId`, `artifactId` values remember to update the `package-info.java` and `import` statements in the files used throughout the rest of this tutorial.
 {: .note }
 
 
@@ -53,7 +53,7 @@ We now create the required modules.
 
 Change directory into the newly created `microservice` project directory; then create the `api` module using the [api Archetype](../about/112-enRoute-Archetypes.html#the-api-archetype) as shown:
 
-    $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=api -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=api -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -182,7 +182,7 @@ and again, we advertise this Capability by creating the following `package-info.
 
 In the `microservice` project director now create the `impl` module using the [ds-component Archetype](../about/112-enRoute-Archetypes.html#the-ds-component-archetype):
 
-    $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -293,7 +293,7 @@ Implementations should **NOT** be shared; hence no `package-info.java` file.
 
 In the `microservice` project director now create the `rest-component` module using the [rest-component Archetype](../about/112-enRoute-Archetypes.html#the-rest-component-archetype):
 
-    $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=rest-component -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=rest-component -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -438,7 +438,7 @@ We now pull these Modules together to create the Composite Application.
  
 In the `microservice` project directory create the `application` module using the [application Archetype](../about/112-enRoute-Archetypes.html#the-application-archetype):
 
-    $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:

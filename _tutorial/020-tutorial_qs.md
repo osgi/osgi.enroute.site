@@ -47,14 +47,14 @@ When you want to terminate the application press **Ctrl+C**.
 
 We'll now recreate the quick start example locally as though it were your own greenfield OSGi project. 
 
-It is assumed that you have the required [environment](015-Prerequisite.html#required-tools) installed on your laptop and have created the [settings.xml](015-Prerequisite.html#project-setup-for-snapshot-archetypes) necessary if you are using SNAPSHOT archetypes. 
+It is assumed that you have the required [environment](015-Prerequisite.html#required-tools) installed on your laptop. 
 {: .note }
 
 ### Project Setup
 
 First issue the command to create the project template:
 
-    $ mvn -s settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0-SNAPSHOT
+    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0
 {: .shell }
 
 Filling the project details with appropriate values: 
@@ -63,7 +63,9 @@ Filling the project details with appropriate values:
     Define value for property 'artifactId': quickstart
     Define value for property 'version' 1.0-SNAPSHOT: :
     Define value for property 'package' org.osgi.enroute.examples.quickstart.quickstart: : org.osgi.enroute.examples.quickstart.rest
-    Define value for property 'app-target-java-version' 8: :
+    [INFO] Using property: app-artifactId = app
+    [INFO] Using property: app-target-java-version = 8
+    [INFO] Using property: impl-artifactId = impl
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.quickstart
     artifactId: quickstart
@@ -182,12 +184,12 @@ The `runbundles` are automatically calculated for us via the process of [resolvi
 
  <div class="tab-content">
   <div markdown="1" role="tabpanel" class="tab-pane active" id="resolve-cli">
-From the root of the `quickstart` project we now generate our indexes and resolve the application using the bnd-resolver-maven-plugin. As the `app` project references other projects in the same reactor we use the `-pl` flag to pick the `app` project and the `-am` flag to be sure all of our dependencies are up to date:
+From the root of the `quickstart` project we now generate our indexes and resolve the application using the bnd-resolver-maven-plugin. As the `app` project references other projects in the same reactor we use the `-pl` flag to pick the `app` project and the `-am` flag to be sure all of our dependencies are packaged and up to date:
 
-    $ mvn -pl app -am package bnd-resolver:resolve
+    $ mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve package
 {: .shell }
 
-Note that the indexes are automatically generated in the package phase. If you want to generate the indexes for the `app` module without packaging everything then you can do so by issuing `mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index`
+Note that the indexes are automatically regenerated every time you run through the package phase. If you want to generate the indexes for the `app` module without packaging everything then you can do so by issuing `mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index`
 {: .note }
 
   </div>
@@ -237,7 +239,7 @@ Now that the initial development is done we're ready to build and package the wh
     $ mvn package
 {: .shell }
 
-Your version of `quickstart` may now be started as described [above](020-tutorial_qs.html#running-the-example); the REST endpoint at [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
+Your version of `quickstart` may now be started as described [above](020-tutorial_qs.html#running-the-example). It won't have a UI, but the REST endpoint will be available at [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
   </div>
   <div markdown="1" role="tabpanel" class="tab-pane" id="run-eclipse">
 In the `app` maven module, open the `app.bndrun` to display the `Bndtools Resolve` screen. Select the **Run OSGi** button
@@ -264,7 +266,7 @@ Wait for maven to finish the generation.
 
 ![Modularity and complexity](img/12.png)
 
-The runnable jar file created will be `app/target/app.jar`, and may be started as described [above](020-tutorial_qs.html#running-the-example); the REST endpoint at [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
+The runnable jar file created will be `app/target/app.jar`, and may be started as described [above](020-tutorial_qs.html#running-the-example). It won't have a UI, but the REST endpoint will be available at [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).
 
    </div>
  </div>

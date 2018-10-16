@@ -23,9 +23,10 @@ The creators of Java made some breaking changes in Java 9, and these affect lots
 
 ### Project Setup for SNAPSHOT Archetypes
 
-<div class="alert alert-warning">
-  Maven automatically searches for archetypes in the Maven Central repository, but it will not discover archetypes from other repositories without additional configuration. Until the OSGi R7 release has completed the enRoute archetypes and indexes must all have SNAPSHOT versions.
-</div>
+If you're using enRoute for the first time, or just want to use the released archetypes then don't worry about this section.
+{: .note }
+
+Maven automatically searches for archetypes in the Maven Central repository, but it will not discover archetypes from other repositories without additional configuration. The released OSGi enRoute archetypes and indexes can therefore be used easily, but some extra work is required if you want to use SNAPSHOT versions.
 
 To complete the tutorials with a SNAPSHOT version of the enRoute archetypes paste the following Maven project skeleton to a file named `settings.xml` in your project root directory.
 
@@ -67,19 +68,21 @@ To complete the tutorials with a SNAPSHOT version of the enRoute archetypes past
   </div>
 </div>
 
+Whenever you want to use the SNAPSHOT archetypes you must then reference this settings.xml file by using `mvn -s settings.xml ...`
+
 
 ## Useful Tools
 
 These tools aren't strictly required but we think that they'll improve your experience of using the tutorials, and that they'll help you in starting your own projects.
 
 * [Eclipse][mars], A powerful, flexible IDE for Java if you do not know which variant you want then pick the _Eclipse Standard_ variant. Make sure that you use version _Mars_ or higher.
-* [Bndtools][bndtools] A plugin for Eclipse that adds IDE support for OSGi development. This includes automatically building your projects and nice editors for bnd metadata. Make sure that you have at least Bndtools 4.0.0 as enRoute makes use of lots of new OSGi features!
+* [Bndtools][bndtools] A plugin for Eclipse that adds IDE support for OSGi development. This includes automatically building your projects and nice editors for bnd metadata. Make sure that you have at least Bndtools 4.1.0 as enRoute makes use of lots of new OSGi features!
 * [Git][git], Eclipse does include git support through EGit, but when it comes to git nothing really beats the good old command line.
 
 
 ### Installing Bndtools
 
-You can install Bndtools 4.0.0.REL or higher directly from the Eclipse market place.
+You can install Bndtools 4.1.0.REL or higher directly from the Eclipse market place.
 
 Alternatively you can install the Bndtools development snapshot directly from an update site using the instructions at:
 
@@ -107,11 +110,7 @@ Make sure you have a good command line shell available. If you're familiar with 
 
 ### MacOS
 
-If you start using enRoute you will likely create a number of workspaces. There is a very handy utility plugin for Eclipse on MacOS that shows you which workspace is which icon in the task bar:
-
-> [http://njbartlett.name/2011/10/09/workspace-mac-badge.html](http://njbartlett.name/2011/10/09/workspace-mac-badge.html)
-
-There is also multi-workspace launcher plugin from Torkild U. Resheim that incorporates Neil Bartlett's task bar badge (above).
+If you start using enRoute you will likely create a number of workspaces. There is a very handy multi-workspace launcher plugin from Torkild U. Resheim that makes it easy to open multiple workspaces.
 
 > [OS X Eclipse Launcher Utility](http://marketplace.eclipse.org/content/osx-eclipse-launcher)
 

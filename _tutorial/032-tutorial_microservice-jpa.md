@@ -19,7 +19,7 @@ In this tutorial we'll modify the Microservice to switch the data-layer from a J
  
 In the `microservice` project root directory, create the `jpa` project.
 
-      mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0-SNAPSHOT
+      mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0
 {: .shell }
 
 input the following values:
@@ -194,7 +194,7 @@ Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependenc
 
 Create the alternative JPA application project.
 
-     $ mvn -s ../settings.xml archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0-SNAPSHOT
+     $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0
 {: .shell }
 
     Define value for property 'groupId': org.osgi.enroute.examples.microservice

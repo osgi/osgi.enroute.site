@@ -61,32 +61,35 @@ Clearly the pattern is common and popular because it is so easy to implement. Vi
 
 This example shows a skeleton of a service that listens to a whiteboard service.
 
-	package com.acme.server;
+```java
+package com.acme.server;
 
-	@Component
-	public class TickerImpl{
+@Component
+public class TickerImpl{
 
-		@Reference(policy=DYNAMIC)
-		final List<Tick> ticks = new CopyOnWriteArrayList<>();
+    @Reference(policy=DYNAMIC)
+    final List<Tick> ticks = new CopyOnWriteArrayList<>();
 
-		private Closeable schedule;
+    private Closeable schedule;
 
-		@Reference
-		void setScheduler( Scheduler scheduler ) {
-			schedule = scheduler.schedule( () -> {
-				ticks.stream().forEach( t -> t.tick() );
-			}, 1000);
-		}
-	}
+    @Reference
+    void setScheduler( Scheduler scheduler ) {
+        schedule = scheduler.schedule( () -> {
+            ticks.stream().forEach( t -> t.tick() );
+        }, 1000);
+    }
+}
+```
 
-
-	package com.acme.client;
-	@Component
-	public class TickWhiteboardImpl implements Tick {
-		public void tick() {
-			System.out.println("I am here!");
-		}
-	}
+```java
+package com.acme.client;
+@Component
+public class TickWhiteboardImpl implements Tick {
+    public void tick() {
+        System.out.println("I am here!");
+    }
+}
+```
 
 ## Extender Pattern
 
@@ -112,5 +115,3 @@ The following OSGi service specifications are extenders:
 * OSGi JPA – The Persistence header identifies the presence of a persistence.xml file that identifies the persistence objects.
 * Metatype – The Metatype service can find metatype definitions inside bundles.
 * Remote Service Admin – The RSA Endpoint discovery model can detect endpoint definitions in bundles.
-
-

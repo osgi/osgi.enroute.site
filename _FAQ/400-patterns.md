@@ -55,7 +55,7 @@ The following is an overview of where the Whiteboard Pattern is used in the OSGi
 
 Novice OSGi users often feel uncomfortable publicly registering these listeners. There are performance fears and a feeling of being unprotected. Performance is not an issue since there have been tests with hundreds of thousands of services without any noticeable degradation. The feeling of being vulnerable will go away once you see how the services in a service registry are collaborating.
 
-Clearly the pattern is common and popular because is so easy to implement. Virtually all OSGi services after release 1 are based on this model. On any occasion where you want to establish a channel of event like objects, the whiteboard pattern should be used.
+Clearly the pattern is common and popular because it is so easy to implement. Virtually all OSGi services after release 1 are based on this model. On any occasion where you want to establish a channel of event like objects, the whiteboard pattern should be used.
 
 ### Example
 

@@ -87,6 +87,19 @@ You can install Bndtools 4.1.0.REL or higher directly from the Eclipse market pl
 Alternatively you can install the Bndtools development snapshot directly from an update site using the instructions at:
 
         http://bndtools.org/installation.html#nonstandard_versions
+        
+### Using Eclipse Archetype Generation
+
+Eclipse M2E provides support for Maven within Eclipse. Broadly speaking it is very good at this job, but its Archetype support can be a bit buggy at times. It is therefore recommended to use the command line to generate your projects. If you do want to use Eclipse then you'll need to add an archetype repository to your Eclipse workspace (Eclipse doesn't search Maven Central by default).
+
+Open `Preferences / Maven / Archetypes / Add Remote Catalog...`
+
+At this point you have a choice, you can either add the OSGi enRoute archetypes from the Maven Central Catalog (the default remote for the command line) or from the Sonatype OSGi repository. 
+
+ * Maven Central: `https://repo.maven.apache.org/maven2/`
+ * Sonatype OSGi: `https://oss.sonatype.org/content/groups/osgi`
+ 
+Maven Central is the official location for released archetypes and so it contains several thousand of them. This means that it is much easier to find the correct archetype when using the Sonatype OSGi repository as it only contains the archetypes published by the OSGi Alliance. We'll leave the decision about which URL to use up to you.
 
 ## Conventions
 

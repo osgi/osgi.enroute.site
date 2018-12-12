@@ -248,7 +248,7 @@ Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include
     osgi.identity;filter:='(osgi.identity=org.osgi.enroute.examples.microservice.rest-service)',\
     osgi.identity;filter:='(osgi.identity=org.apache.johnzon.core)',\
     osgi.identity;filter:='(osgi.identity=org.h2)',\
-    bnd.identity;version='0.0.1.201801031655';id='org.osgi.enroute.examples.microservice.rest-app-jpa'
+    osgi.identity;filter:='(osgi.identity=org.osgi.enroute.examples.microservice.rest-app-jpa)'
 {% endhighlight %}
 
 ### Dependencies

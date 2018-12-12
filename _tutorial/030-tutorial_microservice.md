@@ -555,6 +555,11 @@ Check the modules that make up your application build cleanly from the top level
     mvn -pl !rest-app verify
 {: .shell }
 
+Now build the rest-app bundle using package command.
+
+    mvn -pl rest-app package
+{: .shell }
+
 **Note** - if this build fails then check your code and pom dependencies and try again.
 {: .note }
 

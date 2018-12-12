@@ -560,7 +560,7 @@ Check the modules that make up your application build cleanly from the top level
 
 We now generate the required OSGi indexes from the project dependencies, and resolve our application.
 
-    mvn -pl app -am bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve
+    mvn -pl rest-app -am bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve
 {: .shell }
 
 **Note** Don't do a clean before running this step, it's building the indexes and resolution from the bundles you made in the previous step. Also, you don't need to run this step every time, just if your dependency graph needs to be recalculated.

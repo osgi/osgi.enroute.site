@@ -315,7 +315,7 @@ We build and run the examples as in the previous JDBC Microservices example.
     mvn install
 {: .shell }
 
-**Note** - if `rest-app` fails, run the following resolve command and then re-run `mvn install` 
+**Note** - if `rest-app-jpa` fails, run the following resolve command and then re-run `mvn install`
 {: .note }
 
     mvn bnd-resolver:resolve
@@ -324,7 +324,7 @@ We build and run the examples as in the previous JDBC Microservices example.
     mvn package
 {: .shell }
 
-    java -jar rest-app/target/rest-app.jar
+    java -jar rest-app-jpa/target/rest-app.jar
 {: .shell }
 
 The REST Service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)

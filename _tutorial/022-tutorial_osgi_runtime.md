@@ -72,8 +72,8 @@ Now resolve your bndrun files (always a good idea after making pom or bndrun cha
 
 and run the new debug version.
 
-    $ java -jar app/target/debug.jar
-{: .shell } 
+    $ java -jar target/debug.jar
+{: .shell }
 
 
 ## Gogo and the OSGi Runtime

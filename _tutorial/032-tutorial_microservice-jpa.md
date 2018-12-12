@@ -1,22 +1,22 @@
 ---
-title: Persistence with JPA 
+title: Persistence with JPA
 layout: toc-guide-page
-lprev: 030-tutorial_microservice.html 
+lprev: 030-tutorial_microservice.html
 lnext: 015-Prerequisite.html
 summary: Demonstrates how to upgrade an Application and then use JPA and Hibernate (< 10 minutes).
 author: enRoute@paremus.com
-sponsor: OSGi™ Alliance 
+sponsor: OSGi™ Alliance
 ---
 
-The previous Microservices example which uses `jdbc` provides the start-point for this tutorial. 
+The previous Microservices example which uses `jdbc` provides the start-point for this tutorial.
 
 In this tutorial we'll modify the Microservice to switch the data-layer from a JDBC to a JPA. Because of the de-coupling provided by the [DTOs](../FAQ/420-dtos.html)'s, all we need do is re-implement `dao-impl` and the composite application.
 
 **Note** - because of the use of DTOs, OSGi allows us, via setting one property, to separate the data-layer and REST Services layers of our Microservice across a local IP local network using secure low latency [Remote Services](https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html).
 {: .note }   
 
-## A JPA Implementation 
- 
+## A JPA Implementation
+
 In the `microservice` project root directory, create the `jpa` project.
 
       mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0
@@ -33,14 +33,14 @@ input the following values:
     artifactId: dao-impl-jpa
     version: 0.0.1-SNAPSHOT
     package: org.osgi.enroute.examples.microservice.dao.impl.jpa
-    Y: : 
-{: .shell } 
+    Y: :
+{: .shell }
 
 
 Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/AddressDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressDaoImpl" aria-expanded="false" aria-controls="AddressDaoImpl">
-    AddressDaoImpl.java 
+    AddressDaoImpl.java
   </a>
 </p>
 <div class="collapse" id="AddressDaoImpl">
@@ -55,7 +55,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
 Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/PersonDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonDaoImpl" aria-expanded="false" aria-controls="PersonDaoImpl">
-    PersonDaoImpl.java 
+    PersonDaoImpl.java
   </a>
 </p>
 <div class="collapse" id="PersonDaoImpl">
@@ -190,7 +190,7 @@ Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependenc
 {% endhighlight %}
 
 
-## The JPA Composite Application 
+## The JPA Composite Application
 
 Create the alternative JPA application project.
 
@@ -200,10 +200,10 @@ Create the alternative JPA application project.
     Define value for property 'groupId': org.osgi.enroute.examples.microservice
     Define value for property 'artifactId': rest-app-jpa
     Define value for property 'version' 1.0-SNAPSHOT: : 0.0.1-SNAPSHOT
-    Define value for property 'package' org.osgi.enroute.examples.microservice: : 
-    Define value for property 'impl-artifactId': rest-service 
-    Define value for property 'impl-groupId' org.osgi.enroute.examples.microservice: : 
-    Define value for property 'impl-version' 0.0.1-SNAPSHOT: : 
+    Define value for property 'package' org.osgi.enroute.examples.microservice: :
+    Define value for property 'impl-artifactId': rest-service
+    Define value for property 'impl-groupId' org.osgi.enroute.examples.microservice: :
+    Define value for property 'impl-version' 0.0.1-SNAPSHOT: :
     Define value for property 'app-target-java-version' 8: :
     Confirm properties configuration:
     groupId: org.osgi.enroute.examples.microservice
@@ -214,7 +214,7 @@ Create the alternative JPA application project.
     impl-groupId: org.osgi.enroute.examples.microservice
     impl-version: 0.0.1-SNAPSHOT
     app-target-java-version: 8
-    Y: : 
+    Y: :
 {: .shell }
 
 
@@ -232,7 +232,7 @@ Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`:
     javax.transaction.xa;version=1.2.0,\
     javax.xml.stream;version=1.0.0,\
     javax.xml.stream.events;version=1.0.0,\
-    javax.xml.stream.util;version=1.0.0 
+    javax.xml.stream.util;version=1.0.0
 {% endhighlight %}
 
 The `-runpath` needs to be specified for Java 8 because the Java 8 JRE has a split package for javax.transaction and a uses constraint between javax.sql and javax.transaction. This breaks JPA unless the JTA API is always provided from outside of the OSGi framework. When using Java 9 and above the javax.transaction package is no longer provided by the JRE,
@@ -295,7 +295,7 @@ Edit `rest-app-jpa/pom.xml` adding the following dependencies in the `<dependenc
 Add the following configuration file `rest-app-jpa/src/main/resources/OSGI-INF/configurator/configuration.json`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#configuration" aria-expanded="false" aria-controls="configuration">
-   configuration.json 
+   configuration.json
   </a>
 </p>
 <div class="collapse" id="configuration">
@@ -308,7 +308,7 @@ Add the following configuration file `rest-app-jpa/src/main/resources/OSGI-INF/c
 </div>
 
 
-## Build & Run 
+## Build & Run
 
 We build and run the examples as in the previous JDBC Microservices example.
 

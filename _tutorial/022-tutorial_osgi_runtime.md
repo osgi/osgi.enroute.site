@@ -2,7 +2,7 @@
 title: OSGi Runtime & Debug  
 layout: toc-guide-page
 lprev: 020-tutorial_qs.html  
-lnext: 030-tutorial_microservice.html 
+lnext: 030-tutorial_microservice.html
 summary: A peek behind the curtain - the OSGi µServices runtime!
 author: enRoute@paremus.com
 sponsor: OSGi™ Alliance  
@@ -11,11 +11,11 @@ sponsor: OSGi™ Alliance
 
 In the `quickstart` tutorial we created and ran a simple OSGi Microservice. Before progressing to more sophisticated examples we'll first take a quick look at the OSGi runtime and the software DNA of your Microservices application.
 
-## Creating the Debug Version of `quickstart` 
+## Creating the Debug Version of `quickstart`
 
 To gain access to the OSGi runtime we need to create a **debug** version of `quickstart`.
 
-From the `quickstart` project root directory you previously created, change directory to `./app` edit the `pom.xml`, and changing the first occurrence of `<bndrun>app.bndrun</bndrun>` 
+From the `quickstart` project root directory you previously created, change directory to `./app` edit the `pom.xml`, and changing the first occurrence of `<bndrun>app.bndrun</bndrun>`
 
       <plugin>
           <groupId>biz.aQute.bnd</groupId>
@@ -67,13 +67,13 @@ Now resolve your bndrun files (always a good idea after making pom or bndrun cha
 
     $ cd app/
     $ mvn bnd-resolver:resolve
-    $ mvn verify 
+    $ mvn verify
 {: .shell }
 
 and run the new debug version.
 
-    $ java -jar app/target/debug.jar
-{: .shell } 
+    $ java -jar target/debug.jar
+{: .shell }
 
 
 ## Gogo and the OSGi Runtime
@@ -85,7 +85,7 @@ When interacting with a running OSGi a framework, if you are presented with the 
 
 ### Bundle Level Diagnostics
 
-The list of installed bundles used to create `quickstart` may be shown with either the `lb` or `bundles` command. 
+The list of installed bundles used to create `quickstart` may be shown with either the `lb` or `bundles` command.
 
      g! lb
      START LEVEL 1
@@ -118,9 +118,9 @@ The list of installed bundles used to create `quickstart` may be shown with eith
 {: .shell }
 
 
-Additional information for a specified bundle is available via the `bundle $ID` command. 
+Additional information for a specified bundle is available via the `bundle $ID` command.
 
-The ID for our `quickstart` bundle is `19` and `bundle 19` showns 
+The ID for our `quickstart` bundle is `19` and `bundle 19` showns
 
      g! bundle 19
      Location             jar/impl-1.0-SNAPSHOT.jar
@@ -138,9 +138,9 @@ The ID for our `quickstart` bundle is `19` and `bundle 19` showns
 {: .shell }
 
 
-The `inspect` command can be used to look at the runtime `Requirements` and `Capabilities` of a selected Bundle: see [Namespaces](../FAQ/200-resolving.html#namespaces) for currently supported Req/Cap namespaces. 
+The `inspect` command can be used to look at the runtime `Requirements` and `Capabilities` of a selected Bundle: see [Namespaces](../FAQ/200-resolving.html#namespaces) for currently supported Req/Cap namespaces.
 
-Example of usage. 
+Example of usage.
 
      g! inspect req osgi.wiring.package 19
      org.osgi.enroute.examples.quickstart.rest.impl [19] requires:
@@ -154,7 +154,7 @@ Indicates that looking at the `osgi.wiring.package` namespace, `org.osgi.enroute
 
 ### Component Level Diagnostics
 
-Your bundles may be correctly installed and running, but your application may still not be functioning as is it should. 
+Your bundles may be correctly installed and running, but your application may still not be functioning as is it should.
 
 The Declarative Services `scr` commands provide information on the runtime status and configuration of your Declarative Services (DS) components.
 
@@ -164,14 +164,14 @@ The `scr:list` lists all running DS components.
       BundleId Component Name Default State
          Component Id State      PIDs (Factory PID)
       [  19]   org.osgi.enroute.examples.quickstart.rest.Upper  enabled
-         [   0] [active      ] 
+         [   0] [active      ]
 {: .shell }
 
 With the `quickstart` example, we only have one DS component, which is reported as `active`.
 
 The `scr:info` command can then be used to list detailed information for a named DS component.
 
-     g! scr:info org.osgi.enroute.examples.quickstart.rest.Upper 
+     g! scr:info org.osgi.enroute.examples.quickstart.rest.Upper
      *** Bundle: org.osgi.enroute.examples.quickstart.rest.impl (19)
      Component Description:
        Name: org.osgi.enroute.examples.quickstart.rest.Upper
@@ -183,7 +183,7 @@ The `scr:info` command can then be used to list detailed information for a named
        Deactivate Method: deactivate
        Modified Method: -
        Configuration Pid: [org.osgi.enroute.examples.quickstart.rest.Upper]
-       Services: 
+       Services:
          org.osgi.enroute.examples.quickstart.rest.Upper
        Service Scope: singleton
        Component Description Properties:
@@ -200,7 +200,3 @@ The `scr:info` command can then be used to list detailed information for a named
              osgi.http.whiteboard.resource.prefix = static
              osgi.jaxrs.resource = true
 {: .shell }
-
-
-
-

@@ -54,8 +54,10 @@ It is assumed that you have the required [environment](015-Prerequisite.html#req
 
 First issue the command to create the project template:
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0
+    $ mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0
 {: .shell }
+
+We declare to use the version 3.0.1 of the `maven-archetype-plugin` because if the version is not fixed, Maven chooses the version and it does not work with e.g. version 2.4.
 
 Filling the project details with appropriate values: 
 

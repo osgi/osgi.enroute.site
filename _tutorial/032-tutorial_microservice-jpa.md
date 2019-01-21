@@ -10,6 +10,9 @@ sponsor: OSGi™ Alliance
 
 The previous Microservices example which uses `jdbc` provides the start-point for this tutorial.
 
+For this tutorial we put the project in the `~` (AKA `/home/user`) directory. If you put your project in a different directory, be sure to replace the `~` with your directory path when it appears in shell snippets in the tutorial.
+{: .note }
+
 In this tutorial we'll modify the Microservice to switch the data-layer from a JDBC to a JPA. Because of the de-coupling provided by the [DTOs](../FAQ/420-dtos.html)'s, all we need do is re-implement `dao-impl` and the composite application.
 
 **Note** - because of the use of DTOs, OSGi allows us, via setting one property, to separate the data-layer and REST Services layers of our Microservice across a local IP local network using secure low latency [Remote Services](https://osgi.org/specification/osgi.cmpn/7.0.0/service.remoteservices.html).
@@ -19,7 +22,10 @@ In this tutorial we'll modify the Microservice to switch the data-layer from a J
 
 In the `microservice` project root directory, create the `jpa` project.
 
-      mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0
+      ~/microservice $ mvn archetype:generate \
+          -DarchetypeGroupId=org.osgi.enroute.archetype \
+          -DarchetypeArtifactId=ds-component \
+          -DarchetypeVersion=7.0.0
 {: .shell }
 
 input the following values:
@@ -37,7 +43,7 @@ input the following values:
 {: .shell }
 
 
-Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/AddressDaoImpl.java`
+Add the following file `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/AddressDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressDaoImpl" aria-expanded="false" aria-controls="AddressDaoImpl">
     AddressDaoImpl.java
@@ -52,7 +58,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
   </div>
 </div>
 
-Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/PersonDaoImpl.java`
+Add the following file `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/PersonDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonDaoImpl" aria-expanded="false" aria-controls="PersonDaoImpl">
     PersonDaoImpl.java
@@ -87,9 +93,9 @@ To address a hibernate bug we need to add the following `dao-impl-jpa/bnd.bnd`fi
 
 ### The JPA Entities
 
-Create the directory `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities`
+Create the directory `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities`
 
-Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/AddressEntity.java`
+Add the following file `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/AddressEntity.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressEntity" aria-expanded="false" aria-controls="AddressEntity">
     AddressEntity.java
@@ -105,7 +111,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
 </div>
 
 
-Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/PersonEntity.java`:
+Add the following file `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/PersonEntity.java`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonEntity" aria-expanded="false" aria-controls="PersonEntity">
     PersonEntity.java
@@ -120,7 +126,7 @@ Add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/mic
   </div>
 </div>
 
-The resultant persistence bundle has a Requirement for a JPA service extender. Hence we add the following file `dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/package-info.java`:
+The resultant persistence bundle has a Requirement for a JPA service extender. Hence we add the following file `~/microservice/dao-impl-jpa/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/jpa/entities/package-info.java`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info" aria-expanded="false" aria-controls="package-info">
     package-info.java
@@ -140,7 +146,7 @@ The resultant persistence bundle has a Requirement for a JPA service extender. H
 
 Create the following JPA resources:
 
-`dao-impl-jpa/src/main/resources/META-INF/persistence.xml`
+`~/microservice/dao-impl-jpa/src/main/resources/META-INF/persistence.xml`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#persistence" aria-expanded="false" aria-controls="persistence">
     persistence.xml
@@ -156,7 +162,7 @@ Create the following JPA resources:
 </div>
 
 
-`dao-impl-jpa/src/main/resources/META-INF/tables.sql`
+`~/microservice/dao-impl-jpa/src/main/resources/META-INF/tables.sql`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
    tables.sql
@@ -174,7 +180,7 @@ Create the following JPA resources:
 
 ### Dependencies
 
-Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependencies>` section:
+Edit `~/microservice/dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependencies>` section:
 
 {% highlight xml %}
     <dependency>
@@ -194,7 +200,10 @@ Edit `dao-impl-jpa/pom.xml` to add the following dependencies in the `<dependenc
 
 Create the alternative JPA application project.
 
-     $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0
+     ~/microservice $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=application \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
     Define value for property 'groupId': org.osgi.enroute.examples.microservice
@@ -210,7 +219,7 @@ Create the alternative JPA application project.
     artifactId: rest-app-jpa
     version: 0.0.1-SNAPSHOT
     package: org.osgi.enroute.examples.microservice
-    impl-artifactId: dao-impl-jpa
+    impl-artifactId: rest-service
     impl-groupId: org.osgi.enroute.examples.microservice
     impl-version: 0.0.1-SNAPSHOT
     app-target-java-version: 8
@@ -220,7 +229,7 @@ Create the alternative JPA application project.
 
 ### Define Runtime Entity
 
-Add the following sections to `rest-app-jpa/rest-app-jpa.bndrun`:
+Add the following sections to `~/microservice/rest-app-jpa/rest-app-jpa.bndrun`:
 
 {% highlight shell-session %}
 -resolve.effective: active
@@ -241,7 +250,7 @@ The `-runpath` needs to be specified for Java 8 because the Java 8 JRE has a spl
 The `-runsystempackages` is required because Hibernate has versioned imports for JTA, and its dependency dom4j has versioned imports for the STAX API. When using Java 8 both of these should come from the JRE. When using Java 9 and above the APIs can be provided by bundles in the OSGi framework.
 {: .note }
 
-Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include the composite application's requirements:
+Edit the `-runrequires`  section in `~/microservice/rest-app-jpa/res-app-jpa.bndrun` to include the composite application's requirements:
 
 {% highlight shell-session %}
 -runrequires: \
@@ -253,7 +262,7 @@ Edit the `-runrequires`  section in `rest-app-jpa/res-app-jpa.bndrun` to include
 
 ### Dependencies
 
-Edit `rest-app-jpa/pom.xml` adding the following dependencies in the `<dependencies>` section:
+Edit `~/microservice/rest-app-jpa/pom.xml` adding the following dependencies in the `<dependencies>` section:
 
 {% highlight xml %}
     <dependency>
@@ -292,7 +301,7 @@ Edit `rest-app-jpa/pom.xml` adding the following dependencies in the `<dependenc
 
 ### Runtime Configuration
 
-Add the following configuration file `rest-app-jpa/src/main/resources/OSGI-INF/configurator/configuration.json`:
+Add the following configuration file `~/microservice/rest-app-jpa/src/main/resources/OSGI-INF/configurator/configuration.json`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#configuration" aria-expanded="false" aria-controls="configuration">
    configuration.json
@@ -312,19 +321,23 @@ Add the following configuration file `rest-app-jpa/src/main/resources/OSGI-INF/c
 
 We build and run the examples as in the previous JDBC Microservices example.
 
-    mvn install
+    ~/microservice $ mvn install
 {: .shell }
 
 **Note** - if `rest-app-jpa` fails, run the following resolve command and then re-run `mvn install`
 {: .note }
 
-    mvn bnd-resolver:resolve
+    ~/microservice $ mvn bnd-resolver:resolve
 {: .shell }
 
-    mvn package
+Once the `mvn install` command succeeds, run the following command to build the jar.
+
+    ~/microservice $ mvn package
 {: .shell }
 
-    java -jar rest-app-jpa/target/rest-app.jar
+Run the newly created jar.
+
+    ~/microservice $ java -jar rest-app-jpa/target/rest-app-jpa.jar
 {: .shell }
 
 The REST Service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)

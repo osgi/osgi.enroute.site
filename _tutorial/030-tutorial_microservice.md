@@ -22,11 +22,17 @@ with each module having a POM that describes its dependencies.
 
 We start by creating the required project skeleton.
 
+For this tutorial we put the project in the `~` (AKA `/home/user`) directory. If you put your project in a different directory, be sure to replace the `~` with your directory path when it appears in shell snippets in the tutorial.
+{: .note }
+
 ## Creating the Project
 
 Using the [bare-project Archetype](../about/112-enRoute-Archetypes.html#the-project-archetype), in your project root directory create the **microservice** project:
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project-bare -DarchetypeVersion=7.0.0
+    ~ $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=project-bare \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -53,7 +59,11 @@ We now create the required modules.
 
 Change directory into the newly created `microservice` project directory; then create the `api` module using the [api Archetype](../about/112-enRoute-Archetypes.html#the-api-archetype) as shown:
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=api -DarchetypeVersion=7.0.0
+    ~ $ cd microservice
+    ~/microservice $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=api \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -72,7 +82,7 @@ with the following values:
 
 Now create the following two files:
 
-`dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/PersonDao.java`
+`~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/PersonDao.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonDao" aria-expanded="false" aria-controls="PersonDao">
     PersonDAO.java
@@ -87,7 +97,7 @@ Now create the following two files:
 </div>
 </div>
 
-`dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/AddressDao.java`
+`~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/AddressDao.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressDao" aria-expanded="false" aria-controls="AddressDao">
     AddressDAO.java
@@ -107,7 +117,7 @@ Now create the following two files:
 `dao-api` has no dependencies.
 
 ### Visibility
-`dao-api` is an API package which is imported by `RestComponentImpl`, `PersonDaoImpl` & `AddressDaoImpl`; hence it must must be exported. This is indicated by the automatically generated file `dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/package-info.java`:
+`dao-api` is an API package which is imported by `RestComponentImpl`, `PersonDaoImpl` & `AddressDaoImpl`; hence it must must be exported. This is indicated by the automatically generated file `~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/package-info.java`:
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info-dao" aria-expanded="false" aria-controls="package-info-dao">
     package-info.java
@@ -130,7 +140,7 @@ Data transfer between the components is achieved via the use of [Data Transfer O
 
 To achieve this create the following two files:
 
-`dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/PersonDTO.java`
+`~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/PersonDTO.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonDTO" aria-expanded="false" aria-controls="PersonDTO">
     PersonDTO.java
@@ -145,7 +155,7 @@ To achieve this create the following two files:
 </div>
 </div>
 
-`dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/AddressDTO.java`
+`~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/AddressDTO.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressDTO" aria-expanded="false" aria-controls="AddressDTO">
    AddressDTO.java
@@ -162,7 +172,7 @@ To achieve this create the following two files:
 
 and again, we advertise this Capability by creating the following `package-info.java` file:
 
-`dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/package-info.java`
+`~/microservice/dao-api/src/main/java/org/osgi/enroute/examples/microservice/dao/dto/package-info.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info-dto" aria-expanded="false" aria-controls="package-info-dto">
     package-info.java
@@ -180,9 +190,12 @@ and again, we advertise this Capability by creating the following `package-info.
 
 ## The DAO Implementation
 
-In the `microservice` project director now create the `impl` module using the [ds-component Archetype](../about/112-enRoute-Archetypes.html#the-ds-component-archetype):
+Now, in the `microservice` project directory, create the `impl` module using the [ds-component Archetype](../about/112-enRoute-Archetypes.html#the-ds-component-archetype):
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=ds-component -DarchetypeVersion=7.0.0
+    ~/microservice $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=ds-component \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -201,7 +214,7 @@ with the following values:
 
 Now create the following four files:
 
-`dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/PersonTable.java`
+`~/microservice/dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/PersonTable.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonTable" aria-expanded="false" aria-controls="PersonTable">
     PersonTable.java
@@ -218,7 +231,7 @@ Now create the following four files:
 </div>
 
 
-`dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/PersonDaoImpl.java`
+`~/microservice/dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/PersonDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#PersonDaoImpl" aria-expanded="false" aria-controls="PersonDaoImpl">
     PersonDaoImpl.java
@@ -235,7 +248,7 @@ Now create the following four files:
 </div>
 
 
-`dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/AddressTable.java`
+`~/microservice/dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/AddressTable.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressTable" aria-expanded="false" aria-controls="AddressTable">
     AddressTable.java
@@ -251,7 +264,7 @@ Now create the following four files:
 </div>
 
 
-`dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/AddressDaoImpl.java`
+`~/microservice/dao-impl/src/main/java/org/osgi/enroute/examples/microservice/dao/impl/AddressDaoImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AddressDaoImpl" aria-expanded="false" aria-controls="AddressDaoImpl">
     AddressDaoImpl.java
@@ -291,9 +304,12 @@ Implementations should **NOT** be shared; hence no `package-info.java` file.
 
 ## The REST Service
 
-In the `microservice` project director now create the `rest-component` module using the [rest-component Archetype](../about/112-enRoute-Archetypes.html#the-rest-component-archetype):
+In the `microservice` project directory now create the `rest-component` module using the [rest-component Archetype](../about/112-enRoute-Archetypes.html#the-rest-component-archetype):
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=rest-component -DarchetypeVersion=7.0.0
+    ~/microservice $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=rest-component \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -312,7 +328,7 @@ with the following values:
 
 Now create the following two files:
 
-`rest-service/src/main/java/org/osgi/enroute/examples/microservice/rest/RestComponentImpl.java`
+`~/microservice/rest-service/src/main/java/org/osgi/enroute/examples/microservice/rest/RestComponentImpl.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#RestComponentImpl" aria-expanded="false" aria-controls="RestComponentImpl">
     RestComponentImpl.java
@@ -329,7 +345,7 @@ Now create the following two files:
 </div>
 
 
-`rest-service/src/main/java/org/osgi/enroute/examples/microservice/rest/JsonpConvertingPlugin.java`
+`~/microservice/rest-service/src/main/java/org/osgi/enroute/examples/microservice/rest/JsonpConvertingPlugin.java`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#JsonpConvertingPlugin" aria-expanded="false" aria-controls="JsonpConvertingPlugin">
    JsonpConvertingPlugin.java
@@ -346,9 +362,9 @@ Now create the following two files:
 </div>
 
 
-Create the directory `rest-service/src/main/resources/static/main/html` and added the following file:
+Create the directory `~/microservice/rest-service/src/main/resources/static/main/html` and added the following file:
 
-`rest-service/src/main/resources/static/main/html/person.html`
+`~/microservice/rest-service/src/main/resources/static/main/html/person.html`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#person" aria-expanded="false" aria-controls="person">
     person.html
@@ -364,9 +380,9 @@ Create the directory `rest-service/src/main/resources/static/main/html` and adde
 </div>
 </div>
 
-And also the `rest-service/src/main/resources/static/css` directory for the following `style.css` file
+And also the `~/microservice/rest-service/src/main/resources/static/css` directory for the following `style.css` file
 
-`rest-service/src/main/resources/static/css/style.css`
+`~/microservice/rest-service/src/main/resources/static/css/style.css`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#style" aria-expanded="false" aria-controls="style">
    style.css
@@ -382,9 +398,9 @@ And also the `rest-service/src/main/resources/static/css` directory for the foll
 </div>
 </div>
 
-Finally, place the following `index.html` file in directory `rest-service/src/main/resources/static`
+Finally, place the following `index.html` file in directory `~/microservice/rest-service/src/main/resources/static`
 
-`rest-service/src/main/resources/static/index.html`
+`~/microservice/rest-service/src/main/resources/static/index.html`
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#index" aria-expanded="false" aria-controls="index">
     index.html
@@ -400,13 +416,13 @@ Finally, place the following `index.html` file in directory `rest-service/src/ma
 </div>
 </div>
 
-and create the directory `rest-service/src/main/resources/static/main/img` into which save the following icon with the name `enroute-logo-64.png`.
+and create the directory `~/microservice/rest-service/src/main/resources/static/main/img` into which save the following icon with the name `enroute-logo-64.png`.
 
 ![enRoute logo](img/enroute-logo-64.png)
 
 ### Dependencies
 
-As the `rest-service` module has dependencies on the `dao-api` and `json-api` these dependencies are added to the `<dependencies>` section in `rest-service/pom.xml`. A `JSON-P` implementation dependency is also included so that the `rest-service` can be unit tested.
+As the `rest-service` module has dependencies on the `dao-api` and `json-api` these dependencies are added to the `<dependencies>` section in `~/microservice/rest-service/pom.xml`. A `JSON-P` implementation dependency is also included so that the `rest-service` can be unit tested.
 
 {% highlight xml %}
 <dependency>
@@ -438,7 +454,10 @@ We now pull these Modules together to create the Composite Application.
 
 In the `microservice` project directory create the `application` module using the [application Archetype](../about/112-enRoute-Archetypes.html#the-application-archetype):
 
-    $ mvn archetype:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=application -DarchetypeVersion=7.0.0
+    ~/microservice $ mvn archetype:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=application \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 with the following values:
@@ -470,7 +489,7 @@ Our Microservice is composed of the following elements:
 * An implementation of JSON-P (org.apache.johnzon.core)
 * An in memory database (H2).
 
-These dependencies are expressed as runtime Requirements in the `rest-app/rest-app.bndrun` file:
+These dependencies are expressed as runtime Requirements in the `~/microservice/rest-app/rest-app.bndrun` file:
 
 {% highlight shell-session %}
 index: target/index.xml
@@ -491,7 +510,7 @@ index: target/index.xml
 
 ### Dependencies
 
-By adding the following dependencies inside the `<dependencies>` section of the file `rest-app/pom.xml`, we added the necessary Capabilities to the `rest-app`'s repository.
+By adding the following dependencies inside the `<dependencies>` section of the file `~/microservice/rest-app/pom.xml`, we add the necessary Capabilities to the `rest-app`'s repository.
 
 {% highlight xml %}
 <dependency>
@@ -516,7 +535,7 @@ By adding the following dependencies inside the `<dependencies>` section of the 
 
 Finally, our Microservice will be configured using the new R7 Configurator mechanism.
 
-The [application Archetype](../about/112-enRoute-Archetypes.html##the-application-archetype) enables this via `rest-app/src/main/java/config/package-info.java`.
+The [application Archetype](../about/112-enRoute-Archetypes.html##the-application-archetype) enables this via `~/microservice/rest-app/src/main/java/config/package-info.java`.
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#package-info-config" aria-expanded="false" aria-controls="package-info-config">
     package-info.java
@@ -531,7 +550,7 @@ The [application Archetype](../about/112-enRoute-Archetypes.html##the-applicatio
 </div>
 </div>
 
-All that is required is to pass in the appropriate configuration by overwrite the contents of `rest-app/src/main/resources/OSGI-INF/configurator/configuration.json` with the following:
+To pass in the appropriate configuration, overwrite the contents of `~/microservice/rest-app/src/main/resources/OSGI-INF/configurator/configuration.json` with the following:
 
  <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#configuration" aria-expanded="false" aria-controls="configuration">
@@ -552,12 +571,15 @@ All that is required is to pass in the appropriate configuration by overwrite th
 
 Check the modules that make up your application build cleanly from the top level project directory
 
-    mvn -pl !rest-app verify
+    ~/microservice $ mvn -pl !rest-app verify
 {: .shell }
+
+**Note** - If you are a linux/unix/*nix user, you might need to escape the exclamation point in the above command.
+{: .note }
 
 Now build the rest-app bundle using package command.
 
-    mvn -pl rest-app package
+    ~/microservice $ mvn -pl rest-app package
 {: .shell }
 
 **Note** - if this build fails then check your code and pom dependencies and try again.
@@ -565,7 +587,8 @@ Now build the rest-app bundle using package command.
 
 We now generate the required OSGi indexes from the project dependencies, and resolve our application.
 
-    mvn -pl rest-app -am bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve
+    ~/microservice $ mvn -pl rest-app -am bnd-indexer:index \
+        bnd-indexer:index@test-index bnd-resolver:resolve
 {: .shell }
 
 **Note** Don't do a clean before running this step, it's building the indexes and resolution from the bundles you made in the previous step. Also, you don't need to run this step every time, just if your dependency graph needs to be recalculated.
@@ -573,10 +596,10 @@ We now generate the required OSGi indexes from the project dependencies, and res
 
 And finally generate the runnable jar from the top level project directory.
 
-    mvn verify
+    ~/microservice $ mvn verify
 {: .shell }
 
-Re-inspecting `rest-app/rest-app.bndrun` we can see that this now explicitly references the acceptable version range for each required OSGi bundle. At runtime the OSGi framework resolves these _requirements_ against the _capabilities_ in the specified target repository: i.e. `target/index.xml`.  
+Re-inspecting `~/microservice/rest-app/rest-app.bndrun` we can see that this now explicitly references the acceptable version range for each required OSGi bundle. At runtime the OSGi framework resolves these _requirements_ against the _capabilities_ in the specified target repository: i.e. `target/index.xml`.
 
 {% highlight shell-session %}
 {% include osgi.enroute/examples/microservice/rest-app/rest-app.bndrun %}
@@ -586,7 +609,7 @@ Re-inspecting `rest-app/rest-app.bndrun` we can see that this now explicitly ref
 
 To dynamically assemble and run the resultant REST Microservice simply change back to the top level project directory and type the command:
 
-    java -jar rest-app/target/rest-app.jar
+    ~/microservice $ java -jar rest-app/target/rest-app.jar
 {: .shell }
 
 The REST service can be seen by pointing a browser to [http://localhost:8080/microservice/index.html](http://localhost:8080/microservice/index.html)

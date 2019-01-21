@@ -11,6 +11,9 @@ sponsor: OSGi™ Alliance
 
 In the `quickstart` tutorial we created and ran a simple OSGi Microservice. Before progressing to more sophisticated examples we'll first take a quick look at the OSGi runtime and the software DNA of your Microservices application.
 
+For this tutorial we put the project in the `~` (AKA `/home/user`) directory. If you put your project in a different directory, be sure to replace the `~` with  your directory path when it appears in shell snippets in the tutorial.
+{: .note }
+
 ## Creating the Debug Version of `quickstart`
 
 To gain access to the OSGi runtime we need to create a **debug** version of `quickstart`.
@@ -65,14 +68,14 @@ If you didn't run through the quickstart tutorial before this tutorial then you 
 
 Now resolve your bndrun files (always a good idea after making pom or bndrun changes) and re-build the `app` module of your `quickstart` application
 
-    $ cd app/
-    $ mvn bnd-resolver:resolve
-    $ mvn verify
+    ~/quickstart $ cd app/
+    ~/quickstart/app $ mvn bnd-resolver:resolve
+    ~/quickstart/app $ mvn verify
 {: .shell }
 
 and run the new debug version.
 
-    $ java -jar target/debug.jar
+    ~/quickstart/app $ java -jar target/debug.jar
 {: .shell }
 
 

@@ -115,9 +115,11 @@ Since this part is rather sensitive to the operating system you're using, we hav
 
 ### Windows
 
-In the enRoute tutorials file paths are always indicated using the forward slash or solidus ('/') as is customary on *nix like systems. The reason is that bnd, since its files are portable, always uses relative addressing from the workspace and adopted the forward slash. For most developers mapping these paths to Windows should be straightforward.
+In the enRoute tutorials file paths are always indicated using the forward slash or solidus ('`/`') as is customary on *nix like systems. The reason is that bnd, since its files are portable, always uses relative addressing from the workspace and adopted the forward slash. For most developers mapping these paths to Windows should be straightforward.
 
-The only addressing outside the workspace is to the user's home directory, the user's home directory is indicated by a path that starts with a tilde and a slash ('~/'). This maps to the path indicated in Java's `user.home` System property.
+The only addressing outside the workspace is to the user's home directory, the user's home directory is indicated by a path that starts with a tilde and a slash ('`~/`'). This maps to the path indicated in Java's `user.home` System property.
+
+Some commands in this tutorial use line continuation symbols so that parameters can be differentiated and for ease of reading. The standard character used in this tutorial is the same one used by *nix like systems, the back slash ('`\`'). Be sure to remove these or replace them with the Windows equivalent symbol when running commands in your Windows command line shell (non-bash like shell).
 
 Make sure you have a good command line shell available. If you're familiar with one, keep it. If command lines are uncomfortable for you, you might want to use [Git for Windows][gitforwindows] which includes a bash like shell. Though virtually all work in OSGi enRoute can be done through an IDE, the tutorials use a *shell first* approach so that you can choose the IDE you want to use.
 

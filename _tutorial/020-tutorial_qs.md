@@ -18,12 +18,15 @@ We start by first downloading, building and running the enRoute `quick start` ex
 
 Download the [enroute examples](https://github.com/osgi/osgi.enroute) from GitHub and change directory into `examples/quickstart`.
 
+    ~ $ cd examples/quickstart
+{: .shell }
+
 ### Building the example
  
 Build the Application with the following command:
 
-    $ mvn verify
-{: .shell } 
+    ~/examples/quickstart $ mvn verify
+{: .shell }
 
 If you're using a Java version higher than 8 to run this tutorial then you'll need to set the appropriate `runee` in the `examples/quickstart/app/app.bndrun` and then resolve the application. For Java 9 use `JavaSE-9`, for Java 10 use `JavaSE-10` and for Java 11 use `JavaSE-11`. Once you have made this edit issue the command `mvn bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve` to generate the index, test index, and resolve the bndrun (you should be able to see the changes in the `runbundles` list afterwards). Once you've done this the first time then you can `mvn verify` to your heart's content.
 {: .note } 
@@ -32,7 +35,7 @@ If you're using a Java version higher than 8 to run this tutorial then you'll ne
 
 We now have a runnable artifact which can be started with the command:
 
-    $ java -jar app/target/app.jar
+    ~/examples/quickstart $ java -jar app/target/app.jar
 {: .shell }
 
 To test that the application is running visit the [quickstart](http://localhost:8080/quickstart/index.html) application URL for a friendly greeting,
@@ -52,9 +55,20 @@ It is assumed that you have the required [environment](015-Prerequisite.html#req
 
 ### Project Setup
 
-First issue the command to create the project template:
+First change into a new directory, since we are recreating the project:
 
-    $ mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate -DarchetypeGroupId=org.osgi.enroute.archetype -DarchetypeArtifactId=project -DarchetypeVersion=7.0.0
+    ~/examples/quickstart $ cd ~
+{: .shell }
+
+Make sure the newly recreated project is not in the previous `examples/quickstart` directory structure, as it will also be named `quickstart`. Feel free to put it in the same parent directory as the downloaded `examples/quickstart` project or make a new directory outside the downloaded `examples/quickstart` project. For this tutorial, we put the newly created project in the `~` (AKA `/home/user`) directory. If you put your project in a different directory, be sure to replace the `~` with your directory path when it appears in shell snippets in the tutorial.
+{: .note }
+
+Then issue the command to create the project template:
+
+    ~ $ mvn org.apache.maven.plugins:maven-archetype-plugin:3.0.1:generate \
+        -DarchetypeGroupId=org.osgi.enroute.archetype \
+        -DarchetypeArtifactId=project \
+        -DarchetypeVersion=7.0.0
 {: .shell }
 
 We declare to use the version 3.0.1 of the `maven-archetype-plugin` because if the version is not fixed, Maven chooses the version and it does not work with e.g. version 2.4.
@@ -82,7 +96,7 @@ If you're using an IDE then this would be a good time to import the generated ma
 
 ### Implementing the Microservice
 
-Having created the project skeleton, edit `quickstart/impl/src/main/java/org/osgi/enroute/examples/quickstart/rest/ComponentImpl.java` 
+Having created the project skeleton, edit `~/quickstart/impl/src/main/java/org/osgi/enroute/examples/quickstart/rest/ComponentImpl.java`
 
 {% highlight shell-session %}
 package org.osgi.enroute.examples.quickstart.rest;
@@ -134,9 +148,9 @@ It's now time to build the implementation project.
 
  <div class="tab-content">
   <div markdown="1" role="tabpanel" class="tab-pane active" id="impl-build-cli">
-From the `quickstart/impl` project we now build the impl bundle.
+From the `~/quickstart/impl` project we now build the impl bundle.
 
-    $ mvn package
+    ~/quickstart/impl $ mvn package
 {: .shell }
       
 Here, we use the `package` goal to check that the code compiles and can be successfully packaged into a bundle. If we had tests or other post-packaging checks then we could have used the `verify` goal instead.
@@ -159,7 +173,7 @@ Enter package as the goal and click **Run**
 
 ### Resolving the Application
 
-Before generating the runtime dependency information used by the OSGi framework take a look at the file `quickstart\app\app.bndrun`
+Before generating the runtime dependency information used by the OSGi framework take a look at the file `~/quickstart/app/app.bndrun`
 
 {% highlight shell-session %}
 index: target/index.xml
@@ -188,7 +202,9 @@ The `runbundles` are automatically calculated for us via the process of [resolvi
   <div markdown="1" role="tabpanel" class="tab-pane active" id="resolve-cli">
 From the root of the `quickstart` project we now generate our indexes and resolve the application using the bnd-resolver-maven-plugin. As the `app` project references other projects in the same reactor we use the `-pl` flag to pick the `app` project and the `-am` flag to be sure all of our dependencies are packaged and up to date:
 
-    $ mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index bnd-resolver:resolve package
+    ~/quickstart $ mvn -pl app -am  bnd-indexer:index \
+        bnd-indexer:index@test-index \
+        bnd-resolver:resolve package
 {: .shell }
 
 Note that the indexes are automatically regenerated every time you run through the package phase. If you want to generate the indexes for the `app` module without packaging everything then you can do so by issuing `mvn -pl app -am  bnd-indexer:index bnd-indexer:index@test-index`
@@ -238,7 +254,7 @@ Note that in this version of `quickstart` only the REST endpoint will be availab
   <div markdown="1" role="tabpanel" class="tab-pane active" id="run-cli">
 Now that the initial development is done we're ready to build and package the whole application by running the following command in the project root.
       
-    $ mvn package
+    ~/quickstart $ mvn package
 {: .shell }
 
 Your version of `quickstart` may now be started as described [above](020-tutorial_qs.html#running-the-example). It won't have a UI, but the REST endpoint will be available at [http://localhost:8080/rest/upper/lower](http://localhost:8080/rest/upper/lower).

@@ -11,6 +11,10 @@ enRoute examples illustrate the use of the enRoute indexes and [archetypes](../a
 
 All of the examples are available on Github, so clone the workspaces and play!
 
+<div class="alert alert-warning">
+When you clone the enRoute repository at <a href="https://github.com/osgi/osgi.enroute">https://github.com/osgi/osgi.enroute</a> you will be given the tip of the latest development snapshot. We work hard to keep the snapshots running smoothly, but in general we recommend that you use the latest release tag, currently <code>7.0.0</code>, as a stable base. To do this just type<code>git checkout 7.0.0</code>
+</div>
+
 <br>
 <hr>
 <style>

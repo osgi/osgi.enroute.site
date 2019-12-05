@@ -1,9 +1,14 @@
 sudo: false
 language: ruby
 cache: bundler
-rvm: 2.4
 branches:
   only:
     - gh-pages
     - /.*/
-script: bundle exec jekyll build
+before_install:
+  - "gem update --system"
+  - "gem --version"
+  - "gem install bundler -v '~> 2.0'"
+  - "bundle --version"
+script: 
+  - "bundle exec jekyll build"

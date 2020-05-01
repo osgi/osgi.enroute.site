@@ -21,7 +21,6 @@ Here are instructions to get you started.
 	* [Setup Git Triangular Workflow](#setup-git-triangular-workflow)
 	* [How to do a Pull Request](#how-to-do-a-pull-request)
 	* [Install and Run Jekyll](#install-and-run-jekyll)
-	* [Setup Travis CI](#setup-travis-ci)
 	* [Contribution Guidelines](#contribution-guidelines)
 
 <!-- /code_chunk_output -->
@@ -79,7 +78,7 @@ If you are not satisfied with only reporting issues and want to get your hands d
 **Do it!**
 **We will appreciate it.**
 
-The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the `gh-pages` branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading. This site also makes use of [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to pull in the [OSGi enRoute GitHub repository](https://github.com/osgi/osgi.enroute) so that code examples can be easily pulled from the enRoute examples.
+The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the `master` branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading. This site also makes use of [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to pull in the [OSGi enRoute GitHub repository](https://github.com/osgi/osgi.enroute) so that code examples can be easily pulled from the enRoute examples.
 
 Or you already are a pro at working with GitHub Pages? You have set up the [git triangular workflow](https://www.sociomantic.com/blog/2014/05/git-triangular-workflow/) for this repository and have Ruby, Bundler and Jekyll running? You have pulled down the enRoute submodule? Then what are you waiting for? Read the [contributing guidelines](#contributing-guidelines) section and start writing!
 
@@ -251,16 +250,6 @@ There are several errors that might occur when you are trying to run Jekyll on W
       * Key: `SSL_CERT_FILE`
       * Value: `C:\path\to\your\cacert.pem`
     * Close/Reopen your console
-
-### Setup Travis CI
-Make sure to set up [Travis CI](https://travis-ci.org) for your fork repo to test your commits
-when they are pushed to your fork repo. Travis CI will also build any [pull requests you
-submit](https://travis-ci.org/osgi/osgi.enroute.site/pull_requests).
-
-Setting up Travis is super easy. Just go to their [site](https://travis-ci.org/), log in via your GitHub account and wait for Travis to connect to your repositories.
-After having successfully connected Travis offers you a simple on/off switch for your different repositories.
-If you want Travis to automatically build one of your repositories whenever you pushed a change to it, just set switch for this repository.
-You should do so for your fork of osgi.enroute.site.
 
 ### Contribution Guidelines
 

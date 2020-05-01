@@ -1,0 +1,24 @@
+name: Docs Build
+
+on: [push, pull_request]
+
+env:
+  LC_ALL: en_US.UTF-8
+
+jobs:
+  GitHub_Pages:
+    name: GitHub Pages
+    runs-on: ubuntu-latest
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Set up Ruby
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.6.x
+    - name: Build
+      shell: bash
+      run: |
+        ./.github/scripts/docs.sh

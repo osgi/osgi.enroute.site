@@ -10,7 +10,7 @@ There are a number of patterns used in OSGi systems.
 
 ## Services
 
-Probably the most important pattern in OSGi is the *Service Pattern*. In fact services are so important that there's an [entire chapter of the OSGi specification dedicated to them](https://osgi.org/specification/osgi.core/7.0.0/framework.service.html).
+Probably the most important pattern in OSGi is the *Service Pattern*. In fact services are so important that there's an [entire chapter of the OSGi specification dedicated to them](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.service.html).
 
 At its heart, the OSGi service model has a simple purpose - its job is to allow modules to collaborate at runtime without violating encapsulation. This means:
 

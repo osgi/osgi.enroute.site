@@ -15,7 +15,7 @@ There are two choices for the persistence service implementation used in this ex
 
 ## The DAO Impl Module
 
-The `dao-impl` module contains an implementation of the DAO API using the [Transaction Control Service](https://osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html) with JDBC as the persistence mechanism. It contains two declarative services components in src/main/java, with each one implementing a DAO service.
+The `dao-impl` module contains an implementation of the DAO API using the [Transaction Control Service](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html) with JDBC as the persistence mechanism. It contains two declarative services components in src/main/java, with each one implementing a DAO service.
 
 ### The DAO Impl Implementation
 
@@ -48,13 +48,13 @@ The `dao-impl` module contains an implementation of the DAO API using the [Trans
 
 * **@Reference** - Both components consume services from the service registry using field injection. These references are named `provider` so that they can be easily used in configuration.
 
-* **@Activate** -  An activate method will be called back just before an instance of the component is ready for use. In this component we use this opportunity to link the component's [JDBC Resource Provider](https://osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#d0e127779) to the [Transaction Control Service](https://osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#service.transaction.control-main.body) it will be using, creating a *scoped* `Connection` *resource*.
+* **@Activate** -  An activate method will be called back just before an instance of the component is ready for use. In this component we use this opportunity to link the component's [JDBC Resource Provider](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#d0e127779) to the [Transaction Control Service](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#service.transaction.control-main.body) it will be using, creating a *scoped* `Connection` *resource*.
 
 ### What is Transaction Control?
 
 The Transaction Control Service is a simple programmatic API for transaction lifecycle management and scoping. The client obtains the Transaction Control Service from the service registry and combines it with a Resource Provider instance. The resource provider may also be obtained from the service registry, or it might be created using a factory service. 
 
-Combining a Resource Provider with a Transaction Control service creates a [Scoped Resource](https://osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#d0e126935) which can be used in any Transaction Control scope.
+Combining a Resource Provider with a Transaction Control service creates a [Scoped Resource](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.transaction.control.html#d0e126935) which can be used in any Transaction Control scope.
 
 Importantly a Scoped Resource:
 
@@ -101,7 +101,7 @@ Finally this project enables the `bnd-resolver-maven-plugin` for the `app.bndrun
 
 ### The rest-app Configuration
 
-The rest-app project creates a bundle. This bundle makes use of the [OSGi Configurator specification](https://osgi.org/specification/osgi.cmpn/7.0.0/service.configurator.html) to provide configuration for the application in an easily consumable JSON format. This file is visible in `src/main/resources/OSGI-INF/configurator`
+The rest-app project creates a bundle. This bundle makes use of the [OSGi Configurator specification](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.configurator.html) to provide configuration for the application in an easily consumable JSON format. This file is visible in `src/main/resources/OSGI-INF/configurator`
 
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#AppConfig" aria-expanded="false" aria-controls="AppConfig">

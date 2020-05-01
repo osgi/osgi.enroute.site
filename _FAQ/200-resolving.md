@@ -14,7 +14,7 @@ The OSGi Framework uses the Resolver to _wire_ together a given set of bundles a
 
 As soon as you create Modules, you create a dependency management problem.
 
-Realizing this the OSGi Alliance has evolved, through extensive experience, a generic Requirements-Capabilities [dependency management model](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.dependencies). 
+Realizing this the OSGi Alliance has evolved, through extensive experience, a generic Requirements-Capabilities [dependency management model](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.module.html#framework.module.dependencies). 
 
 This model consists of a small number of primitive concepts:
 
@@ -24,7 +24,7 @@ This model consists of a small number of primitive concepts:
 
 * **Resource** - A formal description of the Artifact specifying what that Artifact can contribute to the host Environment (its _Capabilities_) and what it needs from the Environment to function (its _Requirements_).
 
-* **Namespace** - Capabilities and Requirements are defined in appropriate [namespaces](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html); every _Requirement_ belongs to a namespace and can only require _Capabilities_ in the same namespace.
+* **Namespace** - Capabilities and Requirements are defined in appropriate [namespaces](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html); every _Requirement_ belongs to a namespace and can only require _Capabilities_ in the same namespace.
 
 * **Capability** - Describes a feature or function of the Resource when installed in the Environment. A Capability has a _type_ (specifying namespace) and a set of key/value _properties_. Properties are key value pairs, where the keys are strings and values can be scalars or collections of `String`, `Integer`, `Double`, and `Long`.
 
@@ -38,27 +38,27 @@ This model consists of a small number of primitive concepts:
 
 The Requirements / Capabilities Namespaces currently defined are:
 
-* [_osgi.identity_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1776750) - Used to identify a resource type and  provide a unique name: e.g. for a Certificate the type could be x509 and the name could then its SHA-1 fingerprint.
+* [_osgi.identity_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1776750) - Used to identify a resource type and  provide a unique name: e.g. for a Certificate the type could be x509 and the name could then its SHA-1 fingerprint.
 
-* [_osgi.ee_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#framework.namespaces.osgi.ee) - An OSGi Framework must register capabilities for all the execution environments the Java VM is known to be backward compatible with. For example, if the Java VM provides Java SE 6, then it is backward compatible with 1.2, 1.3, 1.4, 1.5, and 1.6. The osgi.ee capability defines the provided versions as a comma separated list.
+* [_osgi.ee_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#framework.namespaces.osgi.ee) - An OSGi Framework must register capabilities for all the execution environments the Java VM is known to be backward compatible with. For example, if the Java VM provides Java SE 6, then it is backward compatible with 1.2, 1.3, 1.4, 1.5, and 1.6. The osgi.ee capability defines the provided versions as a comma separated list.
 
-* [_osgi.native_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#framework.namespaces.osgi.native) - Used to describe the native environment in which the Framework is executing. An OSGi Framework must provide a capability in the `osgi.native` namespace that represents the native environment in which the Framework is executing.
+* [_osgi.native_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#framework.namespaces.osgi.native) - Used to describe the native environment in which the Framework is executing. An OSGi Framework must provide a capability in the `osgi.native` namespace that represents the native environment in which the Framework is executing.
 
-* [_osgi.content_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.repository.html#i3224340) -  Via which repositories can advertise different formats; each of those format capabilities being identified with a unique SHA-256 checksum and a URL.
+* [_osgi.content_](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.repository.html#i3224340) -  Via which repositories can advertise different formats; each of those format capabilities being identified with a unique SHA-256 checksum and a URL.
 
-* [_osgi.wiring.package_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773241) - A Requirements / Capabilities representation of the information in the Bundle manifest: i.e. Import-Package, DynamicImport-Package, and Export-Package. 
+* [_osgi.wiring.package_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773241) - A Requirements / Capabilities representation of the information in the Bundle manifest: i.e. Import-Package, DynamicImport-Package, and Export-Package. 
 
-* [_osgi.service_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.service.namespace) - A Requirements / Capabilities representation of the OSGi services used and provided by an OSGi bundle. This namespace is part of the OSGi compendium and is usually added automatically by tools.
+* [_osgi.service_](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.service.namespace) - A Requirements / Capabilities representation of the OSGi services used and provided by an OSGi bundle. This namespace is part of the OSGi compendium and is usually added automatically by tools.
 
-* [_osgi.implementation_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.implementation.namespace) - Used as a capability to indicate when a bundle implements a feature that is designed to be used indirectly. A good example is when a bundle implements a [whiteboard pattern](400-patterns.html). In this case there is no direct package or service link from the consumer to the implementation, and so a requirement for the `osgi.implementation` capability is usually added to the consumer instead. This namespace is part of the OSGi compendium and is usually added through the use of annotations.
+* [_osgi.implementation_](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.implementation.namespace) - Used as a capability to indicate when a bundle implements a feature that is designed to be used indirectly. A good example is when a bundle implements a [whiteboard pattern](400-patterns.html). In this case there is no direct package or service link from the consumer to the implementation, and so a requirement for the `osgi.implementation` capability is usually added to the consumer instead. This namespace is part of the OSGi compendium and is usually added through the use of annotations.
 
-* [_osgi.contract_](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.contract.namespace) - A Requirements / Capabilities representation of an API contract which does not use semantic versioning. You will commonly see this used for packages that come from Enterprise Java specifications. This namespace is part of the OSGi compendium and is usually added through the use bnd's `-contract` instruction.
+* [_osgi.contract_](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html#service.namespaces-osgi.contract.namespace) - A Requirements / Capabilities representation of an API contract which does not use semantic versioning. You will commonly see this used for packages that come from Enterprise Java specifications. This namespace is part of the OSGi compendium and is usually added through the use bnd's `-contract` instruction.
 
-* [_osgi.wiring.bundle_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773242) - Reflects the information in the bundle headers for the purpose of requiring another bundle: i.e. a Require-Bundle header creates a wire from the requiring bundle to the required bundle. 
+* [_osgi.wiring.bundle_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773242) - Reflects the information in the bundle headers for the purpose of requiring another bundle: i.e. a Require-Bundle header creates a wire from the requiring bundle to the required bundle. 
 
-* [_osgi.wiring.host_](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773243) - Used to allow a [Fragment](https://osgi.org/specification/osgi.core/7.0.0/framework.wiring.html#d0e13908) to attach itself to a host Bundle. 
+* [_osgi.wiring.host_](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html#i1773243) - Used to allow a [Fragment](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.wiring.html#d0e13908) to attach itself to a host Bundle. 
 
-Of these, the last two are concerned with low-level wire-up of the Bundle assembles and can usually be ignored. For further information see the [Framework Namespace Specification](https://osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html) and the [Common Namespace Specification](https://osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html).
+Of these, the last two are concerned with low-level wire-up of the Bundle assembles and can usually be ignored. For further information see the [Framework Namespace Specification](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.namespaces.html) and the [Common Namespace Specification](https://docs.osgi.org/specification/osgi.cmpn/7.0.0/service.namespaces.html).
 
 
 ## Resolving & Repositories 
@@ -134,4 +134,4 @@ Note that enRoute supports a simple standalone Application release/run model. Mo
 
 The OSGi Resolver is responsible for assembling composite artifacts from selected sets of self-describing OSGi Bundles: so enabling substitution and re-use.
 
-For further details concerning the OSGi Resolver & Repository consult [OSGi Core Release 7 specifications](https://osgi.org/specification/osgi.core/7.0.0/framework.module.html). 
+For further details concerning the OSGi Resolver & Repository consult [OSGi Core Release 7 specifications](https://docs.osgi.org/specification/osgi.core/7.0.0/framework.module.html). 

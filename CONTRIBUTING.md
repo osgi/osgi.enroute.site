@@ -78,7 +78,7 @@ If you are not satisfied with only reporting issues and want to get your hands d
 **Do it!**
 **We will appreciate it.**
 
-The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the `master` branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading. This site also makes use of [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to pull in the [OSGi enRoute GitHub repository](https://github.com/osgi/osgi.enroute) so that code examples can be easily pulled from the enRoute examples.
+The site uses [GitHub Pages](https://help.github.com/articles/what-are-github-pages/) with the site content in the default branch. To build the site locally, you will need to install Ruby, Bundler and Jekyll. If you've never worked with GitHub Pages before, just keep reading. This site also makes use of [Git submodules](https://git-scm.com/book/en/v2/Git-Tools-Submodules) to pull in the [OSGi enRoute GitHub repository](https://github.com/osgi/osgi.enroute) so that code examples can be easily pulled from the enRoute examples.
 
 Or you already are a pro at working with GitHub Pages? You have set up the [git triangular workflow](https://www.sociomantic.com/blog/2014/05/git-triangular-workflow/) for this repository and have Ruby, Bundler and Jekyll running? You have pulled down the enRoute submodule? Then what are you waiting for? Read the [contributing guidelines](#contributing-guidelines) section and start writing!
 

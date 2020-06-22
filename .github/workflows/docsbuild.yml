@@ -5,6 +5,10 @@ on: [push, pull_request]
 env:
   LC_ALL: en_US.UTF-8
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   GitHub_Pages:
     name: GitHub Pages
@@ -19,6 +23,5 @@ jobs:
       with:
         ruby-version: 2.6.x
     - name: Build
-      shell: bash
       run: |
         ./.github/scripts/docs.sh

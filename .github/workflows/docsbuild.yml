@@ -19,7 +19,7 @@ jobs:
       with:
         submodules: true
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1.1.1
+      uses: actions/setup-ruby@v1.1.2
       with:
         ruby-version: 2.6.x
     - name: Build

@@ -1,6 +1,10 @@
 name: Docs Build
 
-on: [push, pull_request]
+on:
+  push:
+    branches-ignore:
+    - 'dependabot/**'
+  pull_request:
 
 env:
   LC_ALL: en_US.UTF-8
@@ -19,9 +23,9 @@ jobs:
       with:
         submodules: true
     - name: Set up Ruby
-      uses: actions/setup-ruby@v1.1.2
+      uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.x
+        ruby-version: 2.7.x
     - name: Build
       run: |
         ./.github/scripts/docs.sh

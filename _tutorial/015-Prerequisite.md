@@ -131,7 +131,7 @@ If you start using enRoute you will likely create a number of workspaces. There 
 
 ### Unix
 
-We aren't currently aware of any challenges on Unix systems. Please [let us know](mailto:osgi-dev@mail.osgi.org) if you have any!
+We aren't currently aware of any challenges on Unix systems. Please [let us know](mailto:osgi-users@eclipse.org) if you have any!
 
 [java8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
 [Maven]: https://maven.apache.org

@@ -14,7 +14,7 @@ Before you start any of the tutorials you must prepare your environment so that 
 
 We need to run the following tools on your computer - without them you won't get very far at all.
 
-* [Java][java8], probably already got it? If not, this is a good time to get started! OSGi enRoute projects target Java 8 as a minimum version.
+* [Java][java17], probably already got it? If not, this is a good time to get started! OSGi enRoute projects target Java 17 as a minimum version.
 * [Maven][Maven], a popular build tool for Java applications with an enormous repository behind it. Make sure that you're on at least 3.3.9
 
 <div class="alert alert-warning">
@@ -133,7 +133,7 @@ If you start using enRoute you will likely create a number of workspaces. There 
 
 We aren't currently aware of any challenges on Unix systems. Please [let us know](mailto:osgi-users@eclipse.org) if you have any!
 
-[java8]: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+[java17]: https://adoptium.net/de/temurin/releases/?version=17
 [Maven]: https://maven.apache.org
 [mars]: https://www.eclipse.org/downloads/
 [bndtools]: http://bndtools.org

@@ -10,3 +10,4 @@ source "https://rubygems.org"
 # Happy Jekylling!
 
 gem 'github-pages', group: :jekyll_plugins
+gem "webrick"
